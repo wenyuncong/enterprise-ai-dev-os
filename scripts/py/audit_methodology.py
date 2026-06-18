@@ -70,6 +70,11 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8-sig")
 
 
+def repo_path(root: Path, raw: str) -> Path:
+    """Resolve a repository-relative path with either slash style."""
+    return root.joinpath(*[part for part in re.split(r"[/\\]+", raw) if part])
+
+
 def parse_frontmatter(text: str) -> tuple[dict[str, str], str]:
     if not text.startswith("---"):
         return {}, text
@@ -201,7 +206,7 @@ def check_agent_paths(root: Path, issues: list[Issue]) -> None:
                 continue
             if "{" in raw or "}" in raw:
                 continue
-            candidate = root / raw.replace("/", "\\")
+            candidate = repo_path(root, raw)
             if not candidate.exists() and raw.startswith(("skills/", "docs/", "scripts/", "methodology/", "rules/")):
                 issues.append(Issue("FAIL", "AGENTS_PATH", rel(agent_file, root), f"referenced path does not exist: {raw}"))
 
