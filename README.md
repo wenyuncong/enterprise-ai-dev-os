@@ -142,6 +142,14 @@ py scripts/py/check_open_source_boundary.py --project-root .
 - [docs/公开材料/OPEN_SOURCE_READINESS.md](docs/公开材料/OPEN_SOURCE_READINESS.md)
 - [docs/全项目总控/DISCLOSURE_BOUNDARY.md](docs/全项目总控/DISCLOSURE_BOUNDARY.md)
 
+### 社区与贡献
+
+- 问题、想法和工具适配讨论：GitHub Discussions
+- 可复现缺陷和文档错误：GitHub Issues
+- 代码、规则、Skill、适配器修改：Pull Request
+
+贡献前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。所有 PR 必须通过方法论审计、开源边界检查和适配器 dry-run。
+
 ### 当前状态
 
 - 38 个 verified official skills
@@ -290,6 +298,14 @@ Boundary documents:
 - [docs/公开材料/OPEN_SOURCE_PACKAGE.md](docs/公开材料/OPEN_SOURCE_PACKAGE.md)
 - [docs/公开材料/OPEN_SOURCE_READINESS.md](docs/公开材料/OPEN_SOURCE_READINESS.md)
 - [docs/全项目总控/DISCLOSURE_BOUNDARY.md](docs/全项目总控/DISCLOSURE_BOUNDARY.md)
+
+### Community And Contributions
+
+- Questions, ideas, and adapter discussions: GitHub Discussions
+- Reproducible bugs and documentation errors: GitHub Issues
+- Code, rules, skills, and adapter changes: Pull Requests
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing. All PRs must pass methodology audit, open-source boundary checks, and adapter dry-run.
 
 ### Status
 

@@ -1,0 +1,36 @@
+name: Tool adapter report
+description: Report or verify behavior for an AI coding tool adapter.
+title: "[Adapter]: "
+labels: ["tool-adapter"]
+body:
+  - type: input
+    id: tool
+    attributes:
+      label: Tool name and version
+      placeholder: "Qoder 0.x, Cursor 1.x, Trae, etc."
+    validations:
+      required: true
+  - type: textarea
+    id: rule_path
+    attributes:
+      label: Rule path behavior
+      description: Which rule file path is loaded? How did you verify it?
+    validations:
+      required: true
+  - type: textarea
+    id: skill_behavior
+    attributes:
+      label: Skill behavior
+      description: Can the tool read SKILL.md and references? Include exact paths.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Paste safe logs, screenshots, or links to official docs.
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Open-source boundary
+      options:
+        - label: Evidence is safe to publish and contains no private material.
+          required: true

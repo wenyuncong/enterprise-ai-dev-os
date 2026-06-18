@@ -1,0 +1,45 @@
+name: Feature request
+description: Suggest a rule, skill, adapter, or documentation improvement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What repeated pain or missing capability does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should change?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Rules
+        - Skills
+        - Tool adapters
+        - Documentation
+        - Audit scripts
+        - Website
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or references
+      description: Link official docs, examples, or verification notes when available.
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Open-source boundary
+      options:
+        - label: This request does not require publishing private or unredacted material.
+          required: true

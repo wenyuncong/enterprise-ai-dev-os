@@ -36,6 +36,7 @@ Public-ready scope means:
 | CLI | `scripts/js/cli.mjs` | Public-ready |
 | Tool adapters | `tools/adapters.json`, `tools/deploy.ps1` | Public-ready as adapter generator, not generated output |
 | Website | `site/`, `.github/workflows/pages.yml` | Public-ready GitHub Pages website |
+| Community | `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `SUPPORT.md`, `GOVERNANCE.md`, `.github/ISSUE_TEMPLATE/`, `.github/PULL_REQUEST_TEMPLATE.md`, `.github/workflows/ci.yml` | Public-ready community workflow |
 
 ## Must Stay Private
 
@@ -94,3 +95,4 @@ Recommended first public release posture:
 - do not claim verified support for WorkBuddy, Trae Solo, or untested regional variants yet
 - continue using `tools/adapters.json` as the source of public compatibility claims
 - after switching the repository to public, enable GitHub Pages with GitHub Actions as the source so `site/` is published by `.github/workflows/pages.yml`
+- enable GitHub Discussions for Q&A, ideas, tool compatibility, and showcase conversations

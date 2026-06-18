@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate adapter registry JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('tools/adapters.json','utf8')); console.log('adapters json ok')"
+
+      - name: Audit methodology
+        run: python scripts/py/audit_methodology.py --project-root .
+
+      - name: Check open-source boundary
+        run: python scripts/py/check_open_source_boundary.py --project-root .
+
+      - name: Score readiness
+        run: python scripts/py/score_ai_development_readiness.py --project-root .
+
+      - name: Validate website
+        run: node -e "const fs=require('fs'); const html=fs.readFileSync('site/index.html','utf8'); if(!html.includes('Enterprise AI Development OS')) process.exit(1); console.log('site ok')"

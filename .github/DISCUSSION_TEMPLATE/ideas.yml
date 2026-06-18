@@ -1,0 +1,20 @@
+title: "[Idea]: "
+labels: ["idea"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: What should the project explore?
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: Value
+      description: What engineering problem would this solve?
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Public boundary
+      description: Confirm that no private material is needed to discuss this idea.
