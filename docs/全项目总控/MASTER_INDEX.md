@@ -119,6 +119,12 @@
 | 文档 | 路径 |
 |---|---|
 | 披露边界 | `docs/全项目总控/DISCLOSURE_BOUNDARY.md` |
+| 开源发布包 | `docs/公开材料/OPEN_SOURCE_PACKAGE.md` |
+| 开源就绪清单 | `docs/公开材料/OPEN_SOURCE_READINESS.md` |
+| 安装说明 | `docs/公开材料/INSTALL.md` |
+| 路线图 | `docs/公开材料/ROADMAP.md` |
+| 价值证据 | `docs/公开材料/VALUE_EVIDENCE.md` |
+| 轻量规则运行时 | `docs/公开材料/RULE_RUNTIME_LITE.md` |
 
 公开仓库只保留披露边界，不收录私有策略材料、过程记录或未脱敏案例。
 

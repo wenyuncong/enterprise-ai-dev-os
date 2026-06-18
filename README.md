@@ -2,9 +2,9 @@
 
 [中文](#中文) | [English](#english)
 
-Enterprise AI Development OS turns AI-assisted coding from ad-hoc generation into deterministic engineering.
+Enterprise AI Development OS makes AI coding tools follow project rules, verification gates, and shared delivery memory instead of producing isolated ad-hoc code.
 
-企业级全 AI 开发操作系统，用规则、Skill、文档记忆、验证门禁和多工具适配层，把 AI 编程从随机生成推进到可治理、可验证、可迁移的工程体系。
+企业级全 AI 开发操作系统，用规则、Skill、文档记忆、验证门禁和多工具适配层，让 AI 编程工具按项目规则稳定交付，而不是随机生成孤立代码。
 
 Website: https://wenyuncong.github.io/enterprise-ai-dev-os/ (available after GitHub Pages is enabled)
 
@@ -14,7 +14,7 @@ Website: https://wenyuncong.github.io/enterprise-ai-dev-os/ (available after Git
 
 ### 这是什么
 
-Enterprise AI Development OS 是一套面向 AI 编程工具的可迁移工程操作层。它把项目规则、Skill 能力单元、文档记忆、审计脚本、验证门禁和多工具适配器组织成一个统一系统，让 Codex、Claude Code、Trae、Qoder、Cursor、GitHub Copilot、VS Code 等工具在大项目中更稳定地协同工作。
+Enterprise AI Development OS 是一套面向 AI 编程工具的可迁移工程治理层。它把项目规则、Skill 能力单元、文档记忆、审计脚本、验证门禁和多工具适配器组织成一个统一系统，让 Codex、Claude Code、Trae、Qoder、Cursor、GitHub Copilot、VS Code 等工具在大项目中按同一套工程纪律工作。
 
 它不是单个 prompt，也不只是传统意义上的 Skill 包。它更接近一个“AI 开发操作系统”：用统一入口、任务路由、能力调度、证据回写和进化闭环，降低 AI 开发中的遗忘、漂移、重复造轮子和验收不确定性。
 
@@ -32,6 +32,8 @@ AI 编码工具很强，但企业级项目需要的不只是生成代码：
 - 多工具之间的一致工作方式
 
 本项目把这些实践打包成工具无关的方法论和适配器框架。
+
+公开版聚焦“规则、Skill、适配、审计、安装和证据框架”。可执行规则运行时、规则命中分析、MCP 调用审计和团队治理面板属于后续高级方向，不作为当前已实现能力宣传。
 
 ### 包含什么
 
@@ -112,6 +114,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
 
 更多安装说明见 [docs/公开材料/INSTALL.md](docs/公开材料/INSTALL.md)。
 
+### 路线与价值证据
+
+- [docs/公开材料/ROADMAP.md](docs/公开材料/ROADMAP.md) — 公开路线图与暂不做事项
+- [docs/公开材料/VALUE_EVIDENCE.md](docs/公开材料/VALUE_EVIDENCE.md) — 如何证明真实价值、token 和返工变化
+- [docs/公开材料/RULE_RUNTIME_LITE.md](docs/公开材料/RULE_RUNTIME_LITE.md) — 未来轻量规则运行时设计边界
+
 ### 核心工作流
 
 ```text
@@ -183,7 +191,7 @@ py scripts/py/check_open_source_boundary.py --project-root .
 
 ### What It Is
 
-Enterprise AI Development OS is a portable operating layer for AI coding tools. It organizes project rules, skill units, documentation memory, audit gates, verification scripts, and multi-tool adapters into one coherent system so tools such as Codex, Claude Code, Trae, Qoder, Cursor, GitHub Copilot, and VS Code can work more consistently on large projects.
+Enterprise AI Development OS is a portable governance layer for AI coding tools. It organizes project rules, skill units, documentation memory, audit gates, verification scripts, and multi-tool adapters into one coherent system so tools such as Codex, Claude Code, Trae, Qoder, Cursor, GitHub Copilot, and VS Code can follow the same engineering discipline on large projects.
 
 It is not just a prompt and not merely a traditional skill pack. It is closer to an AI development operating system: a shared entrypoint, routing layer, capability scheduler, evidence writeback loop, and evolution mechanism for controlled AI-assisted engineering.
 
@@ -201,6 +209,8 @@ AI coding tools are powerful, but enterprise-grade projects need more than code 
 - consistent behavior across multiple AI coding tools
 
 This repository packages those practices into a tool-agnostic methodology and adapter framework.
+
+The open-source edition focuses on rules, skills, adapters, audits, installation, and evidence collection. Executable rule runtime, rule-hit analytics, MCP/tool-call auditing, and team governance dashboards are future advanced directions, not current implementation claims.
 
 ### What Is Included
 
@@ -281,6 +291,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
 ```
 
 See [docs/公开材料/INSTALL.md](docs/公开材料/INSTALL.md) for more installation options.
+
+### Roadmap And Evidence
+
+- [docs/公开材料/ROADMAP.md](docs/公开材料/ROADMAP.md) — public roadmap and deliberate non-goals
+- [docs/公开材料/VALUE_EVIDENCE.md](docs/公开材料/VALUE_EVIDENCE.md) — how to prove real value, token direction, and rework change
+- [docs/公开材料/RULE_RUNTIME_LITE.md](docs/公开材料/RULE_RUNTIME_LITE.md) — future lightweight rule-runtime boundary
 
 ### Core Workflow
 
