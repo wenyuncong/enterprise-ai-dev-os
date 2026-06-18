@@ -131,6 +131,8 @@ py scripts/py/check_open_source_boundary.py --project-root .
 
 See [docs/公开材料/OPEN_SOURCE_PACKAGE.md](docs/公开材料/OPEN_SOURCE_PACKAGE.md) and [docs/全项目总控/DISCLOSURE_BOUNDARY.md](docs/全项目总控/DISCLOSURE_BOUNDARY.md).
 
+Current publish readiness is tracked in [docs/公开材料/OPEN_SOURCE_READINESS.md](docs/公开材料/OPEN_SOURCE_READINESS.md).
+
 ## Status
 
 - 38 verified official skills
