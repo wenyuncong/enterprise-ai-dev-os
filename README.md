@@ -6,6 +6,8 @@ Enterprise AI Development OS turns AI-assisted coding from ad-hoc generation int
 
 企业级全 AI 开发操作系统，用规则、Skill、文档记忆、验证门禁和多工具适配层，把 AI 编程从随机生成推进到可治理、可验证、可迁移的工程体系。
 
+Website: https://wenyuncong.github.io/enterprise-ai-dev-os/ (available after GitHub Pages is enabled)
+
 ---
 
 ## 中文
@@ -206,6 +208,7 @@ scripts/py/               Audit, scoring, environment, and tool-discovery script
 scripts/js/               CLI entrypoint
 tools/                    Adapter registry and deployment script
 lite/                     Lite rules and templates
+site/                     GitHub Pages website
 ```
 
 ### Quick Start

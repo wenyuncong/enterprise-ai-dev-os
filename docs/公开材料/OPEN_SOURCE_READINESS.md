@@ -35,6 +35,7 @@ Public-ready scope means:
 | Audit scripts | `scripts/py/audit_methodology.py`, `check_open_source_boundary.py`, `discover_tools.py`, `env_check.py`, `score_ai_development_readiness.py`, `tool_registry.py` | Public-ready |
 | CLI | `scripts/js/cli.mjs` | Public-ready |
 | Tool adapters | `tools/adapters.json`, `tools/deploy.ps1` | Public-ready as adapter generator, not generated output |
+| Website | `site/`, `.github/workflows/pages.yml` | Public-ready GitHub Pages website |
 
 ## Must Stay Private
 
@@ -92,3 +93,4 @@ Recommended first public release posture:
 - keep private strategy and case evidence private
 - do not claim verified support for WorkBuddy, Trae Solo, or untested regional variants yet
 - continue using `tools/adapters.json` as the source of public compatibility claims
+- after switching the repository to public, enable GitHub Pages with GitHub Actions as the source so `site/` is published by `.github/workflows/pages.yml`
