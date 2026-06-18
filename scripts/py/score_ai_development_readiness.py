@@ -20,8 +20,8 @@ CHECKS = [
         "key": "project_memory",
         "name": "项目记忆",
         "weight": 15,
-        "paths": ["docs/全项目总控/TASK_BACKLOG.md", "docs/全项目总控/MASTER_INDEX.md", "docs/每日调研回写"],
-        "hint": "Add backlog, master index, and daily writeback documents.",
+        "paths": ["docs/全项目总控/TASK_BACKLOG.md", "docs/全项目总控/MASTER_INDEX.md", "docs/_templates/每日调研回写/DAILY_WRITEBACK_TEMPLATE.md"],
+        "hint": "Add backlog, master index, and daily writeback template.",
     },
     {
         "key": "capability_units",
@@ -48,8 +48,8 @@ CHECKS = [
         "key": "verification_gates",
         "name": "验证门禁",
         "weight": 15,
-        "paths": ["scripts/py/audit_methodology.py", "docs/测试验收报告"],
-        "hint": "Add audit scripts and test acceptance reports.",
+        "paths": ["scripts/py/audit_methodology.py", "scripts/py/check_open_source_boundary.py", "skills/governance/ai-runtime-verify/SKILL.md"],
+        "hint": "Add audit scripts, boundary checks, and runtime verification skill.",
     },
     {
         "key": "risk_governance",

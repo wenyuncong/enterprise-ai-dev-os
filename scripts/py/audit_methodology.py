@@ -207,7 +207,10 @@ def check_agent_paths(root: Path, issues: list[Issue]) -> None:
 
 
 def check_private_archive_notice(root: Path, issues: list[Issue]) -> None:
-    readme = root / "备用" / "README.md"
+    archive = root / "备用"
+    if not archive.exists():
+        return
+    readme = archive / "README.md"
     if not readme.exists():
         issues.append(Issue("FAIL", "PRIVATE_ARCHIVE_NOTICE", rel(readme, root), "private archive must explain that it is not the official skill root."))
 

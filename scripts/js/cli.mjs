@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Enterprise AI Methodology CLI
-// Usage: npx enterprise-ai-methodology <command>
+// Enterprise AI Development OS CLI
+// Usage: npx enterprise-ai-dev-os <command>
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSync, copyFileSync } from 'node:fs';
 import { join, dirname, resolve, relative } from 'node:path';
@@ -10,19 +10,21 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const PKG_ROOT = resolve(__dirname, '..', '..');
 
 const USAGE = `
-enterprise-ai-methodology <command>
+enterprise-ai-dev-os <command>
 
 Commands:
   init [path]      Initialize methodology in a project (default: current dir)
-    --lite          Use lite version (2 rules, minimal docs)
-    --full          Use full version (42 skills, all docs) [default]
+    --lite          Use lite version (default: rules, minimal docs)
+    --full          Use full version (rules, official skills, tools)
 
+  install [path]   Alias of init
   validate [path]  Check project methodology health
   sync [path]      Sync skills from upstream source
 
 Examples:
-  npx enterprise-ai-methodology init ./my-project --lite
-  npx enterprise-ai-methodology validate
+  npx enterprise-ai-dev-os init ./my-project
+  npx enterprise-ai-dev-os init ./my-project --full
+  npx enterprise-ai-dev-os validate
 `;
 
 function usage() {
@@ -42,6 +44,17 @@ function copyDir(src, dest) {
       copyFileSync(srcPath, destPath);
     }
   }
+}
+
+function copyPath(src, dest) {
+  if (!existsSync(src)) return;
+  const srcStat = statSync(src);
+  if (srcStat.isDirectory()) {
+    copyDir(src, dest);
+    return;
+  }
+  mkdirSync(dirname(dest), { recursive: true });
+  copyFileSync(src, dest);
 }
 
 function countFiles(dir) {
@@ -69,13 +82,17 @@ function cmdInit(targetPath, mode = 'full') {
   console.log(`  ${target}\n`);
 
   const copies = mode === 'lite' ? [
+    { src: join(sourceRoot, 'rules', 'AGENTS.md'), dest: join(target, 'AGENTS.md'), label: 'Root AI entrypoint' },
     { src: join(sourceRoot, 'rules'), dest: join(target, 'rules'), label: 'Rules engine' },
     { src: join(sourceRoot, 'docs', '_templates'), dest: join(target, 'docs', '_templates'), label: 'Doc templates' },
   ] : [
+    { src: join(sourceRoot, 'AGENTS.md'), dest: join(target, 'AGENTS.md'), label: 'Root AI entrypoint' },
+    { src: join(sourceRoot, 'CLAUDE.md'), dest: join(target, 'CLAUDE.md'), label: 'Claude Code entrypoint' },
     { src: join(sourceRoot, 'rules'), dest: join(target, 'rules'), label: 'Rules engine' },
-    { src: join(sourceRoot, 'skills', 'core'), dest: join(target, 'skills', 'core'), label: 'Core skills (7)' },
-    { src: join(sourceRoot, 'skills', 'governance'), dest: join(target, 'skills', 'governance'), label: 'Governance skills (4)' },
+    { src: join(sourceRoot, 'skills'), dest: join(target, 'skills'), label: 'Official skills' },
     { src: join(sourceRoot, 'docs', '_templates'), dest: join(target, 'docs', '_templates'), label: 'Doc templates' },
+    { src: join(sourceRoot, 'tools'), dest: join(target, 'tools'), label: 'Adapter tools' },
+    { src: join(sourceRoot, 'scripts', 'py'), dest: join(target, 'scripts', 'py'), label: 'Audit scripts' },
   ];
 
   for (const { src, dest, label } of copies) {
@@ -83,8 +100,8 @@ function cmdInit(targetPath, mode = 'full') {
       console.log(`  [SKIP] ${label} — source not found`);
       continue;
     }
-    copyDir(src, dest);
-    const n = countFiles(dest);
+    copyPath(src, dest);
+    const n = statSync(dest).isDirectory() ? countFiles(dest) : 1;
     console.log(`  [OK]   ${label} (${n} files)`);
   }
 
@@ -101,7 +118,15 @@ function cmdInit(targetPath, mode = 'full') {
     }
   }
 
-  console.log(`\n  Done. AI will read rules/AGENTS.md on next session.\n`);
+  const backlogTemplate = join(target, 'docs', '_templates', '全项目总控', 'TASK_BACKLOG_TEMPLATE.md');
+  const backlogFile = join(target, 'docs', '全项目总控', 'TASK_BACKLOG.md');
+  if (existsSync(backlogTemplate) && !existsSync(backlogFile)) {
+    mkdirSync(dirname(backlogFile), { recursive: true });
+    copyFileSync(backlogTemplate, backlogFile);
+    console.log(`  [OK]   Created docs/全项目总控/TASK_BACKLOG.md`);
+  }
+
+  console.log(`\n  Done. AI will read AGENTS.md on next session.\n`);
 }
 
 // ── validate ──────────────────────────────────────────
@@ -110,8 +135,10 @@ function cmdValidate(targetPath) {
   console.log(`\n  Validating: ${target}\n`);
 
   const checks = [
+    { file: join(target, 'AGENTS.md'), label: 'AGENTS.md' },
     { file: join(target, 'rules', 'AGENTS.md'), label: 'rules/AGENTS.md' },
     { file: join(target, 'docs', '_templates', '每日调研回写', 'DAILY_WRITEBACK_TEMPLATE.md'), label: 'Doc templates' },
+    { file: join(target, 'docs', '全项目总控', 'TASK_BACKLOG.md'), label: 'Task backlog' },
     { dir: join(target, 'docs', '每日调研回写'), label: 'docs/每日调研回写/' },
     { dir: join(target, 'docs', '全项目总控'), label: 'docs/全项目总控/' },
   ];
@@ -163,7 +190,7 @@ function cmdValidate(targetPath) {
 function cmdSync(targetPath) {
   const target = resolve(targetPath || '.');
   console.log(`\n  Sync is not yet implemented.`);
-  console.log(`  To update your skills, re-run: npx enterprise-ai-methodology init .\n`);
+  console.log(`  To update your skills, re-run: npx enterprise-ai-dev-os init .\n`);
 }
 
 // ── main ──────────────────────────────────────────────
@@ -172,11 +199,12 @@ if (args.length === 0 || args[0] === '--help' || args[0] === '-h') usage();
 
 const cmd = args[0];
 const rest = args.slice(1);
-const modeFlag = rest.includes('--lite') ? 'lite' : 'full';
+const modeFlag = rest.includes('--full') ? 'full' : 'lite';
 const pathArg = rest.filter(a => !a.startsWith('--'))[0] || '.';
 
 switch (cmd) {
   case 'init':
+  case 'install':
     cmdInit(pathArg, modeFlag);
     break;
   case 'validate':

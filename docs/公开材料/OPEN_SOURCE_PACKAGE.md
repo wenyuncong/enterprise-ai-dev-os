@@ -5,6 +5,7 @@
 建议首版公开仓库只包含：
 
 - `README.md`
+- `.editorconfig`
 - `AGENTS.md`
 - `CLAUDE.md`（如确认内容与 AGENTS 同步且无内部材料）
 - `rules/AGENTS.md`
@@ -17,6 +18,7 @@
 - `docs/_templates/`
 - `docs/COMPATIBILITY.md`
 - `docs/TOOL_ADAPTERS.md`
+- `docs/公开材料/INSTALL.md`
 - `docs/公开材料/OPEN_SOURCE_READINESS.md`
 - `docs/全项目总控/AI_NATIVE_DELIVERY_LOOP.md`
 - `docs/全项目总控/DISCLOSURE_BOUNDARY.md`
@@ -25,6 +27,8 @@
 - `scripts/py/env_check.py`
 - `scripts/py/score_ai_development_readiness.py`
 - `scripts/py/tool_registry.py`
+- `scripts/ps1/install.ps1`
+- `scripts/sh/install.sh`
 - `scripts/js/cli.mjs`
 - `tools/deploy.ps1`
 - `tools/adapters.json`

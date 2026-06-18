@@ -57,6 +57,8 @@ docs/全项目总控/           总控索引、披露边界、交付闭环
 docs/公开材料/             开源发布边界和就绪清单
 docs/TOOL_ADAPTERS.md     多工具适配矩阵和部署契约
 scripts/py/               审计、评分、环境检查、工具发现脚本
+scripts/ps1/              PowerShell 一键安装脚本
+scripts/sh/               Bash 一键安装脚本
 scripts/js/               CLI 入口
 tools/                    多工具适配器注册表和部署脚本
 lite/                     精简版规则和模板
@@ -64,25 +66,34 @@ lite/                     精简版规则和模板
 
 ### 快速开始
 
-复制规则入口：
+推荐先用 lite 模式一键安装到你的项目。它只加入 AI 入口规则、文档模板和任务清单骨架，适合先跑起来。
 
-```bash
-cp rules/AGENTS.md your-project/AGENTS.md
+PowerShell：
+
+```powershell
+iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1 | iex
 ```
 
-复制所需 Skill 层：
+Bash：
 
 ```bash
-cp -r skills/core your-project/skills/
-cp -r skills/governance your-project/skills/
-cp -r skills/tech/vue your-project/skills/        # 示例
-cp -r skills/tech/java-springboot your-project/skills/
+curl -fsSL https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/sh/install.sh | bash
 ```
 
-复制文档模板：
+完整安装会复制规则、官方 Skill、适配器工具和审计脚本：
+
+```powershell
+$u = "https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1"
+$s = Join-Path $env:TEMP "enterprise-ai-dev-os-install.ps1"
+iwr -UseBasicParsing $u -OutFile $s
+powershell -NoProfile -ExecutionPolicy Bypass -File $s -TargetPath . -Mode full
+```
+
+也可以通过 npm 风格 CLI 直接使用 GitHub 仓库：
 
 ```bash
-cp -r docs/_templates your-project/docs/
+npx github:wenyuncong/enterprise-ai-dev-os init ./your-project
+npx github:wenyuncong/enterprise-ai-dev-os init ./your-project --full
 ```
 
 验证本仓库：
@@ -98,6 +109,8 @@ py scripts/py/check_open_source_boundary.py --project-root .
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verified -DryRun
 ```
+
+更多安装说明见 [docs/公开材料/INSTALL.md](docs/公开材料/INSTALL.md)。
 
 ### 核心工作流
 
@@ -213,6 +226,8 @@ docs/全项目总控/           Master index, disclosure boundary, delivery loop
 docs/公开材料/             Public release boundary and readiness notes
 docs/TOOL_ADAPTERS.md     Multi-tool adapter matrix and deploy contract
 scripts/py/               Audit, scoring, environment, and tool-discovery scripts
+scripts/ps1/              PowerShell one-click installer
+scripts/sh/               Bash one-click installer
 scripts/js/               CLI entrypoint
 tools/                    Adapter registry and deployment script
 lite/                     Lite rules and templates
@@ -221,25 +236,34 @@ site/                     GitHub Pages website
 
 ### Quick Start
 
-Copy the rule entrypoint:
+Start with the one-click lite install. It adds the AI entrypoint, rules, documentation templates, and task backlog scaffold without copying the full skill library.
 
-```bash
-cp rules/AGENTS.md your-project/AGENTS.md
+PowerShell:
+
+```powershell
+iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1 | iex
 ```
 
-Copy the skill layers you need:
+Bash:
 
 ```bash
-cp -r skills/core your-project/skills/
-cp -r skills/governance your-project/skills/
-cp -r skills/tech/vue your-project/skills/        # example
-cp -r skills/tech/java-springboot your-project/skills/
+curl -fsSL https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/sh/install.sh | bash
 ```
 
-Copy documentation templates:
+Full install copies rules, official skills, adapter tools, and audit scripts:
+
+```powershell
+$u = "https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1"
+$s = Join-Path $env:TEMP "enterprise-ai-dev-os-install.ps1"
+iwr -UseBasicParsing $u -OutFile $s
+powershell -NoProfile -ExecutionPolicy Bypass -File $s -TargetPath . -Mode full
+```
+
+You can also use the npm-style CLI directly from the GitHub repository:
 
 ```bash
-cp -r docs/_templates your-project/docs/
+npx github:wenyuncong/enterprise-ai-dev-os init ./your-project
+npx github:wenyuncong/enterprise-ai-dev-os init ./your-project --full
 ```
 
 Verify this repository:
@@ -255,6 +279,8 @@ Preview multi-tool adapter output:
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verified -DryRun
 ```
+
+See [docs/公开材料/INSTALL.md](docs/公开材料/INSTALL.md) for more installation options.
 
 ### Core Workflow
 

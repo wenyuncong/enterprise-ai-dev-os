@@ -251,6 +251,7 @@
         <div class="nav-right">
           <nav class="nav-links" aria-label="Primary">
             <a data-i18n="navGithub" href="https://github.com/wenyuncong/enterprise-ai-dev-os">GitHub</a>
+            <a data-i18n="navInstall" href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/docs/%E5%85%AC%E5%BC%80%E6%9D%90%E6%96%99/INSTALL.md">Install</a>
             <a data-i18n="navAdapters" href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/docs/TOOL_ADAPTERS.md">Adapters</a>
             <a data-i18n="navCompatibility" href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/docs/COMPATIBILITY.md">Compatibility</a>
             <a data-i18n="navLicense" href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/LICENSE">License</a>
@@ -330,14 +331,12 @@
       <section>
         <div class="wrap">
           <h2 data-i18n="quickTitle">Quick Start</h2>
-          <pre><code>cp rules/AGENTS.md your-project/AGENTS.md
-cp -r skills/core your-project/skills/
-cp -r skills/governance your-project/skills/
-cp -r docs/_templates your-project/docs/
+          <p data-i18n="quickText">
+            Start with lite mode, then upgrade to full mode when a project needs the complete skill system and adapter tools.
+          </p>
+          <pre><code data-i18n-code="quickCode">iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1 | iex
 
-py scripts/py/audit_methodology.py --project-root .
-py scripts/py/check_open_source_boundary.py --project-root .
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verified -DryRun</code></pre>
+curl -fsSL https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/sh/install.sh | bash</code></pre>
         </div>
       </section>
 
@@ -364,6 +363,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
       const messages = {
         en: {
           navGithub: "GitHub",
+          navInstall: "Install",
           navAdapters: "Adapters",
           navCompatibility: "Compatibility",
           navLicense: "License",
@@ -402,6 +402,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
           cardEvolutionText:
             "Repeated failures become stronger rules, templates, checks, or skills.",
           quickTitle: "Quick Start",
+          quickText:
+            "Start with lite mode, then upgrade to full mode when a project needs the complete skill system and adapter tools.",
+          quickCode:
+            "iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1 | iex\n\ncurl -fsSL https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/sh/install.sh | bash",
           boundaryTitle: "Open Source Boundary",
           boundaryText:
             "The public repository includes portable methodology assets, rules, skills, templates, audit scripts, and adapter generators. Private strategy notes, raw archives, unredacted cases, process records, and local tool state are outside the open-source scope.",
@@ -410,6 +414,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
         },
         zh: {
           navGithub: "GitHub",
+          navInstall: "安装",
           navAdapters: "工具适配",
           navCompatibility: "兼容矩阵",
           navLicense: "开源协议",
@@ -444,6 +449,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
           cardEvolutionTitle: "进化闭环",
           cardEvolutionText: "把重复失败升级为更强的规则、模板、检查或 Skill。",
           quickTitle: "快速开始",
+          quickText:
+            "先用 lite 模式一键安装；项目需要完整 Skill 系统和适配器工具时，再升级到 full 模式。",
+          quickCode:
+            "iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1 | iex\n\ncurl -fsSL https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/sh/install.sh | bash",
           boundaryTitle: "开源边界",
           boundaryText:
             "公开仓库包含可迁移的方法论资产、规则、Skill、模板、审计脚本和适配器生成器。私有策略、原始素材、未脱敏案例、过程记录和本地工具状态不属于开源范围。",
@@ -484,6 +493,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
           const key = node.getAttribute("data-i18n-list");
           const items = messages[selected][key] || [];
           node.innerHTML = items.map((item) => `<li>${item}</li>`).join("");
+        });
+
+        document.querySelectorAll("[data-i18n-code]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-code");
+          node.textContent = messages[selected][key] || "";
         });
 
         document.querySelectorAll("[data-lang-button]").forEach((button) => {
