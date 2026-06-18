@@ -1,95 +1,354 @@
 {
-  "_description": "Multi-tool adapter mapping — defines where each AI coding tool reads rules and skills",
-  "_version": "1.0.0",
-  "_note": "Skill format (SKILL.md) is universal across all listed tools. Rules file location varies.",
-
+  "schemaVersion": "2.0.0",
+  "description": "Multi-tool adapter registry. The canonical source remains skills/, rules/AGENTS.md, and docs/_templates/. Adapter outputs are generated delivery targets only.",
+  "sourceOfTruth": {
+    "rules": "rules/AGENTS.md",
+    "skills": "skills/",
+    "docs": "docs/_templates/"
+  },
+  "statusLegend": {
+    "verified": "Rule path is backed by official documentation or existing local verification.",
+    "experimental": "Likely supported, but needs live verification in the target tool/version.",
+    "pending-verification": "Do not deploy by default. Path or behavior is not yet reliable enough."
+  },
+  "deployDefaults": {
+    "toolSelector": "verified-only",
+    "rulesStrategy": "copy",
+    "skillsStrategy": "symlink",
+    "backupExisting": false,
+    "createMissingDirs": true
+  },
   "tools": {
     "codex": {
-      "name": "Codex (OpenAI)",
-      "skills_dir": ".agents/skills",
-      "rules_file": "AGENTS.md",
-      "rules_dir": "rules",
-      "link_strategy": "symlink",
-      "verified": true
-    },
-    "trae": {
-      "name": "Trae (字节跳动)",
-      "skills_dir": ".trae/skills",
-      "rules_file": ".trae/rules/project_rules.md",
-      "rules_dir": null,
-      "link_strategy": "symlink",
-      "verified": true
-    },
-    "qoder": {
-      "name": "Qoder / Qoder CN",
-      "skills_dir": ".qoder/skills",
-      "rules_file": ".qoder/rules.md",
-      "rules_dir": null,
-      "link_strategy": "symlink",
-      "verified": true
-    },
-    "codebuddy": {
-      "name": "CodeBuddy (腾讯)",
-      "skills_dir": ".codebuddy/skills",
-      "rules_file": ".codebuddy/rules.md",
-      "rules_dir": null,
-      "link_strategy": "symlink",
-      "verified": true
+      "name": "Codex",
+      "vendor": "OpenAI",
+      "tier": "P0",
+      "status": "verified",
+      "aliases": ["openai-codex"],
+      "ruleTargets": [
+        {
+          "path": "AGENTS.md",
+          "format": "agents-md",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".agents/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "verified"
+      },
+      "notes": "AGENTS.md is the primary portable entrypoint. Local .agents/ is an adapter output, not a source directory."
     },
     "claude": {
-      "name": "Claude Code (Anthropic)",
-      "skills_dir": ".claude/skills",
-      "rules_file": "CLAUDE.md",
-      "rules_dir": null,
-      "link_strategy": "symlink",
-      "verified": true
+      "name": "Claude Code",
+      "vendor": "Anthropic",
+      "tier": "P0",
+      "status": "verified",
+      "aliases": ["claude-code"],
+      "ruleTargets": [
+        {
+          "path": "CLAUDE.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".claude/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "verified"
+      }
+    },
+    "trae": {
+      "name": "Trae",
+      "vendor": "ByteDance",
+      "tier": "P0",
+      "status": "verified",
+      "aliases": ["trae-cn"],
+      "ruleTargets": [
+        {
+          "path": ".trae/rules/project_rules.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".trae/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "experimental"
+      },
+      "notes": "Project rules are verified. Skill directory behavior may vary by Trae version."
+    },
+    "trae-solo": {
+      "name": "Trae Solo",
+      "vendor": "ByteDance",
+      "tier": "P3",
+      "status": "pending-verification",
+      "aliases": ["trae-work"],
+      "ruleTargets": [
+        {
+          "path": ".trae/rules/project_rules.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".trae/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "pending-verification"
+      },
+      "notes": "Keep separate from Trae IDE until Solo/Work rule loading is verified."
+    },
+    "qoder": {
+      "name": "Qoder",
+      "vendor": "Qoder",
+      "tier": "P0",
+      "status": "verified",
+      "aliases": ["qoder-cn"],
+      "ruleTargets": [
+        {
+          "path": ".qoder/rules/enterprise-ai-dev-os.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".qoder/skills",
+        "mode": "symlink",
+        "layout": "flat",
+        "status": "verified"
+      },
+      "notes": "Qoder project rules are directory based: .qoder/rules/. Project skills use .qoder/skills/{skill-name}/SKILL.md, so deployment flattens the canonical layered skill tree."
     },
     "cursor": {
       "name": "Cursor",
-      "skills_dir": ".cursor/skills",
-      "rules_file": ".cursorrules",
-      "rules_dir": null,
-      "link_strategy": "symlink",
-      "verified": false,
-      "_note": "Cursor primarily uses .cursorrules; skill dir support may vary by version"
+      "vendor": "Anysphere",
+      "tier": "P1",
+      "status": "verified",
+      "aliases": [],
+      "ruleTargets": [
+        {
+          "path": ".cursor/rules/enterprise-ai-dev-os.mdc",
+          "format": "cursor-mdc",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        },
+        {
+          "path": ".cursorrules",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy",
+          "legacy": true
+        }
+      ],
+      "skills": {
+        "path": ".cursor/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "experimental"
+      },
+      "notes": "Use .cursor/rules/*.mdc as the primary target. .cursorrules is legacy fallback."
     },
     "copilot": {
       "name": "GitHub Copilot",
-      "skills_dir": ".github/copilot/skills",
-      "rules_file": ".github/copilot/rules.md",
-      "rules_dir": null,
-      "link_strategy": "copy",
-      "verified": false,
-      "_note": "GitHub Copilot skill support is evolving; copy strategy is safer"
+      "vendor": "GitHub",
+      "tier": "P1",
+      "status": "verified",
+      "aliases": ["vscode-copilot", "vs-code-copilot"],
+      "ruleTargets": [
+        {
+          "path": ".github/copilot-instructions.md",
+          "format": "copilot",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        },
+        {
+          "path": ".github/instructions/enterprise-ai-dev-os.instructions.md",
+          "format": "copilot-path",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": null,
+        "mode": "none",
+        "status": "not-supported"
+      },
+      "notes": "Copilot consumes custom instructions, not the SKILL.md directory model."
+    },
+    "vscode": {
+      "name": "VS Code Copilot",
+      "vendor": "Microsoft",
+      "tier": "P1",
+      "status": "verified",
+      "aliases": ["visual-studio-code"],
+      "ruleTargets": [
+        {
+          "path": ".github/copilot-instructions.md",
+          "format": "copilot",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": null,
+        "mode": "none",
+        "status": "not-supported"
+      },
+      "notes": "VS Code uses GitHub Copilot custom instructions in repository or workspace context."
     },
     "windsurf": {
-      "name": "Windsurf (Codeium)",
-      "skills_dir": ".windsurf/skills",
-      "rules_file": ".windsurf/rules.md",
-      "rules_dir": null,
-      "link_strategy": "symlink",
-      "verified": false,
-      "_note": "Windsurf uses .windsurfrules or .windsurf/ directory"
+      "name": "Windsurf",
+      "vendor": "Codeium",
+      "tier": "P2",
+      "status": "experimental",
+      "aliases": ["codeium"],
+      "ruleTargets": [
+        {
+          "path": ".windsurfrules",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        },
+        {
+          "path": ".windsurf/rules.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".windsurf/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "experimental"
+      }
+    },
+    "cline": {
+      "name": "Cline",
+      "vendor": "Cline",
+      "tier": "P2",
+      "status": "experimental",
+      "aliases": [],
+      "ruleTargets": [
+        {
+          "path": ".clinerules",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".cline/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "experimental"
+      }
+    },
+    "roo": {
+      "name": "Roo Code",
+      "vendor": "Roo Code",
+      "tier": "P2",
+      "status": "experimental",
+      "aliases": ["roo-code"],
+      "ruleTargets": [
+        {
+          "path": ".roo/rules.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".roo/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "experimental"
+      }
+    },
+    "aider": {
+      "name": "Aider",
+      "vendor": "Aider",
+      "tier": "P2",
+      "status": "experimental",
+      "aliases": [],
+      "ruleTargets": [
+        {
+          "path": "CONVENTIONS.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": null,
+        "mode": "none",
+        "status": "not-supported"
+      }
+    },
+    "continue": {
+      "name": "Continue.dev",
+      "vendor": "Continue",
+      "tier": "P2",
+      "status": "experimental",
+      "aliases": ["continue-dev"],
+      "ruleTargets": [
+        {
+          "path": ".continue/rules.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".continue/skills",
+        "mode": "copy",
+        "layout": "layered",
+        "status": "experimental"
+      }
     },
     "lingma": {
-      "name": "通义灵码 (阿里)",
-      "skills_dir": ".lingma/skills",
-      "rules_file": ".lingma/rules.md",
-      "rules_dir": null,
-      "link_strategy": "symlink",
-      "verified": false,
-      "_note": "Tongyi Lingma skill format TBD; verify before production use"
+      "name": "Tongyi Lingma",
+      "vendor": "Alibaba",
+      "tier": "P3",
+      "status": "pending-verification",
+      "aliases": ["tongyi-lingma"],
+      "ruleTargets": [
+        {
+          "path": ".lingma/rules.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".lingma/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "pending-verification"
+      }
+    },
+    "workbuddy": {
+      "name": "WorkBuddy",
+      "vendor": "Unknown",
+      "tier": "P3",
+      "status": "pending-verification",
+      "aliases": ["work-buddy"],
+      "ruleTargets": [],
+      "skills": {
+        "path": null,
+        "mode": "none",
+        "status": "pending-verification"
+      },
+      "notes": "No reliable public rule-path contract has been verified yet. Keep out of default deployment."
     }
-  },
-
-  "skill_categories": ["core", "governance", "tech", "platform"],
-
-  "deploy_options": {
-    "rules_strategy": "copy",
-    "_rules_strategy_note": "Rules files are COPIED (not symlinked) because some tools modify them. Skills are symlinked because they are read-only.",
-    "backup_existing": false,
-    "create_missing_dirs": true,
-    "require_admin": false,
-    "_require_admin_note": "Windows symlinks may require admin or Developer Mode. If unavailable, falls back to directory junctions or copy."
   }
 }

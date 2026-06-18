@@ -17,14 +17,26 @@ BLOCKED_PREFIXES = (
     "verification-demo/",
     ".agents/",
     ".claude/",
+    ".cline/",
     ".codebuddy/",
+    ".continue/",
+    ".cursor/",
+    ".github/instructions/enterprise-ai-dev-os.instructions.md",
+    ".lingma/",
     ".qoder/",
+    ".roo/",
     ".trae/",
+    ".windsurf/",
     "temp/",
     "tmp/",
 )
 
 BLOCKED_FILES = {
+    ".clinerules",
+    ".cursorrules",
+    ".github/copilot-instructions.md",
+    ".windsurfrules",
+    "CONVENTIONS.md",
     "tools/tool-registry.json",
 }
 

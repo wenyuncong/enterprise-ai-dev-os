@@ -1,204 +1,366 @@
 <#
 .SYNOPSIS
-    企业级全AI开发方法论 — 多工具部署脚本
-    将 skills/ 和 rules/ 一键部署到多个 AI 编程工具目录
+    Enterprise AI Development OS multi-tool adapter deployment.
 
 .DESCRIPTION
-    从 adapters.json 读取工具映射表，为每个工具：
-    1. 创建 skills/ 的符号链接（不改动源文件，永远同步）
-    2. 复制 rules/AGENTS.md 到工具的规则文件位置
+    Deploys the canonical methodology source to AI coding tool adapter paths.
+    Canonical source stays in:
+      - rules/AGENTS.md
+      - skills/
+      - docs/_templates/
+
+    Adapter outputs are generated files or links. They should not be edited
+    as source and are ignored by the repository boundary rules.
 
 .PARAMETER Tool
-    指定目标工具（codex, trae, qoder, codebuddy, claude, cursor, copilot, windsurf, lingma）
-    使用 "all" 部署到所有已验证工具
+    Tool selector. Use a comma-separated list, "verified", "all", or a single
+    tool/alias from tools/adapters.json. Default: verified.
+
+.PARAMETER IncludeExperimental
+    Include tools with status = experimental when Tool is "verified".
+
+.PARAMETER IncludePending
+    Include tools with status = pending-verification. Use only for local tests.
 
 .PARAMETER DryRun
-    仅显示将要执行的操作，不实际执行
+    Show planned actions without writing files.
 
 .PARAMETER Force
-    覆盖已存在的符号链接和文件
+    Overwrite existing generated files/directories.
 
 .PARAMETER ProjectRoot
-    项目根目录，默认为脚本所在目录的上级
+    Project root. Defaults to the parent of this script directory.
 
 .EXAMPLE
-    .\deploy.ps1 -Tool all
-    .\deploy.ps1 -Tool trae -DryRun
-    .\deploy.ps1 -Tool codex,qoder -Force
+    pwsh tools/deploy.ps1 -Tool verified -DryRun
+
+.EXAMPLE
+    pwsh tools/deploy.ps1 -Tool trae,qoder,cursor -Force
+
+.EXAMPLE
+    pwsh tools/deploy.ps1 -Tool all -IncludePending -DryRun
 #>
 
 param(
-    [string]$Tool = "all",
+    [string]$Tool = "verified",
+    [switch]$IncludeExperimental,
+    [switch]$IncludePending,
     [switch]$DryRun,
     [switch]$Force,
     [string]$ProjectRoot = $null
 )
 
 $ErrorActionPreference = "Stop"
+
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-if (-not $ProjectRoot) { $ProjectRoot = Resolve-Path (Join-Path $scriptDir "..") }
+if (-not $ProjectRoot) {
+    $ProjectRoot = Resolve-Path (Join-Path $scriptDir "..")
+}
+$ProjectRoot = [System.IO.Path]::GetFullPath($ProjectRoot)
 $adaptersPath = Join-Path $scriptDir "adapters.json"
 
-Write-Host "=== AI Tool Deploy ===" -ForegroundColor Cyan
+Write-Host "=== Enterprise AI Dev OS Adapter Deploy ===" -ForegroundColor Cyan
 Write-Host "Project Root: $ProjectRoot" -ForegroundColor Gray
+Write-Host "Selector: $Tool" -ForegroundColor Gray
 Write-Host ""
 
-# ─── Load adapter config ───────────────────────────────────────
 if (-not (Test-Path $adaptersPath)) {
     Write-Error "adapters.json not found at $adaptersPath"
     exit 1
 }
+
 $config = Get-Content $adaptersPath -Raw | ConvertFrom-Json
+$srcRulesFile = Join-Path $ProjectRoot $config.sourceOfTruth.rules
+$srcSkills = Join-Path $ProjectRoot $config.sourceOfTruth.skills
 
-# ─── Determine target tools ────────────────────────────────────
-$targetTools = @()
-if ($Tool -eq "all") {
-    $targetTools = $config.tools.PSObject.Properties | ForEach-Object { $_.Name }
-} else {
-    $targetTools = $Tool -split "," | ForEach-Object { $_.Trim() }
-}
-
-# ─── Source paths ──────────────────────────────────────────────
-$srcSkills = Join-Path $ProjectRoot "skills"
-$srcRulesFile  = Join-Path $ProjectRoot "rules" "AGENTS.md"
-
-if (-not (Test-Path $srcSkills)) {
-    Write-Error "Source skills/ not found: $srcSkills"
-    exit 1
-}
 if (-not (Test-Path $srcRulesFile)) {
-    Write-Error "Source rules/AGENTS.md not found: $srcRulesFile"
+    Write-Error "Rules source not found: $srcRulesFile"
+    exit 1
+}
+if (-not (Test-Path $srcSkills)) {
+    Write-Error "Skills source not found: $srcSkills"
     exit 1
 }
 
-# ─── Helper functions ──────────────────────────────────────────
+function Get-ToolStatusAllowed {
+    param([string]$Status)
+    if ($Status -eq "verified") { return $true }
+    if ($Status -eq "experimental" -and $IncludeExperimental) { return $true }
+    if ($Status -eq "pending-verification" -and $IncludePending) { return $true }
+    return $false
+}
+
+function Resolve-ToolNames {
+    param([string]$Selector)
+
+    $all = @{}
+    foreach ($prop in $config.tools.PSObject.Properties) {
+        $name = $prop.Name
+        $tool = $prop.Value
+        $all[$name] = $name
+        foreach ($alias in @($tool.aliases)) {
+            if ($alias) { $all[$alias] = $name }
+        }
+    }
+
+    if ($Selector -eq "all") {
+        return @($config.tools.PSObject.Properties | ForEach-Object { $_.Name })
+    }
+
+    if ($Selector -in @("verified", "verified-only")) {
+        return @(
+            $config.tools.PSObject.Properties |
+                Where-Object { Get-ToolStatusAllowed $_.Value.status } |
+                ForEach-Object { $_.Name }
+        )
+    }
+
+    $names = @()
+    foreach ($item in ($Selector -split "," | ForEach-Object { $_.Trim() } | Where-Object { $_ })) {
+        if (-not $all.ContainsKey($item)) {
+            Write-Warning "Tool or alias not found in adapters.json: $item"
+            continue
+        }
+        $names += $all[$item]
+    }
+    return @($names | Select-Object -Unique)
+}
+
 function Invoke-DeployStep {
-    param($Description, $ScriptBlock)
+    param([string]$Description, [scriptblock]$Action)
+
     if ($DryRun) {
         Write-Host "  [DRY] $Description" -ForegroundColor Yellow
-        $true
-    } else {
-        Write-Host "  $Description" -ForegroundColor Gray
-        try {
-            & $ScriptBlock
-            $true
-        } catch {
-            Write-Warning "  FAILED: $_"
-            $false
-        }
+        return $true
+    }
+
+    Write-Host "  $Description" -ForegroundColor Gray
+    try {
+        & $Action
+        return $true
+    } catch {
+        Write-Warning "  FAILED: $_"
+        return $false
     }
 }
 
-function New-SymlinkSafe {
-    param($Path, $Target)
+function Ensure-ParentDir {
+    param([string]$Path)
+    $parent = Split-Path -Parent $Path
+    if ($parent -and -not (Test-Path $parent)) {
+        New-Item -ItemType Directory -Path $parent -Force | Out-Null
+    }
+}
+
+function Copy-GeneratedFile {
+    param(
+        [string]$Source,
+        [string]$Destination,
+        [string]$Format,
+        [string]$ToolName
+    )
+
+    Ensure-ParentDir $Destination
+
+    $content = Get-Content $Source -Raw
+    if ($Format -eq "cursor-mdc") {
+        $content = "---`ndescription: Enterprise AI Development OS project rules`nalwaysApply: true`n---`n`n" + $content
+    } elseif ($Format -eq "copilot-path") {
+        $content = "---`napplyTo: '**'`n---`n`n" + $content
+    }
+
+    $header = @"
+<!--
+Generated by Enterprise AI Development OS adapter deploy.
+Tool: $ToolName
+Source: rules/AGENTS.md
+Do not edit this file as the source of truth.
+-->
+
+"@
+
+    $next = $header + $content
+
+    if (Test-Path $Destination) {
+        $existing = Get-Content $Destination -Raw
+        if (-not $Force -and $existing.Trim() -ne $next.Trim()) {
+            Write-Host "    exists and differs, use -Force to overwrite" -ForegroundColor DarkGray
+            return
+        }
+    }
+
+    Set-Content -Path $Destination -Value $next -Encoding UTF8
+    Write-Host "    OK (rules copied)" -ForegroundColor DarkGreen
+}
+
+function Remove-PathSafe {
+    param([string]$Path)
+    if (-not (Test-Path $Path)) { return }
+    $item = Get-Item $Path
+    if ($item.PSIsContainer) {
+        if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) {
+            $item.Delete()
+        } else {
+            Remove-Item -LiteralPath $Path -Recurse -Force
+        }
+    } else {
+        Remove-Item -LiteralPath $Path -Force
+    }
+}
+
+function New-LinkedOrCopiedSkills {
+    param(
+        [string]$Destination,
+        [string]$Mode,
+        [string]$Layout = "layered"
+    )
+
+    if (-not $Destination -or $Mode -eq "none") {
+        Write-Host "    SKIP (tool does not consume skills/)" -ForegroundColor DarkGray
+        return
+    }
+
+    Ensure-ParentDir $Destination
+
+    if ($Layout -eq "flat") {
+        if (Test-Path $Destination) {
+            if ($Force) {
+                Remove-PathSafe $Destination
+            } else {
+                Write-Host "    exists, use -Force to overwrite" -ForegroundColor DarkGray
+                return
+            }
+        }
+
+        New-Item -ItemType Directory -Path $Destination -Force | Out-Null
+        $skillFiles = Get-ChildItem -Path $srcSkills -Recurse -Filter "SKILL.md"
+        foreach ($skillFile in $skillFiles) {
+            $skillDir = Split-Path -Parent $skillFile.FullName
+            $skillName = Split-Path -Leaf $skillDir
+            $targetDir = Join-Path $Destination $skillName
+
+            if ($Mode -eq "copy") {
+                Copy-Item -Path $skillDir -Destination $targetDir -Recurse -Force
+                continue
+            }
+
+            try {
+                New-Item -ItemType SymbolicLink -Path $targetDir -Target $skillDir -Force:$Force -ErrorAction Stop | Out-Null
+            } catch {
+                try {
+                    New-Item -ItemType Junction -Path $targetDir -Target $skillDir -Force:$Force -ErrorAction Stop | Out-Null
+                } catch {
+                    Copy-Item -Path $skillDir -Destination $targetDir -Recurse -Force
+                }
+            }
+        }
+        Write-Host "    OK (flat skills: $($skillFiles.Count))" -ForegroundColor DarkGreen
+        return
+    }
+
+    if (Test-Path $Destination) {
+        if ($Force) {
+            Remove-PathSafe $Destination
+        } else {
+            Write-Host "    exists, use -Force to overwrite" -ForegroundColor DarkGray
+            return
+        }
+    }
+
+    if ($Mode -eq "copy") {
+        Copy-Item -Path $srcSkills -Destination $Destination -Recurse -Force
+        Write-Host "    OK (skills copied)" -ForegroundColor DarkGreen
+        return
+    }
+
     try {
-        New-Item -ItemType SymbolicLink -Path $Path -Target $Target -Force:$Force -ErrorAction Stop | Out-Null
-        Write-Host "    OK (symlink)" -ForegroundColor DarkGreen
+        New-Item -ItemType SymbolicLink -Path $Destination -Target $srcSkills -Force:$Force -ErrorAction Stop | Out-Null
+        Write-Host "    OK (skills symlink)" -ForegroundColor DarkGreen
     } catch {
         try {
-            New-Item -ItemType Junction -Path $Path -Target $Target -Force:$Force -ErrorAction Stop | Out-Null
-            Write-Host "    OK (junction)" -ForegroundColor DarkYellow
+            New-Item -ItemType Junction -Path $Destination -Target $srcSkills -Force:$Force -ErrorAction Stop | Out-Null
+            Write-Host "    OK (skills junction)" -ForegroundColor DarkYellow
         } catch {
-            throw "Symlink/junction failed. Run as admin or enable Developer Mode for symlink support."
+            Copy-Item -Path $srcSkills -Destination $Destination -Recurse -Force
+            Write-Host "    OK (skills copied fallback)" -ForegroundColor DarkYellow
         }
     }
 }
 
-# ─── Deploy per tool ───────────────────────────────────────────
+$targetTools = Resolve-ToolNames $Tool
+if (-not $targetTools -or $targetTools.Count -eq 0) {
+    Write-Error "No target tools selected."
+    exit 1
+}
+
 $results = @{}
+$deployedRuleTargets = @{}
+
 foreach ($toolName in $targetTools) {
     $toolCfg = $config.tools.$toolName
-    if (-not $toolCfg) {
-        Write-Warning "Tool not found in adapters.json: $toolName"
+    if (-not $toolCfg) { continue }
+
+    if (-not (Get-ToolStatusAllowed $toolCfg.status) -and $Tool -notin @("all")) {
+        Write-Host "[$toolName] skipped ($($toolCfg.status)); use -IncludeExperimental or -IncludePending" -ForegroundColor DarkGray
         $results[$toolName] = $false
         continue
     }
 
-    Write-Host "[$toolName] $($toolCfg.name)" -ForegroundColor Green
+    Write-Host "[$toolName] $($toolCfg.name) [$($toolCfg.status)]" -ForegroundColor Green
 
-    # ── Skills symlink ─────────────────────────────────────────
-    $toolSkillsDir = Join-Path $ProjectRoot $toolCfg.skills_dir
-
-    $skillOk = Invoke-DeployStep "Skills: skills/ -> $($toolCfg.skills_dir)" {
-        $parent = Split-Path -Parent $toolSkillsDir
-        if (-not (Test-Path $parent)) {
-            New-Item -ItemType Directory -Path $parent -Force | Out-Null
+    $ok = $true
+    foreach ($target in @($toolCfg.ruleTargets)) {
+        if (-not $target.path) { continue }
+        $source = Join-Path $ProjectRoot $target.source
+        $destination = Join-Path $ProjectRoot $target.path
+        $destinationKey = [System.IO.Path]::GetFullPath($destination).ToLowerInvariant()
+        if ($deployedRuleTargets.ContainsKey($destinationKey)) {
+            Write-Host "  Rules: $($target.path) already handled by $($deployedRuleTargets[$destinationKey]), skip duplicate" -ForegroundColor DarkGray
+            continue
         }
-
-        if (Test-Path $toolSkillsDir) {
-            if ($Force) {
-                if ((Get-Item $toolSkillsDir).Attributes -band [IO.FileAttributes]::ReparsePoint) {
-                    (Get-Item $toolSkillsDir).Delete()
-                } else {
-                    Remove-Item $toolSkillsDir -Recurse -Force
-                }
-            } else {
-                Write-Host "    (exists, use -Force to overwrite)" -ForegroundColor DarkGray
-                return
-            }
+        $label = "Rules: $($target.source) -> $($target.path)"
+        $stepOk = Invoke-DeployStep $label {
+            Copy-GeneratedFile -Source $source -Destination $destination -Format $target.format -ToolName $toolName
         }
-
-        New-SymlinkSafe -Path $toolSkillsDir -Target $srcSkills
+        if ($stepOk) {
+            $deployedRuleTargets[$destinationKey] = $toolName
+        }
+        $ok = $ok -and $stepOk
     }
 
-    # ── Rules copy ─────────────────────────────────────────────
-    $toolRulesTarget = Join-Path $ProjectRoot $toolCfg.rules_file
-    $toolRulesNormalized = [System.IO.Path]::GetFullPath($toolRulesTarget)
-    $srcRulesNormalized = [System.IO.Path]::GetFullPath($srcRulesFile)
-
-    # Skip self-copy
-    if ($toolRulesNormalized -eq $srcRulesNormalized) {
-        Write-Host "  Rules: source = target, skip (already in place)" -ForegroundColor DarkGray
-        $results[$toolName] = $skillOk
-        continue
+    $skillPath = $null
+    $skillMode = "none"
+    $skillLayout = "layered"
+    if ($toolCfg.skills) {
+        $skillPath = $toolCfg.skills.path
+        $skillMode = $toolCfg.skills.mode
+        if ($toolCfg.skills.layout) { $skillLayout = $toolCfg.skills.layout }
     }
 
-    Invoke-DeployStep "Rules: AGENTS.md -> $($toolCfg.rules_file)" {
-        $rulesDir = Split-Path -Parent $toolRulesTarget
-        if ($rulesDir -and -not (Test-Path $rulesDir)) {
-            New-Item -ItemType Directory -Path $rulesDir -Force | Out-Null
+    if ($skillPath) {
+        $destination = Join-Path $ProjectRoot $skillPath
+        $stepOk = Invoke-DeployStep "Skills: skills/ -> $skillPath ($skillMode, $skillLayout)" {
+            New-LinkedOrCopiedSkills -Destination $destination -Mode $skillMode -Layout $skillLayout
         }
-
-        if (Test-Path $toolRulesTarget) {
-            if ($Force) {
-                Remove-Item $toolRulesTarget -Force
-            } else {
-                # Compare content - if identical, skip
-                $existingContent = Get-Content $toolRulesTarget -Raw
-                $sourceContent = Get-Content $srcRulesFile -Raw
-                if ($existingContent.Trim() -eq $sourceContent.Trim()) {
-                    Write-Host "    OK (identical, skip)" -ForegroundColor DarkGray
-                    return
-                }
-                Write-Host "    (differs, use -Force to overwrite)" -ForegroundColor DarkGray
-                return
-            }
-        }
-
-        Copy-Item -Path $srcRulesFile -Destination $toolRulesTarget -Force
-        Write-Host "    OK (copied)" -ForegroundColor DarkGreen
+        $ok = $ok -and $stepOk
+    } else {
+        Write-Host "  Skills: skip (not supported)" -ForegroundColor DarkGray
     }
 
-    $results[$toolName] = $skillOk
+    $results[$toolName] = $ok
 }
 
-# ─── Summary ───────────────────────────────────────────────────
 Write-Host ""
 Write-Host "=== Deploy Summary ===" -ForegroundColor Cyan
-foreach ($kv in $results.GetEnumerator()) {
-    $icon = if ($kv.Value) { "[OK]" } else { "[FAIL]" }
-    $color = if ($kv.Value) { "Green" } else { "Red" }
-    Write-Host "  $icon $($kv.Key)" -ForegroundColor $color
+foreach ($name in $targetTools) {
+    $ok = $results[$name]
+    $icon = if ($ok) { "[OK]" } else { "[SKIP/FAIL]" }
+    $color = if ($ok) { "Green" } else { "Yellow" }
+    Write-Host "  $icon $name" -ForegroundColor $color
 }
 
 if ($DryRun) {
     Write-Host "`nDry run complete. Remove -DryRun to execute." -ForegroundColor Yellow
 } else {
     Write-Host "`nDeploy complete." -ForegroundColor Cyan
-    $deployedDirs = $targetTools | Where-Object { $results[$_] } | ForEach-Object {
-        $cfg = $config.tools.$_
-        "  $($cfg.skills_dir)"
-    }
-    Write-Host "Skills synced to:" -ForegroundColor Gray
-    $deployedDirs | ForEach-Object { Write-Host $_ -ForegroundColor DarkGray }
 }

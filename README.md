@@ -39,6 +39,7 @@ methodology/              Methodology whitepapers
 docs/_templates/          Documentation templates
 docs/全项目总控/           Master index, disclosure boundary, delivery loop
 docs/公开材料/             Public release notes and open-source package boundary
+docs/TOOL_ADAPTERS.md      Multi-tool adapter matrix and deploy contract
 scripts/py/               Audit, scoring, environment, and tool-discovery scripts
 scripts/js/               CLI entrypoint
 tools/                    Multi-tool deployment adapters
@@ -113,6 +114,9 @@ py scripts/py/env_check.py --quick
 
 # Check open-source publishing boundary
 py scripts/py/check_open_source_boundary.py --project-root .
+
+# Preview verified AI tool adapters
+powershell -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verified -DryRun
 ```
 
 ## Open-Source Boundary
@@ -132,7 +136,7 @@ See [docs/公开材料/OPEN_SOURCE_PACKAGE.md](docs/公开材料/OPEN_SOURCE_PAC
 - 38 verified official skills
 - methodology audit passing with 0 failures and 0 warnings
 - AI development readiness score: 100/100 for repository structure
-- tool-agnostic rules and skills
+- tool-agnostic rules and multi-tool adapter registry
 - public/private disclosure boundary documented
 
 ## Repository Description

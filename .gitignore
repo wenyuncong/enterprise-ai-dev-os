@@ -18,8 +18,20 @@ target/
 .agents/
 .claude/
 .codebuddy/
+.cline/
+.continue/
+.cursor/
+.github/copilot-instructions.md
+.github/instructions/enterprise-ai-dev-os.instructions.md
+.lingma/
 .qoder/
+.roo/
 .trae/
+.windsurf/
+.clinerules
+.cursorrules
+.windsurfrules
+CONVENTIONS.md
 tools/tool-registry.json
 
 # Internal / non-open-source materials
