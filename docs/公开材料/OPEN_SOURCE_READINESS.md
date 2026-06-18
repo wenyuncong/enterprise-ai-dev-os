@@ -16,6 +16,7 @@ Public-ready scope means:
 - no local tool registry
 - no generated adapter folders
 - no hard-coded old project path residue in tracked files
+- Apache-2.0 license file and package metadata are present
 - methodology audit and open-source boundary checks pass
 
 ## Public-Ready Now
@@ -23,6 +24,7 @@ Public-ready scope means:
 | Area | Paths | Decision |
 |---|---|---|
 | Repository entry | `README.md`, `AGENTS.md`, `CLAUDE.md`, `package.json` | Public-ready |
+| License | `LICENSE`, `NOTICE`, `package.json` license field | Public-ready under Apache-2.0 |
 | Rules | `rules/AGENTS.md`, `lite/rules/AGENTS.md` | Public-ready |
 | Official skills | `skills/`, `skills/SKILL_MANIFEST.json` | Public-ready |
 | Methodology papers | `methodology/` | Public-ready |
@@ -78,22 +80,7 @@ Expected result:
 
 ## GitHub UI Review Checklist
 
-Before changing the GitHub repository from private to public, search the GitHub UI for:
-
-```text
-全项目总控_20260331
-legacy source repository names
-H:/
-H:\
-G:/
-G:\
-内部商业化
-ERP_TERM_AUDIT
-LAUNCH_KIT
-verification-demo
-备用
-reference/GERP
-```
+Before changing the GitHub repository from private to public, search the GitHub UI for old dated control-doc names, legacy source repository names, Windows absolute drive paths, private strategy directory names, launch-kit filenames, local verification project names, raw archive names, and unredacted case-study paths.
 
 All searches should return no tracked public content except expected boundary lists such as `.gitignore` or open-source boundary docs.
 

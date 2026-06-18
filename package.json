@@ -2,6 +2,7 @@
   "name": "enterprise-ai-dev-os",
   "version": "1.0.0",
   "private": false,
+  "license": "Apache-2.0",
   "description": "Enterprise AI Development OS: rules, skills, documentation memory, audit gates, and evolution loops for deterministic AI-assisted engineering.",
   "scripts": {
     "verify": "node skills/governance/ai-runtime-verify/scripts/verify.js",
