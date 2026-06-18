@@ -1,0 +1,324 @@
+﻿{
+  "schemaVersion": "1.0.0",
+  "updatedAt": "2026-06-18",
+  "officialSkillRoot": "skills/",
+  "rawSourceRoot": "private-local-archive",
+  "adapterRoots": [
+    ".agents/skills",
+    ".trae/skills",
+    ".qoder/skills",
+    ".claude/skills",
+    ".codebuddy/skills"
+  ],
+  "maturityLevels": {
+    "raw": "Source material copied from a previous project and not counted as an official portable skill.",
+    "generalized": "GERP-specific naming has been generalized and the skill is stored under skills/.",
+    "callable": "The skill has a SKILL.md and can be loaded by an agent through the official skills/ root.",
+    "verified": "The skill has passed audit checks for path validity, minimum structure, and portable references.",
+    "deprecated": "The skill should not be used for new work."
+  },
+  "counts": {
+    "official": 38,
+    "rawSource": 45,
+    "byLayer": {
+      "core": 12,
+      "governance": 11,
+      "tech": 15,
+      "platform": 0
+    }
+  },
+  "officialSkills": [
+    {
+      "name": "ai-architect-governor",
+      "layer": "core",
+      "path": "skills/core/ai-architect-governor/SKILL.md",
+      "source": "gerp-architect-governor",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-atomic-architect",
+      "layer": "core",
+      "path": "skills/core/ai-atomic-architect/SKILL.md",
+      "source": "GERP architecture extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-chief-planner",
+      "layer": "core",
+      "path": "skills/core/ai-chief-planner/SKILL.md",
+      "source": "gerp-chief-planner",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-command-executor",
+      "layer": "core",
+      "path": "skills/core/ai-command-executor/SKILL.md",
+      "source": "gerp-command-executor",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-foundation-governor",
+      "layer": "core",
+      "path": "skills/core/ai-foundation-governor/SKILL.md",
+      "source": "gerp-stable-foundation-governor",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-library-first",
+      "layer": "core",
+      "path": "skills/core/ai-library-first/SKILL.md",
+      "source": "methodology extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-project-classifier",
+      "layer": "core",
+      "path": "skills/core/ai-project-classifier/SKILL.md",
+      "source": "methodology extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-rule-dispatcher",
+      "layer": "core",
+      "path": "skills/core/ai-rule-dispatcher/SKILL.md",
+      "source": "gerp-rule-dispatcher",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-skill-evolver",
+      "layer": "core",
+      "path": "skills/core/ai-skill-evolver/SKILL.md",
+      "source": "gerp-skill-evolver",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-skill-governor",
+      "layer": "core",
+      "path": "skills/core/ai-skill-governor/SKILL.md",
+      "source": "methodology extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-task-decomposer",
+      "layer": "core",
+      "path": "skills/core/ai-task-decomposer/SKILL.md",
+      "source": "gerp-task-decomposer",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-tool-bootstrapper",
+      "layer": "core",
+      "path": "skills/core/ai-tool-bootstrapper/SKILL.md",
+      "source": "methodology extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-brownfield-analyzer",
+      "layer": "governance",
+      "path": "skills/governance/ai-brownfield-analyzer/SKILL.md",
+      "source": "methodology extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-competitor-analyst",
+      "layer": "governance",
+      "path": "skills/governance/ai-competitor-analyst/SKILL.md",
+      "source": "gerp-competitor-analyst",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-component-standardizer",
+      "layer": "governance",
+      "path": "skills/governance/ai-component-standardizer/SKILL.md",
+      "source": "methodology extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-domain-boundary-mapper",
+      "layer": "governance",
+      "path": "skills/governance/ai-domain-boundary-mapper/SKILL.md",
+      "source": "gerp-domain-boundary-mapper",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-field-package-governor",
+      "layer": "governance",
+      "path": "skills/governance/ai-field-package-governor/SKILL.md",
+      "source": "gerp-atomic-component-fieldpackage",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-flow-closure-audit",
+      "layer": "governance",
+      "path": "skills/governance/ai-flow-closure-audit/SKILL.md",
+      "source": "gerp-flow-closure-audit",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-frontend-audit",
+      "layer": "governance",
+      "path": "skills/governance/ai-frontend-audit/SKILL.md",
+      "source": "gerp-frontend-availability-audit",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-reference-researcher",
+      "layer": "governance",
+      "path": "skills/governance/ai-reference-researcher/SKILL.md",
+      "source": "methodology extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-runtime-verify",
+      "layer": "governance",
+      "path": "skills/governance/ai-runtime-verify/SKILL.md",
+      "source": "methodology extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-single-truth-enforcer",
+      "layer": "governance",
+      "path": "skills/governance/ai-single-truth-enforcer/SKILL.md",
+      "source": "methodology extraction",
+      "maturity": "verified"
+    },
+    {
+      "name": "ai-ui-ux-governor",
+      "layer": "governance",
+      "path": "skills/governance/ai-ui-ux-governor/SKILL.md",
+      "source": "gerp-ui-ux",
+      "maturity": "verified"
+    },
+    {
+      "name": "docker-expert",
+      "layer": "tech",
+      "path": "skills/tech/docker-expert/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "flutter-animations",
+      "layer": "tech",
+      "path": "skills/tech/flutter-animations/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "flutter-expert",
+      "layer": "tech",
+      "path": "skills/tech/flutter-expert/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "java-springboot",
+      "layer": "tech",
+      "path": "skills/tech/java-springboot/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "javascript-typescript-jest",
+      "layer": "tech",
+      "path": "skills/tech/javascript-typescript-jest/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "multi-stage-dockerfile",
+      "layer": "tech",
+      "path": "skills/tech/multi-stage-dockerfile/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "mysql-best-practices",
+      "layer": "tech",
+      "path": "skills/tech/mysql-best-practices/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "springboot-patterns",
+      "layer": "tech",
+      "path": "skills/tech/springboot-patterns/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "springboot-security",
+      "layer": "tech",
+      "path": "skills/tech/springboot-security/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "tailwind-css-patterns",
+      "layer": "tech",
+      "path": "skills/tech/tailwind-css-patterns/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "tailwind-design-system",
+      "layer": "tech",
+      "path": "skills/tech/tailwind-design-system/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "typescript-advanced-types",
+      "layer": "tech",
+      "path": "skills/tech/typescript-advanced-types/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "vue",
+      "layer": "tech",
+      "path": "skills/tech/vue/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "vue-best-practices",
+      "layer": "tech",
+      "path": "skills/tech/vue-best-practices/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    },
+    {
+      "name": "vue-pinia-best-practices",
+      "layer": "tech",
+      "path": "skills/tech/vue-pinia-best-practices/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified"
+    }
+  ],
+  "rawOnlySkills": [
+    "cnb-api",
+    "cnb-code-commit",
+    "cnb-code-review",
+    "cnb-pipeline",
+    "cnb-docs",
+    "cnb-npc-delegate",
+    "cnb-npc-search",
+    "cnb-pr-diff",
+    "cnb-pr-summary",
+    "cnb-repo-knowledge-base",
+    "cnb-tapd-resource-fetcher",
+    "cnb-text-path-converter",
+    "cnb-upload-attachment",
+    "find-skills",
+    "gerp-cnb-release-deploy",
+    "gerp-market-researcher",
+    "gerp-mobile-page-rules",
+    "gerp-multilang-language-onboarding",
+    "gerp-multilang-page-implementation"
+  ],
+  "notes": [
+    "Only skills listed in officialSkills count toward the portable methodology release.",
+    "Raw-only skills remain as source evidence and future extraction candidates.",
+    "A skill reaches verified only after scripts/py/audit_methodology.py passes without blocking issues."
+  ]
+}

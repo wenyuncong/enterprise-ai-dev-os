@@ -1,0 +1,442 @@
+# AGENTS.md — Enterprise-Grade AI-Assisted Development Methodology
+
+> **Language**: Bilingual (CN/EN). All AI agents MUST read this file at the start of every session.
+
+---
+
+
+## 0. Session Start Protocol | 会话启动协议 (EVERY SESSION)
+
+### 0.1 Task Continuity | 防遗忘
+**Before doing anything else:**
+1. Read `docs/全项目总控/TASK_BACKLOG.md`
+2. If unfinished tasks exist → remind user:
+   "You have [N] unfinished tasks: [list]. Continue or start new?"
+3. User decides → update backlog
+
+
+### 0.2 Tool Discovery | 工具发现 (Brownfield projects)
+**Before analyzing an existing project:**
+1. Run: `py scripts/py/discover_tools.py {project_path} --by-purpose`
+2. Catalog existing scripts by purpose
+3. Use existing scripts instead of writing new ones
+4. Match the project's established patterns
+
+**Rule**: If a project has 50+ scripts, it has mature tooling. Respect it.
+
+### 0.3 Environment Verification | 环境自检
+**Before any code work:**
+1. Run: `py scripts/py/env_check.py --quick` (use `python` or `python3` on Linux/Mac)
+2. If tools missing → delegate to ai-tool-bootstrapper to auto-install
+3. If all tools available → proceed
+
+**Never waste time debugging "mysterious errors" when the real problem is a missing tool. Check environment first.**
+
+### 0.3 Tool Path Check | 路径记忆
+**Before installing any tool:**
+1. Check `tools/tool-registry.json` — is the tool already installed?
+2. Run: `py scripts/py/tool_registry.py get {tool_name}`
+3. If registered → use existing path. Do NOT re-install.
+4. If new install → register path: `py scripts/py/tool_registry.py set {name} "{path}" "{version}"`
+
+---
+
+## 1. Overview | 概述
+
+This document defines the mandatory rules, workflows, and discipline for AI-assisted enterprise software development. It is derived from battle-tested practices on a real multi-tenant ERP system and generalized for universal use.
+
+本文档定义了 AI 辅助企业级软件开发的强制性规则、工作流和工程纪律。提炼自真实多租户 ERP 项目的实战经验，已通用化为适用于任何项目的标准。
+
+### Core Philosophy | 核心哲学
+
+| Principle | EN | CN |
+|---|---|---|
+| **Check Before Execute** | Never assume. Always verify the current state of DB, code, runtime before acting. | 先检查后执行：任何操作前必须核实数据库、代码、运行时现状 |
+| **No Degradation** | Find root cause. Never apply temporary workarounds. | 禁止降级方案：必须找到根本原因，不允许临时绕过 |
+| **Data-Driven Development** | DB is the single source of truth. All changes start from the database. | 数据驱动开发：数据库是唯一真相源，所有修改从数据库开始 |
+| **Frontend = Display Only** | Frontend renders. Backend decides. Zero business logic in UI layer. | 前端纯展示：前端绝不写业务逻辑、计算、校验、决策 |
+| **Library First** | Never rewrite what a mature open-source library already does. | 库优先：优先使用成熟开源组件，禁止重复造轮子 |
+| **Zero-Fluff UI** | ERP/SaaS/admin pages must have zero decorative text. Only actionable prompts. | 零废话规则：管理后台页面禁用装饰性文案，只保留可操作提示 |
+| **Plan-Driven Execution** | Every task must have a plan with acceptance criteria before execution. | 计划驱动：每个任务必须先制定详细计划再执行 |
+
+---
+
+## 2. Project Classification | 项目分类 (Step 0)
+
+Before any development work, classify the project. See skills/core/ai-project-classifier/SKILL.md for details.
+
+| Dimension | Options | Determines |
+|---|---|---|
+| **Origin** | Brownfield (existing) / Greenfield (new) | Read-first vs scaffold |
+| **Quality Target** | Rapid Prototype / AI-Native / Enterprise | Which skills to load, which architecture |
+| **Deploy Targets** | Web / Mobile / WeChat / MCP / All | Interface design strategy |
+| **Scale** | Monolith / Atomic Services / Microservices | Service split granularity |
+
+**Rule**: Default to AI-Native when unclear. Easier to downgrade than upgrade.
+
+---
+
+## 3. Mandatory Development Order | 强制开发顺序 (13 Steps)
+
+### Step 0: Project Classification
+- Classify project across 4 dimensions
+- Select skill set and architecture archetype
+- **Gate**: Classification documented
+
+### Backend Phase | 后端阶段
+
+| Step | Action | Verification |
+|---|---|---|
+| 1 | **Database Init** — SQL scripts → schema creation → verify tables | SHOW TABLES; DESCRIBE table; |
+| 2 | **Entity Layer** — Generate entity classes → add comments → verify mapping | Check field-column alignment |
+| 3 | **Mapper Layer** — Extend BaseMapper → custom queries → verify SQL | Execute and check results |
+| 4 | **Service Layer** — Business logic → cache config → transaction management | Unit test pass |
+| 5 | **Controller Layer** — REST API → API docs → permission control | curl endpoint test |
+| 6 | **Build Verification** — Compile → startup test → API health check | Health endpoint UP |
+
+### Frontend Phase | 前端阶段
+
+| Step | Action | Verification |
+|---|---|---|
+| 7 | **API Contracts** — Generate from backend → verify field consistency | Compare with backend DTO |
+| 8 | **Service Layer** — API call wrappers → error handling → verify endpoints | Network tab inspection |
+| 9 | **Components** — Page development → reuse standard templates → functional test | Follow component-standardizer |
+| 10 | **Integration Test** — API testing → functional completeness → error handling | Full workflow test |
+| 11 | **Seed Data** — Write test data → verify in DB → validate in UI | CRUD + edge cases |
+| 12 | **Schema Sync** — Template → all instances → verify sync status | Compare schemas |
+
+### Verification Phase | 验证阶段
+
+| Step | Action | Verification |
+|---|---|---|
+| 13 | **Runtime Verify** — Headless browser → check console/loading/DOM/API | ai-runtime-verify returns passed:true |
+| 13a | **Release Governance** (Enterprise only) — Lock-version, P0 audit, manual test ledger, business process acceptance | All P0=0, P1<5, manual tests pass |
+
+**⚠️ CRITICAL**: Step 13 MUST pass before declaring "development complete". Step 13a is MANDATORY for Enterprise releases.
+
+**⚠️ CRITICAL**: Step 13 MUST pass before declaring "development complete". See skills/governance/ai-runtime-verify/SKILL.md
+
+**Key Rule**: Each step MUST pass verification before moving to the next.
+
+---
+
+## 4. Skill Architecture | Skill 体系架构 (5 Layers)
+
+`
++--------------------------------------------------+
+|         LAYER 0: CLASSIFICATION | 分类层           |
+|         ai-project-classifier                     |
+|         "What kind of project? What quality?"     |
++--------------------------------------------------+
+                         |
++--------------------------------------------------+
+|         LAYER 1: ROUTING | 路由层                 |
+|         ai-rule-dispatcher                        |
+|         "Which skill and rules apply?"            |
++--------------------------------------------------+
+                         |
++--------------------------------------------------+
+|         LAYER 2: DECOMPOSITION | 分解层           |
+|         ai-task-decomposer                        |
+|         "How to break this into safe batches?"    |
++--------------------------------------------------+
+                         |
++--------------------------------------------------+
+|         LAYER 3: EXECUTION | 执行层               |
+|         20+ domain, governance & tech skills      |
+|         "Write the code, follow the rules."       |
++--------------------------------------------------+
+                         |
++--------------------------------------------------+
+|         LAYER 4: EVOLUTION | 进化层               |
+|         ai-skill-evolver                          |
+|         "What did we learn? Update the rules."    |
++--------------------------------------------------+
+`
+
+Skills directory structure:
+- skills/core/ — Engine skills (classification, routing, decomposition, planning, execution, bootstrapping, library-first, evolution)
+- skills/governance/ — Governance skills (single-truth, component-standardizer, frontend-audit, runtime-verify, ui-ux, flow-closure, domain-boundary, field-package, competitor-analyst)
+- skills/tech/ — Technology stack skills (Vue, Spring Boot, Flutter, Docker, Tailwind, MySQL, etc.)
+- skills/platform/ — Platform integration skills (CNB API, pipeline, code commit, code review)
+
+---
+
+## 5. Skill Loading Lifecycle | Skill 加载生命周期
+
+### ⚠️ Context Decay Warning
+AI context windows are finite. Rules loaded early in a long session WILL fade from active memory. This is not a bug — it's a physical limitation. The loading lifecycle below is designed to counteract this.
+
+### Phase 1: Session Start (Load Once)
+- AGENTS.md (this file) — always loaded
+- skills/core/ai-project-classifier/SKILL.md
+- skills/core/ai-tool-bootstrapper/SKILL.md
+
+### Phase 2: Domain Entry (Load When Entering New Domain)
+
+**Entering frontend work → MUST re-read:**
+- skills/governance/ai-single-truth-enforcer/SKILL.md
+- skills/core/ai-library-first/SKILL.md
+- skills/governance/ai-component-standardizer/SKILL.md
+
+**Entering backend work → MUST re-read:**
+- Backend tech skill for your stack (java-springboot / springboot-patterns / etc.)
+- skills/core/ai-library-first/SKILL.md
+- skills/governance/ai-single-truth-enforcer/SKILL.md (Rule 2: single truth)
+
+**Entering brownfield work → MUST re-read:**
+- skills/governance/ai-brownfield-analyzer/SKILL.md
+- methodology/09_老项目改造方法论.md
+
+**Entering unfamiliar domain → SHOULD re-read:**
+- skills/governance/ai-reference-researcher/SKILL.md
+
+### Phase 3: Pre-Gate Re-Read (Load Before Critical Actions)
+
+**Before writing ANY code to a file → verify:**
+- Did I re-read the domain governance skills in the last 50 messages? If not, re-read them now.
+
+**Before claiming "code complete" → MUST re-read:**
+- skills/governance/ai-runtime-verify/SKILL.md
+- skills/governance/ai-single-truth-enforcer/SKILL.md (audit checklist)
+
+**Before commit / PR → MUST re-read:**
+- skills/governance/ai-frontend-audit/SKILL.md (if frontend changes)
+- skills/governance/ai-runtime-verify/SKILL.md
+
+### Phase 4: Compressed Rule Reminder
+When context is tight and full skill re-reads are expensive, use this compressed checklist:
+
+```
+QUICK CHECK (10 rules, always active):
+□ Frontend = display only. Backend computes everything.
+□ Check ai-library-first before writing custom code.
+□ Page must match standard template (list/document/report/dashboard).
+□ Notification severity: P0=Modal, P1=Banner, P2=Toast, P3=Console.
+□ Test evidence REQUIRED before "done" — must show verify JSON path or test output.
+□ Missing tool → auto-install, never ask user.
+□ Every page handles 4 states: loading, empty, error, edge.
+□ Brownfield: audit before code, match existing style.
+□ No business logic in Vue computed() or React useMemo().
+□ Single truth: never compute same value in two places.
+```
+
+
+---
+
+## 6. Non-Negotiable Rules | 非协商规则
+
+These rules are enforced by governance skills. Violating any of them means the task is NOT complete.
+
+### Data & Logic
+| # | Rule | Enforced By |
+|---|---|---|
+| 1 | **Frontend = display only**. Zero business logic in Vue/React components. All computation, validation, decisions in backend. | ai-single-truth-enforcer |
+| 2 | **Backend is sole source of truth**. DB → Backend API → Frontend cache. Never compute the same value in two places. | ai-atomic-architect |
+| 3 | **No duplicate truth sources**. Same field defined in 2+ components with different logic = violation. | ai-field-package-governor |
+
+### Component & UI
+| # | Rule | Enforced By |
+|---|---|---|
+| 4 | **All pages use standard templates**. List, Document, Report, Dashboard. No custom layout per page. | ai-component-standardizer |
+| 5 | **Theme variables only**. No hard-coded colors. All styling via CSS variables. | ai-component-standardizer |
+| 6 | **Notifications match severity**: P0=Modal, P1=Persistent Banner, P2=Toast(4-6s), P3=Console. | ai-ui-ux-governor |
+| 7 | **Zero-fluff**. No welcome messages, marketing copy, placeholder help text on operation pages. | ai-ui-ux-governor |
+
+### Code Quality
+| # | Rule | Enforced By |
+|---|---|---|
+| 8 | **Library first**. Check npm/pip/maven before writing custom code. Writing from scratch wastes 96%+ tokens. | ai-library-first |
+| 9 | **No silent failures**. Every error surfaces to user at correct severity level. | ai-single-truth-enforcer |
+| 10 | **P0 destructive actions = modal confirmation**. Delete/irreversible actions must confirm, never toast. | ai-single-truth-enforcer |
+
+### Verification
+| # | Rule | Enforced By |
+|---|---|---|
+| 11 | **Runtime verify before "done"**. Browser must load with 0 console errors, loading overlay removed, DOM rendered. | ai-runtime-verify |
+| 12 | **Missing tools = auto-install**. Never ask user to install. Detect → acquire → verify → continue. | ai-tool-bootstrapper |
+| 13 | **Every page handles 4 states**: Loading, Empty, Error, Edge Cases. | ai-frontend-audit |
+| 14 | **No test = not done**. Every task MUST produce a passing test before claiming complete. Show test output path (verify JSON, jest/pytest output). | ai-runtime-verify / jest / pytest |
+
+---
+
+## 7. Complete Skill Index | 完整 Skill 索引
+
+### Core Engine (skills/core/) — 11 skills
+
+| Skill | Purpose | When to Load |
+|---|---|---|
+| ai-project-classifier | Classify project (brownfield/greenfield, quality, scale, targets) | ALWAYS first at project start |
+| ai-rule-dispatcher | Route tasks to correct skill and load required docs | Every new task |
+| ai-task-decomposer | Break complex work into safe executable batches | Multi-module or cross-end tasks |
+| ai-chief-planner | End-to-end project planning, scheduling, closure | Project-level orchestration |
+| ai-command-executor | Standardized command execution with env verification | Any shell/CLI operation |
+| ai-tool-bootstrapper | Auto-detect and install missing tools | When "tool not found" error |
+| ai-library-first | Enforce: check existing libraries before writing custom code | Before ANY code generation |
+| ai-architect-governor | Cross-domain architecture governance, ADR | Architecture decisions |
+| ai-atomic-architect | AI-native atomic service + orchestration + unified interfaces | Project architecture design |
+| ai-foundation-governor | Version control, tenant switches, permissions, menus, routes | Platform foundation changes |
+| ai-skill-evolver | Review completed work, update skills, archive patterns | After task closure |
+| ai-skill-governor | Proactive skill health audit: contradiction, overlap, rot, orphan detection | Weekly / monthly / on-demand |
+
+### Governance (skills/governance/) — 9 skills
+
+| Skill | Purpose | When to Load |
+|---|---|---|
+| ai-single-truth-enforcer | Frontend display-only, backend truth, notification severity | ALL frontend work |
+| ai-component-standardizer | Page templates (list/document/report/dashboard), theme system | ALL page development |
+| ai-frontend-audit | Static code quality audit across 6 dimensions | Before PR/code review |
+| ai-runtime-verify | Browser runtime verification (console/DOM/API/loading) | Before claiming "done" |
+| ai-ui-ux-governor | Design system governance, density, states, zero-fluff | UI consistency review |
+| ai-flow-closure-audit | Business chain verification (page→API→table→parameter→writeback) | Business process verification |
+| ai-domain-boundary-mapper | Domain boundary documentation and ownership mapping | Cross-domain changes |
+| ai-field-package-governor | Field metadata centralization, DB→metadata→component chain | Field/column additions |
+| ai-competitor-analyst | Competitor benchmarking, market positioning research | Market research tasks |
+| ai-reference-researcher | Search, download, analyze open-source reference implementations | Complex unfamiliar domains |
+| ai-brownfield-analyzer | Analyze legacy projects, extract patterns, classify intervention level | Any existing project (ALWAYS first) |
+
+### Technology Stack (skills/tech/) — 15 skills
+
+| Skill | Purpose |
+|---|---|
+| vue | Vue 3 Composition API, script setup, reactivity |
+| vue-best-practices | Vue patterns, TypeScript, Volar, vue-tsc |
+| vue-pinia-best-practices | Pinia stores, state management |
+| typescript-advanced-types | Generics, conditional types, mapped types |
+| java-springboot | Spring Boot best practices |
+| springboot-patterns | Architecture patterns, REST API design |
+| springboot-security | AuthN/AuthZ, CSRF, rate limiting |
+| mysql-best-practices | Schema design, query optimization |
+| docker-expert | Multi-stage builds, optimization, Compose |
+| multi-stage-dockerfile | Optimized Dockerfile templates |
+| flutter-expert | Flutter 3+, Riverpod/Bloc, GoRouter |
+| flutter-animations | Implicit/explicit animations in Flutter |
+| tailwind-css-patterns | Utility-first CSS patterns |
+| tailwind-design-system | Design tokens, component libraries |
+| javascript-typescript-jest | Jest testing patterns, mocking |
+
+### Platform Integration (skills/platform/) — 4 skills
+
+| Skill | Purpose |
+|---|---|
+| cnb-api | CNB platform API (repos, issues, PRs, pipelines) |
+| cnb-pipeline | CNB CI/CD pipeline configuration |
+| cnb-code-commit | Code commit + PR creation workflow |
+| cnb-code-review | PR review with inline comments |
+
+**Total**: 38 skills (may grow with project needs)
+
+---
+
+## 8. Documentation System | 文档体系
+
+### Folder Hierarchy
+
+```
+docs/
+  _templates/            ← Templates (never edit directly)
+
+  架构决策记录/           ← One ADR per decision file
+    ADR-001_多租户架构选型.md
+
+  每日调研回写/           ← One file per day
+    2026-06-17_调研记录.md
+
+  业务流程全案/           ← Sub-folders per business process
+    采购流程/
+    销售流程/
+
+  测试验收报告/           ← One file per test round
+    2026-06_R1_核心流程.md
+
+  部署运维手册/           ← Per-environment guides
+    dev_部署指南.md
+    prod_部署指南.md
+
+  全项目总控/             ← Master control hub
+    MASTER_INDEX.md
+    PROJECT_STATUS.md
+```
+
+**Rules**:
+- No loose `.md` files in `docs/` root — all in sub-folders
+- Task packs go under their domain folder, not as loose `docs/{name}_任务包/`
+- Type first (ADR/调研/流程), then topic (财务/采购)
+
+**Daily Writeback Rule**: After each development session, write a dated record under the appropriate docs/ category. This builds an auditable knowledge base automatically.
+
+---
+
+## 9. Coding Standards | 编码规范
+
+### Naming | 命名
+- **Classes**: PascalCase (ProductService)
+- **Methods/Variables**: camelCase (productName)
+- **DB columns**: snake_case (product_name)
+- **Constants**: UPPER_SNAKE_CASE (MAX_RETRY_COUNT)
+
+### Comments | 注释
+- All public classes, methods, and fields MUST have comments
+- Complex logic MUST have step-by-step explanation comments
+- No-comment code is considered incomplete
+
+### Layering | 分层
+`
+Controller -> Service -> Mapper -> Entity
+   (API)     (Business)  (Data)   (Model)
+`
+
+---
+
+## 10. File Placement Rules | 文件存放规范
+
+**NEVER create files in the project root directory.**
+
+| File Type | Target Directory |
+|---|---|
+| .bat scripts | scripts/bat/ |
+| .ps1 scripts | scripts/ps1/ |
+| .py scripts | scripts/py/ |
+| .sql files | database/ |
+| .md documents | docs/ |
+| Temporary files | temp/ or tmp/ |
+
+**Full scaffold standard**: See methodology/08_项目文件夹结构标准.md for archetype-specific folder structures (A/B/C).
+
+---
+
+## 11. PDCA Execution Cycle | PDCA 执行循环
+
+`
+PLAN  -> Task analysis, decomposition into safe batches
+DO    -> Execute step by step, record evidence
+CHECK -> Verify each step result against acceptance criteria
+ACT   -> Extract lessons, update skills, close the loop
+`
+
+---
+
+## 12. Project Bootstrapping | 新项目初始化
+
+For a new project, initialize the methodology by:
+
+1. **Classify first** — Use ai-project-classifier (Step 0) to determine archetype (A/B/C)
+2. **Scaffold folders** — Create project structure matching your archetype. See methodology/08_项目文件夹结构标准.md
+3. Copy rules/AGENTS.md to project root
+4. Copy skills/core/ and skills/governance/ to {project}/skills/
+5. Select relevant skills/tech/ for your tech stack
+6. Copy docs/_templates/ to {project}/docs/
+7. Create docs sub-folders per the documentation hierarchy
+8. Run ai-rule-dispatcher to perform first-project audit
+9. Run ai-tool-bootstrapper to verify all tool dependencies
+
+**Folder rules enforced from day one**:
+- Project root: only AGENTS.md + .editorconfig + build files
+- database/: migrations/ + seed/ + schema/ — no loose SQL files
+- docs/: type-first hierarchy — no loose .md files in root
+- scripts/: bat/ + ps1/ + py/ + js/ + ci/
+
+---
+
+*Methodology version: 2.0.0 | Last updated: 2026-06-17*
+*Skills: 38 | Derived from: GERP Enterprise AI Development System*

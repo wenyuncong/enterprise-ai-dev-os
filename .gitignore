@@ -1,0 +1,48 @@
+# Local / generated
+temp/
+tmp/
+logs/
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+__pycache__/
+*.pyc
+node_modules/
+dist/
+build/
+target/
+
+# AI tool adapter outputs and local tool state
+.agents/
+.claude/
+.codebuddy/
+.qoder/
+.trae/
+tools/tool-registry.json
+
+# Internal / non-open-source materials
+docs/内部商业化/
+docs/商业化/
+docs/每日调研回写/
+docs/测试验收报告/
+docs/LAUNCH_KIT.md
+docs/ERP_TERM_AUDIT.md
+docs/AB_EXPERIMENT.md
+reference/
+备用/
+verification-demo/
+
+# Local evidence artifacts that should be regenerated or curated before publish
+skills/governance/ai-runtime-verify/screenshots/
+
+# Secrets and environment files
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*

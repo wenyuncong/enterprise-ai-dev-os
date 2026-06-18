@@ -1,0 +1,95 @@
+{
+  "_description": "Multi-tool adapter mapping — defines where each AI coding tool reads rules and skills",
+  "_version": "1.0.0",
+  "_note": "Skill format (SKILL.md) is universal across all listed tools. Rules file location varies.",
+
+  "tools": {
+    "codex": {
+      "name": "Codex (OpenAI)",
+      "skills_dir": ".agents/skills",
+      "rules_file": "AGENTS.md",
+      "rules_dir": "rules",
+      "link_strategy": "symlink",
+      "verified": true
+    },
+    "trae": {
+      "name": "Trae (字节跳动)",
+      "skills_dir": ".trae/skills",
+      "rules_file": ".trae/rules/project_rules.md",
+      "rules_dir": null,
+      "link_strategy": "symlink",
+      "verified": true
+    },
+    "qoder": {
+      "name": "Qoder / Qoder CN",
+      "skills_dir": ".qoder/skills",
+      "rules_file": ".qoder/rules.md",
+      "rules_dir": null,
+      "link_strategy": "symlink",
+      "verified": true
+    },
+    "codebuddy": {
+      "name": "CodeBuddy (腾讯)",
+      "skills_dir": ".codebuddy/skills",
+      "rules_file": ".codebuddy/rules.md",
+      "rules_dir": null,
+      "link_strategy": "symlink",
+      "verified": true
+    },
+    "claude": {
+      "name": "Claude Code (Anthropic)",
+      "skills_dir": ".claude/skills",
+      "rules_file": "CLAUDE.md",
+      "rules_dir": null,
+      "link_strategy": "symlink",
+      "verified": true
+    },
+    "cursor": {
+      "name": "Cursor",
+      "skills_dir": ".cursor/skills",
+      "rules_file": ".cursorrules",
+      "rules_dir": null,
+      "link_strategy": "symlink",
+      "verified": false,
+      "_note": "Cursor primarily uses .cursorrules; skill dir support may vary by version"
+    },
+    "copilot": {
+      "name": "GitHub Copilot",
+      "skills_dir": ".github/copilot/skills",
+      "rules_file": ".github/copilot/rules.md",
+      "rules_dir": null,
+      "link_strategy": "copy",
+      "verified": false,
+      "_note": "GitHub Copilot skill support is evolving; copy strategy is safer"
+    },
+    "windsurf": {
+      "name": "Windsurf (Codeium)",
+      "skills_dir": ".windsurf/skills",
+      "rules_file": ".windsurf/rules.md",
+      "rules_dir": null,
+      "link_strategy": "symlink",
+      "verified": false,
+      "_note": "Windsurf uses .windsurfrules or .windsurf/ directory"
+    },
+    "lingma": {
+      "name": "通义灵码 (阿里)",
+      "skills_dir": ".lingma/skills",
+      "rules_file": ".lingma/rules.md",
+      "rules_dir": null,
+      "link_strategy": "symlink",
+      "verified": false,
+      "_note": "Tongyi Lingma skill format TBD; verify before production use"
+    }
+  },
+
+  "skill_categories": ["core", "governance", "tech", "platform"],
+
+  "deploy_options": {
+    "rules_strategy": "copy",
+    "_rules_strategy_note": "Rules files are COPIED (not symlinked) because some tools modify them. Skills are symlinked because they are read-only.",
+    "backup_existing": false,
+    "create_missing_dirs": true,
+    "require_admin": false,
+    "_require_admin_note": "Windows symlinks may require admin or Developer Mode. If unavailable, falls back to directory junctions or copy."
+  }
+}
