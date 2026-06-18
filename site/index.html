@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Enterprise AI Development OS public site. -->
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,7 +18,6 @@
         --muted: #5c667a;
         --line: #d9deea;
         --accent: #0f766e;
-        --accent-2: #334155;
         --code: #101827;
       }
 
@@ -68,11 +67,43 @@
         letter-spacing: 0;
       }
 
+      .nav-right {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
       .nav-links {
         display: flex;
         flex-wrap: wrap;
         gap: 14px;
         font-size: 14px;
+      }
+
+      .language-toggle {
+        display: inline-flex;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        overflow: hidden;
+        background: #eef2f7;
+      }
+
+      .language-toggle button {
+        min-width: 44px;
+        border: 0;
+        padding: 7px 10px;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .language-toggle button[aria-pressed="true"] {
+        background: var(--accent);
+        color: #ffffff;
       }
 
       .hero {
@@ -193,6 +224,10 @@
         color: var(--muted);
       }
 
+      [data-i18n-list] {
+        white-space: pre-line;
+      }
+
       @media (max-width: 840px) {
         .hero {
           padding-top: 46px;
@@ -213,12 +248,18 @@
     <header>
       <div class="wrap nav">
         <div class="brand">Enterprise AI Development OS</div>
-        <nav class="nav-links" aria-label="Primary">
-          <a href="https://github.com/wenyuncong/enterprise-ai-dev-os">GitHub</a>
-          <a href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/docs/TOOL_ADAPTERS.md">Adapters</a>
-          <a href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/docs/COMPATIBILITY.md">Compatibility</a>
-          <a href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/LICENSE">License</a>
-        </nav>
+        <div class="nav-right">
+          <nav class="nav-links" aria-label="Primary">
+            <a data-i18n="navGithub" href="https://github.com/wenyuncong/enterprise-ai-dev-os">GitHub</a>
+            <a data-i18n="navAdapters" href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/docs/TOOL_ADAPTERS.md">Adapters</a>
+            <a data-i18n="navCompatibility" href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/docs/COMPATIBILITY.md">Compatibility</a>
+            <a data-i18n="navLicense" href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/LICENSE">License</a>
+          </nav>
+          <div class="language-toggle" aria-label="Language">
+            <button type="button" data-lang-button="zh" aria-pressed="false">中文</button>
+            <button type="button" data-lang-button="en" aria-pressed="true">EN</button>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -226,24 +267,24 @@
       <div class="wrap hero">
         <div class="hero-grid">
           <div>
-            <h1>Deterministic AI-assisted engineering.</h1>
-            <p class="lead">
+            <h1 data-i18n="heroTitle">Deterministic AI-assisted engineering.</h1>
+            <p class="lead" data-i18n="heroLead">
               A portable operating layer for AI coding tools: rules, skills,
               documentation memory, audit gates, verification workflows, and
               multi-tool adapters.
             </p>
-            <p class="lead">
-              企业级全 AI 开发操作系统：让 Codex、Claude Code、Trae、Qoder、
-              Cursor、GitHub Copilot 和 VS Code 在大项目里按同一套工程纪律工作。
+            <p class="lead" data-i18n="heroLead2">
+              Use one engineering discipline across Codex, Claude Code, Trae,
+              Qoder, Cursor, GitHub Copilot, VS Code, and more.
             </p>
             <div class="actions">
-              <a class="button primary" href="https://github.com/wenyuncong/enterprise-ai-dev-os">View on GitHub</a>
-              <a class="button" href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/README.md">Read README</a>
+              <a class="button primary" data-i18n="actionGithub" href="https://github.com/wenyuncong/enterprise-ai-dev-os">View on GitHub</a>
+              <a class="button" data-i18n="actionReadme" href="https://github.com/wenyuncong/enterprise-ai-dev-os/blob/main/README.md">Read README</a>
             </div>
           </div>
           <aside class="panel">
-            <h2>Current Status</h2>
-            <ul>
+            <h2 data-i18n="statusTitle">Current Status</h2>
+            <ul data-i18n-list="statusItems">
               <li>38 verified official skills</li>
               <li>Methodology audit: PASS</li>
               <li>Readiness score: 100/100</li>
@@ -256,31 +297,31 @@
 
       <section>
         <div class="wrap">
-          <h2>Core System</h2>
+          <h2 data-i18n="coreTitle">Core System</h2>
           <div class="grid">
             <article class="card">
-              <h3>Rules</h3>
-              <p>Session startup, execution order, directory boundaries, and verification gates.</p>
+              <h3 data-i18n="cardRulesTitle">Rules</h3>
+              <p data-i18n="cardRulesText">Session startup, execution order, directory boundaries, and verification gates.</p>
             </article>
             <article class="card">
-              <h3>Skills</h3>
-              <p>Reusable capability units for planning, architecture, governance, frontend, backend, data, and deployment.</p>
+              <h3 data-i18n="cardSkillsTitle">Skills</h3>
+              <p data-i18n="cardSkillsText">Reusable capability units for planning, architecture, governance, frontend, backend, data, and deployment.</p>
             </article>
             <article class="card">
-              <h3>Memory</h3>
-              <p>Backlog, master index, templates, ADRs, writeback structure, and evidence loops.</p>
+              <h3 data-i18n="cardMemoryTitle">Memory</h3>
+              <p data-i18n="cardMemoryText">Backlog, master index, templates, ADRs, writeback structure, and evidence loops.</p>
             </article>
             <article class="card">
-              <h3>Audit Gates</h3>
-              <p>Scripts for methodology health, open-source boundaries, environment checks, and readiness scoring.</p>
+              <h3 data-i18n="cardAuditTitle">Audit Gates</h3>
+              <p data-i18n="cardAuditText">Scripts for methodology health, open-source boundaries, environment checks, and readiness scoring.</p>
             </article>
             <article class="card">
-              <h3>Adapters</h3>
-              <p>Deploy rules and skills into Codex, Claude Code, Trae, Qoder, Cursor, Copilot, and VS Code.</p>
+              <h3 data-i18n="cardAdaptersTitle">Adapters</h3>
+              <p data-i18n="cardAdaptersText">Deploy rules and skills into Codex, Claude Code, Trae, Qoder, Cursor, Copilot, and VS Code.</p>
             </article>
             <article class="card">
-              <h3>Evolution</h3>
-              <p>Repeated failures become stronger rules, templates, checks, or skills.</p>
+              <h3 data-i18n="cardEvolutionTitle">Evolution</h3>
+              <p data-i18n="cardEvolutionText">Repeated failures become stronger rules, templates, checks, or skills.</p>
             </article>
           </div>
         </div>
@@ -288,7 +329,7 @@
 
       <section>
         <div class="wrap">
-          <h2>Quick Start</h2>
+          <h2 data-i18n="quickTitle">Quick Start</h2>
           <pre><code>cp rules/AGENTS.md your-project/AGENTS.md
 cp -r skills/core your-project/skills/
 cp -r skills/governance your-project/skills/
@@ -302,8 +343,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
 
       <section>
         <div class="wrap">
-          <h2>Open Source Boundary</h2>
-          <p>
+          <h2 data-i18n="boundaryTitle">Open Source Boundary</h2>
+          <p data-i18n="boundaryText">
             The public repository includes portable methodology assets, rules,
             skills, templates, audit scripts, and adapter generators. Private
             strategy notes, raw archives, unredacted cases, process records, and
@@ -314,9 +355,189 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
     </main>
 
     <footer>
-      <div class="wrap">
+      <div class="wrap" data-i18n="footerText">
         Enterprise AI Development OS is released under Apache License 2.0.
       </div>
     </footer>
+
+    <script>
+      const messages = {
+        en: {
+          navGithub: "GitHub",
+          navAdapters: "Adapters",
+          navCompatibility: "Compatibility",
+          navLicense: "License",
+          heroTitle: "Deterministic AI-assisted engineering.",
+          heroLead:
+            "A portable operating layer for AI coding tools: rules, skills, documentation memory, audit gates, verification workflows, and multi-tool adapters.",
+          heroLead2:
+            "Use one engineering discipline across Codex, Claude Code, Trae, Qoder, Cursor, GitHub Copilot, VS Code, and more.",
+          actionGithub: "View on GitHub",
+          actionReadme: "Read README",
+          statusTitle: "Current Status",
+          statusItems: [
+            "38 verified official skills",
+            "Methodology audit: PASS",
+            "Readiness score: 100/100",
+            "Apache License 2.0",
+            "Multi-tool adapter registry v2",
+          ],
+          coreTitle: "Core System",
+          cardRulesTitle: "Rules",
+          cardRulesText:
+            "Session startup, execution order, directory boundaries, and verification gates.",
+          cardSkillsTitle: "Skills",
+          cardSkillsText:
+            "Reusable capability units for planning, architecture, governance, frontend, backend, data, and deployment.",
+          cardMemoryTitle: "Memory",
+          cardMemoryText:
+            "Backlog, master index, templates, ADRs, writeback structure, and evidence loops.",
+          cardAuditTitle: "Audit Gates",
+          cardAuditText:
+            "Scripts for methodology health, open-source boundaries, environment checks, and readiness scoring.",
+          cardAdaptersTitle: "Adapters",
+          cardAdaptersText:
+            "Deploy rules and skills into Codex, Claude Code, Trae, Qoder, Cursor, Copilot, and VS Code.",
+          cardEvolutionTitle: "Evolution",
+          cardEvolutionText:
+            "Repeated failures become stronger rules, templates, checks, or skills.",
+          quickTitle: "Quick Start",
+          boundaryTitle: "Open Source Boundary",
+          boundaryText:
+            "The public repository includes portable methodology assets, rules, skills, templates, audit scripts, and adapter generators. Private strategy notes, raw archives, unredacted cases, process records, and local tool state are outside the open-source scope.",
+          footerText:
+            "Enterprise AI Development OS is released under Apache License 2.0.",
+        },
+        zh: {
+          navGithub: "GitHub",
+          navAdapters: "工具适配",
+          navCompatibility: "兼容矩阵",
+          navLicense: "开源协议",
+          heroTitle: "让 AI 开发从随机生成走向确定性交付。",
+          heroLead:
+            "一套面向 AI 编程工具的企业级操作层：规则、Skill、文档记忆、审计门禁、验证流程和多工具适配器。",
+          heroLead2:
+            "让 Codex、Claude Code、Trae、Qoder、Cursor、GitHub Copilot、VS Code 等工具遵循同一套工程纪律。",
+          actionGithub: "查看 GitHub",
+          actionReadme: "阅读 README",
+          statusTitle: "当前状态",
+          statusItems: [
+            "38 个 verified official skills",
+            "方法论审计：PASS",
+            "就绪评分：100/100",
+            "Apache License 2.0",
+            "多工具适配器注册表 v2",
+          ],
+          coreTitle: "核心系统",
+          cardRulesTitle: "规则",
+          cardRulesText: "会话启动、执行顺序、目录边界和验证门禁。",
+          cardSkillsTitle: "Skill",
+          cardSkillsText:
+            "面向规划、架构、治理、前端、后端、数据和部署的可复用能力单元。",
+          cardMemoryTitle: "文档记忆",
+          cardMemoryText: "Backlog、总控索引、模板、ADR、回写结构和证据闭环。",
+          cardAuditTitle: "审计门禁",
+          cardAuditText: "用于方法论健康度、开源边界、环境检查和就绪评分的脚本。",
+          cardAdaptersTitle: "工具适配",
+          cardAdaptersText:
+            "将规则和 Skill 投放到 Codex、Claude Code、Trae、Qoder、Cursor、Copilot 和 VS Code。",
+          cardEvolutionTitle: "进化闭环",
+          cardEvolutionText: "把重复失败升级为更强的规则、模板、检查或 Skill。",
+          quickTitle: "快速开始",
+          boundaryTitle: "开源边界",
+          boundaryText:
+            "公开仓库包含可迁移的方法论资产、规则、Skill、模板、审计脚本和适配器生成器。私有策略、原始素材、未脱敏案例、过程记录和本地工具状态不属于开源范围。",
+          footerText: "Enterprise AI Development OS 采用 Apache License 2.0 发布。",
+        },
+      };
+
+      const regionLanguageMap = {
+        CN: "zh",
+        HK: "zh",
+        MO: "zh",
+        TW: "zh",
+        SG: "zh",
+      };
+
+      function getQueryLanguage() {
+        const params = new URLSearchParams(window.location.search);
+        const value = params.get("lang");
+        return value === "zh" || value === "en" ? value : null;
+      }
+
+      function getBrowserLanguage() {
+        return navigator.language && navigator.language.toLowerCase().startsWith("zh")
+          ? "zh"
+          : "en";
+      }
+
+      function setLanguage(lang, persist = false) {
+        const selected = lang === "zh" ? "zh" : "en";
+        document.documentElement.lang = selected === "zh" ? "zh-CN" : "en";
+
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          const key = node.getAttribute("data-i18n");
+          node.textContent = messages[selected][key] || "";
+        });
+
+        document.querySelectorAll("[data-i18n-list]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-list");
+          const items = messages[selected][key] || [];
+          node.innerHTML = items.map((item) => `<li>${item}</li>`).join("");
+        });
+
+        document.querySelectorAll("[data-lang-button]").forEach((button) => {
+          button.setAttribute(
+            "aria-pressed",
+            button.getAttribute("data-lang-button") === selected ? "true" : "false",
+          );
+        });
+
+        if (persist) {
+          localStorage.setItem("enterprise-ai-dev-os-lang", selected);
+        }
+      }
+
+      async function detectLanguage() {
+        const queryLanguage = getQueryLanguage();
+        if (queryLanguage) {
+          setLanguage(queryLanguage, true);
+          return;
+        }
+
+        const savedLanguage = localStorage.getItem("enterprise-ai-dev-os-lang");
+        if (savedLanguage === "zh" || savedLanguage === "en") {
+          setLanguage(savedLanguage);
+          return;
+        }
+
+        setLanguage(getBrowserLanguage());
+
+        try {
+          const controller = new AbortController();
+          const timeout = window.setTimeout(() => controller.abort(), 1200);
+          const response = await fetch("https://ipapi.co/json/", {
+            signal: controller.signal,
+          });
+          window.clearTimeout(timeout);
+          if (!response.ok) return;
+          const data = await response.json();
+          const regionLang = regionLanguageMap[data.country_code];
+          if (regionLang) {
+            setLanguage(regionLang);
+          }
+        } catch {
+          // Browser-language fallback already applied.
+        }
+      }
+
+      document.querySelectorAll("[data-lang-button]").forEach((button) => {
+        button.addEventListener("click", () => {
+          setLanguage(button.getAttribute("data-lang-button"), true);
+        });
+      });
+
+      detectLanguage();
+    </script>
   </body>
 </html>
