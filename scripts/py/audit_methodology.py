@@ -38,7 +38,7 @@ PRIVATE_ARCHIVE_PREFIXES = (
 BLOCKED_PATTERNS = [
     (re.compile(r"\b[A-Z]:[/\\][^\s`\"']+", re.IGNORECASE), "hard-coded local workspace path"),
     (re.compile("gerp" + r"[-_]" + "enterprise" + r"[-_]" + "mainline", re.IGNORECASE), "hard-coded source repository name"),
-    (re.compile(r"docs[/\\]全项目总控_20260331"), "legacy GERP control-doc path"),
+    (re.compile(r"docs[/\\]全项目总控[_-]\d{8}"), "legacy dated control-doc path"),
 ]
 
 
