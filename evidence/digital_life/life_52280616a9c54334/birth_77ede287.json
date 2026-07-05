@@ -1,0 +1,152 @@
+{
+  "authority": {
+    "authority_id": "auth_65dee44f2f0c4a8b",
+    "authority_type": "offline_local",
+    "trust_zone": "governance-test",
+    "public_key": {
+      "key_id": "key_129a60410a1f4426",
+      "algorithm": "ed25519",
+      "encoded": "pk_a01588d2a5664c7990d41a858005f1b6b33256e7410d40c988e49d5ab3a63748"
+    },
+    "status": "active",
+    "name": "offline_local",
+    "offline_capable": true,
+    "parent_authority_id": "",
+    "policy_pack_refs": [],
+    "created_at": "2026-07-05T16:29:12",
+    "expires_at": ""
+  },
+  "identity": {
+    "life_id": "life_52280616a9c54334",
+    "birth_certificate_id": "birth_d72d5e3b9820463e",
+    "owner_id": "owner_gov_test",
+    "authority_id": "auth_65dee44f2f0c4a8b",
+    "home_node": "test-node",
+    "identity_public_key": {
+      "key_id": "key_ecb0681cacc04601",
+      "algorithm": "ed25519",
+      "encoded": "pk_409fb82bfae74634a7830b5fbc3fa390ce3c4e318dd2415c870bb70eed45dd14"
+    },
+    "registration_status": "offline_registered",
+    "trust_zone": "governance-test",
+    "current_lifecycle_state": "born",
+    "created_at": "2026-07-05T16:29:12",
+    "active_instance_ids": [
+      "inst_a68fe109d8ac476c"
+    ],
+    "evidence_refs": [],
+    "updated_at": ""
+  },
+  "instance": {
+    "instance_id": "inst_a68fe109d8ac476c",
+    "life_id": "life_52280616a9c54334",
+    "authority_id": "auth_65dee44f2f0c4a8b",
+    "node_id": "test-node",
+    "status": "active",
+    "runtime_locator": "service://test-node/life_52280616a9c54334",
+    "installed_atom_set_id": "aset_97d8469383214bb9",
+    "created_at": "2026-07-05T16:29:12",
+    "last_seen_at": "2026-07-05T16:29:12",
+    "evidence_refs": []
+  },
+  "profile": {
+    "profile_id": "profile_4e43977292384c1f",
+    "life_id": "life_52280616a9c54334",
+    "learning_focus": [
+      "foundational_identity",
+      "genome_resolution"
+    ],
+    "capability_scores": {
+      "identity": 1.0,
+      "genome": 1.0
+    },
+    "preferences": {
+      "authority_type": "offline_local",
+      "trust_zone": "governance-test"
+    },
+    "evaluation_notes": [
+      "birth completed"
+    ],
+    "growth_stage": "newborn",
+    "created_at": "2026-07-05T16:29:12",
+    "updated_at": "2026-07-05T16:29:12"
+  },
+  "runtime": {
+    "runtime_id": "runtime_5958e35256b64bf5",
+    "life_id": "life_52280616a9c54334",
+    "active_instance_id": "inst_a68fe109d8ac476c",
+    "status": "idle",
+    "current_task_id": "",
+    "queue_depth": 0,
+    "last_tick_at": "2026-07-05T16:29:12",
+    "evidence_refs": []
+  },
+  "birth_certificate": {
+    "birth_certificate_id": "birth_d72d5e3b9820463e",
+    "life_id": "life_52280616a9c54334",
+    "authority_id": "auth_65dee44f2f0c4a8b",
+    "owner_id": "owner_gov_test",
+    "genome_id": "genome_c8173d23d70940f2",
+    "birth_mode": "offline_local",
+    "issued_at": "2026-07-05T16:29:12",
+    "signature": "sig_5e4e470987244483ac258137407cbdf0",
+    "initial_lifecycle_state": "born",
+    "evidence_refs": []
+  },
+  "genome": {
+    "genome_id": "genome_c8173d23d70940f2",
+    "life_id": "life_52280616a9c54334",
+    "authority_id": "auth_65dee44f2f0c4a8b",
+    "manifest_version": "0.1.0",
+    "atom_refs": [
+      {
+        "atom_id": "core:compute_ops",
+        "version": "0.1.0",
+        "level": "L1",
+        "domain": "compute",
+        "checksum": "sha256:aa",
+        "required": false
+      },
+      {
+        "atom_id": "core:data_ops",
+        "version": "0.1.0",
+        "level": "L1",
+        "domain": "data",
+        "checksum": "sha256:bb",
+        "required": false
+      }
+    ],
+    "created_at": "2026-07-05T16:29:12",
+    "source_mode": "offline_package",
+    "policy_pack_refs": [],
+    "signature": "sig_62562b39898a4083b12b7705f69b1e6c"
+  },
+  "installed_atom_set": {
+    "install_set_id": "aset_97d8469383214bb9",
+    "life_id": "life_52280616a9c54334",
+    "instance_id": "inst_a68fe109d8ac476c",
+    "genome_id": "genome_c8173d23d70940f2",
+    "runtime_node": "test-node",
+    "atoms": [
+      {
+        "atom_id": "core:compute_ops",
+        "version": "0.1.0",
+        "checksum": "sha256:aa",
+        "install_status": "installed",
+        "callable": false,
+        "runtime_binding": "runtime://test-node/core:compute_ops",
+        "evidence_refs": []
+      },
+      {
+        "atom_id": "core:data_ops",
+        "version": "0.1.0",
+        "checksum": "sha256:bb",
+        "install_status": "installed",
+        "callable": false,
+        "runtime_binding": "runtime://test-node/core:data_ops",
+        "evidence_refs": []
+      }
+    ],
+    "verified_at": "2026-07-05T16:29:12"
+  }
+}

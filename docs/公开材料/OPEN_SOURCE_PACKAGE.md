@@ -20,6 +20,7 @@
 - `docs/TOOL_ADAPTERS.md`
 - `docs/公开材料/INSTALL.md`
 - `docs/公开材料/ROADMAP.md`
+- `docs/公开材料/CUSTOMER_INVESTOR_VALUE.md`
 - `docs/公开材料/VALUE_EVIDENCE.md`
 - `docs/公开材料/RULE_RUNTIME_LITE.md`
 - `docs/公开材料/OPEN_SOURCE_READINESS.md`

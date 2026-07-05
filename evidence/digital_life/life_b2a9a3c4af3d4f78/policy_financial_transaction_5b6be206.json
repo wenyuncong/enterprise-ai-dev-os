@@ -1,0 +1,24 @@
+{
+  "allowed": false,
+  "action": "financial_transaction",
+  "policy_pack_id": "policy.default",
+  "policy_pack_version": "0.1.0",
+  "reasons": [
+    "requires_human_confirmation:financial_transaction(L4.4)"
+  ],
+  "details": {
+    "action": "financial_transaction",
+    "risk_level": "L4.4",
+    "risk_decision": "human_confirm_dual",
+    "classification": {
+      "action": "financial_transaction",
+      "category": "financial_transaction",
+      "risk_level": "L4.4",
+      "decision": "human_confirm_dual",
+      "reason": "default decision for financial_transaction (L4.4)",
+      "requires_evidence": true,
+      "sandbox_recommended": false,
+      "description": "Financial transactions: payments, transfers, invoices"
+    }
+  }
+}

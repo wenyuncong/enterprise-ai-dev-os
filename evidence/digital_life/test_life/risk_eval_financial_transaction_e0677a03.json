@@ -1,0 +1,19 @@
+{
+  "life_id": "test_life",
+  "action": "financial_transaction",
+  "verdict": "needs_human",
+  "risk_level": "L4.4",
+  "risk_decision": "human_confirm_dual",
+  "classification": {
+    "action": "financial_transaction",
+    "category": "financial_transaction",
+    "risk_level": "L4.4",
+    "decision": "human_confirm_dual",
+    "reason": "default decision for financial_transaction (L4.4)",
+    "requires_evidence": true,
+    "sandbox_recommended": false,
+    "description": "Financial transactions: payments, transfers, invoices"
+  },
+  "requires_human": true,
+  "human_level": "dual"
+}

@@ -1,0 +1,19 @@
+{
+  "life_id": "test_life",
+  "action": "send_email",
+  "verdict": "needs_human",
+  "risk_level": "L4.2",
+  "risk_decision": "human_confirm",
+  "classification": {
+    "action": "send_email",
+    "category": "send_email",
+    "risk_level": "L4.2",
+    "decision": "human_confirm",
+    "reason": "default decision for send_email (L4.2)",
+    "requires_evidence": true,
+    "sandbox_recommended": false,
+    "description": "Send email via SMTP/API"
+  },
+  "requires_human": true,
+  "human_level": "single"
+}

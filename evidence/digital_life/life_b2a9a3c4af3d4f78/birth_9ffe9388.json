@@ -1,0 +1,135 @@
+{
+  "authority": {
+    "authority_id": "auth_0918fec60e5f4815",
+    "authority_type": "offline_local",
+    "trust_zone": "chain-test",
+    "public_key": {
+      "key_id": "key_dc09ea319f52426c",
+      "algorithm": "ed25519",
+      "encoded": "pk_473e590c51f247febe861caca313cb563564911dba71494d9eb546f8d5225c79"
+    },
+    "status": "active",
+    "name": "offline_local",
+    "offline_capable": true,
+    "parent_authority_id": "",
+    "policy_pack_refs": [],
+    "created_at": "2026-07-05T16:30:47",
+    "expires_at": ""
+  },
+  "identity": {
+    "life_id": "life_b2a9a3c4af3d4f78",
+    "birth_certificate_id": "birth_fe3baae9686c4797",
+    "owner_id": "chain_owner",
+    "authority_id": "auth_0918fec60e5f4815",
+    "home_node": "chain-node",
+    "identity_public_key": {
+      "key_id": "key_27a6069b39bd44e4",
+      "algorithm": "ed25519",
+      "encoded": "pk_21fd984d75604986a6cf70ee8e6bc99e5a17b9ccb3484ccfad19f22b5ab073b5"
+    },
+    "registration_status": "offline_registered",
+    "trust_zone": "chain-test",
+    "current_lifecycle_state": "born",
+    "created_at": "2026-07-05T16:30:47",
+    "active_instance_ids": [
+      "inst_214dfe90442849c1"
+    ],
+    "evidence_refs": [],
+    "updated_at": ""
+  },
+  "instance": {
+    "instance_id": "inst_214dfe90442849c1",
+    "life_id": "life_b2a9a3c4af3d4f78",
+    "authority_id": "auth_0918fec60e5f4815",
+    "node_id": "chain-node",
+    "status": "active",
+    "runtime_locator": "service://chain-node/life_b2a9a3c4af3d4f78",
+    "installed_atom_set_id": "aset_78e6a976de634924",
+    "created_at": "2026-07-05T16:30:47",
+    "last_seen_at": "2026-07-05T16:30:47",
+    "evidence_refs": []
+  },
+  "profile": {
+    "profile_id": "profile_8ee3846c233d4965",
+    "life_id": "life_b2a9a3c4af3d4f78",
+    "learning_focus": [
+      "foundational_identity",
+      "genome_resolution"
+    ],
+    "capability_scores": {
+      "identity": 1.0,
+      "genome": 1.0
+    },
+    "preferences": {
+      "authority_type": "offline_local",
+      "trust_zone": "chain-test"
+    },
+    "evaluation_notes": [
+      "birth completed"
+    ],
+    "growth_stage": "newborn",
+    "created_at": "2026-07-05T16:30:47",
+    "updated_at": "2026-07-05T16:30:47"
+  },
+  "runtime": {
+    "runtime_id": "runtime_d59dcaa7381d4f08",
+    "life_id": "life_b2a9a3c4af3d4f78",
+    "active_instance_id": "inst_214dfe90442849c1",
+    "status": "idle",
+    "current_task_id": "",
+    "queue_depth": 0,
+    "last_tick_at": "2026-07-05T16:30:47",
+    "evidence_refs": []
+  },
+  "birth_certificate": {
+    "birth_certificate_id": "birth_fe3baae9686c4797",
+    "life_id": "life_b2a9a3c4af3d4f78",
+    "authority_id": "auth_0918fec60e5f4815",
+    "owner_id": "chain_owner",
+    "genome_id": "genome_bc0663ae643c4efc",
+    "birth_mode": "offline_local",
+    "issued_at": "2026-07-05T16:30:47",
+    "signature": "sig_cc264537966746578a0c86e54a5b3bec",
+    "initial_lifecycle_state": "born",
+    "evidence_refs": []
+  },
+  "genome": {
+    "genome_id": "genome_bc0663ae643c4efc",
+    "life_id": "life_b2a9a3c4af3d4f78",
+    "authority_id": "auth_0918fec60e5f4815",
+    "manifest_version": "0.1.0",
+    "atom_refs": [
+      {
+        "atom_id": "core:chain",
+        "version": "0.1.0",
+        "level": "L1",
+        "domain": "test",
+        "checksum": "sha256:cc",
+        "required": false
+      }
+    ],
+    "created_at": "2026-07-05T16:30:47",
+    "source_mode": "offline_package",
+    "policy_pack_refs": [],
+    "signature": "sig_dbdd13e536b54af782080a652ea7b986"
+  },
+  "installed_atom_set": {
+    "install_set_id": "aset_78e6a976de634924",
+    "life_id": "life_b2a9a3c4af3d4f78",
+    "instance_id": "inst_214dfe90442849c1",
+    "genome_id": "genome_bc0663ae643c4efc",
+    "runtime_node": "chain-node",
+    "atoms": [
+      {
+        "atom_id": "core:chain",
+        "version": "0.1.0",
+        "checksum": "sha256:cc",
+        "install_status": "installed",
+        "callable": false,
+        "runtime_binding": "runtime://chain-node/core:chain",
+        "evidence_refs": []
+      }
+    ],
+    "verified_at": "2026-07-05T16:30:47"
+  }
+}

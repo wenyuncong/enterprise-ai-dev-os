@@ -32,6 +32,9 @@
 | 09 | 老项目改造方法论 | `methodology/09_老项目改造方法论.md` | 已完成 |
 | 10 | 发布治理与锁版体系 | `methodology/10_发布治理与锁版体系.md` | 已完成 |
 | LOOP | 企业级全 AI 开发落地闭环 | `docs/全项目总控/AI_NATIVE_DELIVERY_LOOP.md` | 已完成 |
+| LIFE | AI-OS 数字生命智能体总纲 | `docs/全项目总控/DIGITAL_LIFE_AGENT_MANIFESTO.md` | 规划中 |
+| LIFE-PLAN | AI-OS 数字生命智能体开发计划 | `docs/全项目总控/DIGITAL_LIFE_AGENT_DEVELOPMENT_PLAN.md` | 规划中 |
+| LIFE-SCHEMA | AI-OS 数字生命核心协议 Schema | `docs/全项目总控/schemas/digital-life/` | 规划中 |
 
 ---
 
@@ -138,12 +141,14 @@
 | 工具发现 | `scripts/py/discover_tools.py` | 按用途盘点项目现有脚本 |
 | 方法论审计 | `scripts/py/audit_methodology.py` | 检查 manifest、路径残留、AGENTS 引用、Skill 结构 |
 | AI 开发确定性评分 | `scripts/py/score_ai_development_readiness.py` | 输出结构就绪分和缺口建议 |
+| 数字生命 Schema 审计 | `scripts/py/audit_digital_life_schemas.py` | 检查数字生命核心协议 JSON Schema 可解析、ID 唯一、索引完整 |
 | 多工具部署 | `tools/deploy.ps1` | 将 `skills/` 和 `rules/AGENTS.md` 同步到 AI 工具适配目录 |
 
 推荐收尾命令：
 
 ```powershell
 py scripts/py/audit_methodology.py --project-root .
+py scripts/py/audit_digital_life_schemas.py --project-root .
 py scripts/py/score_ai_development_readiness.py --project-root .
 ```
 

@@ -69,6 +69,15 @@ This document defines the mandatory rules, workflows, and discipline for AI-assi
 | **Library First** | Never rewrite what a mature open-source library already does. | 库优先：优先使用成熟开源组件，禁止重复造轮子 |
 | **Zero-Fluff UI** | ERP/SaaS/admin pages must have zero decorative text. Only actionable prompts. | 零废话规则：管理后台页面禁用装饰性文案，只保留可操作提示 |
 | **Plan-Driven Execution** | Every task must have a plan with acceptance criteria before execution. | 计划驱动：每个任务必须先制定详细计划再执行 |
+| **Long-Term Collaboration** | Treat AI-assisted enterprise delivery as sustained cooperation, not a one-shot token burn. | 长期协作：默认服务长期 ERP/企业级交付，不把成本压力误判为“用户用不起”，而要通过拆批、验证和复用降低消耗 |
+
+### Collaboration Cost Guardrail | 协作成本护栏
+
+- The methodology is a long-term delivery asset. Do not force every task into the full OS path when a smaller verified batch can solve the current business problem.
+- Optimize for sustained cooperation: prefer scoped batches, reusable scripts, existing tools, and evidence-based verification over repeated broad exploration.
+- Never skip required verification, database checks, build checks, API checks, browser checks, or git scope checks merely to save tokens or time.
+- When a platform-level idea is too large for one person or one delivery cycle, keep it as a private capability, rule, or future roadmap item, and prioritize the ERP/business task that protects current cash flow and delivery momentum.
+- In public/open-source positioning, distinguish the heavy internal kernel from the lightweight adoption entry. Lead with audit, lite install, verification, and concrete evidence before presenting the full AI development OS.
 
 ---
 

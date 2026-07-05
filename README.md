@@ -117,6 +117,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
 ### 路线与价值证据
 
 - [docs/公开材料/ROADMAP.md](docs/公开材料/ROADMAP.md) — 公开路线图与暂不做事项
+- [docs/公开材料/CUSTOMER_INVESTOR_VALUE.md](docs/公开材料/CUSTOMER_INVESTOR_VALUE.md) — 面向客户和投资人的业务价值说明
 - [docs/公开材料/VALUE_EVIDENCE.md](docs/公开材料/VALUE_EVIDENCE.md) — 如何证明真实价值、token 和返工变化
 - [docs/公开材料/RULE_RUNTIME_LITE.md](docs/公开材料/RULE_RUNTIME_LITE.md) — 未来轻量规则运行时设计边界
 
@@ -295,6 +296,7 @@ See [docs/公开材料/INSTALL.md](docs/公开材料/INSTALL.md) for more instal
 ### Roadmap And Evidence
 
 - [docs/公开材料/ROADMAP.md](docs/公开材料/ROADMAP.md) — public roadmap and deliberate non-goals
+- [docs/公开材料/CUSTOMER_INVESTOR_VALUE.md](docs/公开材料/CUSTOMER_INVESTOR_VALUE.md) — customer and investor-facing business value explanation
 - [docs/公开材料/VALUE_EVIDENCE.md](docs/公开材料/VALUE_EVIDENCE.md) — how to prove real value, token direction, and rework change
 - [docs/公开材料/RULE_RUNTIME_LITE.md](docs/公开材料/RULE_RUNTIME_LITE.md) — future lightweight rule-runtime boundary
 

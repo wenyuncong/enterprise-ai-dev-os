@@ -1,0 +1,22 @@
+{
+  "allowed": true,
+  "action": "compute_local",
+  "policy_pack_id": "policy.default",
+  "policy_pack_version": "0.1.0",
+  "reasons": [],
+  "details": {
+    "action": "compute_local",
+    "risk_level": "L1",
+    "risk_decision": "auto_approve_with_evidence",
+    "classification": {
+      "action": "compute_local",
+      "category": "compute_local",
+      "risk_level": "L1",
+      "decision": "auto_approve_with_evidence",
+      "reason": "default decision for compute_local (L1)",
+      "requires_evidence": true,
+      "sandbox_recommended": false,
+      "description": "Local computation, parsing, transformation"
+    }
+  }
+}

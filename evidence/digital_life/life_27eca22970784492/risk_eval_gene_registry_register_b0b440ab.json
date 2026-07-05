@@ -1,0 +1,19 @@
+{
+  "life_id": "life_27eca22970784492",
+  "action": "gene_registry_register",
+  "verdict": "allowed",
+  "risk_level": "L3",
+  "risk_decision": "policy_check",
+  "classification": {
+    "action": "gene_registry_register",
+    "category": "gene_registry_register",
+    "risk_level": "L3",
+    "decision": "policy_check",
+    "reason": "default decision for gene_registry_register (L3)",
+    "requires_evidence": true,
+    "sandbox_recommended": true,
+    "description": "Register candidate atom into gene registry"
+  },
+  "requires_human": false,
+  "human_level": "none"
+}

@@ -1,0 +1,135 @@
+{
+  "authority": {
+    "authority_id": "auth_9cd6ea8d9c394a30",
+    "authority_type": "offline_local",
+    "trust_zone": "policy-test",
+    "public_key": {
+      "key_id": "key_44cb99a174954a61",
+      "algorithm": "ed25519",
+      "encoded": "pk_e6d13b1b859a4340bb51e946a3c700d9c0fa92f1851246a6ac387a37dde4586e"
+    },
+    "status": "active",
+    "name": "offline_local",
+    "offline_capable": true,
+    "parent_authority_id": "",
+    "policy_pack_refs": [],
+    "created_at": "2026-07-05T16:06:22",
+    "expires_at": ""
+  },
+  "identity": {
+    "life_id": "life_e96e572803714d6d",
+    "birth_certificate_id": "birth_d91d365df9b04d45",
+    "owner_id": "policy_owner",
+    "authority_id": "auth_9cd6ea8d9c394a30",
+    "home_node": "pol-node",
+    "identity_public_key": {
+      "key_id": "key_d51b367d11b64575",
+      "algorithm": "ed25519",
+      "encoded": "pk_d18551524d054ee5a848f8ab2e4072211d41f5ef766e4c8e9c0da012ba42c076"
+    },
+    "registration_status": "offline_registered",
+    "trust_zone": "policy-test",
+    "current_lifecycle_state": "born",
+    "created_at": "2026-07-05T16:06:22",
+    "active_instance_ids": [
+      "inst_754e9b85d8724aee"
+    ],
+    "evidence_refs": [],
+    "updated_at": ""
+  },
+  "instance": {
+    "instance_id": "inst_754e9b85d8724aee",
+    "life_id": "life_e96e572803714d6d",
+    "authority_id": "auth_9cd6ea8d9c394a30",
+    "node_id": "pol-node",
+    "status": "active",
+    "runtime_locator": "service://pol-node/life_e96e572803714d6d",
+    "installed_atom_set_id": "aset_de6d4db09cfc42b4",
+    "created_at": "2026-07-05T16:06:22",
+    "last_seen_at": "2026-07-05T16:06:22",
+    "evidence_refs": []
+  },
+  "profile": {
+    "profile_id": "profile_4cac67ea438449c3",
+    "life_id": "life_e96e572803714d6d",
+    "learning_focus": [
+      "foundational_identity",
+      "genome_resolution"
+    ],
+    "capability_scores": {
+      "identity": 1.0,
+      "genome": 1.0
+    },
+    "preferences": {
+      "authority_type": "offline_local",
+      "trust_zone": "policy-test"
+    },
+    "evaluation_notes": [
+      "birth completed"
+    ],
+    "growth_stage": "newborn",
+    "created_at": "2026-07-05T16:06:22",
+    "updated_at": "2026-07-05T16:06:22"
+  },
+  "runtime": {
+    "runtime_id": "runtime_dda58666551c4eab",
+    "life_id": "life_e96e572803714d6d",
+    "active_instance_id": "inst_754e9b85d8724aee",
+    "status": "idle",
+    "current_task_id": "",
+    "queue_depth": 0,
+    "last_tick_at": "2026-07-05T16:06:22",
+    "evidence_refs": []
+  },
+  "birth_certificate": {
+    "birth_certificate_id": "birth_d91d365df9b04d45",
+    "life_id": "life_e96e572803714d6d",
+    "authority_id": "auth_9cd6ea8d9c394a30",
+    "owner_id": "policy_owner",
+    "genome_id": "genome_f008ea0a80264eec",
+    "birth_mode": "offline_local",
+    "issued_at": "2026-07-05T16:06:22",
+    "signature": "sig_7f74aed8bd5740549ed26bcc7638fa38",
+    "initial_lifecycle_state": "born",
+    "evidence_refs": []
+  },
+  "genome": {
+    "genome_id": "genome_f008ea0a80264eec",
+    "life_id": "life_e96e572803714d6d",
+    "authority_id": "auth_9cd6ea8d9c394a30",
+    "manifest_version": "0.1.0",
+    "atom_refs": [
+      {
+        "atom_id": "core:pol",
+        "version": "0.1.0",
+        "level": "L1",
+        "domain": "test",
+        "checksum": "sha256:zz",
+        "required": false
+      }
+    ],
+    "created_at": "2026-07-05T16:06:22",
+    "source_mode": "offline_package",
+    "policy_pack_refs": [],
+    "signature": "sig_41fcb74271fa4e7ba1b4bf6a96b03d14"
+  },
+  "installed_atom_set": {
+    "install_set_id": "aset_de6d4db09cfc42b4",
+    "life_id": "life_e96e572803714d6d",
+    "instance_id": "inst_754e9b85d8724aee",
+    "genome_id": "genome_f008ea0a80264eec",
+    "runtime_node": "pol-node",
+    "atoms": [
+      {
+        "atom_id": "core:pol",
+        "version": "0.1.0",
+        "checksum": "sha256:zz",
+        "install_status": "installed",
+        "callable": false,
+        "runtime_binding": "runtime://pol-node/core:pol",
+        "evidence_refs": []
+      }
+    ],
+    "verified_at": "2026-07-05T16:06:22"
+  }
+}
