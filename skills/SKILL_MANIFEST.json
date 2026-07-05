@@ -1,6 +1,6 @@
-﻿{
+{
   "schemaVersion": "1.0.0",
-  "updatedAt": "2026-06-18",
+  "updatedAt": "2026-07-05",
   "officialSkillRoot": "skills/",
   "rawSourceRoot": "private-local-archive",
   "adapterRoots": [
@@ -18,11 +18,11 @@
     "deprecated": "The skill should not be used for new work."
   },
   "counts": {
-    "official": 38,
+    "official": 40,
     "rawSource": 45,
     "byLayer": {
       "core": 12,
-      "governance": 11,
+      "governance": 13,
       "tech": 15,
       "platform": 0
     }
@@ -293,6 +293,20 @@
       "path": "skills/tech/vue-pinia-best-practices/SKILL.md",
       "source": "tech skill library",
       "maturity": "verified"
+    },
+    {
+      "name": "ai-atomic-governance",
+      "layer": "governance",
+      "path": "skills/governance/ai-atomic-governance/SKILL.md",
+      "maturity": "callable",
+      "description": "Govern atomic system architecture: declaration+executor separation, layering (L0-L5), governance integration, and anti-pattern detection."
+    },
+    {
+      "name": "ai-cross-project-audit",
+      "layer": "governance",
+      "path": "skills/governance/ai-cross-project-audit/SKILL.md",
+      "maturity": "callable",
+      "description": "Cross-project governance audit pipeline: consume existing audit data, orchestrate L3 domain atoms, produce L5 evidence + index + report."
     }
   ],
   "rawOnlySkills": [
