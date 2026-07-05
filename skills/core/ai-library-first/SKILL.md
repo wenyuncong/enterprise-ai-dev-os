@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-library-first
 description: "Enforce library-first development by checking mature packages, built-in framework features, and existing project utilities before custom implementation. Use before writing new logic, parsers, UI widgets, engines, integrations, or scripts from scratch."
 ---
 
+## Rule
+
+Before creating anything new: 1) Search existing libraries/components, 2) Check if existing can be extended, 3) Only create new if nothing matches, 4) Register new in shared catalog, 5) Document the reuse decision. Never duplicate without explicit justification.
+
 # ai-library-first — Library-First Development Governor
 
-## Purpose | 用途
+## Purpose
 
 Enforce the rule: **before writing a single line of custom code, check if a mature open-source library already does it.** This skill prevents the #1 cause of token waste and unstable code in AI-assisted development — reinventing components that already exist in npm/pip/maven.
 
@@ -179,4 +183,4 @@ Run this check on any PR or completed task:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — library catalog for Vue, React, Java Spring Boot, Node.js, token cost analysis
+- v1.0.0: Initial creation — library catalog for Vue, React, Java Spring Boot, Node.js, token cost analysis

@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-domain-boundary-mapper
 description: "Map domain boundaries, object ownership, source-of-truth placement, write paths, read consumers, schema ownership, and cross-domain risks. Use when data, identity, permissions, documents, reports, or business objects cross module boundaries."
 ---
 
 # ai-domain-boundary-mapper — Domain Boundary & Object Ownership Mapper
 
-## Purpose | 用途
+## Purpose
 
 Map domain boundaries at the object level:
 
@@ -19,7 +19,7 @@ This skill is for **domain boundary mapping**, not implementation or architectur
 
 ---
 
-## Core Rule | 核心规则
+## Rule
 
 **Every object (table, service, API) has one owning domain. Cross-domain access must be explicit and traceable.**
 
@@ -116,4 +116,4 @@ Flag any:
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-domain-boundary-mapper
-- v1.1.0: Generalized with universal domain patterns
+- v1.1.0: Generalized with universal domain patterns

@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-competitor-analyst
 description: "Research competitors, market references, product positioning, benchmark gaps, and decision implications while separating facts, inference, and project choices. Use for market analysis, product strategy, pricing, feature comparison, or investor-facing positioning."
 ---
 
 # ai-competitor-analyst — Competitive Benchmarking & Market Research Engine
 
-## Purpose | 用途
+## Purpose
 
 Research and compare products, features, and market positioning:
 
@@ -19,7 +19,7 @@ This skill is for **competitive research and benchmark**, not product strategy d
 
 ---
 
-## Core Rule | 核心规则
+## Rule
 
 **Benchmark against actual product behavior, not marketing materials.**
 
@@ -150,4 +150,4 @@ Rating:
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-competitor-analyst
-- v1.1.0: Generalized with universal benchmark framework
+- v1.1.0: Generalized with universal benchmark framework

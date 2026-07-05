@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-component-standardizer
 description: "Enforce standard page and component templates, theme variables, layout contracts, action placement, and reusable UI patterns. Use when creating or reviewing list pages, document forms, reports, dashboards, or enterprise frontend components."
 ---
 
+## Rule
+
+Standardization must: 1) Check against design system, 2) Validate API consistency, 3) Ensure accessibility (a11y), 4) Check for existing alternatives, 5) Register in component catalog. Never create unstandardized components.
+
 # ai-component-standardizer — Component & Page Template Standardization Engine
 
-## Purpose | 用途
+## Purpose
 
 Define and enforce standardized component/page templates for both backend and frontend. Stop AI from reinventing the layout for every new page. Every list page looks the same. Every form page follows the same pattern. Every report page uses the same structure. Theme support for customer-level customization without breaking standards.
 
@@ -260,4 +264,4 @@ Templates are MANDATORY for AI-Native and Enterprise projects. They are OPTIONAL
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 4 page templates, theme system, enforcement rules
+- v1.0.0: Initial creation — 4 page templates, theme system, enforcement rules

@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-ui-ux-governor
 description: "Govern enterprise UI/UX density, zero-fluff wording, action semantics, states, hierarchy, usability, visual consistency, and design-system fit. Use when designing or reviewing ERP/SaaS/admin pages, forms, dashboards, reports, and operational workflows."
 ---
 
 # ai-ui-ux-governor — Enterprise UI/UX Design System Governor
 
-## Purpose | 用途
+## Purpose
 
 Govern enterprise application UI/UX consistency across all pages:
 
@@ -18,7 +18,7 @@ Govern enterprise application UI/UX consistency across all pages:
 
 This skill is for **design system governance**, not pixel-level design. It applies to ERP, SaaS admin, operations dashboards, and any data-heavy enterprise tool.
 
-## Core Rule | 核心规则
+## Rule
 
 **Enterprise operation pages are action-first screens, not marketing pages.**
 
@@ -190,5 +190,5 @@ interface NotificationAPI {
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-ui-ux (19KB original + 2 references)
-- Source: Enterprise ERP UI/UX governance across 50+ page types
-
+- Source: Enterprise ERP UI/UX governance across 50+ page types
+

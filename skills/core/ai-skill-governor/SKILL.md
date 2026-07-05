@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-skill-governor
 description: "Audit the health of a skill ecosystem for contradictions, overlap, stale assumptions, missing triggers, orphan skills, quality drift, and maturity gaps. Use for weekly/monthly methodology reviews or after major skill, rule, or project-structure changes."
 ---
 
+## Rule
+
+Every skill must: 1) Have valid frontmatter (name, description), 2) Follow naming convention, 3) Be registered in SKILL_MANIFEST.json, 4) Have a clear lifecycle state, 5) Pass structure validation. Never activate unvalidated skills.
+
 # ai-skill-governor — Skill System Health & Governance Engine
 
-## Purpose | 用途
+## Purpose
 
 Proactively audit, deduplicate, and maintain the skill system. Unlike `ai-skill-evolver` (which reacts to completed tasks), this skill performs **scheduled health checks** on the entire skill library — detecting rot, contradictions, redundancy, and effectiveness gaps.
 
@@ -225,4 +229,4 @@ Some issues can be auto-fixed without human review:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 5 audit dimensions, weekly/monthly cycles, auto-fix rules
+- v1.0.0: Initial creation — 5 audit dimensions, weekly/monthly cycles, auto-fix rules

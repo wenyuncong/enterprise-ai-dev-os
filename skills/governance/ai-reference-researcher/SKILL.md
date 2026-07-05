@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-reference-researcher
 description: "Research primary references, official docs, open-source implementations, and comparable systems before designing unfamiliar features. Use when the domain is new, standards may have changed, or implementation should follow proven external practice."
 ---
 
+## Rule
+
+Research must: 1) Search official documentation first, 2) Find canonical examples, 3) Compare multiple sources, 4) Note version applicability, 5) Produce referenced summary. Never claim 'best practice' without citation.
+
 # ai-reference-researcher — Reference-Driven Development Research Engine
 
-## Purpose | 用途
+## Purpose
 
 Before developing complex features in unfamiliar domains, search for, download, analyze, and extract patterns from the best open-source reference implementations. This transforms "AI guesses from training data" into "AI learns from real production code."
 
@@ -248,4 +252,4 @@ Step 13: Runtime Verify
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 5-phase research workflow, domain reference targets, license awareness
+- v1.0.0: Initial creation — 5-phase research workflow, domain reference targets, license awareness

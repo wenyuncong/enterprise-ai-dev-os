@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-brownfield-analyzer
 description: "Analyze existing projects before changing them by discovering architecture, scripts, conventions, risks, intervention level, and safe extension points. Use for brownfield codebases, inherited systems, migrations, or unfamiliar repository work."
 ---
 
 # ai-brownfield-analyzer — Legacy Project Analysis & Pattern Extraction Engine
 
-## Purpose | 用途
+## Purpose
 
 Before modifying any existing project, execute a structured audit: analyze the current state, classify the intervention level, extract patterns (good and bad), and produce a surgical modification plan. This skill ensures that the methodology learns FROM the project before imposing ON the project.
 
@@ -23,7 +23,7 @@ Before modifying any existing project, execute a structured audit: analyze the c
 
 ---
 
-## Core Rule | 核心规则
+## Rule
 
 **The existing project is the teacher. The methodology is the student.**
 
@@ -270,4 +270,4 @@ Full details: methodology/09_老项目改造方法论.md §5b
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 5-step analysis workflow, 5 intervention levels, pattern extraction, semi-finished project handling
+- v1.0.0: Initial creation — 5-step analysis workflow, 5 intervention levels, pattern extraction, semi-finished project handling

@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-frontend-audit
 description: "Audit frontend availability, state handling, API integration, component reuse, accessibility, loading/empty/error states, performance, and user-facing readiness. Use before PRs, screenshots, releases, or when a page exists but may not be usable."
 ---
 
+## Rule
+
+Frontend audit must: 1) Check page load metrics, 2) Run accessibility audit, 3) Test responsive breakpoints, 4) Scan for console errors, 5) Compare against visual baseline. Never deploy without frontend audit passing.
+
 # ai-frontend-audit — Frontend Quality & Availability Auditor
 
-## Purpose | 用途
+## Purpose
 
 Systematically audit frontend module quality across all critical dimensions:
 
@@ -119,4 +123,4 @@ Basic accessibility should be maintained.
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-frontend-availability-audit
-- v1.1.0: Generalized with universal frontend quality dimensions
+- v1.1.0: Generalized with universal frontend quality dimensions

@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-atomic-architect
 description: "Design AI-native atomic services, capability units, orchestration boundaries, shared backend command paths, and multi-platform capability exposure. Use when defining service decomposition, MCP/agent capability surfaces, backend truth ownership, or reusable business command architecture."
 ---
 
+## Rule
+
+DECLARATION = CONTRACT ONLY (schema, meta, relations). EXECUTOR = ALL BUSINESS LOGIC (testable, replaceable). GOVERNANCE = MANDATORY PARAMETER ON EVERY EXECUTOR. Never write run() on a DeclarationAtom. Always separate executor file per atom.
+
 # ai-atomic-architect — AI-Native Atomic Service Architecture
 
-## Purpose | 用途
+## Purpose
 
 Define and enforce AI-native architecture patterns: **atomic services + atomic orchestration + unified interfaces**. This skill ensures that every project built with this methodology can evolve from a single web frontend into a multi-platform system (web, mobile app, WeChat mini-program, MCP server, API) without rewriting business logic.
 
@@ -219,4 +223,4 @@ paths:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 3 pillars, 3 archetypes, unified interface mapping
+- v1.0.0: Initial creation — 3 pillars, 3 archetypes, unified interface mapping

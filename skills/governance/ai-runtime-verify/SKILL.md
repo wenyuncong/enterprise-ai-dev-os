@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-runtime-verify
 description: "Verify runtime behavior with browser/API checks, console inspection, loading-state removal, DOM rendering, screenshots, logs, and structured evidence. Use before claiming code or page work is complete, especially for frontend and integration changes."
 ---
 
+## Rule
+
+Runtime verification must: 1) Execute the actual code path, 2) Capture output/errors/logs, 3) Validate against expected behavior, 4) Check side effects (DB, files, API), 5) Record evidence. Never claim working without runtime proof.
+
 # ai-runtime-verify — Browser Runtime Verification
 
-## Purpose | 用途
+## Purpose
 
 Automatically verify frontend pages render correctly in a real browser before claiming development complete. This skill is **AI-executable** — it runs headless browser checks without human intervention.
 
@@ -96,9 +100,9 @@ Step 14: Mark Complete         → Only if Step 13 passes
 
 ---
 
-## Guardrails | 防护规则
-
-- Use --project-root to auto-archive evidence JSON to docs/测试验收报告/ — this is the task completion proof
+## Guardrails | 防护规则
+
+- Use --project-root to auto-archive evidence JSON to docs/测试验收报告/ — this is the task completion proof
 
 
 - Run against the actual running server, not a mock
@@ -117,8 +121,8 @@ Step 14: Mark Complete         → Only if Step 13 passes
 
 **Stage**: New — Created to fill the gap between static audit and human review. First deployment.
 
-## Evolution History | 进化记录
-
+## Evolution History | 进化记录
+
 - v1.1.0: Added --project-root auto-archive to docs/测试验收报告/ for mandatory task completion evidence
 
-- v1.0.0: Initial creation — P0/P1/P2 verification dimensions, Playwright-based headless verification
+- v1.0.0: Initial creation — P0/P1/P2 verification dimensions, Playwright-based headless verification

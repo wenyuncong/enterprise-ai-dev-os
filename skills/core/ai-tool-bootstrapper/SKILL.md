@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-tool-bootstrapper
 description: "Detect, acquire, register, and verify missing development tools without wasting time on environment confusion. Use when commands are missing, versions are wrong, tool paths are unknown, or project automation depends on local runtimes."
 ---
 
+## Rule
+
+Bootstrapping must: 1) Detect current environment, 2) Identify missing tools, 3) Install with version pinning, 4) Configure project-specific settings, 5) Verify toolchain end-to-end. Never assume tools are available without verification.
+
 # ai-tool-bootstrapper — Self-Healing Environment & Tool Acquisition Engine
 
-## Purpose | 用途
+## Purpose
 
 Automatically detect, acquire, install, and verify missing development tools. This skill gives the methodology the ability to **self-heal its own environment** — when a required tool is missing, it doesn't fail; it finds, downloads, installs, and verifies.
 
@@ -146,4 +150,4 @@ python scripts/py/tool_registry.py set {tool_name} "{install_path}" "{version}"
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 5 tool categories, auto-detection, winget/npm/pip install strategies, self-evolution recording
+- v1.0.0: Initial creation — 5 tool categories, auto-detection, winget/npm/pip install strategies, self-evolution recording

@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-flow-closure-audit
 description: "Audit whether a business flow is closed across page, API, database, parameters, permissions, downstream writeback, reports, evidence, and regression tests. Use before declaring a business process complete or when checking end-to-end readiness."
 ---
 
+## Rule
+
+Closure audit checks: 1) Task has defined acceptance criteria, 2) Evidence of completion exists, 3) Verification step was executed, 4) Output matches expected output, 5) No unresolved issues remain. Never mark done without closure evidence.
+
 # ai-flow-closure-audit — End-to-End Business Flow Closure Auditor
 
-## Purpose | 用途
+## Purpose
 
 Audit whether a business chain is truly closed — from entry layer to API to database to downstream writeback to reporting.
 
@@ -122,4 +126,4 @@ Convert each gap into a concrete task:
 
 - v1.0.0: Extracted from gerp-flow-closure-audit (12.5KB original)
 - v1.1.0: Generalized to universal business chain closure framework
-- Source: O2C, S2P, R2R chain audits in enterprise ERP
+- Source: O2C, S2P, R2R chain audits in enterprise ERP

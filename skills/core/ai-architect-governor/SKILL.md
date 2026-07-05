@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-architect-governor
 description: "Govern cross-domain architecture decisions, ADRs, domain boundaries, source-of-truth ownership, identity/tenant models, integration patterns, and architecture risk. Use when a task changes architecture, crosses modules or platforms, defines ownership, or needs an architecture decision record."
 ---
 
 # ai-architect-governor — Cross-Domain Architecture Governor
 
-## Purpose | 用途
+## Purpose
 
 Govern cross-domain architecture decisions:
 
@@ -18,7 +18,7 @@ Govern cross-domain architecture decisions:
 
 This skill is for **architecture governance**, not single-module implementation.
 
-## Core Rule | 核心规则
+## Rule
 
 **Do not design architecture from imagination.**
 
@@ -123,4 +123,4 @@ Every business capability must distinguish:
 
 - v1.0.0: Extracted from gerp-architect-governor (15KB original)
 - v1.1.0: Generalized to universal architecture governance patterns
-- Source: Multi-domain enterprise system (ERP + Mall + App + Agent + SaaS)
+- Source: Multi-domain enterprise system (ERP + Mall + App + Agent + SaaS)

@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-project-classifier
 description: "Classify projects by origin, quality target, deployment targets, and scale to choose the correct methodology path and skill set. Use at project start, during onboarding, or before applying the methodology to a new or existing codebase."
 ---
 
+## Rule
+
+Classification must determine: 1) Primary domain (code/docs/devops/security/data/governance), 2) Complexity tier (simple/medium/complex), 3) Risk level (low/medium/high/critical), 4) Required skills, 5) Execution strategy. Never execute without classification.
+
 # ai-project-classifier — Project Classification Decision Framework
 
-## Purpose | 用途
+## Purpose
 
 Classify every project at inception across four critical dimensions. This determines which skills to load, which architecture to use, which steps to follow, and what "done" means.
 
@@ -222,4 +226,4 @@ Every project start must produce this summary:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 4 dimensions, 3 quality targets, classification output template
+- v1.0.0: Initial creation — 4 dimensions, 3 quality targets, classification output template

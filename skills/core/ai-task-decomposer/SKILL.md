@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-task-decomposer
 description: "Break complex work into safe executable batches with dependencies, scope boundaries, acceptance criteria, evidence requirements, and handoff-ready task slices. Use for multi-module tasks, long-running work, parallel execution, or ambiguous implementation requests."
 ---
 
 # ai-task-decomposer — Complex Task Decomposition Engine
 
-## Purpose | 用途
+## Purpose
 
 Convert broad or mixed work into:
 
@@ -17,7 +17,7 @@ Convert broad or mixed work into:
 
 This skill is for **decomposition**, not top-level routing or execution itself.
 
-## Core Rule | 核心规则
+## Rule
 
 **Do not split from imagination.**
 
@@ -141,4 +141,4 @@ Use blocker-first ordering:
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-task-decomposer, generalized for universal use
-- Source: GERP Enterprise ERP, PDCA-driven decomposition template
+- Source: GERP Enterprise ERP, PDCA-driven decomposition template

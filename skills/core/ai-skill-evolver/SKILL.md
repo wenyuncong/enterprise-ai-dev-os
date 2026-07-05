@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-skill-evolver
 description: "Improve the skill system from concrete evidence by updating existing skills, classifying gaps, recording evolution, and proposing new skill candidates. Use when reviewing skill quality, fixing ineffective skills, or turning repeated task patterns into reusable capability."
 ---
 
 # ai-skill-evolver — Self-Evolving Skill Engine
 
-## Purpose | 用途
+## Purpose
 
 Turn repeated work into stronger reusable assets:
 
@@ -17,7 +17,7 @@ Turn repeated work into stronger reusable assets:
 
 This skill is for **capability evolution**, not ordinary task execution.
 
-## Core Rule | 核心规则
+## Rule
 
 **Do not evolve skills from vague impressions. Only evolve from concrete evidence.**
 
@@ -145,4 +145,4 @@ ai-skill-evolver should automatically invoke ai-skill-governor when it detects:
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-skill-evolver, generalized for universal use
-- Source: GERP Enterprise ERP, Continuous Repair-To-Skill loop validated
+- Source: GERP Enterprise ERP, Continuous Repair-To-Skill loop validated

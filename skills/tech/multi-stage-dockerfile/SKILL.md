@@ -3,6 +3,14 @@ name: multi-stage-dockerfile
 description: 'Create optimized multi-stage Dockerfiles for applications in any language or framework. Use when containerizing apps, reducing image size, separating build/runtime stages, improving cache behavior, or hardening production images.'
 ---
 
+## Purpose
+
+Provide multi-stage Dockerfile optimization: minimize image layers, separate build from runtime dependencies, cache optimization, and security hardening. Exists to create production-grade, minimal Docker images.
+
+## Rule
+
+Multi-stage rules: 1) Builder stage for compilation, runtime stage for execution, 2) COPY --from=builder only runtime artifacts, 3) Use distroless or slim base for runtime, 4) Layer caching: copy dependency files before source, 5) Image must pass security scan before deployment.
+
 Your goal is to help me create efficient multi-stage Dockerfiles that follow best practices, resulting in smaller, more secure container images.
 
 ## Multi-Stage Structure

@@ -3,6 +3,10 @@ name: javascript-typescript-jest
 description: 'Best practices for writing JavaScript/TypeScript tests using Jest, including mocking strategies, test structure, and common patterns. Use when adding, reviewing, debugging, or refactoring Jest tests for JS/TS code, React components, async code, or mocked dependencies.'
 ---
 
+## Rule
+
+Jest rules: 1) One describe per module, one it per behavior, 2) Mock external dependencies, never mock the unit under test, 3) Async tests must return promise or use async/await, 4) Minimum 80% branch coverage for business logic, 5) Test name describes behavior, not implementation.
+
 ## Purpose
 
 Use this skill to write focused, maintainable Jest tests that verify behavior without over-mocking implementation details.

@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-rule-dispatcher
 description: "Route tasks to the correct methodology rules, skills, first checks, source documents, and safe execution order. Use at the start of each non-trivial task, especially when a request spans frontend, backend, data, deployment, governance, or documentation."
 ---
 
 # ai-rule-dispatcher — Intelligent Task Routing Engine
 
-## Purpose | 用途
+## Purpose
 
 Before any AI agent executes a task, this skill answers five questions:
 
@@ -17,7 +17,7 @@ Before any AI agent executes a task, this skill answers five questions:
 
 This skill is for **routing and first-entry judgment**, not decomposition or implementation.
 
-## Core Rule | 核心规则
+## Rule
 
 **Do not send a task directly to execution when the task line, governing docs, or lead skill are still unclear.**
 
@@ -148,4 +148,4 @@ Re-reading: ai-single-truth-enforcer, ai-library-first
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-rule-dispatcher, generalized for universal use
-- Source: GERP Enterprise ERP, 3+ months of daily dispatches
+- Source: GERP Enterprise ERP, 3+ months of daily dispatches

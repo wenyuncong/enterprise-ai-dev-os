@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-field-package-governor
 description: "Govern field metadata, database-authoritative fields, UI field packages, personalization config, report fields, and duplicate field definitions. Use when adding columns, changing form/table fields, centralizing metadata, or auditing hard-coded page fields."
 ---
 
 # ai-field-package-governor — Field Metadata & Component Configuration Governor
 
-## Purpose | 用途
+## Purpose
 
 Govern the field metadata layer in enterprise systems — the infrastructure that connects database schemas to UI components:
 
@@ -17,7 +17,7 @@ Govern the field metadata layer in enterprise systems — the infrastructure tha
 
 This skill applies to any enterprise system (ERP, CRM, SaaS admin, operations tools) where pages display structured data from a database and field definitions must be centralized rather than duplicated per page.
 
-## Core Rule | 核心规则
+## Rule
 
 **The page does not own the field truth.**
 
@@ -146,4 +146,4 @@ When one physical entity (table) represents multiple business identities:
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-atomic-component-fieldpackage (111KB original)
-- Source: Enterprise ERP metadata governance across purchase/sales/inventory/finance/capital modules
+- Source: Enterprise ERP metadata governance across purchase/sales/inventory/finance/capital modules

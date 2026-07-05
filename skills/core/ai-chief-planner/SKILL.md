@@ -1,11 +1,15 @@
-﻿---
+---
 name: ai-chief-planner
 description: "Plan end-to-end project execution, task lines, batch sequencing, acceptance criteria, evidence requirements, blockers, and closure state. Use for project-level coordination, multi-step delivery, task backlog governance, and final closure planning."
 ---
 
+## Rule
+
+Every plan must: 1) Decompose the goal into atomic verifiable steps, 2) Order steps by dependency, 3) Define clear done criteria per step, 4) Track progress incrementally, 5) Verify completion before marking done. Never skip verification steps.
+
 # ai-chief-planner — End-to-End Project Planning & Closure Engine
 
-## Purpose | 用途
+## Purpose
 
 Orchestrate project tasks across the full lifecycle:
 
@@ -119,4 +123,4 @@ Before marking any task batch as closed, verify:
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-chief-planner (10KB original)
-- v1.1.0: Generalized with universal project planning patterns
+- v1.1.0: Generalized with universal project planning patterns

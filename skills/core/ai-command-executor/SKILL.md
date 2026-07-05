@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-command-executor
 description: "Standardize command execution, environment checks, tool discovery, approved script usage, runtime diagnosis, logs, service start/stop, build verification, and evidence capture. Use before shell/CLI work, runtime debugging, or tool installation decisions."
 ---
 
 # ai-command-executor — Standardized Command Execution Engine
 
-## Purpose | 用途
+## Purpose
 
 Turn execution requests into standardized, auditable command runs:
 
@@ -17,7 +17,7 @@ Turn execution requests into standardized, auditable command runs:
 
 This skill is for **execution and diagnosis**, not task routing or project scheduling.
 
-## Core Rule | 核心规则
+## Rule
 
 **Do not invent a new command flow when the project already provides an approved entrypoint.**
 
@@ -139,5 +139,5 @@ This creates a self-healing environment where missing tools are acquired automat
 
 - v1.0.0: Extracted from gerp-command-executor (28KB original)
 - v1.1.0: Generalized to universal command execution patterns
-- Source: Daily enterprise development environments with multi-service orchestration
-
+- Source: Daily enterprise development environments with multi-service orchestration
+

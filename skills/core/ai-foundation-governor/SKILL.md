@@ -1,11 +1,11 @@
-﻿---
+---
 name: ai-foundation-governor
 description: "Govern stable project foundations including version control, permissions, routes, feature switches, menus, API contracts, configuration ownership, release gates, and single-source platform rules. Use when foundational behavior or shared project infrastructure changes."
 ---
 
 # ai-foundation-governor — Stable Foundation & Single Source of Truth Governor
 
-## Purpose | 用途
+## Purpose
 
 Govern the project's stable foundation layer — the infrastructure that every feature depends on but no single feature owns:
 
@@ -21,7 +21,7 @@ Govern the project's stable foundation layer — the infrastructure that every f
 
 This skill is mandatory for tasks touching **any** foundation-layer component. Foundation breaks cascade into every feature.
 
-## Core Rule | 核心规则
+## Rule
 
 **Every capability has a single source of truth. Missing loops are closed before page patches.**
 
@@ -138,4 +138,4 @@ Before merging any foundation change, verify:
 
 - v1.0.0: Extracted from gerp-stable-foundation-governor (65KB original)
 - v1.1.0: Generalized to universal enterprise foundation patterns
-- Source: 12+ months of enterprise ERP foundation governance
+- Source: 12+ months of enterprise ERP foundation governance

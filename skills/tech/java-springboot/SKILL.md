@@ -3,6 +3,14 @@ name: java-springboot
 description: 'Build, review, refactor, and troubleshoot Spring Boot applications. Use when working on Java backend projects, REST controllers, services, repositories, validation, transactions, configuration, logging, tests, or Spring Boot project structure.'
 ---
 
+## Purpose
+
+Provide Java Spring Boot development best practices: project structure, dependency injection, configuration management, REST API design, exception handling, and testing. Exists to ensure Spring Boot applications are built consistently and maintainably.
+
+## Rule
+
+Spring Boot rules: 1) Constructor injection over field injection, 2) Externalize configuration via application.yml, 3) Use @RestController + @RequestMapping patterns, 4) Global exception handler via @ControllerAdvice, 5) Test slices (@WebMvcTest, @DataJpaTest) not full context.
+
 # Spring Boot Best Practices
 
 Your goal is to help me write high-quality Spring Boot applications by following established best practices.
