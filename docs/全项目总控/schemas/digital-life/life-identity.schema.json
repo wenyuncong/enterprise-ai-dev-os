@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-os.local/schemas/digital-life/life-identity.schema.json",
+  "title": "LifeIdentity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "life_id",
+    "birth_certificate_id",
+    "owner_id",
+    "authority_id",
+    "home_node",
+    "identity_public_key",
+    "registration_status",
+    "trust_zone",
+    "current_lifecycle_state",
+    "created_at"
+  ],
+  "properties": {
+    "life_id": {
+      "type": "string",
+      "pattern": "^life_[a-z0-9][a-z0-9_-]{15,95}$"
+    },
+    "birth_certificate_id": {
+      "type": "string",
+      "pattern": "^birth_[a-z0-9][a-z0-9_-]{15,95}$"
+    },
+    "owner_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "authority_id": {
+      "type": "string",
+      "pattern": "^auth_[a-z0-9][a-z0-9_-]{7,95}$"
+    },
+    "home_node": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "identity_public_key": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key_id",
+        "algorithm",
+        "encoded"
+      ],
+      "properties": {
+        "key_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "ed25519",
+            "ecdsa-p256",
+            "rsa-3072"
+          ]
+        },
+        "encoded": {
+          "type": "string",
+          "minLength": 32
+        }
+      }
+    },
+    "registration_status": {
+      "type": "string",
+      "enum": [
+        "cloud_registered",
+        "private_registered",
+        "offline_registered",
+        "pending_sync",
+        "conflicted",
+        "frozen",
+        "retired"
+      ]
+    },
+    "trust_zone": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "current_lifecycle_state": {
+      "type": "string",
+      "enum": [
+        "draft_birth",
+        "born",
+        "learning",
+        "working",
+        "resting",
+        "growing",
+        "reflecting",
+        "evolving",
+        "communicating",
+        "frozen",
+        "retired"
+      ]
+    },
+    "active_instance_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^inst_[a-z0-9][a-z0-9_-]{15,95}$"
+      },
+      "uniqueItems": true
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      },
+      "uniqueItems": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

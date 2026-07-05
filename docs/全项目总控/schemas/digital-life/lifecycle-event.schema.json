@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-os.local/schemas/digital-life/lifecycle-event.schema.json",
+  "title": "LifecycleEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "life_id",
+    "event_type",
+    "from_state",
+    "to_state",
+    "actor",
+    "occurred_at",
+    "evidence_refs"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt_[a-z0-9][a-z0-9_-]{15,95}$"
+    },
+    "life_id": {
+      "type": "string",
+      "pattern": "^life_[a-z0-9][a-z0-9_-]{15,95}$"
+    },
+    "instance_id": {
+      "type": "string",
+      "pattern": "^inst_[a-z0-9][a-z0-9_-]{15,95}$"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "birth_registered",
+        "identity_verified",
+        "identity_conflicted",
+        "identity_recovered",
+        "genome_resolved",
+        "atoms_installed",
+        "learning_started",
+        "learning_completed",
+        "work_started",
+        "work_completed",
+        "repair_started",
+        "repair_completed",
+        "sleep_entered",
+        "migration_started",
+        "migration_completed",
+        "retired",
+        "frozen"
+      ]
+    },
+    "from_state": {
+      "type": "string",
+      "enum": [
+        "draft_birth",
+        "born",
+        "learning",
+        "working",
+        "resting",
+        "growing",
+        "repairing",
+        "communicating",
+        "frozen",
+        "retired"
+      ]
+    },
+    "to_state": {
+      "type": "string",
+      "enum": [
+        "draft_birth",
+        "born",
+        "learning",
+        "working",
+        "resting",
+        "growing",
+        "repairing",
+        "communicating",
+        "frozen",
+        "retired"
+      ]
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_type",
+        "actor_id"
+      ],
+      "properties": {
+        "actor_type": {
+          "type": "string",
+          "enum": [
+            "life",
+            "owner",
+            "authority",
+            "governance_office",
+            "system"
+          ]
+        },
+        "actor_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      },
+      "uniqueItems": true
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
