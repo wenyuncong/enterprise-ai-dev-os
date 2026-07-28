@@ -1,8 +1,8 @@
 # 2026-07-05 AI-OS 治理发现回写
 
-> 来源: ai-os runtime | 审计案例: `field_package_truth_audit`
+> 来源: atomic runtime | 审计案例: `field_package_truth_audit`
 > 生成时间: 2026-07-02T10:07:19
-> 证据文件: `evidence\gerp_enterprise_mainline\field_package_truth_audit\result.json`
+> 证据文件: `evidence\erp_production\field_package_truth_audit\result.json`
 
 ## 审计摘要
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "updatedAt": "2026-07-05",
+  "updatedAt": "2026-07-28",
   "officialSkillRoot": "skills/",
   "rawSourceRoot": "private-local-archive",
   "adapterRoots": [
@@ -18,10 +18,10 @@
     "deprecated": "The skill should not be used for new work."
   },
   "counts": {
-    "official": 40,
+    "official": 42,
     "rawSource": 45,
     "byLayer": {
-      "core": 12,
+      "core": 14,
       "governance": 13,
       "tech": 15,
       "platform": 0
@@ -64,6 +64,14 @@
       "maturity": "verified"
     },
     {
+      "name": "ai-5s-delivery-governor",
+      "layer": "core",
+      "path": "skills/core/ai-5s-delivery-governor/SKILL.md",
+      "source": "GERP 5S delivery governance extraction",
+      "maturity": "verified",
+      "description": "Govern versioned delivery with Scope, Specify, Ship, Safeguard, Sell, risk-based gates, baseline routing, and evidence-backed closure."
+    },
+    {
       "name": "ai-library-first",
       "layer": "core",
       "path": "skills/core/ai-library-first/SKILL.md",
@@ -76,6 +84,14 @@
       "path": "skills/core/ai-project-classifier/SKILL.md",
       "source": "methodology extraction",
       "maturity": "verified"
+    },
+    {
+      "name": "ai-product-directed-delivery",
+      "layer": "core",
+      "path": "skills/core/ai-product-directed-delivery/SKILL.md",
+      "source": "GERP non-programmer product-owner and AI delivery extraction",
+      "maturity": "verified",
+      "description": "Define product-owner and AI-agent responsibilities across outcome, architecture, atomic delivery, Host composition, business acceptance, and governed release."
     },
     {
       "name": "ai-rule-dispatcher",

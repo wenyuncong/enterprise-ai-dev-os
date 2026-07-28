@@ -38,6 +38,29 @@ Every enterprise page MUST fit one of these templates. No exceptions.
 
 ---
 
+## Frontend Composition Spine | 前端组合主链
+
+Enterprise frontend reuse must follow one composition chain:
+
+```text
+backend runtime / field metadata / aggregate profile
+  -> UI atoms
+  -> UI orchestration
+  -> standard page template
+  -> Host page
+```
+
+| Layer | Responsibility | Must not do |
+|---|---|---|
+| UI atom | Focused reusable UI behavior: field renderer, selector, table, status, action bar, filter, summary, dialog | Own business policy, calculate facts, authorize commands |
+| UI orchestration | Compose atoms from backend facts; coordinate loading, local input, navigation, accessibility, and feedback | Build a second business state machine or command path |
+| Standard template | Stable list/document/report/dashboard/settings shell | Recreate page-local layout systems |
+| Host page | Bind business code/profile, select template, assemble supported atoms and slots | Duplicate fields, permissions, statuses, calculations, or backend command logic |
+
+The Host is a composition surface, not a business service. A Host can show a command only when the backend aggregate/runtime contract marks it available; it sends all writes to the backend command gateway or owning API path.
+
+---
+
 ## Template 1: List/Table Page | 资料列表页
 
 **Use when**: Displaying a searchable, filterable list of records with CRUD actions.
@@ -257,6 +280,7 @@ Templates are MANDATORY for AI-Native and Enterprise projects. They are OPTIONAL
 - **Backend computes, frontend displays** — summaries, totals, computed fields come from API
 - **One component per role** — don't create DataTable2 because DataTable1 is "slightly different"
 - **Theme variables or nothing** — no hard-coded colors anywhere
+- **Host is not a second backend** — it composes supported UI atoms and calls authoritative aggregate/command contracts only
 
 ## Maturity | 成熟度
 
@@ -264,4 +288,5 @@ Templates are MANDATORY for AI-Native and Enterprise projects. They are OPTIONAL
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 4 page templates, theme system, enforcement rules
+- v1.0.0: Initial creation — 4 page templates, theme system, enforcement rules
+- v1.1.0: Added UI atom -> orchestration -> template -> Host composition boundary

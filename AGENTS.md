@@ -56,6 +56,54 @@ When a rule mentions a skill, resolve it from `skills/{layer}/{skill-name}/SKILL
 3. If registered → use existing path. Do NOT re-install.
 4. If new install → register path: `py scripts/py/tool_registry.py set {name} "{path}" "{version}"`
 
+### 0.4 5S Delivery Takeover | 5S 交付接管
+
+For versioned delivery, shared capability, release, deployment, schema, permission, or supported-baseline Bug work:
+
+1. Read `skills/core/ai-5s-delivery-governor/SKILL.md`.
+2. Record the smallest sufficient change record: type, target version/line, affected flow, truth owner, non-goals, and L0-L3 gate.
+3. Route baseline Bugs by where they reproduce, not by where they were discovered.
+4. Do not call a local edit or local commit delivered. Required integration, remotes, CI, release, and deployment evidence remain project-owned closure conditions.
+
+Use the lightweight lifecycle: `Scope -> Specify -> Ship -> Safeguard -> Sell`. Do not impose release ceremony on read-only audits, drafts, or small local experiments.
+
+### 0.5 Product-Directed AI Delivery | 产品主导的全 AI 交付
+
+For product-led delivery, the product owner may work entirely in business language, screenshots, examples, and completed business-flow tests. The product owner owns outcome, usability, scope, priority, non-goals, and final business acceptance. AI agents own requirement analysis, benchmark research, architecture, schema, backend, frontend, tests, evidence, and release execution.
+
+Before a reusable feature is implemented, declare both chains:
+
+```text
+Backend: truth -> atomic service -> orchestration -> aggregate interface -> command gateway -> adapters -> Host
+Frontend: runtime/field truth -> UI atom -> UI orchestration -> standard template -> Host page
+```
+
+Host pages and transport adapters load, render, collect input, request supported commands, and show feedback. They must not become a second source of business logic, state transitions, field truth, authorization, calculations, or write paths. A passed technical gate does not replace the product owner's completed business-flow acceptance.
+
+Read `skills/core/ai-product-directed-delivery/SKILL.md` for product ownership, agent handoffs, the twelve-step delivery map, and acceptance boundaries.
+
+### 0.6 Safe AI Change and Code Location | 安全修改与精准定位
+
+For any Bug fix, feature, refactor, deletion, rename, migration, or large project batch, use `skills/core/ai-product-directed-delivery/SKILL.md` before writing code.
+
+1. **Read, prove, then change**: identify the business symptom, truth owner, candidate files, existing working-tree changes, impact boundary, verification, and rollback path.
+2. **Trace from user flow to truth**: `menu/route -> rendered Host -> shared UI/template -> API -> controller/adapter -> command gateway/aggregate -> orchestration/atomic service -> domain facts/FieldPackage/BusinessProfile/permission -> mapper/DB -> tests/gates`.
+3. **Protect files and code**: classify deletion/rename/bulk replacement. Shared, unknown, schema, configuration, tenant-data, and destructive Git operations are preserve-by-default; database or repository-wide destructive operations require explicit confirmation and recovery evidence.
+4. **Keep unrelated work intact**: never clean a dirty tree globally; use exact file or hunk staging, inspect the staged diff, and verify it before commit.
+5. **Run large work as autopilot batches**: AI maps code and dependencies, selects L0-L3 gates, implements and proves each batch, then reports product-visible results and only asks the owner for business ambiguity, material trade-offs, destructive decisions, or release authorization.
+
+The product owner never needs to locate source files or write code. AI owns investigation and implementation; the owner owns product intent and business-flow acceptance.
+
+### 0.7 Delivery Roles, Task Pack, and Methodology Regression | 职责、任务包与方法论回归
+
+For product-led or multi-step delivery:
+
+1. Read `docs/全项目总控/AI_DELIVERY_SKILL_RESPONSIBILITY_MATRIX.md` and select one primary skill for the active stage.
+2. Start from `docs/_templates/全项目总控/AI_PRODUCT_DELIVERY_TASK_TEMPLATE.md`. Product owners provide only product outcome, examples, priority, usability expectation, and business-flow acceptance; AI fills engineering evidence.
+3. When official rules, product-delivery skills, templates, or routing boundaries change, run `py scripts/py/test_methodology_scenarios.py --project-root .` in addition to `audit_methodology.py`.
+
+The responsibility matrix clarifies ownership; it does not authorize a skill to bypass a project-specific rule, truth owner, verification gate, or explicit destructive-operation confirmation.
+
 ---
 
 ## 1. Overview | 概述
@@ -76,6 +124,8 @@ This document defines the mandatory rules, workflows, and discipline for AI-assi
 | **Zero-Fluff UI** | ERP/SaaS/admin pages must have zero decorative text. Only actionable prompts. | 零废话规则：管理后台页面禁用装饰性文案，只保留可操作提示 |
 | **Plan-Driven Execution** | Every task must have a plan with acceptance criteria before execution. | 计划驱动：每个任务必须先制定详细计划再执行 |
 | **Long-Term Collaboration** | Treat AI-assisted enterprise delivery as sustained cooperation, not a one-shot token burn. | 长期协作：默认服务长期 ERP/企业级交付，不把成本压力误判为“用户用不起”，而要通过拆批、验证和复用降低消耗 |
+| **5S Delivery Governance** | Bound delivery through Scope, Specify, Ship, Safeguard, Sell. | 5S 交付治理：用范围、说明、实现、保障、销售放行约束可审计交付。 |
+| **Product-Directed AI Delivery** | Product owner defines outcome and acceptance; AI agents execute the verifiable engineering system. | 产品主导全 AI 交付：人定义结果与验收，智能体完成可验证工程系统。 |
 
 ### Collaboration Cost Guardrail | 协作成本护栏
 
@@ -246,6 +296,8 @@ QUICK CHECK (10 rules, always active):
 □ Brownfield: audit before code, match existing style.
 □ No business logic in Vue computed() or React useMemo().
 □ Single truth: never compute same value in two places.
+□ Versioned delivery: record 5S state and select an L0-L3 gate.
+□ Product owner owns business acceptance; AI owns evidence-backed engineering execution.
 ```
 
 
@@ -289,11 +341,12 @@ These rules are enforced by governance skills. Violating any of them means the t
 
 ## 7. Complete Skill Index | 完整 Skill 索引
 
-### Core Engine (skills/core/) — 11 skills
+### Core Engine (skills/core/) — 14 skills
 
 | Skill | Purpose | When to Load |
 |---|---|---|
 | ai-project-classifier | Classify project (brownfield/greenfield, quality, scale, targets) | ALWAYS first at project start |
+| ai-product-directed-delivery | Product-owner/AI responsibility boundary, twelve-step delivery map, backend/frontend Host chains | Product-led AI-native delivery |
 | ai-rule-dispatcher | Route tasks to correct skill and load required docs | Every new task |
 | ai-task-decomposer | Break complex work into safe executable batches | Multi-module or cross-end tasks |
 | ai-chief-planner | End-to-end project planning, scheduling, closure | Project-level orchestration |
@@ -303,10 +356,11 @@ These rules are enforced by governance skills. Violating any of them means the t
 | ai-architect-governor | Cross-domain architecture governance, ADR | Architecture decisions |
 | ai-atomic-architect | AI-native atomic service + orchestration + unified interfaces | Project architecture design |
 | ai-foundation-governor | Version control, tenant switches, permissions, menus, routes | Platform foundation changes |
+| ai-5s-delivery-governor | Scope/Specify/Ship/Safeguard/Sell lifecycle, gate selection, release closure | Versioned delivery, release, hotfix, deployment |
 | ai-skill-evolver | Review completed work, update skills, archive patterns | After task closure |
 | ai-skill-governor | Proactive skill health audit: contradiction, overlap, rot, orphan detection | Weekly / monthly / on-demand |
 
-### Governance (skills/governance/) — 9 skills
+### Governance (skills/governance/) — 13 skills
 
 | Skill | Purpose | When to Load |
 |---|---|---|
@@ -342,16 +396,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | tailwind-design-system | Design tokens, component libraries |
 | javascript-typescript-jest | Jest testing patterns, mocking |
 
-### Platform Integration (skills/platform/) — 4 skills
-
-| Skill | Purpose |
-|---|---|
-| cnb-api | CNB platform API (repos, issues, PRs, pipelines) |
-| cnb-pipeline | CNB CI/CD pipeline configuration |
-| cnb-code-commit | Code commit + PR creation workflow |
-| cnb-code-review | PR review with inline comments |
-
-**Total**: 38 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
+**Total**: 42 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
 
 ---
 
@@ -467,47 +512,6 @@ For a new project, initialize the methodology by:
 
 ---
 
-*Methodology version: 2.1.0 | Last updated: 2026-06-17*
-*Skills: 38 | Derived from: GERP Enterprise AI Development System*
-
-
----
-
-## 跨项目联邦发现 (Federation Discovery)
-
-> 更新时间: 2026-07-05 17:27
-
-### 三项目能力索引
-
-| 项目 | 路径 | 角色 | 可审计状态 |
-|------|------|------|-----------|
-| **企业级梦境系统** | G:\企业级梦境系统 | 方法论母体 | 40 skills (含 ai-atomic-governance, ai-cross-project-audit) |
-| **AI-OS Runtime** | G:\ai-os | 运行时内核 | L0-L6 原子体系, 163 tests, 自检 96.8% |
-| **GERP Enterprise** | H:\gerp-enterprise-mainline | 生产验证 | gerp-admin P0 已修复, 全量编译通过 |
-
-### 联邦治理管道
-
-```
-企业级梦境系统 (方法论/规则)
-    │ 规则定义
-    ▼
-AI-OS (L5/L6 联邦原子)
-    │ read-only audit
-    ▼
-GERP (生产代码)
-```
-
-**可用联邦能力**:
-- `app_federation_orchestrator`: 多项目联合审计 → 联邦报告
-- `app_cross_project_sync`: 跨项目配置/结构同步
-- `app_consistency_checker`: 命名/治理/结构一致性评分
-- `app_federation_index`: 联邦知识索引 + 交叉引用
-
-### 方法论验证状态
-
-| Skill | 验证来源 | 状态 |
-|-------|---------|------|
-| ai-atomic-governance | 智能体生命 P0-P2 修复 (21 atoms) | verified |
-| ai-cross-project-audit | GERP 623 项审计 + read-only 报告 | verified |
-| ai-single-truth-enforcer | GERP InMemoryDocumentCommandAtomRegistry | callable |
+*Methodology version: 2.3.0 | Last updated: 2026-07-28*
+*Skills: 42 | Derived from enterprise delivery evidence*
 

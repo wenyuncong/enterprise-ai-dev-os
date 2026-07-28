@@ -198,10 +198,10 @@ Before declaring a cross-project audit complete:
 
 ---
 
-## Case Study: GERP Cross-Project Audit (2026-07-05)
+## Case Study: ERP Cross-Project Audit (2026-07-05)
 
 **Source**: ai-os atomic governance system (L0-L5)
-**Target**: GERP enterprise mainline (H:\gerp-enterprise-mainline)
+**Target**: enterprise ERP production repository
 **Mode**: Read-only
 
 **Inputs**:
@@ -216,6 +216,6 @@ Before declaring a cross-project audit complete:
 **Output**:
 - Evidence: cross_project_audit_20260705/evidence_gov_*.json
 - Index: knowledge_index.json (34 entries)
-- Report: GERP_跨项目治理审计_20260705.md
+- Report: ERP_跨项目治理审计_20260705.md
 
-**Key insight**: Existing audit data from previous GERP audits was directly reusable by L3 atoms — no re-scanning required. The L5 orchestrator chained L3 outputs through evidence → index → report in a single execution.
+**Key insight**: Existing audit data from a prior ERP audit was directly reusable by L3 atoms — no re-scanning required. The L5 orchestrator chained L3 outputs through evidence → index → report in a single execution.

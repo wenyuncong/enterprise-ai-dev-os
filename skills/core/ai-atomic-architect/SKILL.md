@@ -1,6 +1,6 @@
 ---
 name: ai-atomic-architect
-description: "Design AI-native atomic services, capability units, orchestration boundaries, shared backend command paths, and multi-platform capability exposure. Use when defining service decomposition, MCP/agent capability surfaces, backend truth ownership, or reusable business command architecture."
+description: "Design AI-native atomic services, atomic orchestration, aggregate interfaces, command gateways, and multi-platform capability exposure. Use when defining service decomposition, backend truth ownership, reusable business commands, Host clients, or MCP/agent capability surfaces."
 ---
 
 ## Rule
@@ -138,6 +138,55 @@ GERP supports 7 platforms from a single backend. This is the template:
 
 ---
 
+## Delivery Spine: Aggregate Interface and Command Gateway
+
+Atomic services and orchestration are not directly exposed as a client-side puzzle. Reusable business capability must follow this spine:
+
+```text
+domain facts
+  -> atomic service
+  -> atomic orchestration/application service
+  -> aggregate interface
+  -> command gateway
+  -> transport adapters
+  -> Web/App/AI/MCP/OpenAPI Host
+```
+
+### Aggregate Interface
+
+The aggregate interface is the client-ready contract for one business object or workflow. It can include:
+
+- runtime/profile facts;
+- field metadata and display/edit constraints;
+- permissions, tenant/version/data-scope result;
+- current state, available commands, blockers, and related facts;
+- presentation-oriented read models needed by a Host.
+
+It does not move persistence, calculation, lifecycle transition, or authorization into the client.
+
+### Command Gateway
+
+The command gateway is the sole executable entrance for reusable business writes. Before dispatch it must evaluate:
+
+1. authenticated actor and tenant;
+2. permission, version policy, and data scope;
+3. current business state and upstream/downstream blockers;
+4. idempotency and confirmation/risk requirement;
+5. provider/handler coverage;
+6. audit trace and canonical response.
+
+An action is not executable merely because an adapter or Host renders it. Unsupported, deferred, or blocked actions must remain explicitly non-executable with a stable reason.
+
+### Host and Adapter Boundary
+
+Web, App, AI, MCP, OpenAPI, desktop, and connectors are adapters over the same aggregate and command contract:
+
+- adapters translate protocol, identity, input, and output;
+- Hosts load/render permitted facts, collect input, call the gateway, and show feedback;
+- neither adapters nor Hosts may compose domain services, run raw queries, calculate business facts, or invent a second state machine.
+
+---
+
 ### Domain Module Decomposition (Extracted from GERP)
 
 A full ERP breaks down into these domain modules. Use as a reference for domain-driven design:
@@ -214,6 +263,8 @@ paths:
 - **Define the interface before implementing** (OpenAPI/GraphQL schema first)
 - **One atomic service = one database schema** (no cross-service DB joins)
 - **Transport is a detail** — the core business logic doesn't know if it's called via REST, MCP, or WebSocket
+- **Aggregate before Host** — clients consume one aggregate contract instead of composing backend services themselves
+- **Writes through the command gateway** — adapters and Hosts must not bypass authorization, state, idempotency, or audit checks
 - **Start simple, split when needed** — Archetype A is valid; don't over-engineer
 - **Every atomic service must be independently testable** without other services running
 
@@ -223,4 +274,5 @@ paths:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 3 pillars, 3 archetypes, unified interface mapping
+- v1.0.0: Initial creation — 3 pillars, 3 archetypes, unified interface mapping
+- v1.1.0: Added aggregate-interface, command-gateway, adapter, and Host boundaries from enterprise multi-client delivery evidence

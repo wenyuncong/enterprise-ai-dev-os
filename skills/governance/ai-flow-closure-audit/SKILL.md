@@ -38,6 +38,7 @@ A business chain is only "closed" when evidence exists at ALL layers:
 | **Writeback** | Downstream truth updated? | Trace data flow end-to-end | P1 (data risk) |
 | **Report/Analytics** | Reports reflect writeback? | Query comparison, freshness check | P1 (data risk) |
 | **Audit/Evidence** | Actions recorded? Trail complete? | Audit log verification | P2 (compliance) |
+| **Product Acceptance** | Intended user can complete the real business flow efficiently? | Product-owner acceptance record | P1 (delivery risk) |
 
 ---
 
@@ -69,6 +70,7 @@ For each node, collect concrete evidence:
 - **Database**: `DESCRIBE table`, sample rows before and after action
 - **Writeback**: Trace data from source table to downstream table
 - **Report**: Query report output, compare with source data freshness
+- **Product acceptance**: Execute the owner-defined business-flow test and record accept/reject/revise feedback
 
 ### Step 3: Identify Gaps
 Where is the chain broken? Classify:
@@ -101,6 +103,7 @@ Convert each gap into a concrete task:
 | Database | ✅/❌/⚠️ | [SQL results] | [notes] |
 | Writeback | ✅/❌/⚠️ | [Data trace] | [notes] |
 | Report | ✅/❌/⚠️ | [Query comparison] | [notes] |
+| Product acceptance | ✅/❌/⚠️ | [Business-flow test record] | [notes] |
 
 ### Gap Summary
 - P0: [count] blockers
@@ -117,6 +120,7 @@ Convert each gap into a concrete task:
 - Do not skip writeback verification — it's the most common hidden gap
 - Do not audit from imagination — verify against actual running code and database
 - Do not treat a passing API test as full closure without database/writeback verification
+- Do not treat technical verification as a substitute for product-owner business-flow acceptance
 
 ## Maturity | 成熟度
 
@@ -126,4 +130,5 @@ Convert each gap into a concrete task:
 
 - v1.0.0: Extracted from gerp-flow-closure-audit (12.5KB original)
 - v1.1.0: Generalized to universal business chain closure framework
+- v1.2.0: Added product-owner business-flow acceptance as an explicit closure layer
 - Source: O2C, S2P, R2R chain audits in enterprise ERP
