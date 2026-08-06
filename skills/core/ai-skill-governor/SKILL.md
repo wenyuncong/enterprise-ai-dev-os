@@ -13,7 +13,7 @@ Every skill must: 1) Have valid frontmatter (name, description), 2) Follow namin
 
 Proactively audit, deduplicate, and maintain the skill system. Unlike `ai-skill-evolver` (which reacts to completed tasks), this skill performs **scheduled health checks** on the entire skill library — detecting rot, contradictions, redundancy, and effectiveness gaps.
 
-**Problem it solves**: 37 skills (and growing) with no quality control. Skills can:
+**Problem it solves**: 42 official skills (and growing) need continuous quality control. Skills can:
 - Contradict each other (two skills say opposite things)
 - Overlap (two skills cover the same ground differently)
 - Rot (patterns become outdated, libraries change, best practices evolve)
@@ -133,7 +133,7 @@ Skills that exist but are never triggered.
 ### Health Summary
 | Metric | Value |
 |---|---|
-| Total skills | 37 |
+| Total official skills | 42 |
 | Contradictions found | [N] |
 | Overlaps found | [N] |
 | Rotting skills (>3 months) | [N] |

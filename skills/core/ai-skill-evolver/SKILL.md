@@ -31,8 +31,8 @@ Evidence sources:
 Always distinguish:
 - declared skill (exists on disk)
 - callable skill (can be invoked by name)
-- ffective skill (produces correct results consistently)
-- volving skill (actively being improved)
+- effective skill (produces correct results consistently)
+- evolving skill (actively being improved)
 
 ## When to Use | 触发条件
 
@@ -70,7 +70,7 @@ Read the current skill governance chain:
 | Existing skill needs refinement | Update SKILL.md |
 | New pattern crosses 2+ task types | Create new skill |
 | Single-page issue | Record in task doc, not skill |
-| Rule needs updating | Update ules/AGENTS.md |
+| Rule needs updating | Update rules/AGENTS.md |
 | Skill exists but not effective | Investigate and fix root cause |
 
 ### Step 3: Choose the Right Action | 选择正确动作
@@ -105,9 +105,9 @@ Convert evolution result into:
 |---|---|
 | declared | SKILL.md exists but never used |
 | callable | Can be invoked by name, basic instructions work |
-| ffective | Produces correct results consistently |
+| effective | Produces correct results consistently |
 | in-closure | Has acceptance criteria and evidence rules |
-| volving | Actively being improved based on feedback |
+| evolving | Actively being improved based on feedback |
 
 
 ## Scheduled Governance Trigger | 定期治理触发
@@ -140,9 +140,9 @@ ai-skill-evolver should automatically invoke ai-skill-governor when it detects:
 
 ## Maturity | 成熟度
 
-**Stage**: ffective — Battle-tested on GERP ERP with documented evolution cycles.
+**Stage**: effective — Battle-tested on GERP ERP with documented evolution cycles.
 
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-skill-evolver, generalized for universal use
-- Source: GERP Enterprise ERP, Continuous Repair-To-Skill loop validated
+- Source: GERP Enterprise ERP, Continuous Repair-To-Skill loop validatedr

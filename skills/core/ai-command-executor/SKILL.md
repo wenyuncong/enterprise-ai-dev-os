@@ -52,7 +52,7 @@ Before running any command, verify:
 
 ### Phase 1: Environment Verification
 - Verify tool dependencies are available
-- **If any tool is missing → invoke i-tool-bootstrapper to auto-install**
+- **If any tool is missing → invoke ai-tool-bootstrapper to auto-install**
 - Check port availability before starting services
 - Confirm working directory and permissions
 
@@ -127,7 +127,7 @@ Before starting a new task and before committing a completed task, verify the wo
 When environment verification detects a missing tool, do not fail. Instead:
 
 1. Report: "Tool X not found"
-2. Invoke i-tool-bootstrapper to auto-install X
+2. Invoke ai-tool-bootstrapper to auto-install X
 3. Re-verify after installation
 4. Continue execution
 
@@ -139,5 +139,5 @@ This creates a self-healing environment where missing tools are acquired automat
 
 - v1.0.0: Extracted from gerp-command-executor (28KB original)
 - v1.1.0: Generalized to universal command execution patterns
-- Source: Daily enterprise development environments with multi-service orchestration
-
+- Source: Daily enterprise development environments with multi-service orchestrationr
+r

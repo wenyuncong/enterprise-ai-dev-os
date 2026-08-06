@@ -41,31 +41,31 @@ Determine which project line the task belongs to:
 |---|---|---|
 | mainline | Active development work | Feature development, bug fixes, refactoring |
 | governance | Architecture/quality governance | Cross-domain decisions, boundary mapping |
-| udit | Quality inspection | Code review, flow closure audit, frontend audit |
-| esearch | Investigation & analysis | Competitor research, technology evaluation |
-| elease | Deployment & release | CI/CD, deployment scripts, release notes |
+| audit | Quality inspection | Code review, flow closure audit, frontend audit |
+| research | Investigation & analysis | Competitor research, technology evaluation |
+| release | Deployment & release | CI/CD, deployment scripts, release notes |
 
 ### Step 2: Classify the Task Type | 判断任务类型
 
 | Type | Lead Skill |
 |---|---|
-| Complex/multi-module | i-task-decomposer |
-| Architecture/design | i-architect-governor |
-| Project planning | i-chief-planner |
-| Command execution | i-command-executor |
-| Frontend development | {stack}-frontend-dev (e.g., ue) |
+| Complex/multi-module | ai-task-decomposer |
+| Architecture/design | ai-architect-governor |
+| Project planning | ai-chief-planner |
+| Command execution | ai-command-executor |
+| Frontend development | {stack}-frontend-dev (e.g., vue) |
 | Backend development | {stack}-backend-dev (e.g., java-springboot) |
 | Database changes | mysql-best-practices (or equivalent) |
-| Quality audit | i-flow-closure-audit or i-frontend-audit |
-| Research | i-competitor-analyst or i-market-researcher |
-| Skill improvement | i-skill-evolver |
+| Quality audit | ai-flow-closure-audit or ai-frontend-audit |
+| Research | ai-competitor-analyst or ai-market-researcher |
+| Skill improvement | ai-skill-evolver |
 
 ### Step 3: Select First Documents | 选择首要文档
 
 Before execution, identify the authoritative documents:
 
-1. ules/AGENTS.md — Always first
-2. ules/project_rules.md — Project-specific rules (if exists)
+1. rules/AGENTS.md — Always first
+2. rules/project_rules.md — Project-specific rules (if exists)
 3. Relevant skill's SKILL.md
 4. Relevant docs/ category documents
 
@@ -139,13 +139,13 @@ Re-reading: ai-single-truth-enforcer, ai-library-first
 - Do not recommend multiple lead skills — pick ONE
 - Do not route to implementation if entry facts are still missing
 - Do not treat governance support lines as the active mainline
-- If unsure, escalate to i-chief-planner for scheduling decision
+- If unsure, escalate to ai-chief-planner for scheduling decision
 
 ## Maturity | 成熟度
 
-**Stage**: ffective — Battle-tested on GERP ERP project across 2000+ task dispatches.
+**Stage**: effective — Battle-tested on GERP ERP project across 2000+ task dispatches.
 
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-rule-dispatcher, generalized for universal use
-- Source: GERP Enterprise ERP, 3+ months of daily dispatches
+- Source: GERP Enterprise ERP, 3+ months of daily dispatchesr

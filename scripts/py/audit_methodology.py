@@ -29,11 +29,17 @@ PORTABILITY_EXCLUDES = {
     Path("docs/每日调研回写/2026-06-17_可行性分析.md"),
 }
 
+PRIVATE_LOCAL_DOC_PREFIXES = (
+    ("docs", "本地知识中心"),
+)
+
 PRIVATE_ARCHIVE_PREFIXES = (
     "reference",
     "备用",
     "verification-demo",
 )
+
+CONTROL_CHARACTER_PATTERN = re.compile(r"[\x00-\x08\x0B\x0C\x0E-\x1F]")
 
 BLOCKED_PATTERNS = [
     (re.compile(r"\b[A-Z]:[/\\][^\s`\"']+", re.IGNORECASE), "hard-coded local workspace path"),
@@ -142,6 +148,8 @@ def check_portability(root: Path, issues: list[Issue]) -> None:
             rpath = rel(path, root)
             if rpath in PORTABILITY_EXCLUDES:
                 continue
+            if any(rpath.parts[: len(prefix)] == prefix for prefix in PRIVATE_LOCAL_DOC_PREFIXES):
+                continue
             if rpath.parts and rpath.parts[0] in PRIVATE_ARCHIVE_PREFIXES:
                 continue
             if path.suffix.lower() not in {".md", ".json", ".py", ".ps1", ".mjs", ".js", ".yml", ".yaml"}:
@@ -151,6 +159,8 @@ def check_portability(root: Path, issues: list[Issue]) -> None:
             except UnicodeDecodeError as exc:
                 issues.append(Issue("FAIL", "ENCODING", rpath, f"file is not valid UTF-8: {exc}"))
                 continue
+            if CONTROL_CHARACTER_PATTERN.search(text):
+                issues.append(Issue("FAIL", "CONTROL_CHARACTER", rpath, "file contains a forbidden control character."))
             for regex, label in BLOCKED_PATTERNS:
                 if regex.search(text):
                     issues.append(Issue("FAIL", "PORTABILITY_RESIDUE", rpath, label))

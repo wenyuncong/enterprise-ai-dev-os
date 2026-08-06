@@ -73,7 +73,7 @@ Classification happens exactly ONCE at project start (and re-runs on scope chang
 
 ## 3. Layer 1: Routing | 路由层
 
-**Skill**: i-rule-dispatcher
+**Skill**: ai-rule-dispatcher
 
 ### Responsibility
 Determine the execution context before any code is written:
@@ -92,7 +92,7 @@ Routing is a **meta-concern** — it doesn't write code, it tells other layers w
 
 ## 4. Layer 2: Decomposition | 分解层
 
-**Skill**: i-task-decomposer
+**Skill**: ai-task-decomposer
 
 ### Responsibility
 Convert complex tasks into independent, dependency-aware batches:
@@ -127,14 +127,14 @@ Execution skills are **domain-specific** — a Vue developer skill should not co
 The dispatcher selects the execution skill based on task type:
 - Database changes → mysql-best-practices
 - Backend API → java-springboot or equivalent
-- Frontend page → ue or equivalent
+- Frontend page → vue or equivalent
 - Full-stack → sequential dispatch through backend → frontend
 
 ---
 
 ## 6. Layer 4: Evolution | 进化层
 
-**Skill**: i-skill-evolver
+**Skill**: ai-skill-evolver
 
 ### Responsibility
 After task completion, improve the skill system:
@@ -155,10 +155,10 @@ In addition to the four vertical layers, there is a **horizontal governance laye
 
 | Skill | Audits |
 |---|---|
-| i-flow-closure-audit | Business chain: page → API → DB → writeback → report |
-| i-frontend-audit | Page availability, UI consistency, performance |
-| i-domain-boundary-mapper | Object ownership, schema placement, cross-domain chains |
-| i-competitor-analyst | Feature gaps vs market leaders |
+| ai-flow-closure-audit | Business chain: page → API → DB → writeback → report |
+| ai-frontend-audit | Page availability, UI consistency, performance |
+| ai-domain-boundary-mapper | Object ownership, schema placement, cross-domain chains |
+| ai-competitor-analyst | Feature gaps vs market leaders |
 
 Governance skills are **triggered periodically** (not on every task) and produce structured audit reports with prioritized fix tasks.
 
@@ -176,11 +176,11 @@ declared → callable → effective → in-closure → evolving
 |---|---|---|
 | declared | SKILL.md exists | File exists on disk |
 | callable | Can be invoked by name | Successfully loaded by AI |
-| ffective | Produces correct results | 5+ successful task completions |
+| effective | Produces correct results | 5+ successful task completions |
 | in-closure | Has acceptance criteria | Evidence rules documented |
-| volving | Actively being improved | Evolution history has entries |
+| evolving | Actively being improved | Evolution history has entries |
 
-The i-skill-evolver tracks and upgrades maturity ratings.
+The ai-skill-evolver tracks and upgrades maturity ratings.
 
 ---
 

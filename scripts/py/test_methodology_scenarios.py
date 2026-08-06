@@ -27,7 +27,7 @@ def assert_contains(path: Path, required_terms: list[str]) -> list[str]:
     return [term for term in required_terms if term.lower() not in text]
 
 
-def write_fixture(root: Path, include_safety: bool) -> None:
+def write_fixture(root: Path, include_safety: bool, include_control_character: bool = False) -> None:
     (root / "skills/core/ai-5s-delivery-governor").mkdir(parents=True)
     (root / "skills/core/ai-product-directed-delivery").mkdir(parents=True)
     (root / "rules").mkdir(parents=True)
@@ -70,6 +70,8 @@ description: "Use for product owner AI delivery workflow and guardrails."
 {product_terms}
 Workflow guardrails: do not bypass checks.
 """
+    if include_control_character:
+        product += "\x07"
     rules = """# Rules
 ## 5S Delivery Governance
 Scope -> Specify -> Ship -> Safeguard -> Sell
@@ -187,11 +189,14 @@ def main() -> int:
     try:
         complete_fixture = temp_root / "complete"
         incomplete_fixture = temp_root / "missing-safety"
+        control_character_fixture = temp_root / "control-character"
         write_fixture(complete_fixture, include_safety=True)
         write_fixture(incomplete_fixture, include_safety=False)
+        write_fixture(control_character_fixture, include_safety=True, include_control_character=True)
 
         complete_exit, complete_result = run_audit(root, complete_fixture)
         incomplete_exit, incomplete_result = run_audit(root, incomplete_fixture)
+        control_exit, control_result = run_audit(root, control_character_fixture)
     finally:
         shutil.rmtree(temp_root, ignore_errors=True)
 
@@ -208,6 +213,10 @@ def main() -> int:
         failures.append("missing-safety fixture did not fail product delivery skill structure check")
     if not any(issue.get("code") == "PRODUCT_DELIVERY_RULES" for issue in incomplete_result.get("issues", [])):
         failures.append("missing-safety fixture did not fail canonical rules check")
+    if control_exit == 0 or control_result.get("passed"):
+        failures.append("control-character fixture was not rejected by methodology audit")
+    if not any(issue.get("code") == "CONTROL_CHARACTER" for issue in control_result.get("issues", [])):
+        failures.append("control-character fixture did not fail control-character check")
 
     result = {
         "passed": not failures,
@@ -219,6 +228,11 @@ def main() -> int:
                 "passed": not incomplete_result.get("passed") and incomplete_exit != 0,
                 "exitCode": incomplete_exit,
                 "issueCodes": [issue.get("code") for issue in incomplete_result.get("issues", [])],
+            },
+            "control_character_fixture_rejected": {
+                "passed": not control_result.get("passed") and control_exit != 0,
+                "exitCode": control_exit,
+                "issueCodes": [issue.get("code") for issue in control_result.get("issues", [])],
             },
         },
         "failures": failures,
