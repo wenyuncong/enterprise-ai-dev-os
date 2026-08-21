@@ -1,4 +1,4 @@
----
+﻿---
 name: ai-task-decomposer
 description: "Break complex work into safe executable batches with dependencies, scope boundaries, acceptance criteria, evidence requirements, and handoff-ready task slices. Use for multi-module tasks, long-running work, parallel execution, or ambiguous implementation requests."
 ---
@@ -74,6 +74,8 @@ Each batch must be:
 - Small enough for one focused round (~30-60 min of work)
 - Clear about ownership and write scope
 - Explicit about acceptance and evidence
+- Explicit about its public test seam when domain behavior or a bug regression is testable
+- Explicit about its task-local DeliveryContract path and write allowlist when L2/L3, parallel, or high-risk work applies
 
 ### 5. Mark Dependencies | 标记依赖
 
@@ -121,6 +123,10 @@ Use blocker-first ordering:
 ### 5. Acceptance & Evidence Rules
 - [rule-1]
 - [rule-2]
+- Testable seam and red-green evidence: [focused test or justified alternative]
+- Fresh final evidence: [command/check run after the final relevant change]
+- Two-axis review: [standards/truth result] + [product acceptance/non-goals result]
+- Delivery contract: [not required / contract path + validator result]
 
 ### 6. Output Form
 [Internal / External / Handoff]

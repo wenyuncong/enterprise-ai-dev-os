@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Audit the portable AI development methodology repository.
 
 The script checks the release-facing knowledge base and skips private local
@@ -268,6 +268,9 @@ def check_product_directed_delivery(root: Path, manifest: dict, issues: list[Iss
         "impact",
         "exact task-owned",
         "business ambiguity",
+        "shared language",
+        "fresh evidence",
+        "two independent axes",
     ]
     missing = [term for term in required_terms if term not in text]
     if missing:
@@ -289,6 +292,8 @@ def check_product_directed_delivery(root: Path, manifest: dict, issues: list[Iss
         "read, prove, then change",
         "exact file or hunk staging",
         "business ambiguity",
+        "fresh evidence before claims",
+        "review two independent axes",
     ]
     missing_rule_terms = [term for term in required_rule_terms if term not in rules_text]
     if missing_rule_terms:
@@ -346,6 +351,8 @@ def check_delivery_operating_assets(root: Path, issues: list[Issue]) -> None:
             "delete / rename / migration classification",
             "executable batches",
             "verification record",
+            "fresh final evidence",
+            "two-axis review",
             "product acceptance",
             "delivery closure",
         ]
@@ -378,6 +385,74 @@ def check_delivery_operating_assets(root: Path, issues: list[Issue]) -> None:
                 f"canonical rules must require delivery operating assets: {', '.join(missing)}",
             )
         )
+
+
+def check_delivery_contract_governance(root: Path, manifest: dict, issues: list[Issue]) -> None:
+    skill_path = Path("skills/core/ai-delivery-contract-governor/SKILL.md")
+    schema_path = Path("docs/全项目总控/schemas/digital-life/delivery-contract.schema.json")
+    template_path = Path("docs/_templates/全项目总控/task_contract.json")
+    validator_path = Path("scripts/py/validate_delivery_contract.py")
+    required_files = {
+        skill_path: "delivery contract governor skill is required.",
+        schema_path: "delivery contract schema is required.",
+        template_path: "delivery contract template is required.",
+        validator_path: "delivery contract validator is required.",
+    }
+    for path, message in required_files.items():
+        if not (root / path).exists():
+            issues.append(Issue("FAIL", "DELIVERY_CONTRACT_ASSET_MISSING", path, message))
+
+    registered = next(
+        (item for item in manifest.get("officialSkills", []) if item.get("name") == "ai-delivery-contract-governor"),
+        None,
+    )
+    if not registered:
+        issues.append(Issue("FAIL", "DELIVERY_CONTRACT_MANIFEST", Path("skills/SKILL_MANIFEST.json"), "delivery contract governor is not registered."))
+    elif registered.get("path") != str(skill_path).replace("\\", "/"):
+        issues.append(Issue("FAIL", "DELIVERY_CONTRACT_MANIFEST", Path("skills/SKILL_MANIFEST.json"), "delivery contract governor has an invalid manifest path."))
+
+    if (root / skill_path).exists():
+        skill_text = read_text(root / skill_path).lower()
+        required_terms = [
+            "write allowlist",
+            "fresh evidence",
+            "independent",
+            "safeguarded",
+            "completed",
+            "fail-closed",
+            "validate_delivery_contract.py",
+        ]
+        missing = [term for term in required_terms if term not in skill_text]
+        if missing:
+            issues.append(Issue("FAIL", "DELIVERY_CONTRACT_SKILL", skill_path, f"delivery contract skill is missing: {', '.join(missing)}"))
+
+    if (root / schema_path).exists():
+        try:
+            schema = json.loads(read_text(root / schema_path))
+        except Exception as exc:
+            issues.append(Issue("FAIL", "DELIVERY_CONTRACT_SCHEMA_JSON", schema_path, f"delivery contract schema is invalid JSON: {exc}"))
+        else:
+            required_properties = {"delivery", "product_contract", "truth_owner", "scope", "test_strategy", "evidence_plan", "reviews"}
+            missing = required_properties - set(schema.get("properties", {}))
+            if schema.get("title") != "DeliveryContract" or schema.get("additionalProperties") is not False or missing:
+                detail = "title/additionalProperties/properties are incomplete"
+                if missing:
+                    detail = f"missing properties: {', '.join(sorted(missing))}"
+                issues.append(Issue("FAIL", "DELIVERY_CONTRACT_SCHEMA", schema_path, detail))
+
+    rules_path = Path("rules/AGENTS.md")
+    rules_text = read_text(root / rules_path).lower() if (root / rules_path).exists() else ""
+    required_rule_terms = [
+        "executable delivery contract",
+        "ai-delivery-contract-governor",
+        "deliverycontract",
+        "write allowlist",
+        "verification_owner",
+        "fail-closed",
+    ]
+    missing = [term for term in required_rule_terms if term not in rules_text]
+    if missing:
+        issues.append(Issue("FAIL", "DELIVERY_CONTRACT_RULES", rules_path, f"canonical rules must define executable delivery contracts: {', '.join(missing)}"))
 
 
 def check_agent_paths(root: Path, issues: list[Issue]) -> None:
@@ -423,6 +498,7 @@ def main() -> int:
     check_5s_delivery_governance(root, manifest, issues)
     check_product_directed_delivery(root, manifest, issues)
     check_delivery_operating_assets(root, issues)
+    check_delivery_contract_governance(root, manifest, issues)
     check_agent_paths(root, issues)
     check_private_archive_notice(root, issues)
 

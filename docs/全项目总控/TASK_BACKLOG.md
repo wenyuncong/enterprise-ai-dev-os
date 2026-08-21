@@ -26,6 +26,8 @@
 
 | ID | Task | Completed | Notes |
 |---|---|---|---|
+| AI-NATIVE-GOV-01 | 全 AI 原生候选能力评估与验证协议 | 2026-08-09 | 将网页、Skill、工具输出等从可信标签判断升级为项目适配评估、受控验证、授权委托和执行证据契约 |
+| AI-NATIVE-GOV-02 | 可执行交付契约门禁 | 2026-08-21 | 新增任务写入范围、阶段准入、新鲜证据与独立双轴复核的 Schema、Skill、校验器和场景回归 |
 | BUG-01 | Rule 14: No test = not done 强制完成门禁 | 2026-06-17 | AGENTS.md §6 + verify.js --project-root 自动归档 |
 | P5-ALL | P5 工作任务系统 | 2026-07-05 | 5 个原子 (inbox.receive, inbox.classify, task.transition, plan.generate, plan.adjust) + DigitalLifeService 集成 (daily_work_plan/get_daily_plan/execute_daily_plan) + tick_runtime 增强 + 51 测试 |
 | TOOL-01 | Multi-tool deploy adapter | 2026-06-17 | tools/adapters.json + tools/deploy.ps1，已部署5个工具 |
@@ -35,4 +37,4 @@
 
 ---
 
-*Last updated: 2026-07-05*
+*Last updated: 2026-08-21*

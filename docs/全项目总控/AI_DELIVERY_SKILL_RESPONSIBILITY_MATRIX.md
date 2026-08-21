@@ -1,4 +1,4 @@
-# AI Delivery Skill Responsibility Matrix
+﻿# AI Delivery Skill Responsibility Matrix
 
 ## Purpose
 
@@ -20,12 +20,13 @@ acceptance criteria.
 | Define product outcome | `ai-product-directed-delivery` | `ai-competitor-analyst`, `ai-ui-ux-governor` | Product-owner contract, scenario, usability, business acceptance, handoffs | Internal implementation choice without evidence |
 | Plan program | `ai-chief-planner` | `ai-task-decomposer`, `ai-5s-delivery-governor` | Milestones, backlog state, dependency order, closure state | File-level implementation details |
 | Split execution | `ai-task-decomposer` | `ai-chief-planner`, `ai-command-executor` | Atomic batches, write boundaries, dependencies, batch acceptance | Release authorization or business-policy invention |
+| Enforce delivery contract | `ai-delivery-contract-governor` | `ai-5s-delivery-governor`, `ai-command-executor` | Machine-readable write scope, stage transitions, fresh evidence, independent review | Replacing project CI, business truth, or owner authorization |
 | Design architecture | `ai-architect-governor` | `ai-atomic-architect`, `ai-domain-boundary-mapper` | Architectural decision, trade-offs, ADR, ownership boundaries | Product acceptance or transport-specific implementation |
 | Define capability chain | `ai-atomic-architect` | `ai-single-truth-enforcer`, `ai-foundation-governor` | Truth -> atom -> orchestration -> aggregate -> command gateway -> adapter -> Host contract | Page-local business rules or duplicated truth |
 | Implement safely | `ai-command-executor` | Stack skill, `ai-library-first`, relevant governance skill | Approved commands, tool use, working-tree gate, scoped execution evidence | Task routing, product policy, release decision |
 | Govern truth and fields | `ai-single-truth-enforcer` | `ai-field-package-governor`, `ai-foundation-governor` | Backend/data truth, policy boundary, field source, error severity | Visual layout ownership |
 | Build UI | `ai-component-standardizer` | `ai-ui-ux-governor`, frontend stack skill | UI atom, composition, standard template, Host boundary | Domain calculation, authorization, write policy |
-| Verify business flow | `ai-flow-closure-audit` | `ai-runtime-verify`, `ai-frontend-audit` | Page -> API -> truth -> writeback -> report closure | Release/version promotion |
+| Verify business flow | `ai-flow-closure-audit` | `ai-runtime-verify`, `ai-frontend-audit` | Page -> API -> truth -> writeback -> report closure; standards/truth and product/spec two-axis review | Release/version promotion |
 | Verify runtime | `ai-runtime-verify` | Stack skill, `ai-command-executor` | Executed runtime path, browser/API/log/side-effect evidence | Static architecture judgment |
 | Govern delivery | `ai-5s-delivery-governor` | `ai-chief-planner`, `ai-command-executor` | Scope/Specify/Ship/Safeguard/Sell state, L0-L3 gate, release evidence | Business-domain truth |
 | Evolve methodology | `ai-skill-evolver` | `ai-skill-governor` | Evidence-backed skill/rule/template updates after repeated patterns | Routine project implementation |
@@ -45,6 +46,8 @@ acceptance criteria.
    the end-to-end business chain.
 6. `ai-skill-governor` reports overlap. It never merges or deletes a skill
    without an explicit scoped decision.
+7. `ai-delivery-contract-governor` is mandatory for L2/L3, parallel, or
+   high-risk work when a project adopts machine-readable delivery contracts.
 
 ## Required Handoff
 

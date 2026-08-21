@@ -1,4 +1,4 @@
----
+﻿---
 name: ai-product-directed-delivery
 description: "Run AI-native product delivery where a product owner defines outcomes, usability, and business acceptance while AI agents perform analysis, research, architecture, implementation, verification, and delivery evidence. Use for product-led enterprise delivery, non-programmer-led development, end-to-end feature work, or explaining human and agent responsibilities."
 ---
@@ -64,6 +64,16 @@ Risk and rollback notes:
 ```
 
 If the business outcome is unclear, ask for clarification. If the engineering path is unclear, the AI investigates it; it must not send that burden back to the product owner as a programming task.
+
+## Shared Language and Decision Context | 共享语言与决策上下文
+
+When a delivery introduces or depends on ambiguous business terms, stable abbreviations, or cross-session decisions, create or update concise project-owned context under `docs/`:
+
+- A glossary/context record defines the agreed meaning of domain terms and abbreviations.
+- An ADR or decision record captures a durable architectural or scope decision with alternatives and consequences.
+- Specifications, test names, APIs, and code reuse the agreed language so agents and people do not invent parallel names.
+
+This is proportional to risk. Do not require a glossary for a one-line local fix, and do not let a glossary become a second source of business truth. The database/domain model and accepted business rules remain authoritative.
 
 ## Twelve-Step Product Delivery Map
 
@@ -142,6 +152,19 @@ The frontend may validate required input for immediate usability feedback, but t
 | Verifier -> owner | Product-visible result, passed/failed evidence, known limits, acceptance test instructions |
 | Owner -> release | Accept / reject / revise decision for the tested business flow |
 
+## Testable Seams and Fresh Evidence | 可测试边界与新鲜证据
+
+For new or changed domain rules, bug regressions, command/orchestration behavior, and other testable public interfaces:
+
+1. Name the public seam and expected behavior before implementation.
+2. Write a focused test that fails for the intended behavior.
+3. Implement the smallest change that passes it.
+4. Rerun the focused test and affected regressions after the final relevant change.
+
+Do not force red-green work onto copy-only, generated, configuration-only, or exploratory tasks where a focused behavioral test is not meaningful. Record the selected alternative evidence instead.
+
+Before a completion, commit, release, or readiness claim, run the command, runtime check, API call, database readback, or diff inspection that proves the claim **after the final relevant change**. Earlier passing output, a health endpoint, or an agent report is not sufficient evidence.
+
 ## Standard Workflow
 
 1. Start from product outcome, not implementation wording.
@@ -153,7 +176,8 @@ The frontend may validate required input for immediate usability feedback, but t
 7. Verify technical closure independently.
 8. Let the product owner run the business-flow acceptance from the intended user's perspective.
 9. Use `ai-5s-delivery-governor` for final delivery state and release evidence.
-10. Feed recurring lessons into the existing owning skill instead of creating parallel rule sets.
+10. Review the change on two independent axes: standards/truth/architecture compliance and the originating product outcome, acceptance flow, and non-goals.
+11. Feed recurring lessons into the existing owning skill instead of creating parallel rule sets.
 
 ## Safe Change Protocol | 安全修改协议
 

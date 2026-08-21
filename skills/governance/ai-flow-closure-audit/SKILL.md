@@ -72,6 +72,17 @@ For each node, collect concrete evidence:
 - **Report**: Query report output, compare with source data freshness
 - **Product acceptance**: Execute the owner-defined business-flow test and record accept/reject/revise feedback
 
+### Step 2a: Review Two Independent Axes
+
+Before calling a non-trivial flow ready, keep these findings separate:
+
+| Axis | Question | Minimum evidence |
+|---|---|---|
+| **Standards / truth** | Does the change follow repository standards, source-of-truth ownership, architecture boundaries, security/quality gates, and the selected L0-L3 gate? | Scoped diff review, relevant audit/build/test/runtime evidence |
+| **Product / spec** | Does the flow deliver the originating business outcome and acceptance steps without violating explicit non-goals or adding unapproved behavior? | Product contract, acceptance record, observed behavior |
+
+Neither axis masks the other. A technically clean implementation that misses the business outcome fails the audit; a behaviorally correct implementation that violates truth or architecture boundaries also fails.
+
 ### Step 3: Identify Gaps
 Where is the chain broken? Classify:
 - **P0 (Blocker)**: Missing backend validation, broken API, missing table
@@ -105,6 +116,12 @@ Convert each gap into a concrete task:
 | Report | ✅/❌/⚠️ | [Query comparison] | [notes] |
 | Product acceptance | ✅/❌/⚠️ | [Business-flow test record] | [notes] |
 
+### Two-Axis Review
+| Axis | Status | Evidence | Blockers / Notes |
+|---|---|---|---|
+| Standards / truth | ✅/❌/⚠️ | [diff, audit, test, runtime evidence] | [notes] |
+| Product / spec | ✅/❌/⚠️ | [outcome, acceptance, non-goals evidence] | [notes] |
+
 ### Gap Summary
 - P0: [count] blockers
 - P1: [count] data risks
@@ -121,6 +138,8 @@ Convert each gap into a concrete task:
 - Do not audit from imagination — verify against actual running code and database
 - Do not treat a passing API test as full closure without database/writeback verification
 - Do not treat technical verification as a substitute for product-owner business-flow acceptance
+- Do not merge standards/truth findings with product/spec findings; report and resolve both axes independently
+- Do not use stale output or an agent report as closure evidence; rerun the proving check after the final relevant change
 
 ## Maturity | 成熟度
 
@@ -131,4 +150,4 @@ Convert each gap into a concrete task:
 - v1.0.0: Extracted from gerp-flow-closure-audit (12.5KB original)
 - v1.1.0: Generalized to universal business chain closure framework
 - v1.2.0: Added product-owner business-flow acceptance as an explicit closure layer
-- Source: O2C, S2P, R2R chain audits in enterprise ERP
+- Source: O2C, S2P, R2R chain audits in enterprise ERP

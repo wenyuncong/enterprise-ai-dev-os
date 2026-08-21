@@ -1,8 +1,12 @@
-# AI Product Delivery Task Pack
+﻿# AI Product Delivery Task Pack
 
 > Product owner fills only sections 1-2. AI agents complete sections 3-9
 > from verified project evidence. Do not ask the product owner to locate code,
 > choose a framework, or describe internal implementation.
+>
+> For L2/L3, parallel, or high-risk work, create a companion machine-readable
+> contract from `task_contract.json` and validate it with
+> `scripts/py/validate_delivery_contract.py`.
 
 ## 1. Product Owner Input
 
@@ -35,6 +39,8 @@
 | Existing pattern / reuse candidate | |
 | Scripts and tools discovered | |
 | Working-tree boundary | |
+| Shared language / ADR context | None required / [path and terms] |
+| Delivery contract | Not required / [task-local contract path] |
 
 ## 4. Code Location and Truth Map
 
@@ -62,13 +68,15 @@ Focused tests and release gates:
 | Delete / rename / migration classification | None / A / B / C / D |
 | Rollback path | |
 | L0-L3 gate | |
+| Write allowlist / forbidden paths | |
+| Destructive classification / owner confirmation | |
 
 ## 6. Executable Batches
 
-| ID | Dependency | Write boundary | Result | Acceptance | Evidence |
-| --- | --- | --- | --- | --- | --- |
-| B-01 | None | | | | |
-| B-02 | B-01 | | | | |
+| ID | Dependency | Write boundary | Public test seam / justified alternative | Result | Acceptance | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| B-01 | None | | | | | |
+| B-02 | B-01 | | | | | |
 
 ## 7. Verification Record
 
@@ -79,15 +87,23 @@ Focused tests and release gates:
 | API / database | | | |
 | Browser / runtime | | | |
 | Business-flow closure | | | |
+| Fresh final evidence | Claim: | | command/check run after final relevant change |
 | Release / deployment | | | |
 
-## 8. Product Acceptance
+## 8. Two-Axis Review
+
+| Axis | Question | Result | Evidence / blockers |
+| --- | --- | --- | --- |
+| Standards / truth | Repository standards, truth ownership, architecture, quality gates | | |
+| Product / spec | Outcome, business-flow acceptance, explicit non-goals | | |
+
+## 9. Product Acceptance
 
 | Acceptance flow | Expected | Actual | Owner decision |
 | --- | --- | --- | --- |
 | | | | Accept / Revise / Reject |
 
-## 9. Delivery Closure
+## 10. Delivery Closure
 
 ```text
 Change type:

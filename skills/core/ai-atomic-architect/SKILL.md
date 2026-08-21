@@ -37,11 +37,13 @@ Define and enforce AI-native architecture patterns: **atomic services + atomic o
 ## Pillar 1: Atomic Services | 原子服务
 
 ### Definition
-An atomic service is the **smallest independently deployable unit of business logic**. It:
+An atomic service is the **smallest independently understandable, testable, governable, and replaceable unit of business logic**. It:
 - Does exactly ONE thing (single responsibility)
-- Owns its own data (database-per-service or schema-per-service)
+- Has an explicit truth owner and data boundary
 - Communicates only through defined interfaces (never direct DB access)
 - Is stateless where possible, stateful only where necessary
+
+**Important boundary**: Atomicity is a capability boundary, not a mandatory deployment boundary. An atomic service MAY run inside a modular monolith, a service cluster, or an edge runtime. Deployment and database isolation are chosen from actual performance, organization, isolation, and operational-cost needs; they are not forced by the word "atomic".
 
 ### Atomic Service Template
 ```
@@ -261,7 +263,7 @@ paths:
 
 - **Never put business logic in the presentation layer** (Vue components, Flutter widgets)
 - **Define the interface before implementing** (OpenAPI/GraphQL schema first)
-- **One atomic service = one database schema** (no cross-service DB joins)
+- **One atomic service = one explicit data boundary** — schema-per-service is appropriate only when independent deployment and isolation justify its operational cost
 - **Transport is a detail** — the core business logic doesn't know if it's called via REST, MCP, or WebSocket
 - **Aggregate before Host** — clients consume one aggregate contract instead of composing backend services themselves
 - **Writes through the command gateway** — adapters and Hosts must not bypass authorization, state, idempotency, or audit checks

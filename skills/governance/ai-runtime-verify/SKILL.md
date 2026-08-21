@@ -96,16 +96,17 @@ Step 13: Runtime Verify        → ai-runtime-verify checks browser behavior  �
 Step 14: Mark Complete         → Only if Step 13 passes
 ```
 
-**Rule**: An AI agent MUST NOT claim "development complete" unless `ai-runtime-verify` returns `passed: true`.
+**Rule**: An AI agent MUST NOT claim "development complete" unless `ai-runtime-verify` returns `passed: true` from a run performed after the final relevant frontend or runtime change. A previous report, a health endpoint, or an agent report does not prove current behavior.
 
 ---
 
-## Guardrails | 防护规则
-
-- Use --project-root to auto-archive evidence JSON to docs/测试验收报告/ — this is the task completion proof
+## Guardrails | 防护规则
+
+- Use --project-root to auto-archive evidence JSON to docs/测试验收报告/ — this is the task completion proof
 
 
 - Run against the actual running server, not a mock
+- Identify the exact claim being made and run the check that proves it after the final relevant change
 - A failed P0 check means the page is broken — fix before proceeding
 - Do not ignore "minor" console errors; every error is a real bug
 - Screenshot on failure for debugging
@@ -121,8 +122,8 @@ Step 14: Mark Complete         → Only if Step 13 passes
 
 **Stage**: New — Created to fill the gap between static audit and human review. First deployment.
 
-## Evolution History | 进化记录
-
+## Evolution History | 进化记录
+
 - v1.1.0: Added --project-root auto-archive to docs/测试验收报告/ for mandatory task completion evidence
 
-- v1.0.0: Initial creation — P0/P1/P2 verification dimensions, Playwright-based headless verification
+- v1.0.0: Initial creation — P0/P1/P2 verification dimensions, Playwright-based headless verification

@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-os.local/schemas/digital-life/execution-attestation.schema.json",
+  "title": "ExecutionAttestation",
+  "description": "Reproducible evidence record for a governed evaluation, sandbox run, or command execution.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attestation_id",
+    "execution_id",
+    "project_id",
+    "executor",
+    "action",
+    "outcome",
+    "started_at",
+    "finished_at"
+  ],
+  "properties": {
+    "attestation_id": {
+      "type": "string",
+      "pattern": "^att_[a-z0-9][a-z0-9_-]{15,95}$"
+    },
+    "execution_id": {
+      "type": "string",
+      "pattern": "^exec_[a-z0-9][a-z0-9_-]{15,95}$"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^cand_[a-z0-9][a-z0-9_-]{7,95}$"
+    },
+    "delegation_grant_id": {
+      "type": "string",
+      "pattern": "^grant_[a-z0-9][a-z0-9_-]{15,95}$"
+    },
+    "executor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_id",
+        "actor_type"
+      ],
+      "properties": {
+        "actor_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "actor_type": {
+          "type": "string",
+          "enum": [
+            "human",
+            "agent",
+            "runtime",
+            "service"
+          ]
+        },
+        "model_or_tool_version": {
+          "type": "string",
+          "maxLength": 320
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capability_id",
+        "action_code",
+        "execution_mode"
+      ],
+      "properties": {
+        "capability_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "action_code": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "execution_mode": {
+          "type": "string",
+          "enum": [
+            "evaluate",
+            "dry_run",
+            "sandbox",
+            "execute",
+            "replay"
+          ]
+        },
+        "input_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "artifact_digests": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "runtime_version": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "policy_pack_version": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "registry_snapshot_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "dependency_manifest_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "passed",
+            "failed",
+            "blocked",
+            "rolled_back",
+            "compensated"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 320
+          },
+          "uniqueItems": true
+        },
+        "rollback_or_compensation_ref": {
+          "type": "string",
+          "maxLength": 320
+        }
+      }
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finished_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signature": {
+      "type": "string",
+      "minLength": 32
+    }
+  }
+}

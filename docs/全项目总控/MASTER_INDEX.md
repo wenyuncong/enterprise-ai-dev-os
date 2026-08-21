@@ -32,6 +32,8 @@
 | 09 | 老项目改造方法论 | `methodology/09_老项目改造方法论.md` | 已完成 |
 | 10 | 发布治理与锁版体系 | `methodology/10_发布治理与锁版体系.md` | 已完成 |
 | LOOP | 企业级全 AI 开发落地闭环 | `docs/全项目总控/AI_NATIVE_DELIVERY_LOOP.md` | 已完成 |
+| CANDIDATE | 全 AI 原生候选能力评估与验证协议 | `docs/全项目总控/AI_NATIVE_CANDIDATE_CAPABILITY_PROTOCOL.md` | 已完成 |
+| CONTRACT | 可执行交付契约 | `docs/全项目总控/schemas/digital-life/delivery-contract.schema.json` | 已完成 |
 | LIFE | AI-OS 数字生命智能体总纲 | `docs/全项目总控/DIGITAL_LIFE_AGENT_MANIFESTO.md` | 规划中 |
 | LIFE-PLAN | AI-OS 数字生命智能体开发计划 | `docs/全项目总控/DIGITAL_LIFE_AGENT_DEVELOPMENT_PLAN.md` | 规划中 |
 | LIFE-SCHEMA | AI-OS 数字生命核心协议 Schema | `docs/全项目总控/schemas/digital-life/` | 规划中 |
@@ -44,11 +46,11 @@
 
 | 层级 | 数量 | 路径 |
 |---|---:|---|
-| Core Engine | 12 | `skills/core/` |
-| Governance | 11 | `skills/governance/` |
+| Core Engine | 15 | `skills/core/` |
+| Governance | 13 | `skills/governance/` |
 | Tech Stack | 15 | `skills/tech/` |
 | Platform | 0 | `skills/platform/` 当前为空 |
-| **合计** | **38** | `skills/` |
+| **合计** | **43** | `skills/` |
 
 ### Core Engine
 
@@ -58,9 +60,12 @@
 | ai-atomic-architect | `skills/core/ai-atomic-architect/` |
 | ai-chief-planner | `skills/core/ai-chief-planner/` |
 | ai-command-executor | `skills/core/ai-command-executor/` |
+| ai-5s-delivery-governor | `skills/core/ai-5s-delivery-governor/` |
+| ai-delivery-contract-governor | `skills/core/ai-delivery-contract-governor/` |
 | ai-foundation-governor | `skills/core/ai-foundation-governor/` |
 | ai-library-first | `skills/core/ai-library-first/` |
 | ai-project-classifier | `skills/core/ai-project-classifier/` |
+| ai-product-directed-delivery | `skills/core/ai-product-directed-delivery/` |
 | ai-rule-dispatcher | `skills/core/ai-rule-dispatcher/` |
 | ai-skill-evolver | `skills/core/ai-skill-evolver/` |
 | ai-skill-governor | `skills/core/ai-skill-governor/` |
@@ -74,6 +79,7 @@
 | ai-brownfield-analyzer | `skills/governance/ai-brownfield-analyzer/` |
 | ai-competitor-analyst | `skills/governance/ai-competitor-analyst/` |
 | ai-component-standardizer | `skills/governance/ai-component-standardizer/` |
+| ai-cross-project-audit | `skills/governance/ai-cross-project-audit/` |
 | ai-domain-boundary-mapper | `skills/governance/ai-domain-boundary-mapper/` |
 | ai-field-package-governor | `skills/governance/ai-field-package-governor/` |
 | ai-flow-closure-audit | `skills/governance/ai-flow-closure-audit/` |
@@ -142,6 +148,8 @@
 | 方法论审计 | `scripts/py/audit_methodology.py` | 检查 manifest、路径残留、AGENTS 引用、Skill 结构 |
 | AI 开发确定性评分 | `scripts/py/score_ai_development_readiness.py` | 输出结构就绪分和缺口建议 |
 | 数字生命 Schema 审计 | `scripts/py/audit_digital_life_schemas.py` | 检查数字生命核心协议 JSON Schema 可解析、ID 唯一、索引完整 |
+| 全 AI 治理契约审计 | `scripts/py/audit_ai_native_governance.py` | 检查候选能力评估、授权委托和执行证据契约是否齐全 |
+| 交付契约校验 | `scripts/py/validate_delivery_contract.py` | 拒绝越界写入、陈旧证据和缺失独立复核 |
 | 多工具部署 | `tools/deploy.ps1` | 将 `skills/` 和 `rules/AGENTS.md` 同步到 AI 工具适配目录 |
 
 推荐收尾命令：
@@ -149,6 +157,8 @@
 ```powershell
 py scripts/py/audit_methodology.py --project-root .
 py scripts/py/audit_digital_life_schemas.py --project-root .
+py scripts/py/audit_ai_native_governance.py --project-root .
+py scripts/py/validate_delivery_contract.py --contract <task-contract.json> --check-freshness
 py scripts/py/score_ai_development_readiness.py --project-root .
 ```
 
@@ -160,4 +170,4 @@ py scripts/py/score_ai_development_readiness.py --project-root .
 
 ---
 
-**上次更新**: 2026-06-18
+**上次更新**: 2026-08-21

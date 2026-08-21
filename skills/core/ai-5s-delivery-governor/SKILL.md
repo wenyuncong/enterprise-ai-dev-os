@@ -76,10 +76,11 @@ A health endpoint only proves process availability. It never proves business clo
 1. Inspect the current branch, working tree, required remotes, and project delivery scripts.
 2. Classify the change as usability, bug, existing-flow semantic change, or new capability.
 3. Record Scope and Specify before writing: target version, affected flow, truth owner, non-goals, gate, and rollback/data impact.
-4. Ship only the scoped change. Stage exact task files and preserve unrelated worktree changes.
-5. Safeguard with project-owned commands and real runtime/DB evidence appropriate to L0-L3.
-6. Sell only after the approved integration, tag/deploy decision, and required remote/CI evidence are complete.
-7. Record non-blocking debt separately. Do not expand the task merely to make the ledger look clean.
+4. For L2/L3, parallel, or high-risk work, create and validate the project `DeliveryContract` through `ai-delivery-contract-governor` before writing and again before Safeguard.
+5. Ship only the scoped change. Stage exact task files and preserve unrelated worktree changes.
+6. Safeguard with project-owned commands and real runtime/DB evidence appropriate to L0-L3.
+7. Sell only after the approved integration, tag/deploy decision, and required remote/CI evidence are complete.
+8. Record non-blocking debt separately. Do not expand the task merely to make the ledger look clean.
 
 ## Required Closure Statement
 
@@ -106,6 +107,7 @@ Use `complete` only when Safeguard has passed and the project's required integra
 - Do not let release governance duplicate or override backend truth, database facts, or project-owned scripts.
 - Do not force L3 on a small local change merely because the project has release tooling.
 - Do not skip L3 when schema, authorization, version entitlement, deployment, or cross-module writeback is actually in scope.
+- Do not allow a DeliveryContract to replace the real project test, runtime, database, CI, or release gate it names.
 
 ## Evolution History
 

@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-os.local/schemas/digital-life/candidate-capability-evaluation.schema.json",
+  "title": "CandidateCapabilityEvaluation",
+  "description": "Project-fit evaluation and controlled verification plan for an external or internal candidate capability.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evaluation_id",
+    "candidate_id",
+    "candidate_kind",
+    "status",
+    "project_scope",
+    "problem_statement",
+    "fit_assessment",
+    "verification_plan",
+    "decision",
+    "created_at"
+  ],
+  "properties": {
+    "evaluation_id": {
+      "type": "string",
+      "pattern": "^eval_[a-z0-9][a-z0-9_-]{15,95}$"
+    },
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^cand_[a-z0-9][a-z0-9_-]{7,95}$"
+    },
+    "candidate_kind": {
+      "type": "string",
+      "enum": [
+        "web_reference",
+        "skill",
+        "rule",
+        "template",
+        "code_snippet",
+        "patch",
+        "tool_output",
+        "model_output",
+        "library",
+        "container_image",
+        "internal_asset",
+        "atom"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "discovered",
+        "scoped",
+        "evaluated",
+        "sandbox_validated",
+        "promoted",
+        "retained",
+        "rejected",
+        "isolated"
+      ]
+    },
+    "project_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_id",
+        "task_scope"
+      ],
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "task_scope": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 500
+        },
+        "domain_boundaries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "uniqueItems": true
+        },
+        "non_goals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "problem_statement": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 2000
+    },
+    "source_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reference_uri": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "publisher": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "version": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "content_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "license_or_terms": {
+          "type": "string",
+          "maxLength": 240
+        }
+      }
+    },
+    "fit_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome_fit",
+        "architecture_fit",
+        "domain_fit",
+        "dependency_operability",
+        "verifiability",
+        "reversibility"
+      ],
+      "properties": {
+        "outcome_fit": {
+          "$ref": "#/$defs/assessment"
+        },
+        "architecture_fit": {
+          "$ref": "#/$defs/assessment"
+        },
+        "domain_fit": {
+          "$ref": "#/$defs/assessment"
+        },
+        "dependency_operability": {
+          "$ref": "#/$defs/assessment"
+        },
+        "verifiability": {
+          "$ref": "#/$defs/assessment"
+        },
+        "reversibility": {
+          "$ref": "#/$defs/assessment"
+        }
+      }
+    },
+    "verification_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verification_scope",
+        "acceptance_criteria",
+        "rollback_or_isolation"
+      ],
+      "properties": {
+        "verification_scope": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 500
+          },
+          "uniqueItems": true
+        },
+        "evidence_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "static_audit",
+              "unit_test",
+              "integration_test",
+              "api_test",
+              "browser_test",
+              "sandbox_run",
+              "log_review",
+              "database_check",
+              "business_flow_replay",
+              "manual_acceptance"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "rollback_or_isolation": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "rationale"
+      ],
+      "properties": {
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "promote",
+            "retain_as_reference",
+            "reject",
+            "isolate",
+            "needs_more_evidence"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 2000
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "uniqueItems": true
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 320
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rating",
+        "rationale"
+      ],
+      "properties": {
+        "rating": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 320
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

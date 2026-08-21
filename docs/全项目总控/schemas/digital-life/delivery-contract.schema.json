@@ -1,0 +1,382 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-os.local/schemas/digital-life/delivery-contract.schema.json",
+  "title": "DeliveryContract",
+  "description": "Machine-readable scope, verification, and review contract for a governed AI delivery task.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_id",
+    "schema_version",
+    "status",
+    "project_id",
+    "delivery",
+    "product_contract",
+    "truth_owner",
+    "scope",
+    "test_strategy",
+    "evidence_plan",
+    "reviews",
+    "implementer",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "contract_id": {
+      "type": "string",
+      "pattern": "^dc_[a-z0-9][a-z0-9_-]{7,95}$"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "scoped",
+        "approved",
+        "implementing",
+        "safeguarded",
+        "completed",
+        "blocked",
+        "cancelled"
+      ]
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "change_type",
+        "target_line",
+        "affected_flow",
+        "gate"
+      ],
+      "properties": {
+        "change_type": {
+          "type": "string",
+          "enum": [
+            "usability",
+            "bug",
+            "existing_flow_change",
+            "new_capability",
+            "governance"
+          ]
+        },
+        "target_line": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "target_version": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "affected_flow": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 500
+        },
+        "gate": {
+          "type": "string",
+          "enum": [
+            "L0",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        }
+      }
+    },
+    "product_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "acceptance_steps",
+        "non_goals"
+      ],
+      "properties": {
+        "outcome": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "acceptance_steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 500
+          },
+          "uniqueItems": true
+        },
+        "non_goals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 500
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "truth_owner": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 500
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "write_allowlist",
+        "out_of_scope",
+        "destructive_classification"
+      ],
+      "properties": {
+        "write_allowlist": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 320
+          },
+          "uniqueItems": true
+        },
+        "forbidden_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 320
+          },
+          "uniqueItems": true
+        },
+        "out_of_scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 500
+          },
+          "uniqueItems": true
+        },
+        "destructive_classification": {
+          "type": "string",
+          "enum": [
+            "none",
+            "review_required",
+            "explicit_owner_confirmation"
+          ]
+        },
+        "rollback_or_recovery": {
+          "type": "string",
+          "maxLength": 1000
+        }
+      }
+    },
+    "test_strategy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "public_seam",
+        "rationale"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "red_green",
+            "alternative_evidence"
+          ]
+        },
+        "public_seam": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 500
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "focused_test_command": {
+          "type": "string",
+          "maxLength": 1000
+        }
+      }
+    },
+    "evidence_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "final_proofs"
+      ],
+      "properties": {
+        "final_proofs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/proof"
+          }
+        },
+        "last_relevant_change_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence_records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_record"
+          }
+        }
+      }
+    },
+    "reviews": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "standards_truth",
+        "product_spec"
+      ],
+      "properties": {
+        "standards_truth": {
+          "$ref": "#/$defs/review"
+        },
+        "product_spec": {
+          "$ref": "#/$defs/review"
+        }
+      }
+    },
+    "implementer": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "verification_owner": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "owner_confirmation": {
+      "type": "string",
+      "enum": [
+        "not_required",
+        "pending",
+        "confirmed",
+        "rejected"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proof_id",
+        "claim",
+        "command_or_check",
+        "must_run_after_final_change"
+      ],
+      "properties": {
+        "proof_id": {
+          "type": "string",
+          "pattern": "^proof_[a-z0-9][a-z0-9_-]{3,95}$"
+        },
+        "claim": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 500
+        },
+        "command_or_check": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "must_run_after_final_change": {
+          "const": true
+        }
+      }
+    },
+    "evidence_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proof_id",
+        "status",
+        "finished_at",
+        "reference"
+      ],
+      "properties": {
+        "proof_id": {
+          "type": "string",
+          "pattern": "^proof_[a-z0-9][a-z0-9_-]{3,95}$"
+        },
+        "status": {
+          "const": "passed"
+        },
+        "finished_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "evidence"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "passed",
+            "failed",
+            "blocked"
+          ]
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 500
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
