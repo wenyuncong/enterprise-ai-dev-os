@@ -38,6 +38,24 @@ jobs:
       - name: Rule lint
         run: python scripts/py/rule_lint.py --project-root .
 
+      - name: Check constitution
+        run: python scripts/py/check_constitution.py --project-root .
+
+      - name: Aggregate L0-L3 gates (live)
+        run: python scripts/py/aggregate_evidence.py --project-root . --live
+
+      - name: Validate task DAG template
+        run: python scripts/py/orchestrate_dag.py --dag "docs/_templates/全项目总控/task_dag.json"
+
+      - name: Report evolution candidates
+        run: python scripts/py/evolution_counter.py --project-root . report
+
+      - name: Build repomap
+        run: python scripts/py/build_repomap.py --project-root . --json
+
+      - name: Runtime asset regression tests
+        run: python scripts/py/test_runtime_assets.py
+
       - name: Check open-source boundary
         run: python scripts/py/check_open_source_boundary.py --project-root .
 
