@@ -53,6 +53,23 @@ powershell -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool qoder,cursor -Fo
 powershell -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool all -IncludePending -DryRun
 ```
 
+## Global (User-Level) Deploy
+
+Deploy the shared methodology kernel to user-level locations so **every project on this machine** loads the same rules, without copying them into each project. Existing user files are backed up to `~/.enterprise-ai-dev-os/backup/` before overwrite; a global memory file `~/.enterprise-ai-dev-os/user-preferences.md` is created on first deploy for cross-project preferences, vocabulary, and lessons.
+
+```powershell
+# Preview global deploy
+powershell -ExecutionPolicy Bypass -File tools/deploy.ps1 -Scope global -DryRun
+
+# Deploy global rules (codex -> ~/.codex/AGENTS.md, claude -> ~/.claude/CLAUDE.md)
+powershell -ExecutionPolicy Bypass -File tools/deploy.ps1 -Scope global -Force
+
+# Project + global in one run
+powershell -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verified -Scope both -Force
+```
+
+Global targets are registered in `tools/adapters.json` under `globalTargets`; the source is `rules/AGENTS.global.md`. Project-level rules (`AGENTS.md` / `CLAUDE.md` inside a repo) take precedence over global rules.
+
 ## Verification Contract
 
 A tool can move from `pending-verification` or `experimental` to `verified` only after all checks pass:

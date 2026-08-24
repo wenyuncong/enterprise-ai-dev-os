@@ -18,6 +18,21 @@
     "backupExisting": false,
     "createMissingDirs": true
   },
+  "globalTargets": {
+    "description": "User-level (global) rule targets deployed with -Scope global. Source is rules/AGENTS.global.md so every project on this machine loads the same methodology kernel.",
+    "codex": {
+      "path": "~/.codex/AGENTS.md",
+      "source": "rules/AGENTS.global.md",
+      "format": "markdown",
+      "status": "verified"
+    },
+    "claude": {
+      "path": "~/.claude/CLAUDE.md",
+      "source": "rules/AGENTS.global.md",
+      "format": "markdown",
+      "status": "verified"
+    }
+  },
   "tools": {
     "codebuddy": {
       "name": "CodeBuddy",
