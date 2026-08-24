@@ -34,6 +34,7 @@
 | LOOP | 企业级全 AI 开发落地闭环 | `docs/全项目总控/AI_NATIVE_DELIVERY_LOOP.md` | 已完成 |
 | CANDIDATE | 全 AI 原生候选能力评估与验证协议 | `docs/全项目总控/AI_NATIVE_CANDIDATE_CAPABILITY_PROTOCOL.md` | 已完成 |
 | CONTRACT | 可执行交付契约 | `docs/全项目总控/schemas/digital-life/delivery-contract.schema.json` | 已完成 |
+| AUTOPILOT | 全自动交付协议 | `docs/全项目总控/AUTOPILOT_DELIVERY_PROTOCOL.md` | 已完成 |
 | LIFE | AI-OS 数字生命智能体总纲 | `docs/全项目总控/DIGITAL_LIFE_AGENT_MANIFESTO.md` | 规划中 |
 | LIFE-PLAN | AI-OS 数字生命智能体开发计划 | `docs/全项目总控/DIGITAL_LIFE_AGENT_DEVELOPMENT_PLAN.md` | 规划中 |
 | LIFE-SCHEMA | AI-OS 数字生命核心协议 Schema | `docs/全项目总控/schemas/digital-life/` | 规划中 |

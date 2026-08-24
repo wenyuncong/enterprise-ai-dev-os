@@ -49,6 +49,7 @@ verification-demo/
 
 # Local evidence artifacts that should be regenerated or curated before publish
 skills/governance/ai-runtime-verify/screenshots/
+evidence/self_audit/
 
 # Secrets and environment files
 .env
