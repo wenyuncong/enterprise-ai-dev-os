@@ -32,11 +32,24 @@ jobs:
       - name: Audit methodology
         run: python scripts/py/audit_methodology.py --project-root .
 
+      - name: Methodology scenario regression
+        run: python scripts/py/test_methodology_scenarios.py --project-root .
+
+      - name: Rule lint
+        run: python scripts/py/rule_lint.py --project-root .
+
       - name: Check open-source boundary
         run: python scripts/py/check_open_source_boundary.py --project-root .
 
       - name: Score readiness
         run: python scripts/py/score_ai_development_readiness.py --project-root .
+
+      - name: Deploy smoke tests
+        shell: pwsh
+        run: pwsh -NoProfile -File scripts/ps1/test_deploy.ps1
+
+      - name: CLI smoke tests
+        run: node --test scripts/js/test_cli.mjs
 
       - name: Validate website
         run: node -e "const fs=require('fs'); const html=fs.readFileSync('site/index.html','utf8'); if(!html.includes('Enterprise AI Development OS')) process.exit(1); console.log('site ok')"
