@@ -18,12 +18,12 @@
     "deprecated": "The skill should not be used for new work."
   },
   "counts": {
-    "official": 43,
+    "official": 47,
     "rawSource": 45,
     "byLayer": {
       "core": 15,
       "governance": 13,
-      "tech": 15,
+      "tech": 19,
       "platform": 0
     }
   },
@@ -331,6 +331,38 @@
       "path": "skills/governance/ai-cross-project-audit/SKILL.md",
       "maturity": "callable",
       "description": "Cross-project governance audit pipeline: consume existing audit data, orchestrate L3 domain atoms, produce L5 evidence + index + report."
+    },
+    {
+      "name": "node-backend",
+      "layer": "tech",
+      "path": "skills/tech/node-backend/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified",
+      "description": "Node.js backend engineering (Express/NestJS/Fastify): layered services, validation, async discipline, testing, and observability."
+    },
+    {
+      "name": "python-fastapi",
+      "layer": "tech",
+      "path": "skills/tech/python-fastapi/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified",
+      "description": "Python FastAPI backend engineering: Pydantic validation, layered services, async endpoints, SQLAlchemy, and pytest."
+    },
+    {
+      "name": "react-frontend",
+      "layer": "tech",
+      "path": "skills/tech/react-frontend/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified",
+      "description": "React 18+ frontend with TypeScript: display-only components, hooks, state management, performance, and testing."
+    },
+    {
+      "name": "postgresql-best-practices",
+      "layer": "tech",
+      "path": "skills/tech/postgresql-best-practices/SKILL.md",
+      "source": "tech skill library",
+      "maturity": "verified",
+      "description": "PostgreSQL schema design and query optimization: types, constraints, indexes, EXPLAIN, migrations, and backups."
     }
   ],
   "rawOnlySkills": [

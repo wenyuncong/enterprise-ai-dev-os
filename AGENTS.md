@@ -214,6 +214,8 @@ Before any development work, classify the project. See skills/core/ai-project-cl
 
 **Key Rule**: Each step MUST pass verification before moving to the next.
 
+**Stack note**: The 13+1 steps above instantiate the Java / Spring Boot + Vue + MySQL stack. For other stacks (Node, Python, Go, React, PostgreSQL), keep the same skeleton — DB → backend → API → frontend → verification — and map each step to the stack's equivalent layer.
+
 ---
 
 ## 4. Skill Architecture | Skill 体系架构 (5 Layers)
@@ -404,7 +406,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | ai-atomic-governance | Atomic system architecture governance: declaration/executor separation, layering, governance integration, anti-pattern detection | Atomic architecture work |
 | ai-cross-project-audit | Cross-project governance audit pipeline: consume audit data, orchestrate L3 domain atoms, produce L5 evidence + index + report | Cross-project audits |
 
-### Technology Stack (skills/tech/) — 15 skills
+### Technology Stack (skills/tech/) — 19 skills
 
 | Skill | Purpose |
 |---|---|
@@ -416,6 +418,10 @@ These rules are enforced by governance skills. Violating any of them means the t
 | springboot-patterns | Architecture patterns, REST API design |
 | springboot-security | AuthN/AuthZ, CSRF, rate limiting |
 | mysql-best-practices | Schema design, query optimization |
+| node-backend | Node.js backend: layered services, validation, async discipline, testing |
+| python-fastapi | FastAPI backend: Pydantic validation, layered services, async endpoints, pytest |
+| react-frontend | React 18+ display-only components, hooks, state, performance, testing |
+| postgresql-best-practices | PostgreSQL schema design, indexing, EXPLAIN, migrations, backups |
 | docker-expert | Multi-stage builds, optimization, Compose |
 | multi-stage-dockerfile | Optimized Dockerfile templates |
 | flutter-expert | Flutter 3+, Riverpod/Bloc, GoRouter |
@@ -424,7 +430,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | tailwind-design-system | Design tokens, component libraries |
 | javascript-typescript-jest | Jest testing patterns, mocking |
 
-**Total**: 43 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
+**Total**: 47 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
 
 ---
 
@@ -540,5 +546,5 @@ For a new project, initialize the methodology by:
 
 ---
 
-*Methodology version: 2.3.1 | Last updated: 2026-08-24*
-*Skills: 43 | Derived from enterprise delivery evidence*
+*Methodology version: 2.4.0 | Last updated: 2026-08-24*
+*Skills: 47 | Derived from enterprise delivery evidence*

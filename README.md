@@ -178,7 +178,7 @@ py scripts/py/check_open_source_boundary.py --project-root .
 
 ### 当前状态
 
-- 43 个 official skills（41 verified + 2 callable，以 `skills/SKILL_MANIFEST.json` 为准）
+- 47 个 official skills（45 verified + 2 callable，以 `skills/SKILL_MANIFEST.json` 为准）
 - Methodology audit: PASS, 0 failures, 0 warnings
 - AI development readiness: 100/100, L4 可进化
 - 多工具适配器注册表 v2
@@ -360,7 +360,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing. All PRs must
 
 ### Status
 
-- 43 official skills (41 verified + 2 callable; see `skills/SKILL_MANIFEST.json`)
+- 47 official skills (45 verified + 2 callable; see `skills/SKILL_MANIFEST.json`)
 - Methodology audit: PASS, 0 failures, 0 warnings
 - AI development readiness: 100/100, L4 evolvable
 - Multi-tool adapter registry v2

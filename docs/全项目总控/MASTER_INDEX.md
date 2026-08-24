@@ -49,9 +49,9 @@
 |---|---:|---|
 | Core Engine | 15 | `skills/core/` |
 | Governance | 13 | `skills/governance/` |
-| Tech Stack | 15 | `skills/tech/` |
+| Tech Stack | 19 | `skills/tech/` |
 | Platform | 0 | `skills/platform/` 当前为空 |
-| **合计** | **43** | `skills/` |
+| **合计** | **47** | `skills/` |
 
 ### Core Engine
 
@@ -101,6 +101,10 @@
 | javascript-typescript-jest | `skills/tech/javascript-typescript-jest/` |
 | multi-stage-dockerfile | `skills/tech/multi-stage-dockerfile/` |
 | mysql-best-practices | `skills/tech/mysql-best-practices/` |
+| node-backend | `skills/tech/node-backend/` |
+| postgresql-best-practices | `skills/tech/postgresql-best-practices/` |
+| python-fastapi | `skills/tech/python-fastapi/` |
+| react-frontend | `skills/tech/react-frontend/` |
 | springboot-patterns | `skills/tech/springboot-patterns/` |
 | springboot-security | `skills/tech/springboot-security/` |
 | tailwind-css-patterns | `skills/tech/tailwind-css-patterns/` |
