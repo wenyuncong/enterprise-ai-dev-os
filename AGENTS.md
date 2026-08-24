@@ -265,6 +265,9 @@ Skills directory structure:
 ### ⚠️ Context Decay Warning
 AI context windows are finite. Rules loaded early in a long session WILL fade from active memory. This is not a bug — it's a physical limitation. The loading lifecycle below is designed to counteract this.
 
+### Progressive Disclosure | 渐进披露
+Skills are loaded in two stages to save context: first read the skill's `description` (frontmatter / `SKILL_MANIFEST.json` row) and only load the full `SKILL.md` when it matches the current task. Never bulk-load an entire layer. A repomap (`py scripts/py/build_repomap.py --project-root .`) locates code symbols fast instead of scanning the tree.
+
 ### Phase 1: Session Start (Load Once)
 - `AGENTS.md` (this file) — always loaded
 - `skills/SKILL_MANIFEST.json`
