@@ -19,6 +19,28 @@
     "createMissingDirs": true
   },
   "tools": {
+    "codebuddy": {
+      "name": "CodeBuddy",
+      "vendor": "Tencent",
+      "tier": "P1",
+      "status": "verified",
+      "aliases": ["tencent-codebuddy"],
+      "ruleTargets": [
+        {
+          "path": ".codebuddy/rules.md",
+          "format": "markdown",
+          "source": "rules/AGENTS.md",
+          "mode": "copy"
+        }
+      ],
+      "skills": {
+        "path": ".codebuddy/skills",
+        "mode": "symlink",
+        "layout": "layered",
+        "status": "verified"
+      },
+      "notes": "CodeBuddy consumes .codebuddy/rules.md and layered .codebuddy/skills; adapter outputs are generated, not source."
+    },
     "codex": {
       "name": "Codex",
       "vendor": "OpenAI",

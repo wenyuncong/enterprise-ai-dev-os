@@ -22,6 +22,7 @@ This matrix records how well each AI coding tool can consume Enterprise AI Devel
 | Trae | Strong | Experimental | Experimental | Strong | Strong | Verified rules |
 | Qoder / Qoder CN | Strong | Strong | Strong | Strong | Strong | Verified |
 | Cursor | Strong | Experimental | Limited | Strong | Strong | Verified rules |
+| CodeBuddy | Strong | Experimental | Limited | Strong | Strong | Verified |
 | GitHub Copilot / VS Code | Strong | Not native | Limited | Limited | Strong | Verified rules |
 | Windsurf | Medium | Experimental | Limited | Strong | Medium | Experimental |
 | Cline / Roo Code | Medium | Experimental | Limited | Strong | Medium | Experimental |

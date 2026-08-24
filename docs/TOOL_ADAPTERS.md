@@ -24,6 +24,7 @@ Adapter outputs such as `.trae/`, `.qoder/`, `.cursor/`, `.github/copilot-instru
 | P0 | Qoder / Qoder CN | Verified rules and skills | `.qoder/rules/enterprise-ai-dev-os.md` | `.qoder/skills/{skill-name}` |
 | P1 | Cursor | Verified rules, experimental skills | `.cursor/rules/enterprise-ai-dev-os.mdc`, `.cursorrules` | `.cursor/skills` |
 | P1 | GitHub Copilot / VS Code | Verified rules, no skills | `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md` | Not supported |
+| P1 | CodeBuddy | Verified | `.codebuddy/rules.md` | `.codebuddy/skills` |
 | P2 | Windsurf | Experimental | `.windsurfrules`, `.windsurf/rules.md` | `.windsurf/skills` |
 | P2 | Cline | Experimental | `.clinerules` | `.cline/skills` |
 | P2 | Roo Code | Experimental | `.roo/rules.md` | `.roo/skills` |
