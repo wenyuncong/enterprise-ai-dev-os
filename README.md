@@ -64,6 +64,7 @@ scripts/sh/               Bash 一键安装脚本
 scripts/js/               CLI 入口
 tools/                    多工具适配器注册表和部署脚本
 lite/                     精简版规则和模板
+site/                     GitHub Pages 网站
 ```
 
 ### 快速开始
@@ -120,6 +121,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
 - [docs/公开材料/CUSTOMER_INVESTOR_VALUE.md](docs/公开材料/CUSTOMER_INVESTOR_VALUE.md) — 面向客户和投资人的业务价值说明
 - [docs/公开材料/VALUE_EVIDENCE.md](docs/公开材料/VALUE_EVIDENCE.md) — 如何证明真实价值、token 和返工变化
 - [docs/公开材料/RULE_RUNTIME_LITE.md](docs/公开材料/RULE_RUNTIME_LITE.md) — 未来轻量规则运行时设计边界
+- [docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_CN.md](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_CN.md) — 全 AI 原生开发白皮书（中文）
+- [docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_CN.md](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_CN.md) — 全 AI 原生开发标准（中文）
 
 ### 核心工作流
 
@@ -143,8 +146,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
 - Trae
 - Qoder / Qoder CN
 - Cursor
+- CodeBuddy
 - GitHub Copilot / VS Code
-- Windsurf、Cline、Roo Code、Aider、Continue.dev 等实验适配
+- Windsurf、Cline、Roo Code、Aider、Continue.dev 等实验适配；Lingma、Trae Solo、WorkBuddy 待验证
 
 详见 [docs/TOOL_ADAPTERS.md](docs/TOOL_ADAPTERS.md) 和 [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)。
 
@@ -174,7 +178,7 @@ py scripts/py/check_open_source_boundary.py --project-root .
 
 ### 当前状态
 
-- 38 个 verified official skills
+- 43 个 official skills（41 verified + 2 callable，以 `skills/SKILL_MANIFEST.json` 为准）
 - Methodology audit: PASS, 0 failures, 0 warnings
 - AI development readiness: 100/100, L4 可进化
 - 多工具适配器注册表 v2
@@ -299,6 +303,8 @@ See [docs/公开材料/INSTALL.md](docs/公开材料/INSTALL.md) for more instal
 - [docs/公开材料/CUSTOMER_INVESTOR_VALUE.md](docs/公开材料/CUSTOMER_INVESTOR_VALUE.md) — customer and investor-facing business value explanation
 - [docs/公开材料/VALUE_EVIDENCE.md](docs/公开材料/VALUE_EVIDENCE.md) — how to prove real value, token direction, and rework change
 - [docs/公开材料/RULE_RUNTIME_LITE.md](docs/公开材料/RULE_RUNTIME_LITE.md) — future lightweight rule-runtime boundary
+- [docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_EN.md](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_EN.md) — AI-native development whitepaper (English)
+- [docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_EN.md](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_EN.md) — AI-native development standard (English)
 
 ### Core Workflow
 
@@ -322,8 +328,9 @@ Current adapter coverage includes:
 - Trae
 - Qoder / Qoder CN
 - Cursor
+- CodeBuddy
 - GitHub Copilot / VS Code
-- Experimental adapters for Windsurf, Cline, Roo Code, Aider, Continue.dev, and others
+- Experimental adapters for Windsurf, Cline, Roo Code, Aider, Continue.dev; Lingma, Trae Solo, and WorkBuddy pending verification
 
 See [docs/TOOL_ADAPTERS.md](docs/TOOL_ADAPTERS.md) and [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
 
@@ -353,7 +360,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing. All PRs must
 
 ### Status
 
-- 38 verified official skills
+- 43 official skills (41 verified + 2 callable; see `skills/SKILL_MANIFEST.json`)
 - Methodology audit: PASS, 0 failures, 0 warnings
 - AI development readiness: 100/100, L4 evolvable
 - Multi-tool adapter registry v2

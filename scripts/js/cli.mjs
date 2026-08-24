@@ -12,6 +12,10 @@ const PKG_ROOT = resolve(__dirname, '..', '..');
 const USAGE = `
 enterprise-ai-dev-os <command>
 
+NOTE: Until the npm package is published, run via GitHub instead:
+  npx github:wenyuncong/enterprise-ai-dev-os <command>
+  Or use scripts/ps1/install.ps1 or scripts/sh/install.sh.
+
 Commands:
   init [path]      Initialize methodology in a project (default: current dir)
     --lite          Use lite version (default: rules, minimal docs)
