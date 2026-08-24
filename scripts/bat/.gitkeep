@@ -1,0 +1,3 @@
+# scripts/bat/ — Windows batch script home
+# AGENTS.md rule: .bat scripts belong in scripts/bat/. This placeholder keeps
+# the directory in version control so the convention exists from day one.
