@@ -362,7 +362,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 
 ## 7. Complete Skill Index | 完整 Skill 索引
 
-### Core Engine (skills/core/) — 15 skills
+### Core Engine (skills/core/) — 16 skills
 
 | Skill | Purpose | When to Load |
 |---|---|---|
@@ -370,6 +370,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | ai-product-directed-delivery | Product-owner/AI responsibility boundary, twelve-step delivery map, backend/frontend Host chains | Product-led AI-native delivery |
 | ai-rule-dispatcher | Route tasks to correct skill and load required docs | Every new task |
 | ai-task-decomposer | Break complex work into safe executable batches | Multi-module or cross-end tasks |
+| ai-multi-agent-orchestration | Orchestrate parallel agents across domains: dependency matrix, contract-first integration, role/acceptance boundaries | Multi-domain or multi-agent fan-out work |
 | ai-chief-planner | End-to-end project planning, scheduling, closure | Project-level orchestration |
 | ai-command-executor | Standardized command execution with env verification | Any shell/CLI operation |
 | ai-delivery-contract-governor | Create and validate machine-readable task contracts: write-scope allowlist, fresh evidence, fail-closed L2/L3 gates | L2/L3 delivery, parallel agents, destructive/cross-module/schema/release boundaries |
@@ -400,7 +401,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | ai-atomic-governance | Atomic system architecture governance: declaration/executor separation, layering, governance integration, anti-pattern detection | Atomic architecture work |
 | ai-cross-project-audit | Cross-project governance audit pipeline: consume audit data, orchestrate L3 domain atoms, produce L5 evidence + index + report | Cross-project audits |
 
-### Technology Stack (skills/tech/) — 19 skills
+### Technology Stack (skills/tech/) — 20 skills
 
 | Skill | Purpose |
 |---|---|
@@ -409,6 +410,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | vue-pinia-best-practices | Pinia stores, state management |
 | typescript-advanced-types | Generics, conditional types, mapped types |
 | java-springboot | Spring Boot best practices |
+| java-performance-governance | Batch-operation efficiency, cache/memory leaks, SQL cost, observability |
 | springboot-patterns | Architecture patterns, REST API design |
 | springboot-security | AuthN/AuthZ, CSRF, rate limiting |
 | mysql-best-practices | Schema design, query optimization |
@@ -424,7 +426,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | tailwind-design-system | Design tokens, component libraries |
 | javascript-typescript-jest | Jest testing patterns, mocking |
 
-**Total**: 47 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
+**Total**: 49 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
 
 ---
 
@@ -540,5 +542,5 @@ For a new project, initialize the methodology by:
 
 ---
 
-*Methodology version: 2.4.0 | Last updated: 2026-08-24*
-*Skills: 47 | Derived from enterprise delivery evidence*
+*Methodology version: 2.5.0 | Last updated: 2026-08-24*
+*Skills: 49 | Derived from enterprise delivery evidence*

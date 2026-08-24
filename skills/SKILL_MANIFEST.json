@@ -18,12 +18,12 @@
     "deprecated": "The skill should not be used for new work."
   },
   "counts": {
-    "official": 47,
+    "official": 49,
     "rawSource": 45,
     "byLayer": {
-      "core": 15,
+      "core": 16,
       "governance": 13,
-      "tech": 19,
+      "tech": 20,
       "platform": 0
     }
   },
@@ -135,6 +135,14 @@
       "path": "skills/core/ai-tool-bootstrapper/SKILL.md",
       "source": "methodology extraction",
       "maturity": "verified"
+    },
+    {
+      "name": "ai-multi-agent-orchestration",
+      "layer": "core",
+      "path": "skills/core/ai-multi-agent-orchestration/SKILL.md",
+      "source": "GERP multi-agent parallel development extraction",
+      "maturity": "verified",
+      "description": "Orchestrate parallel AI agents across domain boundaries: domain partition, parallel vs serial dependency matrix, contract-first integration, and role/acceptance boundaries."
     },
     {
       "name": "ai-brownfield-analyzer",
@@ -363,6 +371,14 @@
       "source": "tech skill library",
       "maturity": "verified",
       "description": "PostgreSQL schema design and query optimization: types, constraints, indexes, EXPLAIN, migrations, and backups."
+    },
+    {
+      "name": "java-performance-governance",
+      "layer": "tech",
+      "path": "skills/tech/java-performance-governance/SKILL.md",
+      "source": "GERP batch-operation and memory-leak governance extraction",
+      "maturity": "verified",
+      "description": "Java/Spring performance and memory governance: batch-operation efficiency, unbounded caches, finally cleanup, SQL cost, and observability."
     }
   ],
   "rawOnlySkills": [

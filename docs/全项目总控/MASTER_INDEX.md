@@ -47,11 +47,11 @@
 
 | 层级 | 数量 | 路径 |
 |---|---:|---|
-| Core Engine | 15 | `skills/core/` |
+| Core Engine | 16 | `skills/core/` |
 | Governance | 13 | `skills/governance/` |
-| Tech Stack | 19 | `skills/tech/` |
+| Tech Stack | 20 | `skills/tech/` |
 | Platform | 0 | `skills/platform/` 当前为空 |
-| **合计** | **47** | `skills/` |
+| **合计** | **49** | `skills/` |
 
 ### Core Engine
 
@@ -65,6 +65,7 @@
 | ai-delivery-contract-governor | `skills/core/ai-delivery-contract-governor/` |
 | ai-foundation-governor | `skills/core/ai-foundation-governor/` |
 | ai-library-first | `skills/core/ai-library-first/` |
+| ai-multi-agent-orchestration | `skills/core/ai-multi-agent-orchestration/` |
 | ai-project-classifier | `skills/core/ai-project-classifier/` |
 | ai-product-directed-delivery | `skills/core/ai-product-directed-delivery/` |
 | ai-rule-dispatcher | `skills/core/ai-rule-dispatcher/` |
@@ -98,6 +99,7 @@
 | flutter-animations | `skills/tech/flutter-animations/` |
 | flutter-expert | `skills/tech/flutter-expert/` |
 | java-springboot | `skills/tech/java-springboot/` |
+| java-performance-governance | `skills/tech/java-performance-governance/` |
 | javascript-typescript-jest | `skills/tech/javascript-typescript-jest/` |
 | multi-stage-dockerfile | `skills/tech/multi-stage-dockerfile/` |
 | mysql-best-practices | `skills/tech/mysql-best-practices/` |
