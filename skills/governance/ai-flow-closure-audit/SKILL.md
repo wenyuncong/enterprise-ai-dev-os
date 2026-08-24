@@ -72,6 +72,25 @@ For each node, collect concrete evidence:
 - **Report**: Query report output, compare with source data freshness
 - **Product acceptance**: Execute the owner-defined business-flow test and record accept/reject/revise feedback
 
+### Step 2b: Write-back Consistency Cross-check | 写回一致性交叉校验
+
+A writeback is only closed when the numbers reconcile across layers. For any flow that moves quantities, amounts, balances, or status, add a **consistency cross-check** that scans for mismatches instead of trusting a single sample row:
+
+1. **Map the reconciliation pairs**: source table → downstream table for every writeback (e.g., a receipt increments both inventory and payable).
+2. **Design the check**: aggregate each side independently and compare; for calculated values (averages, balances) also recompute from raw rows.
+3. **Run a full-table scan**: locate rows where source and downstream disagree; a single pass often surfaces hidden drift that sample-based checks miss.
+4. **Record the discrepancy**: table, row, expected vs actual, and the likely root cause.
+5. **Fix and rerun**: after the fix, the cross-check must return zero mismatches before closure.
+
+```text
+Example (domain-specific, from ERP): purchase receipt -> inventory + payable
+  SELECT aggregate(inventory_qty) FROM inventory WHERE receipt_id = :id;
+  SELECT aggregate(payable_amount) FROM payable WHERE receipt_id = :id;
+  -- both must reconcile with the receipt line totals; any drift is a P1 data risk
+```
+
+This step is stack- and domain-neutral: the pattern is "reconcile every writeback with a cross-check, not a sample", whatever the business numbers are.
+
 ### Step 2a: Review Two Independent Axes
 
 Before calling a non-trivial flow ready, keep these findings separate:

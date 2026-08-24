@@ -63,6 +63,20 @@ Conclusion:
 | Brownfield project onboarding | TBD | TBD | TBD | not measured |
 | Multi-tool adapter handoff | TBD | TBD | TBD | not measured |
 
+## Sanitized Case Evidence | 脱敏案例证据
+
+> Source: a multi-tenant enterprise ERP (purchase/sales/inventory/finance/production/CRM/WMS/TMS), ~3 months of AI-assisted development. Company, repository paths, and internal logs are redacted. These are illustrative before/after measurements from that engagement, not a guarantee for other projects.
+
+| Dimension | Before | After | Measurement |
+|---|---|---|---|
+| Frontend field/interface alignment | 3-5 API 404s per new module; ~40% pages needed post-launch rework; ~30 min/page to trace a missing field | 0 404s; 0% rework after audit; ~5 min/page | per-page field-vs-API audit before launch |
+| Inventory posting entry points | 6 services each calling stock in/out, logic scattered | 1 idempotent posting service | impact analysis 2-3h -> ~15 min |
+| Permission visibility decision points | 3 places (subscription, feature map, page code) | 1 adjudication chain | new-module wiring 4h -> ~30 min; bug triage 60 min -> ~10 min |
+| Onboarding / decision context | 5-7 days to rebuild context | ~2 days via ADRs | knowledge retention |
+| Skill evolution | 0 skills, manual context each session | 42 skills; evolution triggered on repeated error patterns | capability accumulation |
+
+**Honest limits**: these numbers come from one complex brownfield project and are directional, not benchmarked across projects. Public claims must cite them as a sanitized single case, not as a universal percentage.
+
 ## Public Claim Rules | 公开表述规则
 
 Allowed:
