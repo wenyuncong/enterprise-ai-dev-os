@@ -167,6 +167,22 @@ def build_rules():
     return rules
 
 
+def load_rule_registry(root: Path) -> dict:
+    """Load rules/rules.json metadata (trigger/severity/write-block) if present.
+
+    The registry is optional metadata; built-in rules remain the executable
+    source. Returns {key: {trigger, writeBlock, severity, name}}.
+    """
+    path = root / "rules" / "rules.json"
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+    except Exception:
+        return {}
+    return {r.get("key"): r for r in data.get("rules", []) if r.get("key")}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Lint the methodology's own forbidden patterns.")
     parser.add_argument("--project-root", default=".", help="Repository root to lint.")
@@ -175,6 +191,7 @@ def main() -> int:
 
     root = Path(args.project_root).resolve()
     rules = build_rules()
+    registry = load_rule_registry(root)
     results = []
     fail_count = 0
     warn_count = 0
@@ -185,8 +202,11 @@ def main() -> int:
             fail_count += len(hits)
         else:
             warn_count += len(hits)
+        meta = registry.get(r["key"], {})
         results.append({"key": r["key"], "name": r["name"], "severity": r["severity"],
-                        "hits": hits, "hint": r["hint"]})
+                        "hits": hits, "hint": r["hint"],
+                        "trigger": meta.get("trigger", ""),
+                        "writeBlock": bool(meta.get("writeBlock", False))})
 
     passed = fail_count == 0
     out = {"projectRoot": str(root), "passed": passed, "failCount": fail_count,

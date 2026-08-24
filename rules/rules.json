@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Executable rule registry for the methodology's forbidden patterns. Each rule carries trigger/severity/write-block metadata so the same rules can drive static lint, pre-write guards, and CI gates. scripts/py/rule_lint.py consumes this registry; the built-in rules in rule_lint.py remain the fallback when this file is absent.",
+  "rules": [
+    {
+      "key": "root_clutter",
+      "name": "根目录散落文件",
+      "severity": "WARN",
+      "glob": ["*"],
+      "trigger": "file creation at project root",
+      "writeBlock": true,
+      "description": "Project root only holds AGENTS.md, .editorconfig, build files, and generated adapters."
+    },
+    {
+      "key": "control_chars",
+      "name": "控制字符",
+      "severity": "FAIL",
+      "glob": ["*.md", "*.json", "*.py", "*.ps1", "*.mjs", "*.js", "*.yml", "*.yaml"],
+      "trigger": "forbidden control character in a text file",
+      "writeBlock": false,
+      "description": "Text files must not contain forbidden control characters."
+    },
+    {
+      "key": "drive_paths",
+      "name": "硬编码盘符路径",
+      "severity": "FAIL",
+      "glob": ["*.md", "*.json", "*.py", "*.ps1"],
+      "trigger": "local drive path in portable assets",
+      "writeBlock": true,
+      "description": "Portable assets must not hard-code local drive paths (C:, G:, H:, ...)."
+    },
+    {
+      "key": "stale_repo_paths",
+      "name": "私有仓库路径残留",
+      "severity": "FAIL",
+      "glob": ["*.md", "*.json", "*.py"],
+      "trigger": "reference to a private workspace in portable assets",
+      "writeBlock": true,
+      "description": "Portable assets must not reference the private source repository."
+    },
+    {
+      "key": "hardcoded_colors",
+      "name": "硬编码颜色",
+      "severity": "WARN",
+      "glob": ["*.css", "*.scss", "*.vue", "*.html"],
+      "trigger": "hard-coded color where a theme token should be used",
+      "writeBlock": false,
+      "description": "Theme variables only; no hard-coded colors when a theme exists."
+    },
+    {
+      "key": "empty_catches",
+      "name": "静默失败",
+      "severity": "WARN",
+      "glob": ["*.js", "*.mjs", "*.ts"],
+      "trigger": "empty catch/except block hides a failure",
+      "writeBlock": false,
+      "description": "Empty catch/except blocks hide failures; surface them at the correct severity."
+    }
+  ]
+}
