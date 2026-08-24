@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Error-pattern ledger for the evolution loop. scripts/py/evolution_counter.py records fingerprints here; when a pattern's count reaches the threshold, ai-skill-evolver is triggered to turn the repeated failure into a rule, skill, or template. Project-specific; not shipped as portable release content.",
+  "threshold": 3,
+  "patterns": {}
+}

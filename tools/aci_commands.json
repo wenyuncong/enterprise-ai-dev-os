@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Restricted command interface (ACI) contract for ai-command-executor. Allowed read-only commands may run freely; write commands require explicit confirmation; blocked commands are refused outright. This is the declarative contract — the host runtime enforces it; keep it minimal and auditable.",
+  "allowed": [
+    "git status",
+    "git diff",
+    "git log",
+    "git branch",
+    "py scripts/py/audit_methodology.py --project-root .",
+    "py scripts/py/test_methodology_scenarios.py --project-root .",
+    "py scripts/py/check_open_source_boundary.py --project-root .",
+    "py scripts/py/rule_lint.py --project-root .",
+    "py scripts/py/audit_skill_health.py --project-root .",
+    "py scripts/py/collect_evidence.py --project-root . --run",
+    "node --check scripts/js/cli.mjs",
+    "pwsh -NoProfile -File scripts/ps1/test_deploy.ps1"
+  ],
+  "write": [
+    { "cmd": "git add", "requiresConfirmation": false, "note": "stage exact paths only; never git add . globally" },
+    { "cmd": "git commit", "requiresConfirmation": false, "note": "conventional commits, one logical topic per commit" },
+    { "cmd": "git push", "requiresConfirmation": true },
+    { "cmd": "tools/deploy.ps1", "requiresConfirmation": false, "note": "project-level deploy only; global scope requires explicit confirmation" },
+    { "cmd": "tools/deploy.ps1 -Scope global", "requiresConfirmation": true, "note": "user-level deploy affects every project" }
+  ],
+  "blocked": [
+    "rm -rf",
+    "git push --force",
+    "git reset --hard",
+    "DROP TABLE",
+    "TRUNCATE TABLE",
+    "DELETE FROM ... WHERE 1=1",
+    "mysqldump --single-transaction > prod",
+    "any command that mutates the database or repository without a rollback path"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Task DAG template for multi-agent orchestration. nodes describe work items and their data dependencies; contracts pin cross-node integration points. scripts/py/orchestrate_dag.py validates the graph, detects cycles, and emits a parallel-layer execution plan. Replace the example nodes with a real plan; this is a contract + planner, not a dispatcher.",
+  "nodes": [
+    { "id": "platform-foundation", "name": "平台基础（租户/权限/菜单）", "depends": [] },
+    { "id": "inventory", "name": "库存域", "depends": ["platform-foundation"] },
+    { "id": "finance", "name": "财务域", "depends": ["platform-foundation"] },
+    { "id": "reports", "name": "报表域", "depends": ["inventory", "finance"] }
+  ],
+  "contracts": [
+    { "from": "inventory", "to": "finance", "contract": "出入库金额口径：库存过账后以事件通知应付/成本，幂等键 = 单据号+行号" }
+  ]
+}
