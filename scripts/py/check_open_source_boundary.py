@@ -12,9 +12,16 @@ from pathlib import Path
 BLOCKED_PREFIXES = (
     "docs/内部商业化/",
     "docs/商业化/",
+    "docs/每日调研回写/",
+    "docs/测试验收报告/",
+    "docs/本地知识中心/",
+    "docs/公开材料/推广文章/",
     "reference/",
     "备用/",
     "verification-demo/",
+    "evidence/",
+    "output/",
+    "理论研究/",
     ".agents/",
     ".claude/",
     ".cline/",
@@ -38,6 +45,9 @@ BLOCKED_FILES = {
     ".windsurfrules",
     "CONVENTIONS.md",
     "tools/tool-registry.json",
+    "docs/LAUNCH_KIT.md",
+    "docs/ERP_TERM_AUDIT.md",
+    "docs/AB_EXPERIMENT.md",
 }
 
 

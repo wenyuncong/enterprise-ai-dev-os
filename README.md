@@ -156,6 +156,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verif
 
 本仓库只开源可迁移的方法论、规则、Skill、模板、审计脚本和适配器生成器。私有商业策略、过程记录、未脱敏案例、原始素材和本地工具状态不属于开源范围。
 
+**永不发布（.gitignore + 边界脚本双重拦截）**：
+- `docs/内部商业化/`、`docs/商业化/`、`docs/每日调研回写/`、`docs/测试验收报告/`、`docs/本地知识中心/`
+- `docs/公开材料/推广文章/`（营销稿件，发布前须单独审查）
+- `evidence/`（运行证据）、`output/`（生成物）、`理论研究/`（草稿）
+- `reference/`、`备用/`、`verification-demo/`（私有归档）
+- 适配器生成目录（`.agents/`、`.claude/`、`.codex/`、`.cursor/`、`.trae/`、`.qoder/` 等）与本地工具状态
+
 公开前检查：
 
 ```bash
@@ -337,6 +344,13 @@ See [docs/TOOL_ADAPTERS.md](docs/TOOL_ADAPTERS.md) and [docs/COMPATIBILITY.md](d
 ### Open-Source Boundary
 
 This repository only publishes portable methodology assets, rules, skills, templates, audit scripts, and adapter generators. Private commercialization notes, process records, unredacted case studies, raw source archives, and local tool state are outside the open-source scope.
+
+**Never published (enforced by .gitignore + boundary script)**:
+- `docs/内部商业化/`, `docs/商业化/`, `docs/每日调研回写/`, `docs/测试验收报告/`, `docs/本地知识中心/`
+- `docs/公开材料/推广文章/` (marketing drafts; review before release)
+- `evidence/` (runtime evidence), `output/` (generated), `理论研究/` (drafts)
+- `reference/`, `备用/`, `verification-demo/` (private archives)
+- generated adapter dirs (`.agents/`, `.claude/`, `.codex/`, `.cursor/`, `.trae/`, `.qoder/`, etc.) and local tool state
 
 Before publishing or pushing changes, run:
 
