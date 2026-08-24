@@ -1,4 +1,4 @@
-﻿# AGENTS.md — Enterprise-Grade AI-Assisted Development Methodology
+# AGENTS.md — Enterprise-Grade AI-Assisted Development Methodology
 
 > **Language**: Bilingual (CN/EN). All AI agents MUST read this file at the start of every session.
 
@@ -43,14 +43,14 @@ When a rule mentions a skill, resolve it from `skills/{layer}/{skill-name}/SKILL
 
 **Never waste time debugging "mysterious errors" when the real problem is a missing tool. Check environment first.**
 
-### 0.3 Tool Path Check | 路径记忆
+### 0.4 Tool Path Check | 路径记忆
 **Before installing any tool:**
 1. Check `tools/tool-registry.json` — is the tool already installed?
 2. Run: `py scripts/py/tool_registry.py get {tool_name}`
 3. If registered → use existing path. Do NOT re-install.
 4. If new install → register path: `py scripts/py/tool_registry.py set {name} "{path}" "{version}"`
 
-### 0.4 5S Delivery Takeover | 5S 交付接管
+### 0.5 5S Delivery Takeover | 5S 交付接管
 
 For versioned delivery, shared capability, release, deployment, schema, permission, or supported-baseline Bug work:
 
@@ -61,7 +61,7 @@ For versioned delivery, shared capability, release, deployment, schema, permissi
 
 Use the lightweight lifecycle: `Scope -> Specify -> Ship -> Safeguard -> Sell`. Do not impose release ceremony on read-only audits, drafts, or small local experiments.
 
-### 0.5 Product-Directed AI Delivery | 产品主导的全 AI 交付
+### 0.6 Product-Directed AI Delivery | 产品主导的全 AI 交付
 
 For product-led delivery, the product owner may work entirely in business language, screenshots, examples, and completed business-flow tests. The product owner owns outcome, usability, scope, priority, non-goals, and final business acceptance. AI agents own requirement analysis, benchmark research, architecture, schema, backend, frontend, tests, evidence, and release execution.
 
@@ -76,7 +76,7 @@ Host pages and transport adapters load, render, collect input, request supported
 
 Read `skills/core/ai-product-directed-delivery/SKILL.md` for product ownership, agent handoffs, the twelve-step delivery map, and acceptance boundaries.
 
-### 0.6 Safe AI Change and Code Location | 安全修改与精准定位
+### 0.7 Safe AI Change and Code Location | 安全修改与精准定位
 
 For any Bug fix, feature, refactor, deletion, rename, migration, or large project batch, use `skills/core/ai-product-directed-delivery/SKILL.md` before writing code.
 
@@ -88,7 +88,7 @@ For any Bug fix, feature, refactor, deletion, rename, migration, or large projec
 
 The product owner never needs to locate source files or write code. AI owns investigation and implementation; the owner owns product intent and business-flow acceptance.
 
-### 0.7 Delivery Roles, Task Pack, and Methodology Regression | 职责、任务包与方法论回归
+### 0.8 Delivery Roles, Task Pack, and Methodology Regression | 职责、任务包与方法论回归
 
 For product-led or multi-step delivery:
 
@@ -98,7 +98,7 @@ For product-led or multi-step delivery:
 
 The responsibility matrix clarifies ownership; it does not authorize a skill to bypass a project-specific rule, truth owner, verification gate, or explicit destructive-operation confirmation.
 
-### 0.8 Evidence Freshness, Shared Language, and Two-Axis Review | 新鲜证据、共享语言与双轴审查
+### 0.9 Evidence Freshness, Shared Language, and Two-Axis Review | 新鲜证据、共享语言与双轴审查
 
 For non-trivial delivery:
 
@@ -107,7 +107,7 @@ For non-trivial delivery:
 3. **Shared language is a delivery asset**: when a task introduces or depends on ambiguous domain terms, stable abbreviations, or cross-session decisions, maintain a concise project context/glossary and ADR or decision record under `docs/`. Reuse that language in specifications, tests, APIs, and code; do not let a glossary replace the authoritative business rule or data model.
 4. **Review two independent axes**: before commit or release for a non-trivial change, review both (a) standards/truth/architecture/quality gates and (b) the originating product outcome, acceptance flow, and explicit non-goals. A change passes review only when neither axis has an unaddressed blocker. Keep this review proportional to the selected L0-L3 gate and reuse project-owned review tooling where it exists.
 
-### 0.9 Executable Delivery Contract | 可执行交付契约
+### 0.10 Executable Delivery Contract | 可执行交付契约
 
 For L2/L3 delivery, parallel agent work, or any task with destructive, cross-module, permission, schema, release, or high-risk boundaries:
 
@@ -166,7 +166,7 @@ Before any development work, classify the project. See skills/core/ai-project-cl
 
 ---
 
-## 3. Mandatory Development Order | 强制开发顺序 (13 Steps)
+## 3. Mandatory Development Order | 强制开发顺序 (13+1 Steps)
 
 ### Step 0: Project Classification
 - Classify project across 4 dimensions
@@ -299,7 +299,7 @@ AI context windows are finite. Rules loaded early in a long session WILL fade fr
 When context is tight and full skill re-reads are expensive, use this compressed checklist:
 
 ```
-QUICK CHECK (10 rules, always active):
+QUICK CHECK (15 rules, always active):
 □ Frontend = display only. Backend computes everything.
 □ Check ai-library-first before writing custom code.
 □ Page must match standard template (list/document/report/dashboard).
@@ -360,7 +360,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 
 ## 7. Complete Skill Index | 完整 Skill 索引
 
-### Core Engine (skills/core/) — 14 skills
+### Core Engine (skills/core/) — 15 skills
 
 | Skill | Purpose | When to Load |
 |---|---|---|
@@ -370,6 +370,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | ai-task-decomposer | Break complex work into safe executable batches | Multi-module or cross-end tasks |
 | ai-chief-planner | End-to-end project planning, scheduling, closure | Project-level orchestration |
 | ai-command-executor | Standardized command execution with env verification | Any shell/CLI operation |
+| ai-delivery-contract-governor | Create and validate machine-readable task contracts: write-scope allowlist, fresh evidence, fail-closed L2/L3 gates | L2/L3 delivery, parallel agents, destructive/cross-module/schema/release boundaries |
 | ai-tool-bootstrapper | Auto-detect and install missing tools | When "tool not found" error |
 | ai-library-first | Enforce: check existing libraries before writing custom code | Before ANY code generation |
 | ai-architect-governor | Cross-domain architecture governance, ADR | Architecture decisions |
@@ -394,6 +395,8 @@ These rules are enforced by governance skills. Violating any of them means the t
 | ai-competitor-analyst | Competitor benchmarking, market positioning research | Market research tasks |
 | ai-reference-researcher | Search, download, analyze open-source reference implementations | Complex unfamiliar domains |
 | ai-brownfield-analyzer | Analyze legacy projects, extract patterns, classify intervention level | Any existing project (ALWAYS first) |
+| ai-atomic-governance | Atomic system architecture governance: declaration/executor separation, layering, governance integration, anti-pattern detection | Atomic architecture work |
+| ai-cross-project-audit | Cross-project governance audit pipeline: consume audit data, orchestrate L3 domain atoms, produce L5 evidence + index + report | Cross-project audits |
 
 ### Technology Stack (skills/tech/) — 15 skills
 
@@ -415,7 +418,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | tailwind-design-system | Design tokens, component libraries |
 | javascript-typescript-jest | Jest testing patterns, mocking |
 
-**Total**: 42 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
+**Total**: 43 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
 
 ---
 
@@ -520,7 +523,7 @@ For a new project, initialize the methodology by:
 7. Create docs sub-folders per the documentation hierarchy
 8. Run ai-rule-dispatcher to perform first-project audit
 9. Run ai-tool-bootstrapper to verify all tool dependencies
-10. **Deploy to AI tools** — Run 	ools/deploy.ps1 -Tool all -Force to symlink skills and copy rules to all supported tools (Codex, Trae, Qoder, CodeBuddy, Claude, Cursor, Copilot, Windsurf, Lingma)
+10. **Deploy to AI tools** — Run `tools/deploy.ps1` -Tool all -Force to symlink skills and copy rules to all supported tools (Codex, Trae, Qoder, CodeBuddy, Claude, Cursor, Copilot, Windsurf, Lingma)
 11. Run `py scripts/py/audit_methodology.py --project-root .` before claiming the methodology package is clean
 
 **Folder rules enforced from day one**:
@@ -531,5 +534,5 @@ For a new project, initialize the methodology by:
 
 ---
 
-*Methodology version: 2.3.0 | Last updated: 2026-07-28*
+*Methodology version: 2.3.1 | Last updated: 2026-08-24*
 *Skills: 43 | Derived from enterprise delivery evidence*
