@@ -41,6 +41,8 @@
 | Working-tree boundary | |
 | Shared language / ADR context | None required / [path and terms] |
 | Delivery contract | Not required / [task-local contract path] |
+| Delivery qualification | Q0 / Q1 / Q2 / Q3; evidence and missing higher-level proof |
+| Capability maturity | registered / configured / authorized / provider-covered / runtime-executable / business-closed |
 
 ## 4. Code Location and Truth Map
 
@@ -68,6 +70,8 @@ Focused tests and release gates:
 | Delete / rename / migration classification | None / A / B / C / D |
 | Rollback path | |
 | L0-L3 gate | |
+| Database migration consistency gate | Not applicable / [migration gate record] |
+| Tenant lifecycle regression | Not applicable / [regression record] |
 | Write allowlist / forbidden paths | |
 | Destructive classification / owner confirmation | |
 

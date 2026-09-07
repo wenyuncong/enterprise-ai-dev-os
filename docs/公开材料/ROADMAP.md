@@ -6,14 +6,19 @@ This roadmap keeps the public project focused: Enterprise AI Development OS is a
 
 ## Positioning | 定位
 
-**Current open-source scope:**
+**Current Open-Core Methodology scope:**
 
-- portable rules and session entrypoints
-- skill-based task routing and execution discipline
-- documentation memory and writeback templates
-- audit gates and readiness scoring
-- one-click installation
+- complete portable rules and session entrypoints
+- full official Skill system, task routing, and execution discipline
+- methodology papers, standards, schemas, and documentation templates
+- audit gates, scenario regressions, and readiness scoring
+- one-click installation and CLI support
 - multi-tool adapters for AI coding tools
+- GitHub Pages and community collaboration files
+
+The repository publishes the complete reusable methodology kernel. Real project
+source, customer or tenant data, production configuration, private strategy,
+and unredacted delivery evidence remain private.
 
 **Future advanced scope:**
 
@@ -65,4 +70,3 @@ The advanced scope is intentionally described as future work. Public claims must
 - large web admin console
 
 These may sound enterprise-grade, but they would distract from the current value: making AI coding work more predictably inside real projects.
-

@@ -14,6 +14,8 @@ from pathlib import Path
 
 
 TASK_TEMPLATE = Path("docs/_templates/全项目总控/AI_PRODUCT_DELIVERY_TASK_TEMPLATE.md")
+MIGRATION_TEMPLATE = Path("docs/_templates/部署运维手册/DATABASE_MIGRATION_GATE_TEMPLATE.md")
+TENANT_TEMPLATE = Path("docs/_templates/测试验收报告/TENANT_LIFECYCLE_REGRESSION_TEMPLATE.md")
 RESPONSIBILITY_MATRIX = Path("docs/全项目总控/AI_DELIVERY_SKILL_RESPONSIBILITY_MATRIX.md")
 AUDIT_SCRIPT = Path("scripts/py/audit_methodology.py")
 CONTRACT_TEMPLATE = Path("docs/_templates/全项目总控/task_contract.json")
@@ -29,7 +31,12 @@ def assert_contains(path: Path, required_terms: list[str]) -> list[str]:
     return [term for term in required_terms if term.lower() not in text]
 
 
-def write_fixture(root: Path, include_safety: bool, include_control_character: bool = False) -> None:
+def write_fixture(
+    root: Path,
+    include_safety: bool,
+    include_control_character: bool = False,
+    include_operating_assets: bool = True,
+) -> None:
     (root / "skills/core/ai-5s-delivery-governor").mkdir(parents=True)
     (root / "skills/core/ai-delivery-contract-governor").mkdir(parents=True)
     (root / "skills/core/ai-product-directed-delivery").mkdir(parents=True)
@@ -44,7 +51,7 @@ name: ai-5s-delivery-governor
 description: "Use for Scope Specify Ship Safeguard Sell delivery governance."
 ---
 # 5S
-Scope Specify Ship Safeguard Sell L0 L3 complete blocked.
+Scope Specify Ship Safeguard Sell L0 L3 Q0 Q1 Q2 Q3 qualification saleability complete blocked.
 """
     product_terms = """
 product owner
@@ -173,6 +180,10 @@ fresh final evidence
 two-axis review
 product acceptance
 delivery closure
+delivery qualification
+capability maturity
+database migration consistency gate
+tenant lifecycle regression
 """,
             encoding="utf-8",
         )
@@ -184,6 +195,21 @@ delivery closure
             """{"title":"DeliveryContract","additionalProperties":false,"properties":{"delivery":{},"product_contract":{},"truth_owner":{},"scope":{},"test_strategy":{},"evidence_plan":{},"reviews":{}}}""",
             encoding="utf-8",
         )
+        if include_operating_assets:
+            (root / "docs/_templates/部署运维手册").mkdir(parents=True, exist_ok=True)
+            (root / "docs/_templates/测试验收报告").mkdir(parents=True, exist_ok=True)
+            (root / MIGRATION_TEMPLATE).write_text(
+                """# Database Migration Consistency Gate
+Migration Identity checksum Environment Registration Execution History Post-Migration Checks Recovery.
+""",
+                encoding="utf-8",
+            )
+            (root / TENANT_TEMPLATE).write_text(
+                """# Tenant Lifecycle Regression
+Tenant Lifecycle Regression Load Profile Authoritative Facts Audit Rollback / Residue Cross-tenant access is denied.
+""",
+                encoding="utf-8",
+            )
         (root / "scripts/py/validate_delivery_contract.py").write_text(
             "# delivery contract validator placeholder\n",
             encoding="utf-8",
@@ -259,18 +285,29 @@ def main() -> int:
             "product_spec",
         ],
     )
+    missing_migration_template = assert_contains(
+        root / MIGRATION_TEMPLATE,
+        ["migration identity", "checksum", "environment registration", "execution history", "post-migration checks", "recovery"],
+    )
+    missing_tenant_template = assert_contains(
+        root / TENANT_TEMPLATE,
+        ["tenant lifecycle regression", "load profile", "authoritative facts", "audit", "rollback / residue", "cross-tenant access is denied"],
+    )
 
     temp_root = Path(tempfile.mkdtemp(prefix="methodology-scenarios-"))
     try:
         complete_fixture = temp_root / "complete"
         incomplete_fixture = temp_root / "missing-safety"
+        missing_assets_fixture = temp_root / "missing-operating-assets"
         control_character_fixture = temp_root / "control-character"
         write_fixture(complete_fixture, include_safety=True)
         write_fixture(incomplete_fixture, include_safety=False)
+        write_fixture(missing_assets_fixture, include_safety=True, include_operating_assets=False)
         write_fixture(control_character_fixture, include_safety=True, include_control_character=True)
 
         complete_exit, complete_result = run_audit(root, complete_fixture)
         incomplete_exit, incomplete_result = run_audit(root, incomplete_fixture)
+        missing_assets_exit, missing_assets_result = run_audit(root, missing_assets_fixture)
         control_exit, control_result = run_audit(root, control_character_fixture)
 
         valid_contract = json.loads(read_text(root / CONTRACT_TEMPLATE))
@@ -314,6 +351,10 @@ def main() -> int:
         failures.append(f"responsibility matrix missing: {', '.join(missing_matrix)}")
     if missing_contract_template:
         failures.append(f"delivery contract template missing: {', '.join(missing_contract_template)}")
+    if missing_migration_template:
+        failures.append(f"migration gate template missing: {', '.join(missing_migration_template)}")
+    if missing_tenant_template:
+        failures.append(f"tenant regression template missing: {', '.join(missing_tenant_template)}")
     if complete_exit != 0 or not complete_result.get("passed"):
         failures.append("complete fixture did not pass methodology audit")
     if incomplete_exit == 0 or incomplete_result.get("passed"):
@@ -322,6 +363,10 @@ def main() -> int:
         failures.append("missing-safety fixture did not fail product delivery skill structure check")
     if not any(issue.get("code") == "PRODUCT_DELIVERY_RULES" for issue in incomplete_result.get("issues", [])):
         failures.append("missing-safety fixture did not fail canonical rules check")
+    if missing_assets_exit == 0 or missing_assets_result.get("passed"):
+        failures.append("missing-operating-assets fixture was not rejected by methodology audit")
+    if not any(issue.get("code") == "DELIVERY_OPERATING_ASSET_MISSING" for issue in missing_assets_result.get("issues", [])):
+        failures.append("missing-operating-assets fixture did not fail operating asset check")
     if control_exit == 0 or control_result.get("passed"):
         failures.append("control-character fixture was not rejected by methodology audit")
     if not any(issue.get("code") == "CONTROL_CHARACTER" for issue in control_result.get("issues", [])):
@@ -347,11 +392,18 @@ def main() -> int:
             "product_delivery_task_template": {"passed": not missing_template, "missing": missing_template},
             "skill_responsibility_matrix": {"passed": not missing_matrix, "missing": missing_matrix},
             "delivery_contract_template": {"passed": not missing_contract_template, "missing": missing_contract_template},
+            "migration_gate_template": {"passed": not missing_migration_template, "missing": missing_migration_template},
+            "tenant_regression_template": {"passed": not missing_tenant_template, "missing": missing_tenant_template},
             "complete_fixture": {"passed": complete_result.get("passed"), "exitCode": complete_exit},
             "missing_safety_fixture_rejected": {
                 "passed": not incomplete_result.get("passed") and incomplete_exit != 0,
                 "exitCode": incomplete_exit,
                 "issueCodes": [issue.get("code") for issue in incomplete_result.get("issues", [])],
+            },
+            "missing_operating_assets_fixture_rejected": {
+                "passed": not missing_assets_result.get("passed") and missing_assets_exit != 0,
+                "exitCode": missing_assets_exit,
+                "issueCodes": [issue.get("code") for issue in missing_assets_result.get("issues", [])],
             },
             "control_character_fixture_rejected": {
                 "passed": not control_result.get("passed") and control_exit != 0,

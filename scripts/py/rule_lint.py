@@ -32,7 +32,7 @@ ROOT_ALLOWED_FILES = {
     "AGENTS.md", "CLAUDE.md", "README.md", "LICENSE", "NOTICE",
     "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "GOVERNANCE.md", "SECURITY.md",
     "SUPPORT.md", "package.json", "package-lock.json", ".editorconfig",
-    ".gitignore", ".gitattributes", ".npmrc",
+    ".git", ".gitignore", ".gitattributes", ".npmrc",
     # generated adapter outputs kept at root by tool conventions
     ".cursorrules", ".clinerules", ".windsurfrules", "CONVENTIONS.md",
 }

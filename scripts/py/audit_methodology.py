@@ -219,7 +219,23 @@ def check_5s_delivery_governance(root: Path, manifest: dict, issues: list[Issue]
         issues.append(Issue("FAIL", "FIVE_S_MANIFEST", Path("skills/SKILL_MANIFEST.json"), "5S delivery skill has an invalid manifest path."))
 
     text = read_text(absolute_skill_path).lower()
-    required_terms = ["scope", "specify", "ship", "safeguard", "sell", "l0", "l3", "complete", "blocked"]
+    required_terms = [
+        "scope",
+        "specify",
+        "ship",
+        "safeguard",
+        "sell",
+        "l0",
+        "l3",
+        "complete",
+        "blocked",
+        "q0",
+        "q1",
+        "q2",
+        "q3",
+        "qualification",
+        "saleability",
+    ]
     missing = [term for term in required_terms if term not in text]
     if missing:
         issues.append(
@@ -310,11 +326,15 @@ def check_product_directed_delivery(root: Path, manifest: dict, issues: list[Iss
 def check_delivery_operating_assets(root: Path, issues: list[Issue]) -> None:
     matrix_path = Path("docs/全项目总控/AI_DELIVERY_SKILL_RESPONSIBILITY_MATRIX.md")
     template_path = Path("docs/_templates/全项目总控/AI_PRODUCT_DELIVERY_TASK_TEMPLATE.md")
+    migration_template_path = Path("docs/_templates/部署运维手册/DATABASE_MIGRATION_GATE_TEMPLATE.md")
+    tenant_template_path = Path("docs/_templates/测试验收报告/TENANT_LIFECYCLE_REGRESSION_TEMPLATE.md")
     scenario_path = Path("scripts/py/test_methodology_scenarios.py")
 
     required_files = {
         matrix_path: "delivery skill responsibility matrix is required.",
         template_path: "AI product delivery task template is required.",
+        migration_template_path: "database migration consistency gate template is required.",
+        tenant_template_path: "tenant lifecycle regression template is required.",
         scenario_path: "methodology scenario regression runner is required.",
     }
     for path, message in required_files.items():
@@ -355,6 +375,10 @@ def check_delivery_operating_assets(root: Path, issues: list[Issue]) -> None:
             "two-axis review",
             "product acceptance",
             "delivery closure",
+            "delivery qualification",
+            "capability maturity",
+            "database migration consistency gate",
+            "tenant lifecycle regression",
         ]
         missing = [term for term in required_template_terms if term not in template_text]
         if missing:
@@ -364,6 +388,39 @@ def check_delivery_operating_assets(root: Path, issues: list[Issue]) -> None:
                     "DELIVERY_TASK_TEMPLATE",
                     template_path,
                     f"AI product delivery task template is missing required sections: {', '.join(missing)}",
+                )
+            )
+
+    template_requirements = {
+        migration_template_path: [
+            "migration identity",
+            "checksum",
+            "environment registration",
+            "execution history",
+            "post-migration checks",
+            "recovery",
+        ],
+        tenant_template_path: [
+            "tenant lifecycle regression",
+            "load profile",
+            "authoritative facts",
+            "audit",
+            "rollback / residue",
+            "cross-tenant access is denied",
+        ],
+    }
+    for path, required_terms in template_requirements.items():
+        if not (root / path).exists():
+            continue
+        text = read_text(root / path).lower()
+        missing = [term for term in required_terms if term not in text]
+        if missing:
+            issues.append(
+                Issue(
+                    "FAIL",
+                    "DELIVERY_SUPPORT_TEMPLATE",
+                    path,
+                    f"operating template is missing required terms: {', '.join(missing)}",
                 )
             )
 

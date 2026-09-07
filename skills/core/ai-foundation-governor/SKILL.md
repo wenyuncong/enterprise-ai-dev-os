@@ -106,6 +106,26 @@ Every release must pass two minimum gates:
 
 ---
 
+### Database Migration Consistency Gate | 数据库迁移一致性门禁
+
+For any schema, seed, parameter-baseline, or tenant-data migration, treat the
+migration manifest and each environment's execution registry as one release
+contract:
+
+| Check | Required proof |
+|---|---|
+| Manifest identity | Migration id, version, source path, dependency/order, and checksum |
+| Environment registration | Test/staging and production execution lists register the same intended migration |
+| Safety | Idempotency, explicit replacement/supersession relation, or documented one-time precondition |
+| Execution history | Target environment records status, timestamp, operator/job, and commit/version |
+| Post-migration state | Schema, seed, parameter, runtime-profile, and tenant-scope checks pass |
+| Recovery | Reversible patch, compensating migration, backup, or explicit recovery decision |
+
+The migration gate fails closed when a migration exists only in source code, is
+registered in one environment but not another, has no checksum/history, or has
+no post-migration verification. A successful deployment job does not replace
+these checks.
+
 ## 5. Foundation Change Impact Checklist | 基础变更影响清单
 
 Before merging any foundation change, verify:
@@ -116,8 +136,9 @@ Before merging any foundation change, verify:
 - [ ] Fields: Metadata registry consistent
 - [ ] Parameters: Runtime compilation succeeds
 - [ ] Schema: Migrations in correct directory, baselines updated
+- [ ] Migrations: Manifest, environment registrations, checksum, execution history, and post-migration checks agree
 - [ ] Reports: Queries reference correct sources
-- [ ] Tenants: All active tenants pass schema sync
+- [ ] Tenants: All active tenants pass schema sync and tenant-scope isolation checks
 - [ ] Release docs: Evidence collected
 
 ---
@@ -138,4 +159,7 @@ Before merging any foundation change, verify:
 
 - v1.0.0: Extracted from gerp-stable-foundation-governor (65KB original)
 - v1.1.0: Generalized to universal enterprise foundation patterns
+- v1.2.0: Added a fail-closed cross-environment migration consistency gate,
+  including manifest, checksum, execution history, post-migration checks, and
+  recovery evidence.
 - Source: 12+ months of enterprise ERP foundation governance

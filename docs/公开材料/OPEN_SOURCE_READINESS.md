@@ -2,11 +2,11 @@
 
 Last reviewed: 2026-06-18
 
-This document records what can be made public now, what must stay private, and what needs more verification before public claims.
+This document records the Open-Core Methodology boundary: the complete portable methodology kernel is public, while real delivery assets and sensitive operational evidence remain private.
 
 ## Current Decision
 
-The current Git-tracked repository is ready to remain in a private GitHub repository and is suitable to switch to public after a final GitHub UI review.
+The current Git-tracked repository is suitable for a public GitHub repository after a final GitHub UI review and sensitive-history review.
 
 Public-ready scope means:
 
@@ -92,7 +92,8 @@ All searches should return no tracked public content except expected boundary li
 
 Recommended first public release posture:
 
-- publish as a methodology and adapter framework
+- publish as the complete portable methodology and adapter framework
+- describe the repository as Open-Core Methodology: the full methodology kernel is open, while real delivery evidence remains private
 - keep private strategy and case evidence private
 - point value claims to `docs/公开材料/VALUE_EVIDENCE.md` until measured public evidence exists
 - describe Rule Runtime Lite as a future direction, not an implemented engine

@@ -1,264 +1,117 @@
 # Enterprise AI Development OS
 
-[中文](#中文) | [English](#english)
+[Website](https://wenyuncong.github.io/enterprise-ai-dev-os/) | [中文](#中文) | [English](#english)
 
-Enterprise AI Development OS makes AI coding tools follow project rules, verification gates, and shared delivery memory instead of producing isolated ad-hoc code.
+**Keep your attention on the business goal and the final outcome. Let agents and large language models handle the engineering work inside a governed, verifiable delivery system.**
 
-企业级全 AI 开发操作系统，用规则、Skill、文档记忆、验证门禁和多工具适配层，让 AI 编程工具按项目规则稳定交付，而不是随机生成孤立代码。
+Enterprise AI Development OS is a portable methodology and governance layer for AI-native software delivery. It gives AI agents shared rules, reusable skills, project memory, backend truth boundaries, verification gates, and evidence-driven closure across tools and projects.
 
-Website: https://wenyuncong.github.io/enterprise-ai-dev-os/ (available after GitHub Pages is enabled)
-
----
-
-## 中文
-
-### 这是什么
-
-Enterprise AI Development OS 是一套面向 AI 编程工具的可迁移工程治理层。它把项目规则、Skill 能力单元、文档记忆、审计脚本、验证门禁和多工具适配器组织成一个统一系统，让 Codex、Claude Code、Trae、Qoder、Cursor、GitHub Copilot、VS Code 等工具在大项目中按同一套工程纪律工作。
-
-它不是单个 prompt，也不只是传统意义上的 Skill 包。它更接近一个“AI 开发操作系统”：用统一入口、任务路由、能力调度、证据回写和进化闭环，降低 AI 开发中的遗忘、漂移、重复造轮子和验收不确定性。
-
-### 为什么需要它
-
-AI 编码工具很强，但企业级项目需要的不只是生成代码：
-
-- 跨会话项目记忆
-- 修改前规则加载
-- 任务路由和拆解
-- 可复用能力单元
-- 完成前验证门禁
-- 文档回写和证据链
-- 重复问题反哺规则和 Skill
-- 多工具之间的一致工作方式
-
-本项目把这些实践打包成工具无关的方法论和适配器框架。
-
-公开版聚焦“规则、Skill、适配、审计、安装和证据框架”。可执行规则运行时、规则命中分析、MCP 调用审计和团队治理面板属于后续高级方向，不作为当前已实现能力宣传。
-
-### 包含什么
-
-| 层 | 作用 |
-|---|---|
-| Rules | 会话启动、执行顺序、目录边界、验证门禁 |
-| Skills | 规划、架构、治理、前端、后端、数据、测试和部署能力单元 |
-| Documentation memory | Backlog、总控索引、模板、ADR、调研回写结构 |
-| Audit gates | 方法论结构检查、开源边界检查、就绪评分 |
-| Tool adapters | 将规则和 Skill 投放到不同 AI 编程工具 |
-| Evolution loop | 将重复问题升级为规则、模板或 Skill |
-
-### 仓库结构
-
-```text
-AGENTS.md                 主规则入口
-CLAUDE.md                 Claude Code 规则入口
-rules/                    可迁移规则源
-skills/                   官方 Skill 源
-methodology/              方法论白皮书
-docs/_templates/          文档模板
-docs/全项目总控/           总控索引、披露边界、交付闭环
-docs/公开材料/             开源发布边界和就绪清单
-docs/TOOL_ADAPTERS.md     多工具适配矩阵和部署契约
-scripts/py/               审计、评分、环境检查、工具发现脚本
-scripts/ps1/              PowerShell 一键安装脚本
-scripts/sh/               Bash 一键安装脚本
-scripts/js/               CLI 入口
-tools/                    多工具适配器注册表和部署脚本
-lite/                     精简版规则和模板
-site/                     GitHub Pages 网站
-```
-
-### 快速开始
-
-推荐先用 lite 模式一键安装到你的项目。它只加入 AI 入口规则、文档模板和任务清单骨架，适合先跑起来。
-
-PowerShell：
-
-```powershell
-iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1 | iex
-```
-
-Bash：
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/sh/install.sh | bash
-```
-
-完整安装会复制规则、官方 Skill、适配器工具和审计脚本：
-
-```powershell
-$u = "https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1"
-$s = Join-Path $env:TEMP "enterprise-ai-dev-os-install.ps1"
-iwr -UseBasicParsing $u -OutFile $s
-powershell -NoProfile -ExecutionPolicy Bypass -File $s -TargetPath . -Mode full
-```
-
-也可以通过 npm 风格 CLI 直接使用 GitHub 仓库：
-
-```bash
-npx github:wenyuncong/enterprise-ai-dev-os init ./your-project
-npx github:wenyuncong/enterprise-ai-dev-os init ./your-project --full
-```
-
-验证本仓库：
-
-```bash
-py scripts/py/audit_methodology.py --project-root .
-py scripts/py/score_ai_development_readiness.py --project-root .
-py scripts/py/check_open_source_boundary.py --project-root .
-```
-
-预览多工具适配输出：
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verified -DryRun
-```
-
-更多安装说明见 [docs/公开材料/INSTALL.md](docs/公开材料/INSTALL.md)。
-
-### 路线与价值证据
-
-- [docs/公开材料/ROADMAP.md](docs/公开材料/ROADMAP.md) — 公开路线图与暂不做事项
-- [docs/公开材料/CUSTOMER_INVESTOR_VALUE.md](docs/公开材料/CUSTOMER_INVESTOR_VALUE.md) — 面向客户和投资人的业务价值说明
-- [docs/公开材料/VALUE_EVIDENCE.md](docs/公开材料/VALUE_EVIDENCE.md) — 如何证明真实价值、token 和返工变化
-- [docs/公开材料/RULE_RUNTIME_LITE.md](docs/公开材料/RULE_RUNTIME_LITE.md) — 未来轻量规则运行时设计边界
-- [docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_CN.md](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_CN.md) — 全 AI 原生开发白皮书（中文）
-- [docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_CN.md](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_CN.md) — 全 AI 原生开发标准（中文）
-
-### 核心工作流
-
-```text
-需求输入
-  -> 读取规则和项目记忆
-  -> 任务路由
-  -> 安全拆批
-  -> 使用现有工具和脚本执行
-  -> 通过测试、API、浏览器或审计验证
-  -> 回写证据和结论
-  -> 将重复问题进化为规则或 Skill
-```
-
-### 多工具适配
-
-当前适配层支持：
-
-- Codex
-- Claude Code
-- Trae
-- Qoder / Qoder CN
-- Cursor
-- CodeBuddy
-- GitHub Copilot / VS Code
-- Windsurf、Cline、Roo Code、Aider、Continue.dev 等实验适配；Lingma、Trae Solo、WorkBuddy 待验证
-
-详见 [docs/TOOL_ADAPTERS.md](docs/TOOL_ADAPTERS.md) 和 [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)。
-
-### 开源边界
-
-本仓库只开源可迁移的方法论、规则、Skill、模板、审计脚本和适配器生成器。私有商业策略、过程记录、未脱敏案例、原始素材和本地工具状态不属于开源范围。
-
-**永不发布（.gitignore + 边界脚本双重拦截）**：
-- `docs/内部商业化/`、`docs/商业化/`、`docs/每日调研回写/`、`docs/测试验收报告/`、`docs/本地知识中心/`
-- `docs/公开材料/推广文章/`（营销稿件，发布前须单独审查）
-- `evidence/`（运行证据）、`output/`（生成物）、`理论研究/`（草稿）
-- `reference/`、`备用/`、`verification-demo/`（私有归档）
-- 适配器生成目录（`.agents/`、`.claude/`、`.codex/`、`.cursor/`、`.trae/`、`.qoder/` 等）与本地工具状态
-
-公开前检查：
-
-```bash
-py scripts/py/check_open_source_boundary.py --project-root .
-```
-
-边界文档：
-
-- [docs/公开材料/OPEN_SOURCE_PACKAGE.md](docs/公开材料/OPEN_SOURCE_PACKAGE.md)
-- [docs/公开材料/OPEN_SOURCE_READINESS.md](docs/公开材料/OPEN_SOURCE_READINESS.md)
-- [docs/全项目总控/DISCLOSURE_BOUNDARY.md](docs/全项目总控/DISCLOSURE_BOUNDARY.md)
-
-### 社区与贡献
-
-- 问题、想法和工具适配讨论：GitHub Discussions
-- 可复现缺陷和文档错误：GitHub Issues
-- 代码、规则、Skill、适配器修改：Pull Request
-
-贡献前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。所有 PR 必须通过方法论审计、开源边界检查和适配器 dry-run。
-
-### 当前状态
-
-- 49 个 official skills（47 verified + 2 callable，以 `skills/SKILL_MANIFEST.json` 为准）
-- Methodology audit: PASS, 0 failures, 0 warnings
-- AI development readiness: 100/100, L4 可进化
-- 多工具适配器注册表 v2
-- 开源边界已文档化
-
-### 协议
-
-本仓库公开发布内容采用 [Apache License 2.0](LICENSE)。
-
-注意：Apache-2.0 适用于本仓库中已经公开提交的代码、规则、文档模板和方法论材料；未提交到本仓库的私有商业策略、未脱敏案例、过程记录和本地素材不属于本开源发布范围。
-
----
+It is not an unrestricted promise of autonomous software delivery. People still own business intent, priorities, material trade-offs, risk acceptance, and final business acceptance. Agents and models own the repeatable engineering work: discovery, planning, implementation, testing, documentation, evidence collection, and controlled correction.
 
 ## English
 
 ### What It Is
 
-Enterprise AI Development OS is a portable governance layer for AI coding tools. It organizes project rules, skill units, documentation memory, audit gates, verification scripts, and multi-tool adapters into one coherent system so tools such as Codex, Claude Code, Trae, Qoder, Cursor, GitHub Copilot, and VS Code can follow the same engineering discipline on large projects.
+Enterprise AI Development OS turns AI coding from isolated generation into governed delivery:
 
-It is not just a prompt and not merely a traditional skill pack. It is closer to an AI development operating system: a shared entrypoint, routing layer, capability scheduler, evidence writeback loop, and evolution mechanism for controlled AI-assisted engineering.
+```text
+Business goal and expected outcome
+  -> project classification
+  -> rule routing and task decomposition
+  -> agent and model execution
+  -> tests, runtime checks, and business-flow verification
+  -> evidence writeback and capability evolution
+```
+
+The system is designed for teams that want AI to do most of the engineering work while keeping business truth, permissions, state, side effects, and acceptance under explicit control.
+
+### The Human-AI Boundary
+
+| Responsibility | Human | Agents and models |
+|---|---|---|
+| Business goal and expected outcome | Owns | Clarifies and structures |
+| Product priority and trade-offs | Owns | Proposes options |
+| Architecture, schema, code, tests, and docs | Accepts the result | Discovers, implements, and verifies |
+| Runtime truth, permissions, state, and audit | Owns the business decision | Enforces through the project system |
+| Final business acceptance | Owns | Produces evidence for review |
+
+The intended experience is simple: the product owner describes what the business must achieve and what the final result must look like. The AI delivery system handles the engineering path and reports what was actually proven.
 
 ### Why It Exists
 
-AI coding tools are powerful, but enterprise-grade projects need more than code generation:
+AI coding tools are powerful, but enterprise delivery needs more than code generation:
 
 - persistent project memory across sessions
-- rules loaded before code changes
-- task routing and decomposition
-- reusable capability units
-- verification before "done"
-- documentation writeback and evidence chains
-- repeated mistakes converted into stronger rules or skills
-- consistent behavior across multiple AI coding tools
+- rules loaded before changes
+- brownfield discovery before intervention
+- task routing and dependency-aware batches
+- reusable skills and standard templates
+- backend-owned truth and frontend display boundaries
+- verification before a result is called complete
+- audit, migration, tenant, and release evidence
+- repeated failures converted into stronger rules, tests, or skills
+- consistent delivery across multiple AI tools
 
-This repository packages those practices into a tool-agnostic methodology and adapter framework.
+### Five-Layer Operating Model
 
-The open-source edition focuses on rules, skills, adapters, audits, installation, and evidence collection. Executable rule runtime, rule-hit analytics, MCP/tool-call auditing, and team governance dashboards are future advanced directions, not current implementation claims.
+| Layer | Question | Primary capability |
+|---|---|---|
+| Classification | What kind of project and quality target is this? | `ai-project-classifier` |
+| Routing | Which rules and skills apply? | `ai-rule-dispatcher` |
+| Decomposition | How can the work be split safely? | `ai-task-decomposer` |
+| Execution | How is the solution implemented and verified? | Core, Governance, Tech, and Platform skills |
+| Evolution | What should become reusable next time? | `ai-skill-evolver`, `ai-skill-governor` |
+
+### Backend Truth And Frontend Delivery
+
+For business software, agents follow two connected chains:
+
+```text
+Backend:
+truth -> atomic service -> orchestration -> aggregate interface
+       -> command gateway -> adapters -> Host / AI / MCP / OpenAPI
+
+Frontend:
+runtime and field truth -> UI atom -> UI orchestration
+                        -> standard template -> Host page
+```
+
+Host pages and transport adapters load truth, render it, collect input, request supported commands, and show feedback. They must not become a second source of business rules, calculations, authorization, state transitions, or write paths.
+
+### Delivery Qualification
+
+Capability presence is not business closure. The methodology records the highest level supported by fresh evidence:
+
+| Level | Meaning |
+|---|---|
+| Q0 | Capability exists in source, registry, or route |
+| Q1 | Parameters, permissions, state, configuration, and dependencies align |
+| Q2 | Backend orchestration, provider coverage, unique side-effect path, audit, and authoritative readback close |
+| Q3 | Real business acceptance, reconciliation, cross-client/runtime, and release evidence close |
+
+The maturity chain is:
+
+```text
+registered -> configured -> authorized -> provider-covered
+            -> runtime-executable -> business-closed
+```
+
+HTTP 200, health checks, page visibility, CI success, or a local commit do not individually prove Q3.
 
 ### What Is Included
 
-| Layer | Purpose |
+| Area | Purpose |
 |---|---|
-| Rules | Session startup, execution order, file placement, verification gates |
-| Skills | Capability units for planning, architecture, governance, frontend, backend, data, testing, and deployment |
-| Documentation memory | Backlog, master index, templates, ADRs, writeback structure |
-| Audit gates | Methodology audit, open-source boundary check, readiness scoring |
-| Tool adapters | Deployment helpers for syncing rules and skills into AI coding tools |
-| Evolution loop | Guidance for turning repeated failures into reusable capability |
-
-### Repository Layout
-
-```text
-AGENTS.md                 Main rule entrypoint
-CLAUDE.md                 Claude Code rule entrypoint
-rules/                    Portable rule source
-skills/                   Official skill source
-methodology/              Methodology whitepapers
-docs/_templates/          Documentation templates
-docs/全项目总控/           Master index, disclosure boundary, delivery loop
-docs/公开材料/             Public release boundary and readiness notes
-docs/TOOL_ADAPTERS.md     Multi-tool adapter matrix and deploy contract
-scripts/py/               Audit, scoring, environment, and tool-discovery scripts
-scripts/ps1/              PowerShell one-click installer
-scripts/sh/               Bash one-click installer
-scripts/js/               CLI entrypoint
-tools/                    Adapter registry and deployment script
-lite/                     Lite rules and templates
-site/                     GitHub Pages website
-```
+| Rules | Session startup, execution order, safety boundaries, and delivery gates |
+| Skills | Planning, architecture, governance, frontend, backend, data, testing, and deployment capabilities |
+| Documentation memory | Backlog, master index, templates, ADRs, and daily writeback |
+| Audit gates | Methodology structure, open-source boundary, governance, and readiness checks |
+| Tool adapters | Deploy rules and skills into supported AI coding tools |
+| Evolution loop | Turn repeated failures into rules, templates, tests, or skills |
 
 ### Quick Start
 
-Start with the one-click lite install. It adds the AI entrypoint, rules, documentation templates, and task backlog scaffold without copying the full skill library.
+Lite mode is the recommended starting point. It adds the AI entrypoint, rules, documentation templates, and task backlog scaffold.
 
 PowerShell:
 
@@ -272,7 +125,7 @@ Bash:
 curl -fsSL https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/sh/install.sh | bash
 ```
 
-Full install copies rules, official skills, adapter tools, and audit scripts:
+Full mode:
 
 ```powershell
 $u = "https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1"
@@ -281,76 +134,52 @@ iwr -UseBasicParsing $u -OutFile $s
 powershell -NoProfile -ExecutionPolicy Bypass -File $s -TargetPath . -Mode full
 ```
 
-You can also use the npm-style CLI directly from the GitHub repository:
-
-```bash
-npx github:wenyuncong/enterprise-ai-dev-os init ./your-project
-npx github:wenyuncong/enterprise-ai-dev-os init ./your-project --full
-```
-
 Verify this repository:
 
 ```bash
-py scripts/py/audit_methodology.py --project-root .
-py scripts/py/score_ai_development_readiness.py --project-root .
+py scripts/py/test_methodology_scenarios.py --project-root .
+py scripts/py/audit_ai_native_governance.py --project-root .
+py scripts/py/audit_skill_health.py --project-root .
 py scripts/py/check_open_source_boundary.py --project-root .
 ```
 
-Preview multi-tool adapter output:
+More installation options are documented in [docs/公开材料/INSTALL.md](docs/公开材料/INSTALL.md).
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verified -DryRun
-```
-
-See [docs/公开材料/INSTALL.md](docs/公开材料/INSTALL.md) for more installation options.
-
-### Roadmap And Evidence
-
-- [docs/公开材料/ROADMAP.md](docs/公开材料/ROADMAP.md) — public roadmap and deliberate non-goals
-- [docs/公开材料/CUSTOMER_INVESTOR_VALUE.md](docs/公开材料/CUSTOMER_INVESTOR_VALUE.md) — customer and investor-facing business value explanation
-- [docs/公开材料/VALUE_EVIDENCE.md](docs/公开材料/VALUE_EVIDENCE.md) — how to prove real value, token direction, and rework change
-- [docs/公开材料/RULE_RUNTIME_LITE.md](docs/公开材料/RULE_RUNTIME_LITE.md) — future lightweight rule-runtime boundary
-- [docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_EN.md](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_EN.md) — AI-native development whitepaper (English)
-- [docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_EN.md](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_EN.md) — AI-native development standard (English)
-
-### Core Workflow
+### Repository Layout
 
 ```text
-Requirement
-  -> Read rules and project memory
-  -> Route the task
-  -> Decompose into safe batches
-  -> Execute with existing tools and scripts
-  -> Verify with tests, API checks, browser checks, or audits
-  -> Write back evidence and decisions
-  -> Evolve rules or skills when patterns repeat
+AGENTS.md                 Main rule entrypoint
+rules/                    Portable rule source
+skills/                   Official skill source
+methodology/              Methodology whitepapers
+docs/_templates/          Documentation templates
+docs/全项目总控/           Master index and delivery control
+docs/公开材料/             Public release boundary and evidence notes
+scripts/py/               Audit, verification, environment, and discovery scripts
+scripts/ps1/              PowerShell installers and utilities
+scripts/sh/               Bash installers
+scripts/js/               CLI entrypoint
+tools/                    Adapter registry and deployment scripts
+lite/                     Lite rules and templates
+site/                     GitHub Pages website
 ```
 
-### Tool Adapters
+### Public Documentation
 
-Current adapter coverage includes:
-
-- Codex
-- Claude Code
-- Trae
-- Qoder / Qoder CN
-- Cursor
-- CodeBuddy
-- GitHub Copilot / VS Code
-- Experimental adapters for Windsurf, Cline, Roo Code, Aider, Continue.dev; Lingma, Trae Solo, and WorkBuddy pending verification
-
-See [docs/TOOL_ADAPTERS.md](docs/TOOL_ADAPTERS.md) and [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
+- [Full AI-Native Development Whitepaper](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_EN.md)
+- [全 AI 原生开发白皮书](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_WHITEPAPER_CN.md)
+- [Full AI-Native Development Standard](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_EN.md)
+- [全 AI 原生开发标准](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_CN.md)
+- [Roadmap](docs/公开材料/ROADMAP.md)
+- [Value Evidence](docs/公开材料/VALUE_EVIDENCE.md)
+- [Tool Adapters](docs/TOOL_ADAPTERS.md)
+- [Compatibility](docs/COMPATIBILITY.md)
 
 ### Open-Source Boundary
 
-This repository only publishes portable methodology assets, rules, skills, templates, audit scripts, and adapter generators. Private commercialization notes, process records, unredacted case studies, raw source archives, and local tool state are outside the open-source scope.
+This repository follows an **Open-Core Methodology** model. The complete portable methodology kernel is open source: rules, official skills, whitepapers, schemas, templates, audit scripts, installers, CLI tools, adapter generators, and the evolution loop. Private commercialization notes, real project source code, customer or tenant data, production configuration, unredacted cases, process evidence, local paths, and local tool state remain outside the public release.
 
-**Never published (enforced by .gitignore + boundary script)**:
-- `docs/内部商业化/`, `docs/商业化/`, `docs/每日调研回写/`, `docs/测试验收报告/`, `docs/本地知识中心/`
-- `docs/公开材料/推广文章/` (marketing drafts; review before release)
-- `evidence/` (runtime evidence), `output/` (generated), `理论研究/` (drafts)
-- `reference/`, `备用/`, `verification-demo/` (private archives)
-- generated adapter dirs (`.agents/`, `.claude/`, `.codex/`, `.cursor/`, `.trae/`, `.qoder/`, etc.) and local tool state
+The boundary is between **reusable methodology** and **real delivery assets**, not between “complete” and “simplified” documentation. The public repository is intended to be a complete, installable, auditable methodology package.
 
 Before publishing or pushing changes, run:
 
@@ -358,30 +187,127 @@ Before publishing or pushing changes, run:
 py scripts/py/check_open_source_boundary.py --project-root .
 ```
 
-Boundary documents:
+See [docs/公开材料/OPEN_SOURCE_PACKAGE.md](docs/公开材料/OPEN_SOURCE_PACKAGE.md), [docs/公开材料/OPEN_SOURCE_READINESS.md](docs/公开材料/OPEN_SOURCE_READINESS.md), and [docs/全项目总控/DISCLOSURE_BOUNDARY.md](docs/全项目总控/DISCLOSURE_BOUNDARY.md).
 
-- [docs/公开材料/OPEN_SOURCE_PACKAGE.md](docs/公开材料/OPEN_SOURCE_PACKAGE.md)
-- [docs/公开材料/OPEN_SOURCE_READINESS.md](docs/公开材料/OPEN_SOURCE_READINESS.md)
-- [docs/全项目总控/DISCLOSURE_BOUNDARY.md](docs/全项目总控/DISCLOSURE_BOUNDARY.md)
+### Current Evidence
 
-### Community And Contributions
+- Methodology scenario regression: passing
+- AI-native governance audit: passing
+- Skill health audit: passing; 49 skills, average `100.0/100`
+- L2 delivery contract for the latest methodology upgrade: passing
+- Full methodology audit: passing with no failures or warnings
 
-- Questions, ideas, and adapter discussions: GitHub Discussions
+The evidence status above is intentionally more precise than a blanket “everything passes”. Run the project-owned checks for the current result.
+
+### Community And License
+
+- Questions and adapter discussions: GitHub Discussions
 - Reproducible bugs and documentation errors: GitHub Issues
-- Code, rules, skills, and adapter changes: Pull Requests
+- Rules, skills, scripts, and adapter changes: Pull Requests
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing. All PRs must pass methodology audit, open-source boundary checks, and adapter dry-run.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing. Public contents are licensed under the [Apache License 2.0](LICENSE).
 
-### Status
+---
 
-- 49 official skills (47 verified + 2 callable; see `skills/SKILL_MANIFEST.json`)
-- Methodology audit: PASS, 0 failures, 0 warnings
-- AI development readiness: 100/100, L4 evolvable
-- Multi-tool adapter registry v2
-- Public/private disclosure boundary documented
+## 中文
 
-### License
+### 这是什么
 
-The public contents of this repository are licensed under the [Apache License 2.0](LICENSE).
+Enterprise AI Development OS 是一套面向全 AI 原生软件交付的可迁移方法论和治理层。
 
-Note: Apache-2.0 applies to the code, rules, documentation templates, and methodology materials committed to this public repository. Private commercialization notes, unredacted case studies, process records, and local source archives that are not committed to this repository are not part of this open-source release.
+**人的主要工作是关注业务目标和最终效果；智能体与大模型在治理边界内完成需求分析、方案设计、代码、测试、文档、验证和问题修复。**
+
+人仍然负责业务意图、优先级、重大取舍、风险接受和最终业务验收。AI 负责可重复的工程执行，并必须报告哪些结果已经被证据证明。
+
+### 全 AI 原生开发的协作闭环
+
+```text
+业务目标与预期效果
+  -> 项目分类
+  -> 规则路由与任务拆解
+  -> 智能体与大模型执行
+  -> 测试、运行时和业务流程验证
+  -> 证据回写与能力进化
+```
+
+它不是放任 AI 自由生成代码，也不是承诺 AI 无条件替代产品负责人或业务负责人。它是在规则、Skill、Runtime、命令网关、审计和验收结构内，让 AI 完成尽可能多的工程工作。
+
+### 人与 AI 的边界
+
+| 责任 | 人 | 智能体与大模型 |
+|---|---|---|
+| 业务目标和预期效果 | 负责 | 协助澄清和结构化 |
+| 产品优先级和取舍 | 负责 | 提供方案 |
+| 架构、数据库、代码、测试、文档 | 接受结果 | 发现、实现和验证 |
+| 真相、权限、状态和审计 | 负责业务决策 | 通过系统执行和留证 |
+| 最终业务验收 | 负责 | 提供证据 |
+
+### 五层 Skill 操作模型
+
+| 层 | 要回答的问题 | 主要能力 |
+|---|---|---|
+| 分类层 | 这是什么项目，质量目标是什么 | `ai-project-classifier` |
+| 路由层 | 应使用哪些规则和 Skill | `ai-rule-dispatcher` |
+| 分解层 | 如何安全拆成执行批次 | `ai-task-decomposer` |
+| 执行层 | 如何实现并验证 | Core、Governance、Tech、Platform Skill |
+| 进化层 | 哪些经验应成为下次能力 | `ai-skill-evolver`、`ai-skill-governor` |
+
+### 后端真相与前端承载
+
+```text
+后端：
+真相 -> 原子服务 -> 编排 -> 聚合接口
+     -> 命令网关 -> 适配器 -> Host / AI / MCP / OpenAPI
+
+前端：
+运行时和字段真相 -> UI 原子 -> UI 编排
+                -> 标准模板 -> Host 页面
+```
+
+Host 页面和传输适配器只负责加载真相、展示、收集输入、请求受支持的命令和展示反馈，不得成为第二套业务规则、计算、授权、状态迁移或写入路径。
+
+### 交付资格
+
+能力存在不等于业务完成。方法论用新鲜证据记录最高资格：
+
+| 级别 | 含义 |
+|---|---|
+| Q0 | 能力存在于源码、注册表或路由 |
+| Q1 | 参数、权限、状态、配置和依赖基线一致 |
+| Q2 | 后端编排、Provider、唯一副作用链、审计和权威回读闭合 |
+| Q3 | 真实业务验收、对账、跨端/运行时和发布证据闭合 |
+
+能力成熟度链：
+
+```text
+registered -> configured -> authorized -> provider-covered
+            -> runtime-executable -> business-closed
+```
+
+HTTP 200、健康检查、页面打开、CI 通过或本地提交，都不能单独证明 Q3。
+
+### 快速开始
+
+推荐先使用 lite 模式：
+
+```powershell
+iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-dev-os/main/scripts/ps1/install.ps1 | iex
+```
+
+完整安装、仓库结构、公开文档、工具适配和开源边界请直接查看上面的 English 部分及对应文档链接。
+
+### 当前证据状态
+
+- 方法论场景回归：通过
+- AI 原生治理审计：通过
+- Skill 健康审计：通过，49 个 Skill，平均 `100.0/100`
+- 最新方法论升级的 L2 交付契约：通过
+- 总方法论审计：通过，失败项和警告项均为 0
+
+### 开源边界与许可
+
+本仓库采用 **Open-Core Methodology（开放方法论内核）** 模式。完整、可迁移的方法论内核公开，包括规则、官方 Skill、白皮书、Schema、模板、审计脚本、安装器、CLI、适配器生成器和进化闭环。
+
+公开边界划分在“可复用方法论”和“真实交付资产”之间，而不是划分在“完整”和“简化”文档之间。私有商业策略、真实项目源代码、客户或租户数据、生产配置、未脱敏案例、过程证据、本机路径和本地工具状态不属于公开范围。
+
+公开内容采用 [Apache License 2.0](LICENSE)。

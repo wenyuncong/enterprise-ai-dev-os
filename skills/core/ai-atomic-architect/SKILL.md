@@ -179,6 +179,41 @@ The command gateway is the sole executable entrance for reusable business writes
 
 An action is not executable merely because an adapter or Host renders it. Unsupported, deferred, or blocked actions must remain explicitly non-executable with a stable reason.
 
+### Capability Execution Maturity | 能力执行成熟度
+
+Use one shared maturity chain for Atoms, Skills, tools, AI tasks, plugins, and
+business capabilities:
+
+```text
+registered
+  -> configured
+  -> authorized
+  -> provider-covered
+  -> runtime-executable
+  -> business-closed
+```
+
+Each transition needs its own evidence and a stable failure reason:
+
+| State | Meaning | Evidence |
+|---|---|---|
+| `registered` | Identity, version, owner, and declared contract exist | Registry or manifest |
+| `configured` | Required parameters, dependencies, and runtime profile resolve | Configuration or profile readback |
+| `authorized` | Actor, tenant, role, version entitlement, and data scope permit use | Permission decision |
+| `provider-covered` | A real provider, handler, or command covers the declared operation | Provider or command coverage audit |
+| `runtime-executable` | The supported entrypoint executes with expected state and side effects | Runtime/API execution and authoritative readback |
+| `business-closed` | The originating business flow, reconciliation, audit, and acceptance are complete | End-to-end closure and product or customer acceptance |
+
+Rules:
+
+1. A lower state must not be reported as a higher state.
+2. Registry or catalog presence proves only `registered`; a visible button proves
+   none of the later states.
+3. Deferred, blocked, or unsupported actions remain explicitly non-executable
+   and expose a stable reason.
+4. The same chain applies across Web, App, AI, MCP, OpenAPI, and background-task
+   adapters; adapters do not promote capability maturity.
+
 ### Host and Adapter Boundary
 
 Web, App, AI, MCP, OpenAPI, desktop, and connectors are adapters over the same aggregate and command contract:
@@ -278,3 +313,5 @@ paths:
 
 - v1.0.0: Initial creation — 3 pillars, 3 archetypes, unified interface mapping
 - v1.1.0: Added aggregate-interface, command-gateway, adapter, and Host boundaries from enterprise multi-client delivery evidence
+- v1.2.0: Added a shared registered-to-business-closed maturity chain for
+  capabilities across Atom, Skill, tool, task, plugin, and business adapters.

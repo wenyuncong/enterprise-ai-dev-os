@@ -71,6 +71,30 @@ Choose the smallest gate that proves the actual risk:
 
 A health endpoint only proves process availability. It never proves business closure.
 
+## Delivery Qualification | 交付资格
+
+The 5S lifecycle describes how work moves. Qualification describes what the
+result is allowed to claim. Record the highest qualification supported by fresh
+evidence:
+
+| Qualification | Meaning | Minimum evidence |
+|---|---|---|
+| `Q0` | Capability is present in code, a registry, or a route | Source or registry inspection; existence is not execution |
+| `Q1` | Parameters, permissions, states, configuration, and required materials are aligned | Baseline, configuration, or runtime-profile evidence |
+| `Q2` | Backend orchestration, provider coverage, the unique side-effect path, and audit chain are closed | Command/API execution plus authoritative data and audit readback |
+| `Q3` | A real customer or product-owner scenario is completed across required clients, reconciliation checks pass, and release evidence is accepted | Business-flow acceptance, cross-client/runtime evidence, reconciliation, and release decision |
+
+Rules:
+
+1. Never claim delivery, release readiness, or saleability from `Q0` or `Q1`.
+2. `Q2` proves a technically executable business capability, not customer
+   acceptance or commercial readiness.
+3. `Q3` is required before describing a result as customer-ready, sellable, or
+   generally released.
+4. HTTP 200, a health check, a page opening, a green CI job, or a local commit
+   is supporting evidence only; none is a qualification by itself.
+5. A qualification claim below `Q3` must name the missing higher-level evidence.
+
 ## Standard Workflow
 
 1. Inspect the current branch, working tree, required remotes, and project delivery scripts.
@@ -81,6 +105,9 @@ A health endpoint only proves process availability. It never proves business clo
 6. Safeguard with project-owned commands and real runtime/DB evidence appropriate to L0-L3.
 7. Sell only after the approved integration, tag/deploy decision, and required remote/CI evidence are complete.
 8. Record non-blocking debt separately. Do not expand the task merely to make the ledger look clean.
+9. Record the achieved `Q0-Q3` qualification separately from the 5S delivery
+   state. `Safeguard` may pass at `Q2` while `Sell` remains blocked pending
+   product acceptance or release evidence.
 
 ## Required Closure Statement
 
@@ -103,6 +130,7 @@ Use `complete` only when Safeguard has passed and the project's required integra
 
 - Do not let a branch name replace evidence.
 - Do not declare a task complete from a local commit alone.
+- Do not call a capability sellable or customer-ready below `Q3`.
 - Do not use a release candidate as a general "more stable" development branch.
 - Do not let release governance duplicate or override backend truth, database facts, or project-owned scripts.
 - Do not force L3 on a small local change merely because the project has release tooling.
@@ -112,3 +140,5 @@ Use `complete` only when Safeguard has passed and the project's required integra
 ## Evolution History
 
 - v1.0.0: Generalized from the GERP 5S delivery state machine and three-line release governance, with project-specific paths and remote names removed.
+- v1.1.0: Added evidence-backed `Q0-Q3` delivery qualification so technical
+  execution and customer or release readiness cannot be conflated.
