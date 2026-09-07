@@ -60,7 +60,11 @@ def find_tool_path(tool_name, known_paths):
     # Check PATH
     cmd = TOOLS[tool_name]["cmd"]
     if cmd:
-        result = subprocess.run(["where", cmd], capture_output=True, text=True)
+        finder = "where" if os.name == "nt" else "which"
+        try:
+            result = subprocess.run([finder, cmd], capture_output=True, text=True)
+        except FileNotFoundError:
+            return ""
         if result.returncode == 0:
             paths = result.stdout.strip().split("\n")
             if paths:

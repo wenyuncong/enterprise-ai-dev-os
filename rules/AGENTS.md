@@ -119,7 +119,7 @@ promote a result to `Q3`.
 For L2/L3 delivery, parallel agent work, or any task with destructive, cross-module, permission, schema, release, or high-risk boundaries:
 
 1. Read `skills/core/ai-delivery-contract-governor/SKILL.md`.
-2. Create a task-local `DeliveryContract` from `docs/_templates/全项目总控/task_contract.json`, using `docs/全项目总控/schemas/digital-life/delivery-contract.schema.json`.
+2. Create a task-local `DeliveryContract` from `docs/_templates/全项目总控/task_contract.json`, using `docs/全项目总控/schemas/governance/delivery-contract.schema.json`.
 3. Before writing, validate scope, truth owner, non-goals, public test seam or justified alternative, proof plan, and exact write allowlist with `py scripts/py/validate_delivery_contract.py --contract <path>`.
 4. Before Safeguard/complete, validate actual changed files, fresh final evidence, and independent two-axis reviews. L2/L3 requires a `verification_owner` different from `implementer`.
 

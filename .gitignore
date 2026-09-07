@@ -44,6 +44,12 @@ docs/LAUNCH_KIT.md
 docs/ERP_TERM_AUDIT.md
 docs/AB_EXPERIMENT.md
 docs/公开材料/推广文章/
+docs/全项目总控/DIGITAL_LIFE_AGENT_MANIFESTO.md
+docs/全项目总控/DIGITAL_LIFE_AGENT_DEVELOPMENT_PLAN.md
+docs/全项目总控/RUNTIME_ALIGNMENT.md
+docs/全项目总控/SELF_BOOTSTRAP.md
+docs/全项目总控/schemas/digital-life/
+scripts/py/generate_promo_articles.py
 evidence/digital_life/
 output/
 理论研究/

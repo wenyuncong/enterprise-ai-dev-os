@@ -4,7 +4,9 @@
 
 **Keep your attention on the business goal and the final outcome. Let agents and large language models handle the engineering work inside a governed, verifiable delivery system.**
 
-Enterprise AI Development OS is a portable methodology and governance layer for AI-native software delivery. It gives AI agents shared rules, reusable skills, project memory, backend truth boundaries, verification gates, and evidence-driven closure across tools and projects.
+Enterprise AI Development OS is a portable methodology and governance toolkit for AI-assisted software delivery. It gives AI agents shared rules, reusable skills, project memory, backend truth boundaries, verification gates, and evidence-driven closure across tools and projects.
+
+This repository provides rules, skills, templates, schemas, audit scripts, installers, CLI utilities, and adapter definitions. It does not provide a universal AI runtime, scheduler, command sandbox, or autonomous business system. Those controls belong to the target project or its own runtime.
 
 It is not an unrestricted promise of autonomous software delivery. People still own business intent, priorities, material trade-offs, risk acceptance, and final business acceptance. Agents and models own the repeatable engineering work: discovery, planning, implementation, testing, documentation, evidence collection, and controlled correction.
 
@@ -23,7 +25,7 @@ Business goal and expected outcome
   -> evidence writeback and capability evolution
 ```
 
-The system is designed for teams that want AI to do most of the engineering work while keeping business truth, permissions, state, side effects, and acceptance under explicit control.
+The system is designed for teams that want AI to do most of the engineering work while keeping business truth, permissions, state, side effects, and acceptance under explicit control. The target project remains responsible for implementing and operating its backend and runtime controls.
 
 ### The Human-AI Boundary
 
@@ -32,7 +34,7 @@ The system is designed for teams that want AI to do most of the engineering work
 | Business goal and expected outcome | Owns | Clarifies and structures |
 | Product priority and trade-offs | Owns | Proposes options |
 | Architecture, schema, code, tests, and docs | Accepts the result | Discovers, implements, and verifies |
-| Runtime truth, permissions, state, and audit | Owns the business decision | Enforces through the project system |
+| Runtime truth, permissions, state, and audit | Owns the business decision | Enforces through the target project's backend/runtime |
 | Final business acceptance | Owns | Produces evidence for review |
 
 The intended experience is simple: the product owner describes what the business must achieve and what the final result must look like. The AI delivery system handles the engineering path and reports what was actually proven.
@@ -104,7 +106,7 @@ HTTP 200, health checks, page visibility, CI success, or a local commit do not i
 |---|---|
 | Rules | Session startup, execution order, safety boundaries, and delivery gates |
 | Skills | Planning, architecture, governance, frontend, backend, data, testing, and deployment capabilities |
-| Documentation memory | Backlog, master index, templates, ADRs, and daily writeback |
+| Documentation memory | Backlog, master index, templates, ADRs, and optional project writeback |
 | Audit gates | Methodology structure, open-source boundary, governance, and readiness checks |
 | Tool adapters | Deploy rules and skills into supported AI coding tools |
 | Evolution loop | Turn repeated failures into rules, templates, tests, or skills |
@@ -189,13 +191,18 @@ py scripts/py/check_open_source_boundary.py --project-root .
 
 See [docs/公开材料/OPEN_SOURCE_PACKAGE.md](docs/公开材料/OPEN_SOURCE_PACKAGE.md), [docs/公开材料/OPEN_SOURCE_READINESS.md](docs/公开材料/OPEN_SOURCE_READINESS.md), and [docs/全项目总控/DISCLOSURE_BOUNDARY.md](docs/全项目总控/DISCLOSURE_BOUNDARY.md).
 
+### Implementation Boundary
+
+The architecture documents describe what an adopted project may implement. They are not claims that this repository already implements every architectural object. In particular, a runtime, command gateway, registry, backend truth model, and business acceptance flow are project-owned. `Rule Runtime Lite` remains a future direction for making selected rules more executable.
+
 ### Current Evidence
 
 - Methodology scenario regression: passing
 - AI-native governance audit: passing
-- Skill health audit: passing; 49 skills, average `100.0/100`
+- Skill health audit: passing; 49 skills, average `100.0/100` structural health score
 - L2 delivery contract for the latest methodology upgrade: passing
 - Full methodology audit: passing with no failures or warnings
+- Independent external business-effect evidence: not yet available; current practice evidence is author-led and not a cross-project benchmark
 
 The evidence status above is intentionally more precise than a blanket “everything passes”. Run the project-owned checks for the current result.
 
@@ -230,7 +237,7 @@ Enterprise AI Development OS 是一套面向全 AI 原生软件交付的可迁�
   -> 证据回写与能力进化
 ```
 
-它不是放任 AI 自由生成代码，也不是承诺 AI 无条件替代产品负责人或业务负责人。它是在规则、Skill、Runtime、命令网关、审计和验收结构内，让 AI 完成尽可能多的工程工作。
+它不是放任 AI 自由生成代码，也不是承诺 AI 无条件替代产品负责人或业务负责人。它是在规则、Skill、项目自身的后端/Runtime、命令入口、审计和验收结构内，让 AI 完成尽可能多的工程工作。本仓库本身不提供通用 Runtime、调度器或命令执行沙箱。
 
 ### 人与 AI 的边界
 
@@ -300,9 +307,10 @@ iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-
 
 - 方法论场景回归：通过
 - AI 原生治理审计：通过
-- Skill 健康审计：通过，49 个 Skill，平均 `100.0/100`
+- Skill 健康审计：通过，49 个 Skill，平均 `100.0/100`，这是结构健康度自检分
 - 最新方法论升级的 L2 交付契约：通过
 - 总方法论审计：通过，失败项和警告项均为 0
+- 独立外部业务效果证据：当前尚无；现有经验来自作者主导实践，不能当作跨项目基准
 
 ### 开源边界与许可
 
@@ -311,3 +319,7 @@ iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-
 公开边界划分在“可复用方法论”和“真实交付资产”之间，而不是划分在“完整”和“简化”文档之间。私有商业策略、真实项目源代码、客户或租户数据、生产配置、未脱敏案例、过程证据、本机路径和本地工具状态不属于公开范围。
 
 公开内容采用 [Apache License 2.0](LICENSE)。
+
+### 实现边界
+
+公开文档中的 Runtime、命令网关、注册表、后端真相和业务闭环，是采用本方法论的项目可以实现的架构对象，不代表本仓库已经提供这些通用运行能力。`Rule Runtime Lite` 仍是将部分规则逐步变为可执行检查的未来方向。

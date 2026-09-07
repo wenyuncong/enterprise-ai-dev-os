@@ -446,7 +446,7 @@ def check_delivery_operating_assets(root: Path, issues: list[Issue]) -> None:
 
 def check_delivery_contract_governance(root: Path, manifest: dict, issues: list[Issue]) -> None:
     skill_path = Path("skills/core/ai-delivery-contract-governor/SKILL.md")
-    schema_path = Path("docs/全项目总控/schemas/digital-life/delivery-contract.schema.json")
+    schema_path = Path("docs/全项目总控/schemas/governance/delivery-contract.schema.json")
     template_path = Path("docs/_templates/全项目总控/task_contract.json")
     validator_path = Path("scripts/py/validate_delivery_contract.py")
     required_files = {

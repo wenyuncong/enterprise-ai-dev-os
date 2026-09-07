@@ -35,6 +35,9 @@ jobs:
       - name: Methodology scenario regression
         run: python scripts/py/test_methodology_scenarios.py --project-root .
 
+      - name: Delivery contract validator regression
+        run: python scripts/py/test_delivery_contract_validator.py -v
+
       - name: Rule lint
         run: python scripts/py/rule_lint.py --project-root .
 
@@ -55,6 +58,12 @@ jobs:
 
       - name: Runtime asset regression tests
         run: python scripts/py/test_runtime_assets.py
+
+      - name: Audit governance contract schemas
+        run: python scripts/py/audit_governance_contracts.py --project-root .
+
+      - name: Report public document references
+        run: python scripts/py/audit_reference_links.py --project-root .
 
       - name: Check open-source boundary
         run: python scripts/py/check_open_source_boundary.py --project-root .

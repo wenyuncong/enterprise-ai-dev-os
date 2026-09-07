@@ -157,7 +157,7 @@ Every evolution must be recorded at the bottom of the affected SKILL.md:
 - v1.0.0 (2026-06-17): Initial extraction from GERP project
 `
 
-The skill archive (docs/_templates/全项目总控/MASTER_INDEX.md) tracks all skills:
+The skill archive (`docs/全项目总控/MASTER_INDEX.md`) tracks all skills:
 
 `markdown
 ## Skill Maturity Matrix — 2026-06-17

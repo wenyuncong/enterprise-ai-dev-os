@@ -86,7 +86,7 @@
 ## Extending the Verification Engine
 
 To add a new check:
-1. Add the check logic in `scripts/verify.js` inside the `try` block
+1. Add the check logic in `skills/governance/ai-runtime-verify/scripts/verify.js` inside the `try` block
 2. Add the check to the appropriate array (`p0Checks`, `p1Checks`, or `p2Checks`)
 3. Update this checklist with the new check description
 4. Bump the skill version in `SKILL.md` Evolution History

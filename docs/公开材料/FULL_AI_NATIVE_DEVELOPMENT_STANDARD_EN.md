@@ -1,8 +1,8 @@
 # Full AI-Native Development Standard
 
-> Version: Draft 1.1  
-> Date: 2026-08-09  
-> Scope: AI-assisted software delivery, enterprise business systems, AI-OS runtime, agent capability governance, and multi-surface business capability reuse.  
+> Version: Draft 1.1
+> Date: 2026-08-09
+> Scope: AI-assisted software delivery, enterprise business systems, project runtime governance, agent capability governance, and multi-surface business capability reuse.
 > Disclosure boundary: this is a standard explanation document. It does not include private repository paths, customer data, unredacted evidence, or unverified benefit metrics.
 
 ## 0. Standard Positioning
@@ -15,7 +15,7 @@ The goals are:
 
 1. Humans express goals, boundaries, and acceptance in business language.
 2. AI analyzes, implements, tests, and delivers inside an understandable structure.
-3. Runtime manages truth, permission, state, evidence, and risk.
+3. The target project's backend/runtime manages truth, permission, state, evidence, and risk; this repository supplies the methodology and gates.
 4. Repeated issues become rules, skills, scripts, atoms, tests, or governance policies.
 
 ## 1. Normative Terms
@@ -163,7 +163,7 @@ Requirements:
 
 ### 3.10 Runtime
 
-The runtime is the substrate that executes the standard. It manages truth, uniqueness, memory, learning, state, permission, evidence, risk, and evolution.
+The runtime is a target-project architecture component that may execute the adopted standard. It manages truth, uniqueness, memory, learning, state, permission, evidence, risk, and evolution. This repository does not include a universal runtime implementation.
 
 Requirements:
 
@@ -242,7 +242,7 @@ Project fit, verifiability, and reversibility determine admission.
 | S1 | Rule-based delivery | Project rules, directory boundaries, development order, and basic verification exist |
 | S2 | Skill-based delivery | Recurring tasks become skills, templates, and scripts |
 | S3 | Architecture-native | Truth owners, atomic services, orchestration, aggregate interfaces, command gateways, and Hosts exist |
-| S4 | Runtime-governed | Runtime manages permission, state, risk, evidence, and multi-surface invocation |
+| S4 | Runtime-governed | A project runtime manages permission, state, risk, evidence, and multi-surface invocation |
 | S5 | Evolvable system | Repeated issues become rules, atoms, tests, and governance policies automatically or semi-automatically |
 
 ## 6. Acceptance Gates

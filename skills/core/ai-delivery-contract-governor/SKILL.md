@@ -37,7 +37,7 @@ L0/L1 work may use the same contract when useful, but should not be burdened wit
 
 Use the project-owned assets:
 
-- Schema: `docs/全项目总控/schemas/digital-life/delivery-contract.schema.json`
+- Schema: `docs/全项目总控/schemas/governance/delivery-contract.schema.json`
 - Template: `docs/_templates/全项目总控/task_contract.json`
 - Validator: `scripts/py/validate_delivery_contract.py`
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ai-os.local/schemas/digital-life/delegation-grant.schema.json",
+  "$id": "https://enterprise-ai-dev-os.local/schemas/governance/delegation-grant.schema.json",
   "title": "DelegationGrant",
   "description": "Scoped, time-bound authorization from a human or runtime authority to an agent or executor.",
   "type": "object",

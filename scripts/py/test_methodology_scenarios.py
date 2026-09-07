@@ -42,7 +42,7 @@ def write_fixture(
     (root / "skills/core/ai-product-directed-delivery").mkdir(parents=True)
     (root / "rules").mkdir(parents=True)
     (root / "docs/全项目总控").mkdir(parents=True)
-    (root / "docs/全项目总控/schemas/digital-life").mkdir(parents=True)
+    (root / "docs/全项目总控/schemas/governance").mkdir(parents=True)
     (root / "docs/_templates/全项目总控").mkdir(parents=True)
     (root / "scripts/py").mkdir(parents=True)
 
@@ -191,7 +191,7 @@ tenant lifecycle regression
             """{"contract_id":"dc_fixture","schema_version":"1.0","status":"scoped","project_id":"fixture","delivery":{"gate":"L2"},"product_contract":{"outcome":"outcome","acceptance_steps":["accept"],"non_goals":["non-goal"]},"truth_owner":"owner","scope":{"write_allowlist":["src/**"],"out_of_scope":["out"],"destructive_classification":"none"},"test_strategy":{"mode":"red_green","public_seam":"public seam","rationale":"reason","focused_test_command":"test"},"evidence_plan":{"final_proofs":[{"proof_id":"proof_fixture","claim":"claim","command_or_check":"test","must_run_after_final_change":true}]},"reviews":{"standards_truth":{"status":"pending","evidence":"pending"},"product_spec":{"status":"pending","evidence":"pending"}},"implementer":"implementer","created_at":"2026-08-21T00:00:00Z","updated_at":"2026-08-21T00:00:00Z"}""",
             encoding="utf-8",
         )
-        (root / "docs/全项目总控/schemas/digital-life/delivery-contract.schema.json").write_text(
+        (root / "docs/全项目总控/schemas/governance/delivery-contract.schema.json").write_text(
             """{"title":"DeliveryContract","additionalProperties":false,"properties":{"delivery":{},"product_contract":{},"truth_owner":{},"scope":{},"test_strategy":{},"evidence_plan":{},"reviews":{}}}""",
             encoding="utf-8",
         )

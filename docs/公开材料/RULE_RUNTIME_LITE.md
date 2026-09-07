@@ -35,7 +35,7 @@ Start with rules that are cheap, deterministic, and useful:
 | Type | Example | Implementation path |
 |---|---|---|
 | Path rules | no files in private folders, no generated adapter outputs committed | Python audit |
-| Structure rules | required docs/templates/skills exist | Python audit |
+| Structure rules | required `docs/_templates/` and `skills/` assets exist | Python audit |
 | Manifest rules | every `SKILL.md` is listed in `SKILL_MANIFEST.json` | Python audit |
 | Text residue rules | no hard-coded local paths or legacy repo names | Python audit |
 | Adapter rules | verified adapters can dry-run without errors | PowerShell dry-run |

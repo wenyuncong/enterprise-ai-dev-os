@@ -219,7 +219,7 @@ Full details: methodology/09_老项目改造方法论.md §5b
 | Category | What to Look For | Feeds To |
 |---|---|---|
 | **Naming** | Consistent class/file/table naming patterns | ai-component-standardizer |
-| **Structure** | Module organization, folder hierarchy | ai-atomic-architect, methodology/08 |
+| **Structure** | Module organization, folder hierarchy | ai-atomic-architect, `methodology/08_项目文件夹结构标准.md` |
 | **Error handling** | How errors are caught, logged, returned | ai-single-truth-enforcer |
 | **API design** | Endpoint naming, request/response format | Backend tech skills |
 | **Component patterns** | How pages are structured (list/form/report) | ai-component-standardizer |

@@ -76,9 +76,9 @@ CandidateCapabilityEvaluation
 
 对应机器可读 Schema：
 
-- `schemas/digital-life/candidate-capability-evaluation.schema.json`
-- `schemas/digital-life/delegation-grant.schema.json`
-- `schemas/digital-life/execution-attestation.schema.json`
+- `schemas/governance/candidate-capability-evaluation.schema.json`
+- `schemas/governance/delegation-grant.schema.json`
+- `schemas/governance/execution-attestation.schema.json`
 
 ## 6. 晋升门槛
 

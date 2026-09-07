@@ -12,8 +12,10 @@
 - `skills/`
 - `methodology/`
 - `docs/全项目总控/AI_NATIVE_DELIVERY_LOOP.md`
+- `docs/全项目总控/AI_NATIVE_CANDIDATE_CAPABILITY_PROTOCOL.md`
 - `docs/全项目总控/DISCLOSURE_BOUNDARY.md`
 - `docs/全项目总控/MASTER_INDEX.md`
+- `docs/全项目总控/schemas/governance/`
 - `docs/公开材料/`
 - `docs/_templates/`
 - `docs/COMPATIBILITY.md`
@@ -27,6 +29,8 @@
 - `docs/全项目总控/AI_NATIVE_DELIVERY_LOOP.md`
 - `docs/全项目总控/DISCLOSURE_BOUNDARY.md`
 - `scripts/py/audit_methodology.py`
+- `scripts/py/audit_governance_contracts.py`
+- `scripts/py/audit_reference_links.py`
 - `scripts/py/discover_tools.py`
 - `scripts/py/env_check.py`
 - `scripts/py/score_ai_development_readiness.py`
@@ -57,6 +61,12 @@
 - `reference/`
 - `备用/`
 - `verification-demo/`
+- `docs/全项目总控/DIGITAL_LIFE_AGENT_MANIFESTO.md`
+- `docs/全项目总控/DIGITAL_LIFE_AGENT_DEVELOPMENT_PLAN.md`
+- `docs/全项目总控/RUNTIME_ALIGNMENT.md`
+- `docs/全项目总控/SELF_BOOTSTRAP.md`
+- `docs/全项目总控/schemas/digital-life/`
+- `scripts/py/generate_promo_articles.py`
 - `.agents/`
 - `.claude/`
 - `.codebuddy/`
@@ -101,4 +111,4 @@ git check-ignore -v docs/内部商业化 docs/商业化 reference 备用 verific
 
 公开定位建议：
 
-> Enterprise AI Development OS: the complete portable methodology kernel for governed AI-native delivery, including rules, skills, templates, schemas, audits, adapters, and evolution loops.
+> Enterprise AI Development OS: a portable methodology and governance toolkit for AI-assisted delivery, including rules, skills, templates, governance schemas, audits, adapters, and evolution loops. It does not include a universal AI runtime or scheduler.

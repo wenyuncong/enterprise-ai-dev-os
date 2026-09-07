@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ai-os.local/schemas/digital-life/candidate-capability-evaluation.schema.json",
+  "$id": "https://enterprise-ai-dev-os.local/schemas/governance/candidate-capability-evaluation.schema.json",
   "title": "CandidateCapabilityEvaluation",
   "description": "Project-fit evaluation and controlled verification plan for an external or internal candidate capability.",
   "type": "object",

@@ -1,6 +1,6 @@
 # Open Source Readiness
 
-Last reviewed: 2026-06-18
+Last reviewed: 2026-09-07
 
 This document records the Open-Core Methodology boundary: the complete portable methodology kernel is public, while real delivery assets and sensitive operational evidence remain private.
 
@@ -30,9 +30,9 @@ Public-ready scope means:
 | Methodology papers | `methodology/` | Public-ready |
 | Documentation templates | `docs/_templates/`, `lite/docs/_templates/` | Public-ready |
 | Public docs | `docs/公开材料/`, `docs/COMPATIBILITY.md`, `docs/TOOL_ADAPTERS.md` | Public-ready |
-| Control docs | `docs/全项目总控/AI_NATIVE_DELIVERY_LOOP.md`, `DISCLOSURE_BOUNDARY.md`, `MASTER_INDEX.md`, `TASK_BACKLOG.md` | Public-ready |
+| Control docs | `docs/全项目总控/AI_NATIVE_DELIVERY_LOOP.md`, `AI_NATIVE_CANDIDATE_CAPABILITY_PROTOCOL.md`, `DISCLOSURE_BOUNDARY.md`, `MASTER_INDEX.md`, `TASK_BACKLOG.md`, `schemas/governance/` | Public-ready |
 | Lite package | `lite/` | Public-ready |
-| Audit scripts | `scripts/py/audit_methodology.py`, `check_open_source_boundary.py`, `discover_tools.py`, `env_check.py`, `score_ai_development_readiness.py`, `tool_registry.py` | Public-ready |
+| Audit scripts | `scripts/py/audit_methodology.py`, `audit_governance_contracts.py`, `audit_reference_links.py`, `check_open_source_boundary.py`, `discover_tools.py`, `env_check.py`, `score_ai_development_readiness.py`, `tool_registry.py` | Public-ready |
 | CLI | `scripts/js/cli.mjs` | Public-ready |
 | Tool adapters | `tools/adapters.json`, `tools/deploy.ps1` | Public-ready as adapter generator, not generated output |
 | Website | `site/`, `.github/workflows/pages.yml` | Public-ready GitHub Pages website |
@@ -61,6 +61,7 @@ Public-ready scope means:
 | Real project case studies | Need separate anonymization and legal/business review |
 | Rule Runtime Lite implementation | Public docs describe the design boundary only; do not claim a runtime engine is implemented |
 | Quantitative improvement claims | Use `docs/公开材料/VALUE_EVIDENCE.md` before publishing percentages |
+| General AI runtime, scheduler, or command sandbox | Not included in this repository; target projects may implement their own controls |
 
 ## Required Checks Before Public Release
 
@@ -68,6 +69,8 @@ Run these commands from the repository root:
 
 ```powershell
 py scripts/py/audit_methodology.py --project-root .
+py scripts/py/audit_governance_contracts.py --project-root .
+py scripts/py/audit_reference_links.py --project-root .
 py scripts/py/check_open_source_boundary.py --project-root .
 py scripts/py/score_ai_development_readiness.py --project-root .
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/deploy.ps1 -Tool verified -DryRun
@@ -78,7 +81,7 @@ Expected result:
 
 - methodology audit: `PASS`
 - open-source boundary check: `PASS`
-- readiness score: `100/100`
+- readiness score: `100/100` structural self-check, not a delivery-effect score
 - adapter deploy dry-run: no errors
 - ignored private directories appear with `!!`, not as tracked or staged files
 

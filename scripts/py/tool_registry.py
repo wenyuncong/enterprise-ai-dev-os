@@ -79,6 +79,9 @@ def main():
     
     json_out = "--json" in sys.argv
     args = [a for a in sys.argv[1:] if a != "--json"]
+    if not args:
+        print(__doc__)
+        sys.exit(1)
     registry = load()
     
     cmd = args[0]

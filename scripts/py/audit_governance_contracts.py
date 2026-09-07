@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit AI-OS digital life JSON Schema contracts."""
+"""Audit public governance JSON Schema contracts."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-SCHEMA_DIR = Path("docs") / "全项目总控" / "schemas" / "digital-life"
+SCHEMA_DIR = Path("docs") / "全项目总控" / "schemas" / "governance"
 
 
 @dataclass
@@ -54,7 +54,7 @@ def audit(root: Path) -> list[Issue]:
     files = schema_files(root)
 
     if not base.exists():
-        return [Issue("FAIL", "SCHEMA_DIR_MISSING", SCHEMA_DIR, "digital life schema directory is missing.")]
+        return [Issue("FAIL", "SCHEMA_DIR_MISSING", SCHEMA_DIR, "governance schema directory is missing.")]
 
     if not readme.exists():
         issues.append(Issue("FAIL", "README_MISSING", rel(readme, root), "schema README is required."))
@@ -99,7 +99,7 @@ def audit(root: Path) -> list[Issue]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Audit digital life JSON Schema contracts.")
+    parser = argparse.ArgumentParser(description="Audit public governance JSON Schema contracts.")
     parser.add_argument("--project-root", default=".", help="Repository root.")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON.")
     args = parser.parse_args()
@@ -127,7 +127,7 @@ def main() -> int:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
         status = "PASS" if result["passed"] else "FAIL"
-        print(f"Digital life schema audit: {status}")
+        print(f"Governance schema audit: {status}")
         print(f"Failures: {result['failCount']} | Warnings: {result['warnCount']}")
         for issue in issues:
             print(f"[{issue.severity}] {issue.code} {str(issue.path).replace(chr(92), '/')}: {issue.message}")

@@ -13,7 +13,7 @@ The core value is not replacing humans, but redefining collaboration:
 
 - Humans own ideas, goals, business judgment, and final acceptance.
 - AI and agents implement code, solutions, creative variations, and repetitive engineering work.
-- The runtime owns truth, permission, state, evidence, and risk boundaries.
+- The target project's backend and runtime own truth, permission, state, evidence, and risk boundaries. This repository provides methodology and gates; it does not ship a universal runtime.
 - Gates, tests, and regression mechanisms turn "it looks done" into "it can be reviewed".
 
 The goal is not merely faster code generation. The goal is to let AI-generated code, workflows, and capabilities enter real business systems while remaining controlled, verifiable, and evolvable.
@@ -68,7 +68,7 @@ Explain -> Standardize -> Amplify
 
 The first stage is explanation. Humans provide business ideas, goals, examples, screenshots, and acceptance results. AI tries to translate them into requirements, tasks, and code.
 
-The second stage is standardization. The system turns repeated explanation into reusable rules, skills, documentation structures, registries, gateways, runtime mechanisms, and verification gates. AI no longer relies on temporary understanding. It works inside a structure.
+The second stage is standardization. The system turns repeated explanation into reusable rules, skills, documentation structures, registries, runtime contracts, and verification gates. AI no longer relies on temporary understanding. It works inside a structure. Runtime mechanisms are implemented by the target project; this repository does not claim to include a universal runtime.
 
 The third stage is amplification. Once the standard is stable, AI and agents gain more room to act. They can implement code, generate solutions, compose workflows, and suggest improvements. Every action still passes through registration, permission, state checks, evidence, and acceptance.
 
@@ -113,7 +113,7 @@ The key principle is this: business truth, field truth, permission truth, state 
 | Command Gateway | The only action entrance for permission, state, idempotency, audit, and risk checks |
 | Registry | Records capabilities, versions, status, providers, permissions, and callable boundaries |
 | Host | Loads aggregate interfaces, renders UI, collects input, and calls the command gateway |
-| Runtime | Executes the standard, maintains truth, records evidence, manages risk and evolution |
+| Target project runtime | Executes the adopted standard, maintains truth, records evidence, manages risk and evolution |
 | Evidence Loop | Proves results through tests, logs, APIs, browser checks, and business-flow evidence |
 
 Together, these objects form an AI-oriented software operating structure. AI does not need to guess what the system can do. It reads registries, aggregate interfaces, and runtime profiles to understand what is possible, what is not possible, and why.
@@ -198,7 +198,7 @@ To remain credible, public communication should avoid these misunderstandings:
 
 - Do not claim that AI fully replaces human product judgment.
 - Do not claim zero defects, fixed savings, or fixed pass rates without benchmark evidence.
-- Do not describe digital life as proven consciousness.
+- Do not describe future autonomous-agent or "digital life" concepts as implemented capabilities of this repository.
 - Do not make training a proprietary foundation model a prerequisite of the current standard.
 - Do not make any specific AI tool, model, or vendor a prerequisite.
 - Do not publish private ERP details, customer data, local paths, or unredacted evidence.
@@ -220,10 +220,10 @@ Full AI-Native Development can be adopted in stages:
 | S1 Rule-based | Establish project rules, directory boundaries, development order, and basic verification |
 | S2 Skill-based | Package recurring tasks into reusable skills, templates, and check scripts |
 | S3 Architecture-native | Establish truth sources, atomic services, orchestration, aggregate interfaces, command gateways, and Hosts |
-| S4 Runtime-governed | Use runtime to manage permission, state, evidence, risk, and multi-surface invocation |
+| S4 Runtime-governed | A project runtime manages permission, state, evidence, risk, and multi-surface invocation |
 | S5 Evolvable system | Convert repeated issues into rules, atoms, tests, skills, or governance policies automatically or semi-automatically |
 
-This roadmap does not require a complete digital-life system or proprietary model training system at the beginning. For many teams, reaching S1 to S3 already reduces the risk of uncontrolled AI coding significantly.
+This roadmap does not require a complete autonomous runtime or proprietary model training system at the beginning. For many teams, reaching S1 to S3 already provides a useful governed delivery baseline. S4 and S5 require project-specific runtime and evidence; they are not included automatically by installing this repository.
 
 ## 12. One-Sentence External Positioning
 

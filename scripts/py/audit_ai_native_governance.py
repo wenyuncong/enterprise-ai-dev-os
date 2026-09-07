@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-SCHEMA_DIR = Path("docs") / "全项目总控" / "schemas" / "digital-life"
+SCHEMA_DIR = Path("docs") / "全项目总控" / "schemas" / "governance"
 PROTOCOL_PATH = Path("docs") / "全项目总控" / "AI_NATIVE_CANDIDATE_CAPABILITY_PROTOCOL.md"
 
 CONTRACTS = {
