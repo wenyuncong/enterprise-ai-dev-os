@@ -1,0 +1,89 @@
+{
+  "site": "",
+  "checks": [
+    {
+      "name": "默认首页是白皮书",
+      "ok": true,
+      "detail": "企业级全 AI 开发方法论 · 核心白皮书 | Enterprise-Grade Full AI Development Methodology"
+    },
+    {
+      "name": "侧栏自动加载 >=100 条",
+      "ok": true,
+      "detail": "118"
+    },
+    {
+      "name": "侧栏含 Skill 正文 >=40 条",
+      "ok": true,
+      "detail": "42"
+    },
+    {
+      "name": "白皮书渲染出表格/标题",
+      "ok": true,
+      "detail": "{\"tables\":6,\"pres\":4,\"h2\":10}"
+    },
+    {
+      "name": "并排对照两侧都有内容",
+      "ok": true,
+      "detail": "{\"on\":true,\"zh\":10,\"en\":9,\"enLen\":9958}"
+    },
+    {
+      "name": "English 单栏渲染英文原文",
+      "ok": true,
+      "detail": "英文源文件：methodology/00_核心方法论白皮书.md  Enterprise-Grade Full AI Development Methodology | 企业级全AI开发方法论  Document Type: Core Whitepaper | 核心白皮书 Version: 1.0.0 | Date: "
+    },
+    {
+      "name": "Skill 页可打开且含章节对齐信息",
+      "ok": true,
+      "detail": "ai-5s-delivery-governor — 5S 交付治理 | `ai-5s-delivery-governor` — 5S 交付治理 已同步（源未变） 分组：Skill 正文（49 个） 源文件：skills/core/ai-5s-delivery-governor/SKILL.md 源版本：未标注（源文件 frontmatter 只有 `"
+    },
+    {
+      "name": "tech Skill 页（中文摘要 + 英文原文）",
+      "ok": true,
+      "detail": "{\"zh\":2929,\"en\":2261}"
+    },
+    {
+      "name": "中英同步总览页可用",
+      "ok": true,
+      "detail": "{\"h1\":\"中英同步总览\",\"rows\":108}"
+    },
+    {
+      "name": "全文搜索可用且有高亮",
+      "ok": true,
+      "detail": "{\"on\":true,\"hits\":13,\"marks\":14}"
+    },
+    {
+      "name": "站内链接可在 SPA 内跳转",
+      "ok": true,
+      "detail": "{\"linkTest\":{\"before\":\"全 AI 开发方法论（中文版）| Enterprise AI Development OS (Chinese Edition)\",\"target\":\"00_导读/02_术语对照表.md\"},\"after\":\"术语对照表（中英）| Glossary (CN/EN)\"}"
+    },
+    {
+      "name": "全量逐页扫描无问题",
+      "ok": true,
+      "detail": "问题 0 项"
+    }
+  ],
+  "consoleErrors": [],
+  "problems": [],
+  "stats": {
+    "docs": 123,
+    "tablesRendered": 372,
+    "codeBlocksRendered": 256,
+    "zhRenderedRatio": 0.89,
+    "enDocsChecked": 114,
+    "enTablesRendered": 272,
+    "enRenderedRatio": 0.932,
+    "consoleErrors": 0,
+    "problems": 0,
+    "passed": 12,
+    "total": 12
+  },
+  "screenshots": [
+    "../../../../企业级梦境系统/i18n/zh-CN/90_校验/screenshots/01_home_zh.png",
+    "../../../../企业级梦境系统/i18n/zh-CN/90_校验/screenshots/02_compare.png",
+    "../../../../企业级梦境系统/i18n/zh-CN/90_校验/screenshots/03_skill_5s.png",
+    "../../../../企业级梦境系统/i18n/zh-CN/90_校验/screenshots/04_tech_skill.png",
+    "../../../../企业级梦境系统/i18n/zh-CN/90_校验/screenshots/05_overview.png",
+    "../../../../企业级梦境系统/i18n/zh-CN/90_校验/screenshots/06_search.png"
+  ],
+  "browser": "chromium + msedge channel"
+}

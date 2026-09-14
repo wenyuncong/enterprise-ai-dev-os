@@ -14,6 +14,11 @@ dist/
 build/
 target/
 
+# Chinese edition local artifacts (generated evidence, not source)
+i18n/zh-CN/90_校验/screenshots/
+i18n/zh-CN/90_校验/verify_stdout.txt
+i18n/zh-CN/site/index.html
+
 # AI tool adapter outputs and local tool state
 .agents/
 .claude/

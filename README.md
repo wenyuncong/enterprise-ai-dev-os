@@ -1,6 +1,6 @@
 # Enterprise AI Development OS
 
-[Website](https://wenyuncong.github.io/enterprise-ai-dev-os/) | [中文](#中文) | [English](#english)
+[Website](https://wenyuncong.github.io/enterprise-ai-dev-os/) | [中文](#中文) | [English](#english) | [中文版全文 / Chinese Edition](i18n/zh-CN/README.md)
 
 **Keep your attention on the business goal and the final outcome. Let agents and large language models handle the engineering work inside a governed, verifiable delivery system.**
 

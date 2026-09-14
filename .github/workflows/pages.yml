@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "site/**"
+      - "i18n/zh-CN/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -27,6 +28,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Build Chinese edition site
+        run: |
+          python i18n/zh-CN/site/build_site.py --source-root .
+          mkdir -p site/zh-CN
+          cp i18n/zh-CN/site/index.html site/zh-CN/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

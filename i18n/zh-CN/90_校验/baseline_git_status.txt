@@ -1,0 +1,6 @@
+# 基线（2026-09-14 翻译开工前）
+HEAD=8951188
+全部改动=1 行
+受保护路径改动=1 行
+
+受保护路径清单：AGENTS.md, CLAUDE.md, README.md, rules/, skills/, methodology/, docs/_templates/
