@@ -190,5 +190,5 @@ interface NotificationAPI {
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-ui-ux (19KB original + 2 references)
-- Source: Enterprise ERP UI/UX governance across 50+ page types
-
+- Source: Enterprise ERP UI/UX governance across 50+ page types
+

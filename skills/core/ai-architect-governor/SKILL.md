@@ -123,4 +123,4 @@ Every business capability must distinguish:
 
 - v1.0.0: Extracted from gerp-architect-governor (15KB original)
 - v1.1.0: Generalized to universal architecture governance patterns
-- Source: Multi-domain enterprise system (ERP + Mall + App + Agent + SaaS)
+- Source: Multi-domain enterprise system (ERP + Mall + App + Agent + SaaS)

@@ -146,4 +146,4 @@ When one physical entity (table) represents multiple business identities:
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-atomic-component-fieldpackage (111KB original)
-- Source: Enterprise ERP metadata governance across purchase/sales/inventory/finance/capital modules
+- Source: Enterprise ERP metadata governance across purchase/sales/inventory/finance/capital modules

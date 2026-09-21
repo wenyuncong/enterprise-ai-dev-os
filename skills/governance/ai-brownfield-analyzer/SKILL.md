@@ -270,4 +270,4 @@ Full details: methodology/09_老项目改造方法论.md §5b
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 5-step analysis workflow, 5 intervention levels, pattern extraction, semi-finished project handling
+- v1.0.0: Initial creation — 5-step analysis workflow, 5 intervention levels, pattern extraction, semi-finished project handling

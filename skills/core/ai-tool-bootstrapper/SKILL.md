@@ -150,4 +150,4 @@ python scripts/py/tool_registry.py set {tool_name} "{install_path}" "{version}"
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 5 tool categories, auto-detection, winget/npm/pip install strategies, self-evolution recording
+- v1.0.0: Initial creation — 5 tool categories, auto-detection, winget/npm/pip install strategies, self-evolution recording

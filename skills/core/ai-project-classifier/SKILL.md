@@ -226,4 +226,4 @@ Every project start must produce this summary:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 4 dimensions, 3 quality targets, classification output template
+- v1.0.0: Initial creation — 4 dimensions, 3 quality targets, classification output template

@@ -474,7 +474,8 @@ def check_source_integrity(source: Path | None, edition: Path, rep: Report,
     if missing:
         rep.add("FAIL", "SOURCE_MISSING", "英文正式源文件缺失：" + "、".join(missing[:10]))
     if not changed and not missing:
-        rep.add("PASS", "SOURCE_INTACT", f"{len(read_text(baseline).strip().splitlines())} 个受保护英文源文件哈希与基线一致")
+        entries = [line for line in read_text(baseline).splitlines() if "|" in line]
+        rep.add("PASS", "SOURCE_INTACT", f"{len(entries)} 个受保护英文源文件哈希与基线一致")
 
 
 LINK = re.compile(r"\]\(([^)#\s]+)(?:#[^)\s]*)?\)")

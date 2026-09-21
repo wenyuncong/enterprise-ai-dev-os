@@ -1,4 +1,4 @@
-﻿---
+---
 name: ai-task-decomposer
 description: "Break complex work into safe executable batches with dependencies, scope boundaries, acceptance criteria, evidence requirements, and handoff-ready task slices. Use for multi-module tasks, long-running work, parallel execution, or ambiguous implementation requests."
 ---

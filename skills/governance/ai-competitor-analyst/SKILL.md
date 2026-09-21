@@ -150,4 +150,4 @@ Rating:
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-competitor-analyst
-- v1.1.0: Generalized with universal benchmark framework
+- v1.1.0: Generalized with universal benchmark framework

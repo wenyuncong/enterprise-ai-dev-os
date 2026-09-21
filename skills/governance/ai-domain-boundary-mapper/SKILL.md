@@ -116,4 +116,4 @@ Flag any:
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-domain-boundary-mapper
-- v1.1.0: Generalized with universal domain patterns
+- v1.1.0: Generalized with universal domain patterns

@@ -183,4 +183,4 @@ Run this check on any PR or completed task:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — library catalog for Vue, React, Java Spring Boot, Node.js, token cost analysis
+- v1.0.0: Initial creation — library catalog for Vue, React, Java Spring Boot, Node.js, token cost analysis

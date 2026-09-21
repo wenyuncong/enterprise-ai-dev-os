@@ -1,4 +1,4 @@
-﻿---
+---
 name: ai-single-truth-enforcer
 description: "Enforce backend-owned truth, single source of business logic, no duplicate computation, correct notification severity, and no silent failures. Use for frontend/backend splits, validation, calculations, permissions, status transitions, and shared business rules."
 ---

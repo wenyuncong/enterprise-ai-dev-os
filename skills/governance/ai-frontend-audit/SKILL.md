@@ -123,4 +123,4 @@ Basic accessibility should be maintained.
 ## Evolution History | 进化记录
 
 - v1.0.0: Extracted from gerp-frontend-availability-audit
-- v1.1.0: Generalized with universal frontend quality dimensions
+- v1.1.0: Generalized with universal frontend quality dimensions

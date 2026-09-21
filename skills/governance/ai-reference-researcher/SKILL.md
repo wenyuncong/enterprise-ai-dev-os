@@ -252,4 +252,4 @@ Step 13: Runtime Verify
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — 5-phase research workflow, domain reference targets, license awareness
+- v1.0.0: Initial creation — 5-phase research workflow, domain reference targets, license awareness

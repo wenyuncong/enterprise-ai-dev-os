@@ -162,4 +162,4 @@ Before merging any foundation change, verify:
 - v1.2.0: Added a fail-closed cross-environment migration consistency gate,
   including manifest, checksum, execution history, post-migration checks, and
   recovery evidence.
-- Source: 12+ months of enterprise ERP foundation governance
+- Source: 12+ months of enterprise ERP foundation governance
