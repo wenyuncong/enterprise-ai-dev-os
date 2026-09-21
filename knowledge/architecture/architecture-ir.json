@@ -1,0 +1,2856 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-09-21T03:37:06Z",
+  "project_root": "G:\\企业级梦境系统",
+  "scan_mode": "read-only-bounded",
+  "technology": {
+    "languages": [
+      "javascript"
+    ],
+    "frameworks": [
+      "express"
+    ],
+    "databases": [],
+    "package_managers": [
+      "npm"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "api:/api/notes",
+      "type": "api",
+      "label": "/api/notes",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "api:/api/notes/:id",
+      "type": "api",
+      "label": "/api/notes/:id",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "api:/api/tasks",
+      "type": "api",
+      "label": "/api/tasks",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "api:/api/tasks/:id",
+      "type": "api",
+      "label": "/api/tasks/:id",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "api:/api/tasks/:id/notes",
+      "type": "api",
+      "label": "/api/tasks/:id/notes",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "api:/api/tasks/:id/status",
+      "type": "api",
+      "label": "/api/tasks/:id/status",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "api:/api/tasks/stats",
+      "type": "api",
+      "label": "/api/tasks/stats",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "api:/api/tasks/status/done",
+      "type": "api",
+      "label": "/api/tasks/status/done",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "api:/orders",
+      "type": "api",
+      "label": "/orders",
+      "source": "scripts/py/test_architecture_delivery.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "db:notes",
+      "type": "database_table",
+      "label": "notes",
+      "source": "verification-demo/backend/database/schema.sql",
+      "confidence": "observed"
+    },
+    {
+      "id": "db:tasks",
+      "type": "database_table",
+      "label": "tasks",
+      "source": "verification-demo/backend/database/schema.sql",
+      "confidence": "observed"
+    },
+    {
+      "id": "deploy:.github/workflows/ci.yml",
+      "type": "deploy",
+      "label": ".github/workflows/ci.yml",
+      "source": ".github/workflows/ci.yml",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:bootstrap/02_机读三件套/validate.py",
+      "type": "file",
+      "label": "bootstrap/02_机读三件套/validate.py",
+      "source": "bootstrap/02_机读三件套/validate.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:i18n/zh-CN/90_校验/build_skill_index.py",
+      "type": "file",
+      "label": "i18n/zh-CN/90_校验/build_skill_index.py",
+      "source": "i18n/zh-CN/90_校验/build_skill_index.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:i18n/zh-CN/90_校验/check_repo_compat.py",
+      "type": "file",
+      "label": "i18n/zh-CN/90_校验/check_repo_compat.py",
+      "source": "i18n/zh-CN/90_校验/check_repo_compat.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "type": "file",
+      "label": "i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:i18n/zh-CN/90_校验/verify_site_runtime.mjs",
+      "type": "file",
+      "label": "i18n/zh-CN/90_校验/verify_site_runtime.mjs",
+      "source": "i18n/zh-CN/90_校验/verify_site_runtime.mjs",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:i18n/zh-CN/site/build_site.py",
+      "type": "file",
+      "label": "i18n/zh-CN/site/build_site.py",
+      "source": "i18n/zh-CN/site/build_site.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/js/cli.mjs",
+      "type": "file",
+      "label": "scripts/js/cli.mjs",
+      "source": "scripts/js/cli.mjs",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/js/test_cli.mjs",
+      "type": "file",
+      "label": "scripts/js/test_cli.mjs",
+      "source": "scripts/js/test_cli.mjs",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/aggregate_evidence.py",
+      "type": "file",
+      "label": "scripts/py/aggregate_evidence.py",
+      "source": "scripts/py/aggregate_evidence.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/architecture_delivery.py",
+      "type": "file",
+      "label": "scripts/py/architecture_delivery.py",
+      "source": "scripts/py/architecture_delivery.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/audit_ai_native_governance.py",
+      "type": "file",
+      "label": "scripts/py/audit_ai_native_governance.py",
+      "source": "scripts/py/audit_ai_native_governance.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/audit_governance_contracts.py",
+      "type": "file",
+      "label": "scripts/py/audit_governance_contracts.py",
+      "source": "scripts/py/audit_governance_contracts.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/audit_methodology.py",
+      "type": "file",
+      "label": "scripts/py/audit_methodology.py",
+      "source": "scripts/py/audit_methodology.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/audit_reference_links.py",
+      "type": "file",
+      "label": "scripts/py/audit_reference_links.py",
+      "source": "scripts/py/audit_reference_links.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/audit_skill_health.py",
+      "type": "file",
+      "label": "scripts/py/audit_skill_health.py",
+      "source": "scripts/py/audit_skill_health.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/build_repomap.py",
+      "type": "file",
+      "label": "scripts/py/build_repomap.py",
+      "source": "scripts/py/build_repomap.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/check_constitution.py",
+      "type": "file",
+      "label": "scripts/py/check_constitution.py",
+      "source": "scripts/py/check_constitution.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/check_open_source_boundary.py",
+      "type": "file",
+      "label": "scripts/py/check_open_source_boundary.py",
+      "source": "scripts/py/check_open_source_boundary.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/collect_evidence.py",
+      "type": "file",
+      "label": "scripts/py/collect_evidence.py",
+      "source": "scripts/py/collect_evidence.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/discover_tools.py",
+      "type": "file",
+      "label": "scripts/py/discover_tools.py",
+      "source": "scripts/py/discover_tools.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/env_check.py",
+      "type": "file",
+      "label": "scripts/py/env_check.py",
+      "source": "scripts/py/env_check.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/event_trace.py",
+      "type": "file",
+      "label": "scripts/py/event_trace.py",
+      "source": "scripts/py/event_trace.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/evolution_counter.py",
+      "type": "file",
+      "label": "scripts/py/evolution_counter.py",
+      "source": "scripts/py/evolution_counter.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "type": "file",
+      "label": "scripts/py/generate_device_iot_solution_pdf.py",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/generate_promo_articles.py",
+      "type": "file",
+      "label": "scripts/py/generate_promo_articles.py",
+      "source": "scripts/py/generate_promo_articles.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/methodology_mcp_server.py",
+      "type": "file",
+      "label": "scripts/py/methodology_mcp_server.py",
+      "source": "scripts/py/methodology_mcp_server.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/methodology_precheck_hook.py",
+      "type": "file",
+      "label": "scripts/py/methodology_precheck_hook.py",
+      "source": "scripts/py/methodology_precheck_hook.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/methodology_rules.py",
+      "type": "file",
+      "label": "scripts/py/methodology_rules.py",
+      "source": "scripts/py/methodology_rules.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/orchestrate_dag.py",
+      "type": "file",
+      "label": "scripts/py/orchestrate_dag.py",
+      "source": "scripts/py/orchestrate_dag.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/project_onboarding.py",
+      "type": "file",
+      "label": "scripts/py/project_onboarding.py",
+      "source": "scripts/py/project_onboarding.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/rule_lint.py",
+      "type": "file",
+      "label": "scripts/py/rule_lint.py",
+      "source": "scripts/py/rule_lint.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/score_ai_development_readiness.py",
+      "type": "file",
+      "label": "scripts/py/score_ai_development_readiness.py",
+      "source": "scripts/py/score_ai_development_readiness.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/test_architecture_delivery.py",
+      "type": "file",
+      "label": "scripts/py/test_architecture_delivery.py",
+      "source": "scripts/py/test_architecture_delivery.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/test_delivery_contract_validator.py",
+      "type": "file",
+      "label": "scripts/py/test_delivery_contract_validator.py",
+      "source": "scripts/py/test_delivery_contract_validator.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/test_methodology_guard.py",
+      "type": "file",
+      "label": "scripts/py/test_methodology_guard.py",
+      "source": "scripts/py/test_methodology_guard.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/test_methodology_scenarios.py",
+      "type": "file",
+      "label": "scripts/py/test_methodology_scenarios.py",
+      "source": "scripts/py/test_methodology_scenarios.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/test_project_onboarding.py",
+      "type": "file",
+      "label": "scripts/py/test_project_onboarding.py",
+      "source": "scripts/py/test_project_onboarding.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/test_runtime_assets.py",
+      "type": "file",
+      "label": "scripts/py/test_runtime_assets.py",
+      "source": "scripts/py/test_runtime_assets.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/test_skill_frontmatter_gate.py",
+      "type": "file",
+      "label": "scripts/py/test_skill_frontmatter_gate.py",
+      "source": "scripts/py/test_skill_frontmatter_gate.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/tool_registry.py",
+      "type": "file",
+      "label": "scripts/py/tool_registry.py",
+      "source": "scripts/py/tool_registry.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:scripts/py/validate_delivery_contract.py",
+      "type": "file",
+      "label": "scripts/py/validate_delivery_contract.py",
+      "source": "scripts/py/validate_delivery_contract.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:verification-demo/backend/database/db.js",
+      "type": "file",
+      "label": "verification-demo/backend/database/db.js",
+      "source": "verification-demo/backend/database/db.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:verification-demo/backend/server.js",
+      "type": "file",
+      "label": "verification-demo/backend/server.js",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "file:verification-demo/backend/test/api.test.js",
+      "type": "file",
+      "label": "verification-demo/backend/test/api.test.js",
+      "source": "verification-demo/backend/test/api.test.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "manifest:package.json",
+      "type": "dependency_manifest",
+      "label": "package.json",
+      "source": "package.json",
+      "confidence": "observed"
+    },
+    {
+      "id": "manifest:verification-demo/backend/package.json",
+      "type": "dependency_manifest",
+      "label": "verification-demo/backend/package.json",
+      "source": "verification-demo/backend/package.json",
+      "confidence": "observed"
+    },
+    {
+      "id": "manifest:verification-demo/package.json",
+      "type": "dependency_manifest",
+      "label": "verification-demo/package.json",
+      "source": "verification-demo/package.json",
+      "confidence": "observed"
+    },
+    {
+      "id": "module:PIL",
+      "type": "module",
+      "label": "PIL",
+      "source": "scripts/py/generate_promo_articles.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:__future__",
+      "type": "module",
+      "label": "__future__",
+      "source": "bootstrap/02_机读三件套/validate.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:architecture_delivery",
+      "type": "module",
+      "label": "architecture_delivery",
+      "source": "scripts/py/test_architecture_delivery.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:argparse",
+      "type": "module",
+      "label": "argparse",
+      "source": "bootstrap/02_机读三件套/validate.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:assert",
+      "type": "module",
+      "label": "assert",
+      "source": "scripts/js/test_cli.mjs",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:audit_methodology",
+      "type": "module",
+      "label": "audit_methodology",
+      "source": "i18n/zh-CN/90_校验/check_repo_compat.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:bootstrap",
+      "type": "module",
+      "label": "bootstrap",
+      "source": "bootstrap/02_机读三件套/validate.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "module:collections",
+      "type": "module",
+      "label": "collections",
+      "source": "scripts/py/audit_reference_links.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:copy",
+      "type": "module",
+      "label": "copy",
+      "source": "scripts/py/test_delivery_contract_validator.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:dataclasses",
+      "type": "module",
+      "label": "dataclasses",
+      "source": "scripts/py/audit_ai_native_governance.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:datetime",
+      "type": "module",
+      "label": "datetime",
+      "source": "i18n/zh-CN/site/build_site.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:docx",
+      "type": "module",
+      "label": "docx",
+      "source": "scripts/py/generate_promo_articles.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:fnmatch",
+      "type": "module",
+      "label": "fnmatch",
+      "source": "scripts/py/validate_delivery_contract.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:fs",
+      "type": "module",
+      "label": "fs",
+      "source": "i18n/zh-CN/90_校验/verify_site_runtime.mjs",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:glob",
+      "type": "module",
+      "label": "glob",
+      "source": "scripts/py/env_check.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:hashlib",
+      "type": "module",
+      "label": "hashlib",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:html",
+      "type": "module",
+      "label": "html",
+      "source": "scripts/py/architecture_delivery.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:i18n",
+      "type": "module",
+      "label": "i18n",
+      "source": "i18n/zh-CN/90_校验/build_skill_index.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "module:json",
+      "type": "module",
+      "label": "json",
+      "source": "bootstrap/02_机读三件套/validate.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:jsonschema",
+      "type": "module",
+      "label": "jsonschema",
+      "source": "bootstrap/02_机读三件套/validate.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:locale",
+      "type": "module",
+      "label": "locale",
+      "source": "scripts/py/test_methodology_scenarios.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:math",
+      "type": "module",
+      "label": "math",
+      "source": "scripts/py/generate_promo_articles.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:methodology_mcp_server",
+      "type": "module",
+      "label": "methodology_mcp_server",
+      "source": "scripts/py/test_methodology_guard.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:methodology_rules",
+      "type": "module",
+      "label": "methodology_rules",
+      "source": "scripts/py/methodology_mcp_server.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:os",
+      "type": "module",
+      "label": "os",
+      "source": "scripts/py/architecture_delivery.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:path",
+      "type": "module",
+      "label": "path",
+      "source": "i18n/zh-CN/90_校验/verify_site_runtime.mjs",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:pathlib",
+      "type": "module",
+      "label": "pathlib",
+      "source": "bootstrap/02_机读三件套/validate.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:project_onboarding",
+      "type": "module",
+      "label": "project_onboarding",
+      "source": "scripts/py/test_project_onboarding.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:pypdf",
+      "type": "module",
+      "label": "pypdf",
+      "source": "scripts/py/generate_promo_articles.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:re",
+      "type": "module",
+      "label": "re",
+      "source": "i18n/zh-CN/90_校验/build_skill_index.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:reportlab",
+      "type": "module",
+      "label": "reportlab",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:rule_lint",
+      "type": "module",
+      "label": "rule_lint",
+      "source": "scripts/py/check_constitution.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:scripts",
+      "type": "module",
+      "label": "scripts",
+      "source": "scripts/js/cli.mjs",
+      "confidence": "observed"
+    },
+    {
+      "id": "module:shutil",
+      "type": "module",
+      "label": "shutil",
+      "source": "scripts/py/test_methodology_guard.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:subprocess",
+      "type": "module",
+      "label": "subprocess",
+      "source": "scripts/py/aggregate_evidence.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:sys",
+      "type": "module",
+      "label": "sys",
+      "source": "bootstrap/02_机读三件套/validate.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:tempfile",
+      "type": "module",
+      "label": "tempfile",
+      "source": "scripts/py/test_architecture_delivery.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:time",
+      "type": "module",
+      "label": "time",
+      "source": "scripts/py/collect_evidence.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:typing",
+      "type": "module",
+      "label": "typing",
+      "source": "scripts/py/architecture_delivery.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:unittest",
+      "type": "module",
+      "label": "unittest",
+      "source": "scripts/py/test_architecture_delivery.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:validate_delivery_contract",
+      "type": "module",
+      "label": "validate_delivery_contract",
+      "source": "scripts/py/test_delivery_contract_validator.py",
+      "confidence": "inferred"
+    },
+    {
+      "id": "module:verification-demo",
+      "type": "module",
+      "label": "verification-demo",
+      "source": "verification-demo/backend/server.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:docs/_templates/测试验收报告/TEST_REPORT_TEMPLATE.md",
+      "type": "test",
+      "label": "docs/_templates/测试验收报告/TEST_REPORT_TEMPLATE.md",
+      "source": "docs/_templates/测试验收报告/TEST_REPORT_TEMPLATE.md",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:evidence/digital_life/test/risk_eval_deploy_production_2a7ceb1e.json",
+      "type": "test",
+      "label": "evidence/digital_life/test/risk_eval_deploy_production_2a7ceb1e.json",
+      "source": "evidence/digital_life/test/risk_eval_deploy_production_2a7ceb1e.json",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:evidence/digital_life/test/risk_eval_deploy_production_7afc1d00.json",
+      "type": "test",
+      "label": "evidence/digital_life/test/risk_eval_deploy_production_7afc1d00.json",
+      "source": "evidence/digital_life/test/risk_eval_deploy_production_7afc1d00.json",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:evidence/digital_life/test/risk_eval_deploy_production_8777fa7e.json",
+      "type": "test",
+      "label": "evidence/digital_life/test/risk_eval_deploy_production_8777fa7e.json",
+      "source": "evidence/digital_life/test/risk_eval_deploy_production_8777fa7e.json",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:evidence/digital_life/test/risk_eval_deploy_production_92018a38.json",
+      "type": "test",
+      "label": "evidence/digital_life/test/risk_eval_deploy_production_92018a38.json",
+      "source": "evidence/digital_life/test/risk_eval_deploy_production_92018a38.json",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:i18n/zh-CN/30_模板/测试验收报告/TEST_REPORT_TEMPLATE_中文版.md",
+      "type": "test",
+      "label": "i18n/zh-CN/30_模板/测试验收报告/TEST_REPORT_TEMPLATE_中文版.md",
+      "source": "i18n/zh-CN/30_模板/测试验收报告/TEST_REPORT_TEMPLATE_中文版.md",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:scripts/js/test_cli.mjs",
+      "type": "test",
+      "label": "scripts/js/test_cli.mjs",
+      "source": "scripts/js/test_cli.mjs",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:scripts/ps1/test_deploy.ps1",
+      "type": "test",
+      "label": "scripts/ps1/test_deploy.ps1",
+      "source": "scripts/ps1/test_deploy.ps1",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:scripts/py/test_architecture_delivery.py",
+      "type": "test",
+      "label": "scripts/py/test_architecture_delivery.py",
+      "source": "scripts/py/test_architecture_delivery.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:scripts/py/test_delivery_contract_validator.py",
+      "type": "test",
+      "label": "scripts/py/test_delivery_contract_validator.py",
+      "source": "scripts/py/test_delivery_contract_validator.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:scripts/py/test_methodology_guard.py",
+      "type": "test",
+      "label": "scripts/py/test_methodology_guard.py",
+      "source": "scripts/py/test_methodology_guard.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:scripts/py/test_methodology_scenarios.py",
+      "type": "test",
+      "label": "scripts/py/test_methodology_scenarios.py",
+      "source": "scripts/py/test_methodology_scenarios.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:scripts/py/test_project_onboarding.py",
+      "type": "test",
+      "label": "scripts/py/test_project_onboarding.py",
+      "source": "scripts/py/test_project_onboarding.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:scripts/py/test_runtime_assets.py",
+      "type": "test",
+      "label": "scripts/py/test_runtime_assets.py",
+      "source": "scripts/py/test_runtime_assets.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:scripts/py/test_skill_frontmatter_gate.py",
+      "type": "test",
+      "label": "scripts/py/test_skill_frontmatter_gate.py",
+      "source": "scripts/py/test_skill_frontmatter_gate.py",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:verification-demo/backend/test/api.test.js",
+      "type": "test",
+      "label": "verification-demo/backend/test/api.test.js",
+      "source": "verification-demo/backend/test/api.test.js",
+      "confidence": "observed"
+    },
+    {
+      "id": "test:verification-demo/docs/_templates/测试验收报告/TEST_REPORT_TEMPLATE.md",
+      "type": "test",
+      "label": "verification-demo/docs/_templates/测试验收报告/TEST_REPORT_TEMPLATE.md",
+      "source": "verification-demo/docs/_templates/测试验收报告/TEST_REPORT_TEMPLATE.md",
+      "confidence": "observed"
+    }
+  ],
+  "edges": [
+    {
+      "from": "file:bootstrap/02_机读三件套/validate.py",
+      "to": "module:bootstrap",
+      "type": "belongs_to",
+      "source": "bootstrap/02_机读三件套/validate.py"
+    },
+    {
+      "from": "file:bootstrap/02_机读三件套/validate.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "bootstrap/02_机读三件套/validate.py"
+    },
+    {
+      "from": "file:bootstrap/02_机读三件套/validate.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "bootstrap/02_机读三件套/validate.py"
+    },
+    {
+      "from": "file:bootstrap/02_机读三件套/validate.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "bootstrap/02_机读三件套/validate.py"
+    },
+    {
+      "from": "file:bootstrap/02_机读三件套/validate.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "bootstrap/02_机读三件套/validate.py"
+    },
+    {
+      "from": "file:bootstrap/02_机读三件套/validate.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "bootstrap/02_机读三件套/validate.py"
+    },
+    {
+      "from": "file:bootstrap/02_机读三件套/validate.py",
+      "to": "module:jsonschema",
+      "type": "imports",
+      "source": "bootstrap/02_机读三件套/validate.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/build_skill_index.py",
+      "to": "module:i18n",
+      "type": "belongs_to",
+      "source": "i18n/zh-CN/90_校验/build_skill_index.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/build_skill_index.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/build_skill_index.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/build_skill_index.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/build_skill_index.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/build_skill_index.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/build_skill_index.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/build_skill_index.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/build_skill_index.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/build_skill_index.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/build_skill_index.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/check_repo_compat.py",
+      "to": "module:i18n",
+      "type": "belongs_to",
+      "source": "i18n/zh-CN/90_校验/check_repo_compat.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/check_repo_compat.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/check_repo_compat.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/check_repo_compat.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/check_repo_compat.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/check_repo_compat.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/check_repo_compat.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/check_repo_compat.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/check_repo_compat.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/check_repo_compat.py",
+      "to": "module:audit_methodology",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/check_repo_compat.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "to": "module:i18n",
+      "type": "belongs_to",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "to": "module:hashlib",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_cn_edition.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/verify_cn_edition.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_site_runtime.mjs",
+      "to": "module:i18n",
+      "type": "belongs_to",
+      "source": "i18n/zh-CN/90_校验/verify_site_runtime.mjs"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_site_runtime.mjs",
+      "to": "module:path",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/verify_site_runtime.mjs"
+    },
+    {
+      "from": "file:i18n/zh-CN/90_校验/verify_site_runtime.mjs",
+      "to": "module:fs",
+      "type": "imports",
+      "source": "i18n/zh-CN/90_校验/verify_site_runtime.mjs"
+    },
+    {
+      "from": "file:i18n/zh-CN/site/build_site.py",
+      "to": "module:i18n",
+      "type": "belongs_to",
+      "source": "i18n/zh-CN/site/build_site.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/site/build_site.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "i18n/zh-CN/site/build_site.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/site/build_site.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "i18n/zh-CN/site/build_site.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/site/build_site.py",
+      "to": "module:hashlib",
+      "type": "imports",
+      "source": "i18n/zh-CN/site/build_site.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/site/build_site.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "i18n/zh-CN/site/build_site.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/site/build_site.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "i18n/zh-CN/site/build_site.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/site/build_site.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "i18n/zh-CN/site/build_site.py"
+    },
+    {
+      "from": "file:i18n/zh-CN/site/build_site.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "i18n/zh-CN/site/build_site.py"
+    },
+    {
+      "from": "file:scripts/js/cli.mjs",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/js/cli.mjs"
+    },
+    {
+      "from": "file:scripts/js/test_cli.mjs",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/js/test_cli.mjs"
+    },
+    {
+      "from": "file:scripts/js/test_cli.mjs",
+      "to": "module:assert",
+      "type": "imports",
+      "source": "scripts/js/test_cli.mjs"
+    },
+    {
+      "from": "file:scripts/py/aggregate_evidence.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/aggregate_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/aggregate_evidence.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/aggregate_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/aggregate_evidence.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/aggregate_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/aggregate_evidence.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/aggregate_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/aggregate_evidence.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/aggregate_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/aggregate_evidence.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/aggregate_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/aggregate_evidence.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/aggregate_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:hashlib",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:html",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:os",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/architecture_delivery.py",
+      "to": "module:typing",
+      "type": "imports",
+      "source": "scripts/py/architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/audit_ai_native_governance.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/audit_ai_native_governance.py"
+    },
+    {
+      "from": "file:scripts/py/audit_ai_native_governance.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/audit_ai_native_governance.py"
+    },
+    {
+      "from": "file:scripts/py/audit_ai_native_governance.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/audit_ai_native_governance.py"
+    },
+    {
+      "from": "file:scripts/py/audit_ai_native_governance.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/audit_ai_native_governance.py"
+    },
+    {
+      "from": "file:scripts/py/audit_ai_native_governance.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/audit_ai_native_governance.py"
+    },
+    {
+      "from": "file:scripts/py/audit_ai_native_governance.py",
+      "to": "module:dataclasses",
+      "type": "imports",
+      "source": "scripts/py/audit_ai_native_governance.py"
+    },
+    {
+      "from": "file:scripts/py/audit_ai_native_governance.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/audit_ai_native_governance.py"
+    },
+    {
+      "from": "file:scripts/py/audit_governance_contracts.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/audit_governance_contracts.py"
+    },
+    {
+      "from": "file:scripts/py/audit_governance_contracts.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/audit_governance_contracts.py"
+    },
+    {
+      "from": "file:scripts/py/audit_governance_contracts.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/audit_governance_contracts.py"
+    },
+    {
+      "from": "file:scripts/py/audit_governance_contracts.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/audit_governance_contracts.py"
+    },
+    {
+      "from": "file:scripts/py/audit_governance_contracts.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/audit_governance_contracts.py"
+    },
+    {
+      "from": "file:scripts/py/audit_governance_contracts.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/audit_governance_contracts.py"
+    },
+    {
+      "from": "file:scripts/py/audit_governance_contracts.py",
+      "to": "module:dataclasses",
+      "type": "imports",
+      "source": "scripts/py/audit_governance_contracts.py"
+    },
+    {
+      "from": "file:scripts/py/audit_governance_contracts.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/audit_governance_contracts.py"
+    },
+    {
+      "from": "file:scripts/py/audit_methodology.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/audit_methodology.py"
+    },
+    {
+      "from": "file:scripts/py/audit_methodology.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/audit_methodology.py"
+    },
+    {
+      "from": "file:scripts/py/audit_methodology.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/audit_methodology.py"
+    },
+    {
+      "from": "file:scripts/py/audit_methodology.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/audit_methodology.py"
+    },
+    {
+      "from": "file:scripts/py/audit_methodology.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/audit_methodology.py"
+    },
+    {
+      "from": "file:scripts/py/audit_methodology.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/audit_methodology.py"
+    },
+    {
+      "from": "file:scripts/py/audit_methodology.py",
+      "to": "module:dataclasses",
+      "type": "imports",
+      "source": "scripts/py/audit_methodology.py"
+    },
+    {
+      "from": "file:scripts/py/audit_methodology.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/audit_methodology.py"
+    },
+    {
+      "from": "file:scripts/py/audit_reference_links.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/audit_reference_links.py"
+    },
+    {
+      "from": "file:scripts/py/audit_reference_links.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/audit_reference_links.py"
+    },
+    {
+      "from": "file:scripts/py/audit_reference_links.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/audit_reference_links.py"
+    },
+    {
+      "from": "file:scripts/py/audit_reference_links.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/audit_reference_links.py"
+    },
+    {
+      "from": "file:scripts/py/audit_reference_links.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/audit_reference_links.py"
+    },
+    {
+      "from": "file:scripts/py/audit_reference_links.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/audit_reference_links.py"
+    },
+    {
+      "from": "file:scripts/py/audit_reference_links.py",
+      "to": "module:collections",
+      "type": "imports",
+      "source": "scripts/py/audit_reference_links.py"
+    },
+    {
+      "from": "file:scripts/py/audit_reference_links.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/audit_reference_links.py"
+    },
+    {
+      "from": "file:scripts/py/audit_skill_health.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/audit_skill_health.py"
+    },
+    {
+      "from": "file:scripts/py/audit_skill_health.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/audit_skill_health.py"
+    },
+    {
+      "from": "file:scripts/py/audit_skill_health.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/audit_skill_health.py"
+    },
+    {
+      "from": "file:scripts/py/audit_skill_health.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/audit_skill_health.py"
+    },
+    {
+      "from": "file:scripts/py/audit_skill_health.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/audit_skill_health.py"
+    },
+    {
+      "from": "file:scripts/py/audit_skill_health.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/audit_skill_health.py"
+    },
+    {
+      "from": "file:scripts/py/audit_skill_health.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "scripts/py/audit_skill_health.py"
+    },
+    {
+      "from": "file:scripts/py/audit_skill_health.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/audit_skill_health.py"
+    },
+    {
+      "from": "file:scripts/py/build_repomap.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/build_repomap.py"
+    },
+    {
+      "from": "file:scripts/py/build_repomap.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/build_repomap.py"
+    },
+    {
+      "from": "file:scripts/py/build_repomap.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/build_repomap.py"
+    },
+    {
+      "from": "file:scripts/py/build_repomap.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/build_repomap.py"
+    },
+    {
+      "from": "file:scripts/py/build_repomap.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/build_repomap.py"
+    },
+    {
+      "from": "file:scripts/py/build_repomap.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/build_repomap.py"
+    },
+    {
+      "from": "file:scripts/py/build_repomap.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/build_repomap.py"
+    },
+    {
+      "from": "file:scripts/py/check_constitution.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/check_constitution.py"
+    },
+    {
+      "from": "file:scripts/py/check_constitution.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/check_constitution.py"
+    },
+    {
+      "from": "file:scripts/py/check_constitution.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/check_constitution.py"
+    },
+    {
+      "from": "file:scripts/py/check_constitution.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/check_constitution.py"
+    },
+    {
+      "from": "file:scripts/py/check_constitution.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/check_constitution.py"
+    },
+    {
+      "from": "file:scripts/py/check_constitution.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/check_constitution.py"
+    },
+    {
+      "from": "file:scripts/py/check_constitution.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/check_constitution.py"
+    },
+    {
+      "from": "file:scripts/py/check_constitution.py",
+      "to": "module:rule_lint",
+      "type": "imports",
+      "source": "scripts/py/check_constitution.py"
+    },
+    {
+      "from": "file:scripts/py/check_open_source_boundary.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/check_open_source_boundary.py"
+    },
+    {
+      "from": "file:scripts/py/check_open_source_boundary.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/check_open_source_boundary.py"
+    },
+    {
+      "from": "file:scripts/py/check_open_source_boundary.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/check_open_source_boundary.py"
+    },
+    {
+      "from": "file:scripts/py/check_open_source_boundary.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/check_open_source_boundary.py"
+    },
+    {
+      "from": "file:scripts/py/check_open_source_boundary.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/check_open_source_boundary.py"
+    },
+    {
+      "from": "file:scripts/py/check_open_source_boundary.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/check_open_source_boundary.py"
+    },
+    {
+      "from": "file:scripts/py/collect_evidence.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/collect_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/collect_evidence.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/collect_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/collect_evidence.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/collect_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/collect_evidence.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/collect_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/collect_evidence.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/collect_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/collect_evidence.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/collect_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/collect_evidence.py",
+      "to": "module:time",
+      "type": "imports",
+      "source": "scripts/py/collect_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/collect_evidence.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "scripts/py/collect_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/collect_evidence.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/collect_evidence.py"
+    },
+    {
+      "from": "file:scripts/py/discover_tools.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/discover_tools.py"
+    },
+    {
+      "from": "file:scripts/py/discover_tools.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/discover_tools.py"
+    },
+    {
+      "from": "file:scripts/py/discover_tools.py",
+      "to": "module:os",
+      "type": "imports",
+      "source": "scripts/py/discover_tools.py"
+    },
+    {
+      "from": "file:scripts/py/discover_tools.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/discover_tools.py"
+    },
+    {
+      "from": "file:scripts/py/discover_tools.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/discover_tools.py"
+    },
+    {
+      "from": "file:scripts/py/discover_tools.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "scripts/py/discover_tools.py"
+    },
+    {
+      "from": "file:scripts/py/discover_tools.py",
+      "to": "module:collections",
+      "type": "imports",
+      "source": "scripts/py/discover_tools.py"
+    },
+    {
+      "from": "file:scripts/py/env_check.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/env_check.py"
+    },
+    {
+      "from": "file:scripts/py/env_check.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/env_check.py"
+    },
+    {
+      "from": "file:scripts/py/env_check.py",
+      "to": "module:os",
+      "type": "imports",
+      "source": "scripts/py/env_check.py"
+    },
+    {
+      "from": "file:scripts/py/env_check.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/env_check.py"
+    },
+    {
+      "from": "file:scripts/py/env_check.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/env_check.py"
+    },
+    {
+      "from": "file:scripts/py/env_check.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/env_check.py"
+    },
+    {
+      "from": "file:scripts/py/env_check.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/env_check.py"
+    },
+    {
+      "from": "file:scripts/py/env_check.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "scripts/py/env_check.py"
+    },
+    {
+      "from": "file:scripts/py/env_check.py",
+      "to": "module:glob",
+      "type": "imports",
+      "source": "scripts/py/env_check.py"
+    },
+    {
+      "from": "file:scripts/py/event_trace.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/event_trace.py"
+    },
+    {
+      "from": "file:scripts/py/event_trace.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/event_trace.py"
+    },
+    {
+      "from": "file:scripts/py/event_trace.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/event_trace.py"
+    },
+    {
+      "from": "file:scripts/py/event_trace.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/event_trace.py"
+    },
+    {
+      "from": "file:scripts/py/event_trace.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/event_trace.py"
+    },
+    {
+      "from": "file:scripts/py/event_trace.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "scripts/py/event_trace.py"
+    },
+    {
+      "from": "file:scripts/py/event_trace.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/event_trace.py"
+    },
+    {
+      "from": "file:scripts/py/evolution_counter.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/evolution_counter.py"
+    },
+    {
+      "from": "file:scripts/py/evolution_counter.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/evolution_counter.py"
+    },
+    {
+      "from": "file:scripts/py/evolution_counter.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/evolution_counter.py"
+    },
+    {
+      "from": "file:scripts/py/evolution_counter.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/evolution_counter.py"
+    },
+    {
+      "from": "file:scripts/py/evolution_counter.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/evolution_counter.py"
+    },
+    {
+      "from": "file:scripts/py/evolution_counter.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "scripts/py/evolution_counter.py"
+    },
+    {
+      "from": "file:scripts/py/evolution_counter.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/evolution_counter.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_device_iot_solution_pdf.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_device_iot_solution_pdf.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:math",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:docx",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:docx",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:docx",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:docx",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:docx",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:docx",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:PIL",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:reportlab",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:docx",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/generate_promo_articles.py",
+      "to": "module:pypdf",
+      "type": "imports",
+      "source": "scripts/py/generate_promo_articles.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:hashlib",
+      "type": "imports",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:time",
+      "type": "imports",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_mcp_server.py",
+      "to": "module:methodology_rules",
+      "type": "imports",
+      "source": "scripts/py/methodology_mcp_server.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_precheck_hook.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/methodology_precheck_hook.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_precheck_hook.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/methodology_precheck_hook.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_precheck_hook.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/methodology_precheck_hook.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_precheck_hook.py",
+      "to": "module:os",
+      "type": "imports",
+      "source": "scripts/py/methodology_precheck_hook.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_precheck_hook.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/methodology_precheck_hook.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_precheck_hook.py",
+      "to": "module:methodology_rules",
+      "type": "imports",
+      "source": "scripts/py/methodology_precheck_hook.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_rules.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/methodology_rules.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_rules.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/methodology_rules.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_rules.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/methodology_rules.py"
+    },
+    {
+      "from": "file:scripts/py/methodology_rules.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/methodology_rules.py"
+    },
+    {
+      "from": "file:scripts/py/orchestrate_dag.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/orchestrate_dag.py"
+    },
+    {
+      "from": "file:scripts/py/orchestrate_dag.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/orchestrate_dag.py"
+    },
+    {
+      "from": "file:scripts/py/orchestrate_dag.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/orchestrate_dag.py"
+    },
+    {
+      "from": "file:scripts/py/orchestrate_dag.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/orchestrate_dag.py"
+    },
+    {
+      "from": "file:scripts/py/orchestrate_dag.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/orchestrate_dag.py"
+    },
+    {
+      "from": "file:scripts/py/orchestrate_dag.py",
+      "to": "module:collections",
+      "type": "imports",
+      "source": "scripts/py/orchestrate_dag.py"
+    },
+    {
+      "from": "file:scripts/py/orchestrate_dag.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/orchestrate_dag.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:hashlib",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:os",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/project_onboarding.py",
+      "to": "module:typing",
+      "type": "imports",
+      "source": "scripts/py/project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/rule_lint.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/rule_lint.py"
+    },
+    {
+      "from": "file:scripts/py/rule_lint.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/rule_lint.py"
+    },
+    {
+      "from": "file:scripts/py/rule_lint.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/rule_lint.py"
+    },
+    {
+      "from": "file:scripts/py/rule_lint.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/rule_lint.py"
+    },
+    {
+      "from": "file:scripts/py/rule_lint.py",
+      "to": "module:re",
+      "type": "imports",
+      "source": "scripts/py/rule_lint.py"
+    },
+    {
+      "from": "file:scripts/py/rule_lint.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/rule_lint.py"
+    },
+    {
+      "from": "file:scripts/py/rule_lint.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/rule_lint.py"
+    },
+    {
+      "from": "file:scripts/py/score_ai_development_readiness.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/score_ai_development_readiness.py"
+    },
+    {
+      "from": "file:scripts/py/score_ai_development_readiness.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/score_ai_development_readiness.py"
+    },
+    {
+      "from": "file:scripts/py/score_ai_development_readiness.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/score_ai_development_readiness.py"
+    },
+    {
+      "from": "file:scripts/py/score_ai_development_readiness.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/score_ai_development_readiness.py"
+    },
+    {
+      "from": "file:scripts/py/score_ai_development_readiness.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/score_ai_development_readiness.py"
+    },
+    {
+      "from": "file:scripts/py/test_architecture_delivery.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/test_architecture_delivery.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/test_architecture_delivery.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/test_architecture_delivery.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/test_architecture_delivery.py",
+      "to": "module:tempfile",
+      "type": "imports",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/test_architecture_delivery.py",
+      "to": "module:unittest",
+      "type": "imports",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/test_architecture_delivery.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/test_architecture_delivery.py",
+      "to": "module:architecture_delivery",
+      "type": "imports",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "api:/orders",
+      "to": "module:scripts",
+      "type": "api_to_module",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "api:/orders",
+      "to": "module:scripts",
+      "type": "api_to_module",
+      "source": "scripts/py/test_architecture_delivery.py"
+    },
+    {
+      "from": "file:scripts/py/test_delivery_contract_validator.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/test_delivery_contract_validator.py"
+    },
+    {
+      "from": "file:scripts/py/test_delivery_contract_validator.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/test_delivery_contract_validator.py"
+    },
+    {
+      "from": "file:scripts/py/test_delivery_contract_validator.py",
+      "to": "module:copy",
+      "type": "imports",
+      "source": "scripts/py/test_delivery_contract_validator.py"
+    },
+    {
+      "from": "file:scripts/py/test_delivery_contract_validator.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/test_delivery_contract_validator.py"
+    },
+    {
+      "from": "file:scripts/py/test_delivery_contract_validator.py",
+      "to": "module:unittest",
+      "type": "imports",
+      "source": "scripts/py/test_delivery_contract_validator.py"
+    },
+    {
+      "from": "file:scripts/py/test_delivery_contract_validator.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/test_delivery_contract_validator.py"
+    },
+    {
+      "from": "file:scripts/py/test_delivery_contract_validator.py",
+      "to": "module:validate_delivery_contract",
+      "type": "imports",
+      "source": "scripts/py/test_delivery_contract_validator.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:shutil",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:unittest",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:methodology_mcp_server",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_guard.py",
+      "to": "module:methodology_rules",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_guard.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:locale",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:shutil",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:tempfile",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_methodology_scenarios.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/test_methodology_scenarios.py"
+    },
+    {
+      "from": "file:scripts/py/test_project_onboarding.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/test_project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/test_project_onboarding.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/test_project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/test_project_onboarding.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/test_project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/test_project_onboarding.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/test_project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/test_project_onboarding.py",
+      "to": "module:tempfile",
+      "type": "imports",
+      "source": "scripts/py/test_project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/test_project_onboarding.py",
+      "to": "module:unittest",
+      "type": "imports",
+      "source": "scripts/py/test_project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/test_project_onboarding.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/test_project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/test_project_onboarding.py",
+      "to": "module:project_onboarding",
+      "type": "imports",
+      "source": "scripts/py/test_project_onboarding.py"
+    },
+    {
+      "from": "file:scripts/py/test_runtime_assets.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/test_runtime_assets.py"
+    },
+    {
+      "from": "file:scripts/py/test_runtime_assets.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/test_runtime_assets.py"
+    },
+    {
+      "from": "file:scripts/py/test_runtime_assets.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/test_runtime_assets.py"
+    },
+    {
+      "from": "file:scripts/py/test_runtime_assets.py",
+      "to": "module:os",
+      "type": "imports",
+      "source": "scripts/py/test_runtime_assets.py"
+    },
+    {
+      "from": "file:scripts/py/test_runtime_assets.py",
+      "to": "module:subprocess",
+      "type": "imports",
+      "source": "scripts/py/test_runtime_assets.py"
+    },
+    {
+      "from": "file:scripts/py/test_runtime_assets.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/test_runtime_assets.py"
+    },
+    {
+      "from": "file:scripts/py/test_runtime_assets.py",
+      "to": "module:tempfile",
+      "type": "imports",
+      "source": "scripts/py/test_runtime_assets.py"
+    },
+    {
+      "from": "file:scripts/py/test_runtime_assets.py",
+      "to": "module:unittest",
+      "type": "imports",
+      "source": "scripts/py/test_runtime_assets.py"
+    },
+    {
+      "from": "file:scripts/py/test_runtime_assets.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/test_runtime_assets.py"
+    },
+    {
+      "from": "file:scripts/py/test_skill_frontmatter_gate.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/test_skill_frontmatter_gate.py"
+    },
+    {
+      "from": "file:scripts/py/test_skill_frontmatter_gate.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/test_skill_frontmatter_gate.py"
+    },
+    {
+      "from": "file:scripts/py/test_skill_frontmatter_gate.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/test_skill_frontmatter_gate.py"
+    },
+    {
+      "from": "file:scripts/py/test_skill_frontmatter_gate.py",
+      "to": "module:tempfile",
+      "type": "imports",
+      "source": "scripts/py/test_skill_frontmatter_gate.py"
+    },
+    {
+      "from": "file:scripts/py/test_skill_frontmatter_gate.py",
+      "to": "module:unittest",
+      "type": "imports",
+      "source": "scripts/py/test_skill_frontmatter_gate.py"
+    },
+    {
+      "from": "file:scripts/py/test_skill_frontmatter_gate.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/test_skill_frontmatter_gate.py"
+    },
+    {
+      "from": "file:scripts/py/test_skill_frontmatter_gate.py",
+      "to": "module:audit_methodology",
+      "type": "imports",
+      "source": "scripts/py/test_skill_frontmatter_gate.py"
+    },
+    {
+      "from": "file:scripts/py/tool_registry.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/tool_registry.py"
+    },
+    {
+      "from": "file:scripts/py/tool_registry.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/tool_registry.py"
+    },
+    {
+      "from": "file:scripts/py/tool_registry.py",
+      "to": "module:sys",
+      "type": "imports",
+      "source": "scripts/py/tool_registry.py"
+    },
+    {
+      "from": "file:scripts/py/tool_registry.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/tool_registry.py"
+    },
+    {
+      "from": "file:scripts/py/validate_delivery_contract.py",
+      "to": "module:scripts",
+      "type": "belongs_to",
+      "source": "scripts/py/validate_delivery_contract.py"
+    },
+    {
+      "from": "file:scripts/py/validate_delivery_contract.py",
+      "to": "module:__future__",
+      "type": "imports",
+      "source": "scripts/py/validate_delivery_contract.py"
+    },
+    {
+      "from": "file:scripts/py/validate_delivery_contract.py",
+      "to": "module:argparse",
+      "type": "imports",
+      "source": "scripts/py/validate_delivery_contract.py"
+    },
+    {
+      "from": "file:scripts/py/validate_delivery_contract.py",
+      "to": "module:fnmatch",
+      "type": "imports",
+      "source": "scripts/py/validate_delivery_contract.py"
+    },
+    {
+      "from": "file:scripts/py/validate_delivery_contract.py",
+      "to": "module:json",
+      "type": "imports",
+      "source": "scripts/py/validate_delivery_contract.py"
+    },
+    {
+      "from": "file:scripts/py/validate_delivery_contract.py",
+      "to": "module:dataclasses",
+      "type": "imports",
+      "source": "scripts/py/validate_delivery_contract.py"
+    },
+    {
+      "from": "file:scripts/py/validate_delivery_contract.py",
+      "to": "module:datetime",
+      "type": "imports",
+      "source": "scripts/py/validate_delivery_contract.py"
+    },
+    {
+      "from": "file:scripts/py/validate_delivery_contract.py",
+      "to": "module:pathlib",
+      "type": "imports",
+      "source": "scripts/py/validate_delivery_contract.py"
+    },
+    {
+      "from": "file:scripts/py/validate_delivery_contract.py",
+      "to": "module:typing",
+      "type": "imports",
+      "source": "scripts/py/validate_delivery_contract.py"
+    },
+    {
+      "from": "file:verification-demo/backend/server.js",
+      "to": "module:verification-demo",
+      "type": "belongs_to",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/tasks",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/tasks/stats",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/tasks/:id",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/tasks",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/tasks/:id",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/tasks/:id/status",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/tasks/:id",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/tasks/status/done",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/notes",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/notes/:id",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/notes",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/notes/:id",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/notes/:id",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "api:/api/tasks/:id/notes",
+      "to": "module:verification-demo",
+      "type": "api_to_module",
+      "source": "verification-demo/backend/server.js"
+    },
+    {
+      "from": "file:verification-demo/backend/database/db.js",
+      "to": "module:verification-demo",
+      "type": "belongs_to",
+      "source": "verification-demo/backend/database/db.js"
+    },
+    {
+      "from": "file:verification-demo/backend/test/api.test.js",
+      "to": "module:verification-demo",
+      "type": "belongs_to",
+      "source": "verification-demo/backend/test/api.test.js"
+    }
+  ],
+  "limitations": [
+    "Static inference may miss dynamic routes, generated code, runtime configuration, and database state.",
+    "The graph is discovery evidence, not authorization, business truth, or release evidence."
+  ]
+}

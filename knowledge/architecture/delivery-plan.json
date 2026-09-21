@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-09-21T03:37:06Z",
+  "basis": "Architecture IR static evidence",
+  "steps": [
+    {
+      "id": "step-01",
+      "number": 1,
+      "name": "Database initialization and schema verification",
+      "status": "applicable",
+      "evidence_hint": "project evidence for database",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-02",
+      "number": 2,
+      "name": "Model/entity layer alignment",
+      "status": "applicable",
+      "evidence_hint": "project evidence for model",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-03",
+      "number": 3,
+      "name": "Repository/mapper query verification",
+      "status": "applicable",
+      "evidence_hint": "project evidence for repository",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-04",
+      "number": 4,
+      "name": "Service and orchestration behavior",
+      "status": "applicable",
+      "evidence_hint": "project evidence for service",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-05",
+      "number": 5,
+      "name": "API/controller contract and permission review",
+      "status": "applicable",
+      "evidence_hint": "project evidence for api",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-06",
+      "number": 6,
+      "name": "Build and startup verification",
+      "status": "applicable",
+      "evidence_hint": "project evidence for build",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-07",
+      "number": 7,
+      "name": "Client type contract generation",
+      "status": "not_applicable",
+      "evidence_hint": "project evidence for types",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-08",
+      "number": 8,
+      "name": "Client service/API adapter verification",
+      "status": "not_applicable",
+      "evidence_hint": "project evidence for frontend_service",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-09",
+      "number": 9,
+      "name": "UI Host/page integration and state coverage",
+      "status": "not_applicable",
+      "evidence_hint": "project evidence for frontend_page",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-10",
+      "number": 10,
+      "name": "Integration and edge-case tests",
+      "status": "applicable",
+      "evidence_hint": "project evidence for integration",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-11",
+      "number": 11,
+      "name": "Seed data and business-flow validation",
+      "status": "needs_confirmation",
+      "evidence_hint": "project evidence for seed",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-12",
+      "number": 12,
+      "name": "Schema drift and instance synchronization",
+      "status": "needs_confirmation",
+      "evidence_hint": "project evidence for schema_sync",
+      "source": "architecture_ir"
+    },
+    {
+      "id": "step-13",
+      "number": 13,
+      "name": "Runtime/browser/API verification",
+      "status": "needs_confirmation",
+      "evidence_hint": "project evidence for runtime",
+      "source": "architecture_ir"
+    }
+  ],
+  "human_confirmation_required": [
+    "business outcome, acceptance flow, destructive operations, migration and release authorization"
+  ]
+}

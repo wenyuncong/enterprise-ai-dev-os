@@ -45,13 +45,15 @@
 
 | 层级 | 数量 | 路径 |
 |---|---:|---|
-| Core Engine | 16 | `skills/core/` |
+| Core Engine | 18 | `skills/core/` |
 | Governance | 13 | `skills/governance/` |
 | Tech Stack | 20 | `skills/tech/` |
 | Platform | 0 | `skills/platform/` 当前为空 |
-| **合计** | **49** | `skills/` |
+| **合计** | **51** | `skills/` |
 
 ### Core Engine
+
+| ai-architecture-knowledge-and-delivery | `skills/core/ai-architecture-knowledge-and-delivery/` |
 
 | Skill | 路径 |
 |---|---|
@@ -150,6 +152,7 @@
 |---|---|---|
 | 环境检查 | `scripts/py/env_check.py` | 检查 Node、Python、Git、Java、MySQL、Playwright 等工具 |
 | 工具发现 | `scripts/py/discover_tools.py` | 按用途盘点项目现有脚本 |
+| 架构与交付生成 | `scripts/py/architecture_delivery.py` | 生成 Architecture IR、适用性 13 步计划、任务 DAG 和静态知识中心 |
 | 方法论审计 | `scripts/py/audit_methodology.py` | 检查 manifest、路径残留、AGENTS 引用、Skill 结构 |
 | AI 开发确定性评分 | `scripts/py/score_ai_development_readiness.py` | 输出结构就绪分和缺口建议 |
 | 治理契约 Schema 审计 | `scripts/py/audit_governance_contracts.py` | 检查公开治理契约 JSON Schema 可解析、ID 唯一、索引完整 |

@@ -598,6 +598,39 @@ def check_project_onboarding_governance(root: Path, manifest: dict, issues: list
         issues.append(Issue("FAIL", "ONBOARDING_RULES", rules_path, f"canonical rules must define controlled onboarding: {', '.join(missing)}"))
 
 
+def check_architecture_delivery_governance(root: Path, manifest: dict, issues: list[Issue]) -> None:
+    skill_path = Path("skills/core/ai-architecture-knowledge-and-delivery/SKILL.md")
+    script_path = Path("scripts/py/architecture_delivery.py")
+    test_path = Path("scripts/py/test_architecture_delivery.py")
+    registered = next(
+        (item for item in manifest.get("officialSkills", []) if item.get("name") == "ai-architecture-knowledge-and-delivery"),
+        None,
+    )
+    if not registered:
+        return
+    for path, message in {
+        skill_path: "architecture knowledge and delivery skill is required.",
+        script_path: "architecture delivery generator is required.",
+        test_path: "architecture delivery regression test is required.",
+    }.items():
+        if not (root / path).exists():
+            issues.append(Issue("FAIL", "ARCHITECTURE_DELIVERY_ASSET_MISSING", path, message))
+    if registered.get("path") != skill_path.as_posix():
+        issues.append(Issue("FAIL", "ARCHITECTURE_DELIVERY_MANIFEST", Path("skills/SKILL_MANIFEST.json"), "architecture delivery skill has an invalid manifest path."))
+    if (root / skill_path).exists():
+        text = read_text(root / skill_path).lower()
+        required_terms = ["architecture ir", "13-step delivery plan", "task dag", "read-only evidence", "runtime truth"]
+        missing = [term for term in required_terms if term not in text]
+        if missing:
+            issues.append(Issue("FAIL", "ARCHITECTURE_DELIVERY_SKILL", skill_path, f"architecture delivery skill is missing: {', '.join(missing)}"))
+    rules_path = Path("rules/AGENTS.md")
+    rules_text = read_text(root / rules_path).lower() if (root / rules_path).exists() else ""
+    required_rule_terms = ["architecture_delivery.py", "language-neutral architecture ir", "13-step delivery plan", "bounded static knowledge"]
+    missing = [term for term in required_rule_terms if term not in rules_text]
+    if missing:
+        issues.append(Issue("FAIL", "ARCHITECTURE_DELIVERY_RULES", rules_path, f"canonical rules must define architecture delivery generation: {', '.join(missing)}"))
+
+
 def check_agent_paths(root: Path, issues: list[Issue]) -> None:
     for agent_file in [root / "AGENTS.md", root / "rules" / "AGENTS.md"]:
         if not agent_file.exists():
@@ -643,6 +676,7 @@ def main() -> int:
     check_delivery_operating_assets(root, issues)
     check_delivery_contract_governance(root, manifest, issues)
     check_project_onboarding_governance(root, manifest, issues)
+    check_architecture_delivery_governance(root, manifest, issues)
     check_agent_paths(root, issues)
     check_private_archive_notice(root, issues)
 

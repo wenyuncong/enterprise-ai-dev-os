@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-09-21T03:37:06Z",
+  "nodes": [
+    {
+      "id": "scan-architecture",
+      "name": "Scan project and build Architecture IR",
+      "depends": []
+    },
+    {
+      "id": "step-01",
+      "name": "Database initialization and schema verification",
+      "depends": [
+        "scan-architecture"
+      ]
+    },
+    {
+      "id": "step-02",
+      "name": "Model/entity layer alignment",
+      "depends": [
+        "step-01"
+      ]
+    },
+    {
+      "id": "step-03",
+      "name": "Repository/mapper query verification",
+      "depends": [
+        "step-02"
+      ]
+    },
+    {
+      "id": "step-04",
+      "name": "Service and orchestration behavior",
+      "depends": [
+        "step-03"
+      ]
+    },
+    {
+      "id": "step-05",
+      "name": "API/controller contract and permission review",
+      "depends": [
+        "step-04"
+      ]
+    },
+    {
+      "id": "step-06",
+      "name": "Build and startup verification",
+      "depends": [
+        "step-05"
+      ]
+    },
+    {
+      "id": "step-10",
+      "name": "Integration and edge-case tests",
+      "depends": [
+        "step-06"
+      ]
+    },
+    {
+      "id": "step-11",
+      "name": "Seed data and business-flow validation",
+      "depends": [
+        "step-10"
+      ]
+    },
+    {
+      "id": "step-12",
+      "name": "Schema drift and instance synchronization",
+      "depends": [
+        "step-11"
+      ]
+    },
+    {
+      "id": "step-13",
+      "name": "Runtime/browser/API verification",
+      "depends": [
+        "step-12"
+      ]
+    }
+  ],
+  "contracts": [
+    {
+      "from": "scan-architecture",
+      "to": "step-01",
+      "contract": "Architecture IR and evidence limits"
+    }
+  ]
+}

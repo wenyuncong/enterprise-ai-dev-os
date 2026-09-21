@@ -72,6 +72,11 @@ creating a project knowledge base:
    skill-health audit. Refresh the knowledge index incrementally after material
    source/dependency/skill/script changes; the index is discovery evidence, not
    runtime authorization, database truth, or business closure.
+7. For an existing project, run `py scripts/py/architecture_delivery.py` after
+   onboarding to generate a language-neutral Architecture IR, an applicable
+   13-step delivery plan, a dependency DAG, and a bounded static knowledge
+   center. Keep dynamic routes, runtime permissions, database state, business
+   acceptance, and release evidence explicitly outside the generated graph.
 
 Never resolve an install conflict by using `-Force`, recursive deletion, or
 blind copying. Preserve project-owned rules, scripts, skills, and history until
@@ -415,6 +420,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 |---|---|---|
 | ai-project-classifier | Classify project (brownfield/greenfield, quality, scale, targets) | ALWAYS first at project start |
 | ai-project-onboarding-and-skill-integration | Detect stack, safely adopt methodology, govern external skill candidates, and build bounded knowledge indexes | Before methodology copy, skill import, or knowledge-base setup |
+| ai-architecture-knowledge-and-delivery | Scan project architecture, generate applicable 13-step delivery plans and task DAGs, and publish bounded knowledge-center evidence | After project onboarding and before project-level implementation planning |
 | ai-product-directed-delivery | Product-owner/AI responsibility boundary, twelve-step delivery map, backend/frontend Host chains | Product-led AI-native delivery |
 | ai-rule-dispatcher | Route tasks to correct skill and load required docs | Every new task |
 | ai-task-decomposer | Break complex work into safe executable batches | Multi-module or cross-end tasks |
@@ -474,7 +480,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | tailwind-design-system | Design tokens, component libraries |
 | javascript-typescript-jest | Jest testing patterns, mocking |
 
-**Total**: 50 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
+**Total**: 51 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
 
 ---
 
@@ -573,6 +579,8 @@ For a new or existing project, initialize the methodology by:
 1. **Classify and discover first** — Use `ai-project-classifier`, existing tool
    discovery, and `project_onboarding.py inspect` to determine archetype,
    technology profile, existing skills/scripts, and index scope.
+   Then run `architecture_delivery.py` to produce Architecture IR and the
+   language-neutral project graph before planning implementation.
 2. **Preflight before copying** — Run `project_onboarding.py preflight` against
    the target. Review every `add`, `same`, and `conflict`; preserve conflicts
    until their explicit merge/overwrite decision and rollback path are recorded.
@@ -600,4 +608,4 @@ For a new or existing project, initialize the methodology by:
 ---
 
 *Methodology version: 2.6.0 | Last updated: 2026-09-21*
-*Skills: 50 | Derived from enterprise delivery evidence*
+*Skills: 51 | Derived from enterprise delivery evidence*

@@ -1,0 +1,90 @@
+{
+  "contract_id": "dc_architecture_delivery_01",
+  "schema_version": "1.0",
+  "status": "safeguarded",
+  "project_id": "enterprise-ai-development-os",
+  "delivery": {
+    "change_type": "governance",
+    "target_line": "main",
+    "target_version": "unversioned",
+    "affected_flow": "project architecture scan, delivery plan generation, and knowledge center indexing",
+    "gate": "L2"
+  },
+  "product_contract": {
+    "outcome": "A language-neutral project scan produces Architecture IR, an applicable 13-step delivery plan, a task DAG, and a static knowledge-center entry without mutating application code.",
+    "acceptance_steps": [
+      "A temporary mixed Python and Vue project is detected with technology, modules, API, database, test, and dependency evidence.",
+      "The generator emits machine-readable Architecture IR, delivery plan, task DAG, and static knowledge-center HTML.",
+      "The methodology audit and focused regression tests pass after the final relevant changes."
+    ],
+    "non_goals": [
+      "This change does not execute migrations, modify application source, or infer business truth from the generated graph.",
+      "This change does not bulk-import external GitHub skills or replace project-owned runtime and authorization evidence."
+    ]
+  },
+  "truth_owner": "The scanned project's source, dependency manifests, API declarations, database artifacts, tests, and project-owned runtime/data truth.",
+  "scope": {
+    "write_allowlist": [
+      "scripts/py/architecture_delivery.py",
+      "scripts/py/test_architecture_delivery.py",
+      "skills/core/ai-architecture-knowledge-and-delivery/SKILL.md",
+      "skills/SKILL_MANIFEST.json",
+      "rules/AGENTS.md",
+      "AGENTS.md",
+      "docs/全项目总控/MASTER_INDEX.md",
+      "docs/全项目总控/task_contracts/METH-ARCH-DELIVERY-01.json",
+      "docs/每日调研回写/**",
+      "knowledge/architecture/**"
+    ],
+    "forbidden_paths": [
+      "database/production/**",
+      "src/**",
+      "backend/**",
+      "frontend/**"
+    ],
+    "out_of_scope": [
+      "Business application implementation and database migration execution.",
+      "Automatic activation of external skills and destructive cleanup of project assets.",
+      "Replacing the existing onboarding, delivery-contract, or runtime verification systems."
+    ],
+    "destructive_classification": "none",
+    "rollback_or_recovery": "Revert only the task-owned files from the scoped commit; regenerate or remove the bounded knowledge snapshot through the generator."
+  },
+  "test_strategy": {
+    "mode": "red_green",
+    "public_seam": "architecture_delivery.py scan/generate CLI and generated JSON/HTML artifacts",
+    "rationale": "The new behavior is deterministic and can be tested through a temporary mixed-stack project without changing application code.",
+    "focused_test_command": "py scripts/py/test_architecture_delivery.py"
+  },
+  "evidence_plan": {
+    "final_proofs": [
+      {
+        "proof_id": "proof_architecture_delivery_tests",
+        "claim": "Architecture IR, applicable delivery steps, task DAG, and knowledge-center HTML are generated correctly.",
+        "command_or_check": "py scripts/py/test_architecture_delivery.py",
+        "must_run_after_final_change": true
+      },
+      {
+        "proof_id": "proof_methodology_audit_architecture_delivery",
+        "claim": "The new official skill and governance references remain portable and structurally valid.",
+        "command_or_check": "py scripts/py/audit_methodology.py --project-root .",
+        "must_run_after_final_change": true
+      }
+    ]
+  },
+  "reviews": {
+    "standards_truth": {
+      "status": "passed",
+      "evidence": "Focused tests, methodology audit, scenario regression, and skill health audit passed after the final relevant change."
+    },
+    "product_spec": {
+      "status": "passed",
+      "evidence": "Generated IR, 13-step plan, task DAG, and static knowledge center were replayed against the task acceptance steps."
+    }
+  },
+  "implementer": "agent-delivery-owner",
+  "verification_owner": "independent-reviewer",
+  "owner_confirmation": "not_required",
+  "created_at": "2026-09-21T00:00:00Z",
+  "updated_at": "2026-09-21T03:41:42Z"
+}

@@ -18,10 +18,10 @@
     "deprecated": "The skill should not be used for new work."
   },
   "counts": {
-    "official": 50,
+    "official": 51,
     "rawSource": 45,
     "byLayer": {
-      "core": 17,
+      "core": 18,
       "governance": 13,
       "tech": 20,
       "platform": 0
@@ -100,6 +100,14 @@
       "source": "methodology adoption and skill supply-chain governance",
       "maturity": "verified",
       "description": "Safely onboard methodology assets by detecting project technology, staging external skills in quarantine, preserving conflicts, governing candidates, and building a bounded knowledge index. Use before methodology copying, skill import, or project knowledge-base setup."
+    },
+    {
+      "name": "ai-architecture-knowledge-and-delivery",
+      "layer": "core",
+      "path": "skills/core/ai-architecture-knowledge-and-delivery/SKILL.md",
+      "source": "language-neutral architecture IR and delivery-plan generation",
+      "maturity": "verified",
+      "description": "Scan project structure into Architecture IR, generate an applicable 13-step delivery plan and task DAG, and publish bounded static knowledge-center evidence."
     },
     {
       "name": "ai-product-directed-delivery",
