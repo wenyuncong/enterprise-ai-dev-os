@@ -1,0 +1,59 @@
+{
+  "profile_version": "1.0.0",
+  "project_id": "gerp-enterprise",
+  "display_name": "GERP 企业管理系统（母版 / reference implementation）",
+  "origin": "brownfield",
+  "archetype": "C",
+  "quality_target": "enterprise",
+  "deploy_targets": ["web", "mobile", "mcp", "openapi", "desktop"],
+  "scale": "modular_monolith",
+  "domain": {
+    "name": "ERP（进销存 / 资金往来 / 财务 / 生产 / 报表）",
+    "tenancy": "multi_tenant",
+    "regulated": true
+  },
+  "tech_stack": {
+    "backend": "Java / Spring Boot（单体 JAR + 模块化 gerp-modules）",
+    "frontend": "Vue 3 + Vite（gerp-web / gerp-admin-web / gerp-agent-web / gerp-desktop）",
+    "database": "MySQL 8.0",
+    "mobile": "Flutter（gerp-mobile）",
+    "container": "docker / docker-compose",
+    "runtime": "Node 24（MCP bridge 与桌面壳）"
+  },
+  "delivery": {
+    "branch_model": {
+      "mainline": "develop",
+      "integration": "develop",
+      "production": "stable",
+      "release_pattern": "release/<version>",
+      "frozen": ["daily"]
+    },
+    "remotes": ["origin", "cnb"],
+    "change_types": ["U", "B", "E", "N"],
+    "risk_levels": ["L0", "L1", "L2", "L3"],
+    "qualification_matrix": "S0_S3",
+    "close_criteria": "FIVE_S_DELIVERY_CLOSE=PASS"
+  },
+  "knowledge": {
+    "handbook_root": "docs/项目知识体系",
+    "routing_index": "docs/项目知识体系/00_任务路由索引.md",
+    "knowledge_center_dir": "docs/项目知识体系/00_本地知识中心",
+    "generate_command": "py scripts/py/generate_local_knowledge_center.py",
+    "verify_command": "py scripts/py/generate_local_knowledge_center.py --check",
+    "impact_declaration": "Knowledge-Impact:"
+  },
+  "ai": {
+    "engine": "openclaw（小龙虾）为当前 runtime；DSH 为并列候选引擎",
+    "engine_replaceable": true,
+    "engine_interface_version": "1.0.0",
+    "mcp_server": "scripts/mcp/gerp-mcp-stdio-bridge.mjs（标准 MCP stdio）+ /api/v1/ai-tools/mcp/{catalog,invoke}",
+    "tool_contract": "后端 MCP Gateway 的 L1–L4 工具分级（24 个工具）",
+    "model_adaptation_level": "M1"
+  },
+  "language": {
+    "code": "en",
+    "docs": "zh-CN"
+  },
+  "generated_at": "2026-09-14",
+  "source_template": "enterprise-ai-dev-os/bootstrap@1.0.0"
+}

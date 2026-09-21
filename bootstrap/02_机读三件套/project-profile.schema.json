@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://enterprise-ai-dev-os/bootstrap/project-profile.schema.json",
+  "title": "Project Profile",
+  "description": "项目画像：模板实例化时生成，供会话启动阶段一次性加载（目标 <= 5KB）。字段名保持 snake_case，与方法论既有 delivery-contract 契约一致。",
+  "type": "object",
+  "required": [
+    "profile_version",
+    "project_id",
+    "origin",
+    "archetype",
+    "quality_target",
+    "tech_stack",
+    "delivery",
+    "language",
+    "generated_at"
+  ],
+  "properties": {
+    "profile_version": {
+      "type": "string",
+      "description": "画像格式版本，例如 1.0.0"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "稳定标识（小写、连字符），用于门禁与锁文件引用"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "origin": {
+      "enum": ["greenfield", "brownfield"],
+      "description": "greenfield=新项目；brownfield=存量项目改造"
+    },
+    "archetype": {
+      "enum": ["A", "B", "C"],
+      "description": "A=快速原型（单服务）；B=AI 原生（原子服务）；C=企业级（多端）"
+    },
+    "quality_target": {
+      "enum": ["prototype", "ai_native", "enterprise"]
+    },
+    "deploy_targets": {
+      "type": "array",
+      "items": {
+        "enum": ["web", "mobile", "wechat", "miniprogram", "mcp", "openapi", "desktop"]
+      }
+    },
+    "scale": {
+      "enum": ["monolith", "modular_monolith", "atomic_services", "microservices"]
+    },
+    "domain": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "tenancy": { "enum": ["single_tenant", "multi_tenant"] },
+        "regulated": {
+          "type": "boolean",
+          "description": "是否受审计/合规约束（决定证据留存与权限门禁强度）"
+        }
+      },
+      "additionalProperties": true
+    },
+    "tech_stack": {
+      "type": "object",
+      "properties": {
+        "backend": { "type": "string" },
+        "frontend": { "type": "string" },
+        "database": { "type": "string" },
+        "mobile": { "type": "string" },
+        "container": { "type": "string" },
+        "runtime": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "delivery": {
+      "type": "object",
+      "required": ["branch_model", "remotes", "risk_levels"],
+      "properties": {
+        "branch_model": {
+          "type": "object",
+          "properties": {
+            "mainline": { "type": "string", "description": "日常开发唯一事实源" },
+            "integration": { "type": "string" },
+            "production": { "type": "string" },
+            "release_pattern": { "type": "string", "description": "例如 release/<version>" },
+            "frozen": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "禁承接新提交的历史分支"
+            }
+          }
+        },
+        "remotes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "必须全部可达才允许开工（双远端闭环）"
+        },
+        "change_types": {
+          "type": "array",
+          "items": { "enum": ["U", "B", "E", "N"] },
+          "description": "U=补强 B=Bug E=增强 N=新能力"
+        },
+        "risk_levels": {
+          "type": "array",
+          "items": { "enum": ["L0", "L1", "L2", "L3"] }
+        },
+        "qualification_matrix": {
+          "enum": ["none", "S0_S3", "Q0_Q3"],
+          "description": "交付资格矩阵口径：S0–S3（母版销售资格）或 Q0–Q3（本方法论交付资格）"
+        },
+        "close_criteria": {
+          "type": "string",
+          "description": "会话关闭判据字符串，例如 FIVE_S_DELIVERY_CLOSE=PASS"
+        }
+      }
+    },
+    "knowledge": {
+      "type": "object",
+      "properties": {
+        "handbook_root": { "type": "string" },
+        "routing_index": { "type": "string" },
+        "knowledge_center_dir": { "type": "string" },
+        "generate_command": { "type": "string" },
+        "verify_command": { "type": "string" },
+        "impact_declaration": {
+          "type": "string",
+          "description": "提交时必须声明的知识影响字段，例如 Knowledge-Impact:"
+        }
+      }
+    },
+    "ai": {
+      "type": "object",
+      "properties": {
+        "engine": { "type": "string", "description": "当前执行引擎，例如 dsh" },
+        "engine_replaceable": { "type": "boolean" },
+        "engine_interface_version": { "type": "string" },
+        "mcp_server": { "type": "string", "description": "项目对外暴露的 MCP 入口" },
+        "tool_contract": { "type": "string", "description": "工具契约文件路径" },
+        "model_adaptation_level": {
+          "enum": ["none", "M0", "M1", "M2", "M3"],
+          "description": "模型适配资格：M0 能读规则产出格式正确文件；M1 能跑门禁并解释失败；M2 对抗性测试不漂移；M3 无人干预完成 L2/L3 且留新鲜证据"
+        }
+      }
+    },
+    "language": {
+      "type": "object",
+      "required": ["code"],
+      "properties": {
+        "code": { "type": "string", "description": "代码与标识符语言，通常 en" },
+        "docs": { "type": "string", "description": "文档语言，例如 zh-CN" }
+      }
+    },
+    "generated_at": { "type": "string" },
+    "source_template": {
+      "type": "string",
+      "description": "生成自哪个模板版本，用于回溯"
+    }
+  },
+  "additionalProperties": false
+}

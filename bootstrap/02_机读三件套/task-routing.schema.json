@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://enterprise-ai-dev-os/bootstrap/task-routing.schema.json",
+  "title": "Task Routing Table",
+  "description": "任务路由表：把「任务特征 -> 该加载什么 -> 该跑什么检查」变成机读数据，替代散在长规则文件里的人读映射表。",
+  "type": "object",
+  "required": ["routing_version", "entries"],
+  "properties": {
+    "_provenance": {
+      "type": "string",
+      "description": "可选注释：本表的来源与抽取依据（下划线前缀为注释键约定）"
+    },
+    "routing_version": { "type": "string" },
+    "precedence": {
+      "type": "array",
+      "description": "命中多条路由时的加载优先级",
+      "items": { "enum": ["project_rules", "domain_skill", "tech_skill", "handbook"] }
+    },
+    "defaults": {
+      "type": "object",
+      "description": "未命中任何条目时的兜底动作",
+      "properties": {
+        "risk_level": { "enum": ["L0", "L1", "L2", "L3"] },
+        "load": { "$ref": "#/definitions/load" },
+        "pre_checks": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "match", "risk_level", "load"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "稳定路由 id，例如 route-backend-service"
+          },
+          "title": { "type": "string" },
+          "match": {
+            "type": "object",
+            "properties": {
+              "keywords": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "任务描述/文件路径中的关键词"
+              },
+              "paths": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "改动路径前缀匹配"
+              },
+              "change_types": {
+                "type": "array",
+                "items": { "enum": ["U", "B", "E", "N"] }
+              }
+            }
+          },
+          "risk_level": { "enum": ["L0", "L1", "L2", "L3"] },
+          "load": { "$ref": "#/definitions/load" },
+          "pre_checks": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "进入实现前必须先跑的事实检查（DB/接口/运行态/同类实现搜索）"
+          },
+          "gates": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "引用 gates.json 中的 gate id"
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "load": {
+      "type": "object",
+      "properties": {
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string" },
+              "lines": {
+                "type": "integer",
+                "description": "只读前 N 行（母版实践为 50）"
+              },
+              "full": { "type": "boolean", "description": "是否全量加载" }
+            }
+          }
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["file"],
+            "properties": {
+              "file": { "type": "string" },
+              "sections": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "只读这些章节；为空表示按关键字检索"
+              },
+              "full": { "type": "boolean" }
+            }
+          }
+        },
+        "handbooks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "知识体系册级/专题路径"
+        },
+        "code_entrypoints": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "必须检查的既有实现入口（防第四套实现）"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

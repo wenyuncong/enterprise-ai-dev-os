@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://enterprise-ai-dev-os/bootstrap/gates.schema.json",
+  "title": "Gate Registry",
+  "description": "门禁注册表：每条门禁必须声明「何时跑、跑什么命令、失败算不算阻断、留下什么证据」。模型只能在门禁通过的边界内改动代码。",
+  "type": "object",
+  "required": ["gates_version", "gates"],
+  "properties": {
+    "_provenance": {
+      "type": "string",
+      "description": "可选注释：本注册表的来源与抽取依据（下划线前缀为注释键约定）"
+    },
+    "gates_version": { "type": "string" },
+    "layers": {
+      "type": "array",
+      "description": "门禁分层（母版实践为六层）",
+      "items": {
+        "enum": [
+          "static_audit",
+          "contract_test",
+          "consumer_test",
+          "runtime_replay",
+          "artifact_provenance",
+          "delivery_governance",
+          "environment"
+        ]
+      }
+    },
+    "rollout_policy": {
+      "type": "object",
+      "description": "先告警后阻断的推进策略",
+      "properties": {
+        "default_severity": { "enum": ["warn", "error"] },
+        "blocking_paths": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "达到阻断级别的核心路径范围"
+        },
+        "promotion_rule": {
+          "type": "string",
+          "description": "从 warn 升为 blocking 的条件（例如误报率确认后）"
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "layer", "when", "command", "severity", "blocking", "evidence"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "layer": {
+            "enum": [
+              "static_audit",
+              "contract_test",
+              "consumer_test",
+              "runtime_replay",
+              "artifact_provenance",
+              "delivery_governance",
+              "environment"
+            ]
+          },
+          "when": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "enum": [
+                "session_start",
+                "before_write",
+                "pre_commit",
+                "pre_push",
+                "pre_release",
+                "post_deploy",
+                "on_demand"
+              ]
+            }
+          },
+          "command": {
+            "type": "string",
+            "description": "可直接执行的命令（含解释器与相对路径）"
+          },
+          "workdir": { "type": "string" },
+          "timeout_seconds": { "type": "integer" },
+          "severity": { "enum": ["error", "warn", "info"] },
+          "blocking": {
+            "type": "boolean",
+            "description": "true=失败即阻断；false=只报告"
+          },
+          "applies_to": {
+            "type": "object",
+            "properties": {
+              "paths": { "type": "array", "items": { "type": "string" } },
+              "change_types": {
+                "type": "array",
+                "items": { "enum": ["U", "B", "E", "N"] }
+              },
+              "risk_levels": {
+                "type": "array",
+                "items": { "enum": ["L0", "L1", "L2", "L3"] }
+              }
+            }
+          },
+          "evidence": {
+            "type": "object",
+            "required": ["kind"],
+            "properties": {
+              "kind": {
+                "enum": ["exit_code", "json", "file", "screenshot", "db_readback", "api_response", "log"]
+              },
+              "path": { "type": "string" },
+              "freshness_rule": {
+                "type": "string",
+                "description": "证据必须在最后一次相关改动之后产生"
+              }
+            }
+          },
+          "owner": {
+            "type": "string",
+            "description": "门禁归属（项目 / 方法论 / 平台）"
+          },
+          "provenance": {
+            "type": "string",
+            "description": "该门禁来自母版的哪个脚本或哪条规则"
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
