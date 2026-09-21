@@ -15,6 +15,7 @@ acceptance criteria.
 | Stage | Primary skill | Supporting skills | Owns | Must not own |
 | --- | --- | --- | --- | --- |
 | Classify | `ai-project-classifier` | `ai-brownfield-analyzer` | Project origin, quality target, platforms, scale, baseline skill set | Detailed task plan or implementation |
+| Onboard methodology | `ai-project-onboarding-and-skill-integration` | `ai-project-classifier`, `ai-brownfield-analyzer`, `ai-skill-governor` | Technology profile, non-mutating copy plan, external candidate quarantine, integration record, bounded knowledge index | Silent overwrite, direct activation of external content, runtime/business truth |
 | Route | `ai-rule-dispatcher` | `ai-project-classifier` | Task line, one lead skill, first documents, first factual checks | Batch breakdown or code changes |
 | Discover | `ai-brownfield-analyzer` | `ai-reference-researcher`, tech skills | Existing architecture, scripts, conventions, extension points, intervention level | Rewriting unrelated working code |
 | Define product outcome | `ai-product-directed-delivery` | `ai-competitor-analyst`, `ai-ui-ux-governor` | Product-owner contract, scenario, usability, business acceptance, handoffs | Internal implementation choice without evidence |

@@ -26,6 +26,7 @@
 
 | ID | Task | Completed | Notes |
 |---|---|---|---|
+| METH-ONBOARDING-01 | 项目接入与技能供应链治理 | 2026-09-21 | 新增技术指纹、逐文件预检、GitHub 候选隔离、来源锁、候选治理、增量知识索引和方法论回归门禁 |
 | AI-NATIVE-GOV-01 | 全 AI 原生候选能力评估与验证协议 | 2026-08-09 | 将网页、Skill、工具输出等从可信标签判断升级为项目适配评估、受控验证、授权委托和执行证据契约 |
 | AI-NATIVE-GOV-02 | 可执行交付契约门禁 | 2026-08-21 | 新增任务写入范围、阶段准入、新鲜证据与独立双轴复核的 Schema、Skill、校验器和场景回归 |
 | BUG-01 | Rule 14: No test = not done 强制完成门禁 | 2026-06-17 | AGENTS.md §6 + verify.js --project-root 自动归档 |

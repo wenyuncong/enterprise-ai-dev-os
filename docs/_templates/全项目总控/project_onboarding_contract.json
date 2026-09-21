@@ -1,0 +1,82 @@
+{
+  "contract_id": "po_example_project_onboarding",
+  "schema_version": "1.0",
+  "status": "scoped",
+  "project_id": "target-project",
+  "delivery": {
+    "change_type": "governance",
+    "target_line": "main",
+    "target_version": "unversioned",
+    "affected_flow": "methodology and skill onboarding",
+    "gate": "L2"
+  },
+  "product_contract": {
+    "outcome": "The target project receives only approved methodology assets and a governed skill discovery process.",
+    "acceptance_steps": [
+      "The preflight plan identifies every target conflict before copying.",
+      "External skills remain non-callable until review and registration are complete.",
+      "The project index identifies its technology profile and scan limits."
+    ],
+    "non_goals": [
+      "This onboarding does not replace project runtime, database, authorization, or release evidence.",
+      "This onboarding does not overwrite project-owned assets by default."
+    ]
+  },
+  "truth_owner": "The target project's authoritative rules, runtime, data model, and project-owner integration decision.",
+  "scope": {
+    "write_allowlist": [
+      "AGENTS.md",
+      "rules/**",
+      "skills/**",
+      "scripts/py/**",
+      "docs/_templates/**",
+      "docs/全项目总控/**",
+      "knowledge/**"
+    ],
+    "forbidden_paths": [
+      "database/production/**",
+      "src/**"
+    ],
+    "out_of_scope": [
+      "Unrelated application source, database migrations, production configuration, and automatic deletion of project assets."
+    ],
+    "destructive_classification": "review_required",
+    "rollback_or_recovery": "Retain the preflight plan and restore only explicit task-owned additions or reviewed file-level backups."
+  },
+  "test_strategy": {
+    "mode": "alternative_evidence",
+    "public_seam": "Project onboarding CLI preflight, candidate governance report, and methodology audit.",
+    "rationale": "The delivery changes governance assets and is proven by deterministic CLI reports and focused regression tests."
+  },
+  "evidence_plan": {
+    "final_proofs": [
+      {
+        "proof_id": "proof_onboarding_cli",
+        "claim": "The onboarding workflow detects technology, preserves conflicts, and keeps candidates non-callable.",
+        "command_or_check": "py scripts/py/test_project_onboarding.py",
+        "must_run_after_final_change": true
+      },
+      {
+        "proof_id": "proof_methodology_integrity",
+        "claim": "Activated methodology assets remain structurally valid.",
+        "command_or_check": "py scripts/py/audit_methodology.py --project-root .",
+        "must_run_after_final_change": true
+      }
+    ]
+  },
+  "reviews": {
+    "standards_truth": {
+      "status": "pending",
+      "evidence": "Awaiting scoped diff and governance review."
+    },
+    "product_spec": {
+      "status": "pending",
+      "evidence": "Awaiting confirmation against adoption outcome and non-goals."
+    }
+  },
+  "implementer": "agent-delivery-owner",
+  "verification_owner": "independent-reviewer",
+  "owner_confirmation": "not_required",
+  "created_at": "2026-09-21T00:00:00Z",
+  "updated_at": "2026-09-21T00:00:00Z"
+}

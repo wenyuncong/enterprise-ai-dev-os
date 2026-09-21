@@ -50,6 +50,33 @@ When a rule mentions a skill, resolve it from `skills/{layer}/{skill-name}/SKILL
 3. If registered → use existing path. Do NOT re-install.
 4. If new install → register path: `py scripts/py/tool_registry.py set {name} "{path}" "{version}"`
 
+### 0.4a Project Onboarding and Skill Integration | 项目接入与技能融合
+
+Before copying methodology assets into a project, importing an external skill, or
+creating a project knowledge base:
+
+1. Read `skills/core/ai-project-onboarding-and-skill-integration/SKILL.md`.
+2. Discover the target project's existing scripts and generate its technology
+   profile with `py scripts/py/project_onboarding.py inspect --project-root <target>`.
+3. Generate a non-mutating copy plan with `project_onboarding.py preflight`.
+   Default is add-only; an existing target asset is a conflict, not permission
+   to overwrite it.
+4. Select stack skills from detected language, framework, database, package
+   manager, and project patterns. Do not bulk-import GitHub skills because a
+   language marker exists.
+5. Stage a GitHub source only under `skills/candidates/` with repository, pinned
+   ref, resolved commit, license decision, checksum/lock record, compatibility
+   review, and explicit owner decision. Candidates and quarantined material are
+   never callable.
+6. After approved integration, run candidate governance, methodology audit, and
+   skill-health audit. Refresh the knowledge index incrementally after material
+   source/dependency/skill/script changes; the index is discovery evidence, not
+   runtime authorization, database truth, or business closure.
+
+Never resolve an install conflict by using `-Force`, recursive deletion, or
+blind copying. Preserve project-owned rules, scripts, skills, and history until
+a reviewed file-level merge and rollback path exist.
+
 ### 0.5 5S Delivery Takeover | 5S 交付接管
 
 For versioned delivery, shared capability, release, deployment, schema, permission, or supported-baseline Bug work:
@@ -283,6 +310,7 @@ Skills are loaded in two stages to save context: first read the skill's `descrip
 - `skills/SKILL_MANIFEST.json`
 - `skills/core/ai-project-classifier/SKILL.md`
 - `skills/core/ai-tool-bootstrapper/SKILL.md`
+- `skills/core/ai-project-onboarding-and-skill-integration/SKILL.md` when starting in a project that does not yet have a verified onboarding record
 
 ### Phase 2: Domain Entry (Load When Entering New Domain)
 
@@ -386,6 +414,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | Skill | Purpose | When to Load |
 |---|---|---|
 | ai-project-classifier | Classify project (brownfield/greenfield, quality, scale, targets) | ALWAYS first at project start |
+| ai-project-onboarding-and-skill-integration | Detect stack, safely adopt methodology, govern external skill candidates, and build bounded knowledge indexes | Before methodology copy, skill import, or knowledge-base setup |
 | ai-product-directed-delivery | Product-owner/AI responsibility boundary, twelve-step delivery map, backend/frontend Host chains | Product-led AI-native delivery |
 | ai-rule-dispatcher | Route tasks to correct skill and load required docs | Every new task |
 | ai-task-decomposer | Break complex work into safe executable batches | Multi-module or cross-end tasks |
@@ -445,7 +474,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | tailwind-design-system | Design tokens, component libraries |
 | javascript-typescript-jest | Jest testing patterns, mocking |
 
-**Total**: 49 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
+**Total**: 50 official callable skills. Only skills listed in `skills/SKILL_MANIFEST.json` count as official release skills.
 
 ---
 
@@ -539,19 +568,28 @@ ACT   -> Extract lessons, update skills, close the loop
 
 ## 12. Project Bootstrapping | 新项目初始化
 
-For a new project, initialize the methodology by:
+For a new or existing project, initialize the methodology by:
 
-1. **Classify first** — Use ai-project-classifier (Step 0) to determine archetype (A/B/C)
-2. **Scaffold folders** — Create project structure matching your archetype. See methodology/08_项目文件夹结构标准.md
-3. Copy rules/AGENTS.md to project root
-4. Copy skills/core/ and skills/governance/ to {project}/skills/
-5. Select relevant skills/tech/ for your tech stack
-6. Copy docs/_templates/ to {project}/docs/
-7. Create docs sub-folders per the documentation hierarchy
-8. Run ai-rule-dispatcher to perform first-project audit
-9. Run ai-tool-bootstrapper to verify all tool dependencies
-10. **Deploy to AI tools** — Run `tools/deploy.ps1` -Tool all -Force to symlink skills and copy rules to all supported tools (Codex, Trae, Qoder, CodeBuddy, Claude, Cursor, Copilot, Windsurf, Lingma)
-11. Run `py scripts/py/audit_methodology.py --project-root .` before claiming the methodology package is clean
+1. **Classify and discover first** — Use `ai-project-classifier`, existing tool
+   discovery, and `project_onboarding.py inspect` to determine archetype,
+   technology profile, existing skills/scripts, and index scope.
+2. **Preflight before copying** — Run `project_onboarding.py preflight` against
+   the target. Review every `add`, `same`, and `conflict`; preserve conflicts
+   until their explicit merge/overwrite decision and rollback path are recorded.
+3. **Select, do not bulk-copy** — Add entry rules/templates, core/governance
+   capabilities needed by the selected adoption mode, and only stack skills that
+   match verified language/framework/database facts.
+4. **Stage external content** — GitHub skills/references enter
+   `skills/candidates/` with pinned source metadata. They remain non-callable
+   until reviewed, integrated, and registered in `skills/SKILL_MANIFEST.json`.
+5. **Scaffold approved folders** — Create the documentation hierarchy and
+   project onboarding record from
+   `docs/_templates/全项目总控/PROJECT_ONBOARDING_RECORD_TEMPLATE.md`.
+6. **Govern and index** — Run candidate governance, methodology audit,
+   skill-health audit, and an initial bounded knowledge-index build. Refresh
+   the index incrementally, not on every session.
+7. **Deploy adapters only after integration** — Run `tools/deploy.ps1` for
+   selected verified tools. Do not use `-Force` as a substitute for preflight.
 
 **Folder rules enforced from day one**:
 - Project root: only AGENTS.md + .editorconfig + build files
@@ -561,5 +599,5 @@ For a new project, initialize the methodology by:
 
 ---
 
-*Methodology version: 2.5.0 | Last updated: 2026-08-24*
-*Skills: 49 | Derived from enterprise delivery evidence*
+*Methodology version: 2.6.0 | Last updated: 2026-09-21*
+*Skills: 50 | Derived from enterprise delivery evidence*

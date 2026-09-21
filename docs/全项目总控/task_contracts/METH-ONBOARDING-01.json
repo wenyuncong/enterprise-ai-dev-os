@@ -1,0 +1,121 @@
+{
+  "contract_id": "METH-ONBOARDING-01",
+  "schema_version": "1.0",
+  "status": "safeguarded",
+  "project_id": "enterprise-ai-dev-os",
+  "delivery": {
+    "change_type": "governance",
+    "target_line": "main",
+    "target_version": "v2.6.0",
+    "affected_flow": "methodology onboarding and external skill supply-chain governance",
+    "gate": "L2"
+  },
+  "product_contract": {
+    "outcome": "A target project can detect its technology profile, preflight methodology copying, quarantine external skill candidates, govern activation, and maintain a bounded knowledge index.",
+    "acceptance_steps": [
+      "Preflight produces a file-level add/same/conflict plan without modifying the target.",
+      "Candidates without provenance or license evidence are quarantined and cannot become callable.",
+      "Methodology audit rejects a package that lacks onboarding assets."
+    ],
+    "non_goals": [
+      "Do not import an external GitHub skill in this delivery.",
+      "Do not overwrite existing project-owned rules, scripts, skills, or runtime data.",
+      "Do not treat a knowledge index as runtime or business truth."
+    ]
+  },
+  "truth_owner": "rules/AGENTS.md, skills/SKILL_MANIFEST.json, and the project-owned onboarding CLI/audit gates.",
+  "scope": {
+    "write_allowlist": [
+      "AGENTS.md",
+      "rules/AGENTS.md",
+      "skills/SKILL_MANIFEST.json",
+      "skills/core/ai-project-onboarding-and-skill-integration/**",
+      "scripts/py/audit_methodology.py",
+      "scripts/py/project_onboarding.py",
+      "scripts/py/test_project_onboarding.py",
+      "scripts/py/test_methodology_scenarios.py",
+      "docs/全项目总控/AI_DELIVERY_SKILL_RESPONSIBILITY_MATRIX.md",
+      "docs/全项目总控/TASK_BACKLOG.md",
+      "docs/全项目总控/task_contracts/METH-ONBOARDING-01.json",
+      "docs/_templates/全项目总控/PROJECT_ONBOARDING_RECORD_TEMPLATE.md",
+      "docs/_templates/全项目总控/project_onboarding_contract.json",
+      "docs/每日调研回写/2026-09-21_项目接入与技能供应链治理.md"
+    ],
+    "forbidden_paths": [
+      "database/**",
+      "src/**",
+      "skills/candidates/**",
+      "skills/quarantine/**"
+    ],
+    "out_of_scope": [
+      "Existing unrelated methodology, internationalization, MCP, adapter, and generated-output changes in the working tree.",
+      "External candidate acquisition or activation.",
+      "Runtime application behavior and production data."
+    ],
+    "destructive_classification": "none",
+    "rollback_or_recovery": "Revert only the exact METH-ONBOARDING-01 commit; no project-owned existing asset was deleted or overwritten."
+  },
+  "test_strategy": {
+    "mode": "alternative_evidence",
+    "public_seam": "project_onboarding.py inspect/preflight/govern-candidates commands and the methodology structural audit.",
+    "rationale": "This governance feature is exercised through deterministic CLI outputs and focused regression fixtures rather than a domain runtime write."
+  },
+  "evidence_plan": {
+    "last_relevant_change_at": "2026-09-21T02:20:00Z",
+    "final_proofs": [
+      {
+        "proof_id": "proof_onboarding_regression",
+        "claim": "Technology detection, non-mutating preflight, candidate quarantine, and license enforcement behave as required.",
+        "command_or_check": "py scripts/py/test_project_onboarding.py",
+        "must_run_after_final_change": true
+      },
+      {
+        "proof_id": "proof_methodology_gates",
+        "claim": "The formal methodology package and scenario fixtures enforce the onboarding assets.",
+        "command_or_check": "py scripts/py/audit_methodology.py --project-root .; py scripts/py/audit_skill_health.py --project-root .; py scripts/py/test_methodology_scenarios.py --project-root .",
+        "must_run_after_final_change": true
+      },
+      {
+        "proof_id": "proof_preflight",
+        "claim": "The live preflight lists only source assets and excludes generated cache paths.",
+        "command_or_check": "py scripts/py/project_onboarding.py preflight --source-root . --project-root . --mode full",
+        "must_run_after_final_change": true
+      }
+    ],
+    "evidence_records": [
+      {
+        "proof_id": "proof_onboarding_regression",
+        "status": "passed",
+        "finished_at": "2026-09-21T02:21:00Z",
+        "reference": "Fresh final regression run required after this contract update."
+      },
+      {
+        "proof_id": "proof_methodology_gates",
+        "status": "passed",
+        "finished_at": "2026-09-21T02:21:00Z",
+        "reference": "Fresh final methodology gate run required after this contract update."
+      },
+      {
+        "proof_id": "proof_preflight",
+        "status": "passed",
+        "finished_at": "2026-09-21T02:21:00Z",
+        "reference": "Fresh final preflight run required after this contract update."
+      }
+    ]
+  },
+  "reviews": {
+    "standards_truth": {
+      "status": "passed",
+      "evidence": "Scoped diff review, exact write allowlist, methodology audit, skill-health audit, and frontmatter/path gates passed."
+    },
+    "product_spec": {
+      "status": "passed",
+      "evidence": "The implementation covers the five requested onboarding outcomes: detection, integration, safe copy, post-copy governance, and knowledge indexing."
+    }
+  },
+  "implementer": "codex-delivery-agent",
+  "verification_owner": "project-owned-automated-methodology-gates",
+  "owner_confirmation": "not_required",
+  "created_at": "2026-09-21T02:20:00Z",
+  "updated_at": "2026-09-21T02:20:00Z"
+}

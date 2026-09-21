@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Audit the portable AI development methodology repository.
 
 The script checks the release-facing knowledge base and skips private local
@@ -170,6 +170,35 @@ def check_skill_structure(root: Path, issues: list[Issue]) -> None:
     for skill in sorted((root / "skills").rglob("SKILL.md")):
         rpath = rel(skill, root)
         text = read_text(skill)
+        # Fail-closed frontmatter delimiter gate: a stray CR (0x0D) before the LF — e.g. a
+        # "0D 0D 0A" double-CR line ending — makes the opening "---" illegal for strict
+        # parsers, which then read no frontmatter and silently drop the whole skill from the
+        # catalog. Verified against the DSH skill provider (2026-09-14): 9 of 49 skills were
+        # invisible until this defect was repaired.
+        # NOTE: this must inspect raw bytes. Python text mode applies universal newlines
+        # (0D 0D 0A -> 0A 0A), which hides exactly the defect this gate exists to catch.
+        raw_head = skill.read_bytes()[:16]
+        if raw_head.startswith(b"\xef\xbb\xbf"):
+            issues.append(
+                Issue(
+                    "WARN",
+                    "SKILL_FRONTMATTER_BOM",
+                    rpath,
+                    "SKILL.md starts with a UTF-8 BOM; the current agent runtimes tolerate it, "
+                    "but strict frontmatter parsers may not. Keep skill files BOM-free.",
+                )
+            )
+            raw_head = raw_head[3:]
+        if not re.match(rb"^---[ \t]*(\r\n|\n)", raw_head):
+            issues.append(
+                Issue(
+                    "FAIL",
+                    "SKILL_FRONTMATTER_DELIMITER",
+                    rpath,
+                    "SKILL.md must start with a legal frontmatter delimiter: '---' followed by CRLF or LF "
+                    "(a stray CR before the newline, e.g. a 0D 0D 0A double-CR ending, silently drops the skill).",
+                )
+            )
         metadata, body = parse_frontmatter(text)
         if len(text.strip()) < 800:
             issues.append(Issue("WARN", "SKILL_THIN", rpath, "SKILL.md is short; confirm it is not only a placeholder."))
@@ -512,6 +541,63 @@ def check_delivery_contract_governance(root: Path, manifest: dict, issues: list[
         issues.append(Issue("FAIL", "DELIVERY_CONTRACT_RULES", rules_path, f"canonical rules must define executable delivery contracts: {', '.join(missing)}"))
 
 
+def check_project_onboarding_governance(root: Path, manifest: dict, issues: list[Issue]) -> None:
+    skill_path = Path("skills/core/ai-project-onboarding-and-skill-integration/SKILL.md")
+    script_path = Path("scripts/py/project_onboarding.py")
+    test_path = Path("scripts/py/test_project_onboarding.py")
+    record_template = Path("docs/_templates/全项目总控/PROJECT_ONBOARDING_RECORD_TEMPLATE.md")
+    contract_template = Path("docs/_templates/全项目总控/project_onboarding_contract.json")
+    required_files = {
+        skill_path: "project onboarding and skill integration skill is required.",
+        script_path: "project onboarding CLI is required.",
+        test_path: "project onboarding regression test is required.",
+        record_template: "project onboarding record template is required.",
+        contract_template: "project onboarding contract template is required.",
+    }
+    for path, message in required_files.items():
+        if not (root / path).exists():
+            issues.append(Issue("FAIL", "ONBOARDING_ASSET_MISSING", path, message))
+
+    registered = next(
+        (item for item in manifest.get("officialSkills", []) if item.get("name") == "ai-project-onboarding-and-skill-integration"),
+        None,
+    )
+    if not registered:
+        issues.append(Issue("FAIL", "ONBOARDING_MANIFEST", Path("skills/SKILL_MANIFEST.json"), "project onboarding skill is not registered."))
+    elif registered.get("path") != str(skill_path).replace("\\", "/"):
+        issues.append(Issue("FAIL", "ONBOARDING_MANIFEST", Path("skills/SKILL_MANIFEST.json"), "project onboarding skill has an invalid manifest path."))
+
+    if (root / skill_path).exists():
+        skill_text = read_text(root / skill_path).lower()
+        required_terms = [
+            "detect -> discover -> evaluate -> plan -> stage -> merge -> govern -> index -> verify",
+            "skills/candidates/",
+            "skills/quarantine/",
+            "pinned ref",
+            "license",
+            "knowledge index",
+            "non-mutating",
+            "never activate",
+        ]
+        missing = [term for term in required_terms if term not in skill_text]
+        if missing:
+            issues.append(Issue("FAIL", "ONBOARDING_SKILL_STRUCTURE", skill_path, f"project onboarding skill is missing: {', '.join(missing)}"))
+
+    rules_path = Path("rules/AGENTS.md")
+    rules_text = read_text(root / rules_path).lower() if (root / rules_path).exists() else ""
+    required_rule_terms = [
+        "project onboarding and skill integration",
+        "project_onboarding.py inspect",
+        "project_onboarding.py preflight",
+        "skills/candidates/",
+        "never resolve an install conflict by using `-force`",
+        "knowledge index incrementally",
+    ]
+    missing = [term for term in required_rule_terms if term not in rules_text]
+    if missing:
+        issues.append(Issue("FAIL", "ONBOARDING_RULES", rules_path, f"canonical rules must define controlled onboarding: {', '.join(missing)}"))
+
+
 def check_agent_paths(root: Path, issues: list[Issue]) -> None:
     for agent_file in [root / "AGENTS.md", root / "rules" / "AGENTS.md"]:
         if not agent_file.exists():
@@ -556,6 +642,7 @@ def main() -> int:
     check_product_directed_delivery(root, manifest, issues)
     check_delivery_operating_assets(root, issues)
     check_delivery_contract_governance(root, manifest, issues)
+    check_project_onboarding_governance(root, manifest, issues)
     check_agent_paths(root, issues)
     check_private_archive_notice(root, issues)
 

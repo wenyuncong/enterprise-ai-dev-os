@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "updatedAt": "2026-07-28",
+  "updatedAt": "2026-09-21",
   "officialSkillRoot": "skills/",
   "rawSourceRoot": "private-local-archive",
   "adapterRoots": [
@@ -18,10 +18,10 @@
     "deprecated": "The skill should not be used for new work."
   },
   "counts": {
-    "official": 49,
+    "official": 50,
     "rawSource": 45,
     "byLayer": {
-      "core": 16,
+      "core": 17,
       "governance": 13,
       "tech": 20,
       "platform": 0
@@ -92,6 +92,14 @@
       "path": "skills/core/ai-project-classifier/SKILL.md",
       "source": "methodology extraction",
       "maturity": "verified"
+    },
+    {
+      "name": "ai-project-onboarding-and-skill-integration",
+      "layer": "core",
+      "path": "skills/core/ai-project-onboarding-and-skill-integration/SKILL.md",
+      "source": "methodology adoption and skill supply-chain governance",
+      "maturity": "verified",
+      "description": "Safely onboard methodology assets by detecting project technology, staging external skills in quarantine, preserving conflicts, governing candidates, and building a bounded knowledge index. Use before methodology copying, skill import, or project knowledge-base setup."
     },
     {
       "name": "ai-product-directed-delivery",

@@ -20,6 +20,11 @@ RESPONSIBILITY_MATRIX = Path("docs/全项目总控/AI_DELIVERY_SKILL_RESPONSIBIL
 AUDIT_SCRIPT = Path("scripts/py/audit_methodology.py")
 CONTRACT_TEMPLATE = Path("docs/_templates/全项目总控/task_contract.json")
 CONTRACT_VALIDATOR = Path("scripts/py/validate_delivery_contract.py")
+ONBOARDING_SKILL = Path("skills/core/ai-project-onboarding-and-skill-integration/SKILL.md")
+ONBOARDING_SCRIPT = Path("scripts/py/project_onboarding.py")
+ONBOARDING_TEST = Path("scripts/py/test_project_onboarding.py")
+ONBOARDING_RECORD_TEMPLATE = Path("docs/_templates/全项目总控/PROJECT_ONBOARDING_RECORD_TEMPLATE.md")
+ONBOARDING_CONTRACT_TEMPLATE = Path("docs/_templates/全项目总控/project_onboarding_contract.json")
 
 
 def read_text(path: Path) -> str:
@@ -39,6 +44,7 @@ def write_fixture(
 ) -> None:
     (root / "skills/core/ai-5s-delivery-governor").mkdir(parents=True)
     (root / "skills/core/ai-delivery-contract-governor").mkdir(parents=True)
+    (root / "skills/core/ai-project-onboarding-and-skill-integration").mkdir(parents=True)
     (root / "skills/core/ai-product-directed-delivery").mkdir(parents=True)
     (root / "rules").mkdir(parents=True)
     (root / "docs/全项目总控").mkdir(parents=True)
@@ -124,6 +130,12 @@ fail-closed
 AI_DELIVERY_SKILL_RESPONSIBILITY_MATRIX.md
 AI_PRODUCT_DELIVERY_TASK_TEMPLATE.md
 test_methodology_scenarios.py
+## Project Onboarding and Skill Integration
+project_onboarding.py inspect
+project_onboarding.py preflight
+skills/candidates/
+Never resolve an install conflict by using `-Force`.
+Knowledge index incrementally.
 """
 
     manifest = {
@@ -147,12 +159,35 @@ test_methodology_scenarios.py
                 "path": "skills/core/ai-product-directed-delivery/SKILL.md",
                 "maturity": "verified",
             },
+            {
+                "name": "ai-project-onboarding-and-skill-integration",
+                "layer": "core",
+                "path": "skills/core/ai-project-onboarding-and-skill-integration/SKILL.md",
+                "maturity": "verified",
+            },
         ],
     }
     (root / "skills/SKILL_MANIFEST.json").write_text(json.dumps(manifest), encoding="utf-8")
     (root / "skills/core/ai-5s-delivery-governor/SKILL.md").write_text(five_s, encoding="utf-8")
     (root / "skills/core/ai-delivery-contract-governor/SKILL.md").write_text(delivery_contract, encoding="utf-8")
     (root / "skills/core/ai-product-directed-delivery/SKILL.md").write_text(product, encoding="utf-8")
+    (root / ONBOARDING_SKILL).write_text(
+        """---
+name: ai-project-onboarding-and-skill-integration
+description: "Use before methodology copy, skill import, or knowledge-base setup."
+---
+# Onboarding
+Detect -> Discover -> Evaluate -> Plan -> Stage -> Merge -> Govern -> Index -> Verify
+skills/candidates/
+skills/quarantine/
+pinned ref
+license
+knowledge index
+non-mutating
+never activate
+""",
+        encoding="utf-8",
+    )
     (root / "rules/AGENTS.md").write_text(rules, encoding="utf-8")
     (root / "AGENTS.md").write_text("# Generated rules\n", encoding="utf-8")
     if include_safety:
@@ -164,6 +199,7 @@ ai-chief-planner
 ai-task-decomposer
 ai-delivery-contract-governor
 ai-product-directed-delivery
+ai-project-onboarding-and-skill-integration
 ai-5s-delivery-governor
 ai-runtime-verify
 """,
@@ -189,6 +225,14 @@ tenant lifecycle regression
         )
         (root / "docs/_templates/全项目总控/task_contract.json").write_text(
             """{"contract_id":"dc_fixture","schema_version":"1.0","status":"scoped","project_id":"fixture","delivery":{"gate":"L2"},"product_contract":{"outcome":"outcome","acceptance_steps":["accept"],"non_goals":["non-goal"]},"truth_owner":"owner","scope":{"write_allowlist":["src/**"],"out_of_scope":["out"],"destructive_classification":"none"},"test_strategy":{"mode":"red_green","public_seam":"public seam","rationale":"reason","focused_test_command":"test"},"evidence_plan":{"final_proofs":[{"proof_id":"proof_fixture","claim":"claim","command_or_check":"test","must_run_after_final_change":true}]},"reviews":{"standards_truth":{"status":"pending","evidence":"pending"},"product_spec":{"status":"pending","evidence":"pending"}},"implementer":"implementer","created_at":"2026-08-21T00:00:00Z","updated_at":"2026-08-21T00:00:00Z"}""",
+            encoding="utf-8",
+        )
+        (root / ONBOARDING_RECORD_TEMPLATE).write_text(
+            "# Project Onboarding\nknowledge index\nskills/candidates/\n",
+            encoding="utf-8",
+        )
+        (root / ONBOARDING_CONTRACT_TEMPLATE).write_text(
+            """{"contract_id":"po_fixture","schema_version":"1.0","status":"scoped","project_id":"fixture","delivery":{"gate":"L2"},"product_contract":{"outcome":"outcome","acceptance_steps":["accept"],"non_goals":["non-goal"]},"truth_owner":"owner","scope":{"write_allowlist":["skills/**"],"out_of_scope":["out"],"destructive_classification":"none"},"test_strategy":{"mode":"alternative_evidence","public_seam":"public seam","rationale":"reason"},"evidence_plan":{"final_proofs":[{"proof_id":"proof_fixture","claim":"claim","command_or_check":"test","must_run_after_final_change":true}]},"reviews":{"standards_truth":{"status":"pending","evidence":"pending"},"product_spec":{"status":"pending","evidence":"pending"}},"implementer":"implementer","created_at":"2026-08-21T00:00:00Z","updated_at":"2026-08-21T00:00:00Z"}""",
             encoding="utf-8",
         )
         (root / "docs/全项目总控/schemas/governance/delivery-contract.schema.json").write_text(
@@ -218,6 +262,8 @@ Tenant Lifecycle Regression Load Profile Authoritative Facts Audit Rollback / Re
             "# scenario regression placeholder\n",
             encoding="utf-8",
         )
+        (root / ONBOARDING_SCRIPT).write_text("# onboarding CLI placeholder\n", encoding="utf-8")
+        (root / ONBOARDING_TEST).write_text("# onboarding regression placeholder\n", encoding="utf-8")
 
 
 def run_audit(repo_root: Path, fixture: Path) -> tuple[int, dict]:
@@ -293,21 +339,35 @@ def main() -> int:
         root / TENANT_TEMPLATE,
         ["tenant lifecycle regression", "load profile", "authoritative facts", "audit", "rollback / residue", "cross-tenant access is denied"],
     )
+    missing_onboarding_assets = [
+        str(path) for path in (
+            ONBOARDING_SKILL,
+            ONBOARDING_SCRIPT,
+            ONBOARDING_TEST,
+            ONBOARDING_RECORD_TEMPLATE,
+            ONBOARDING_CONTRACT_TEMPLATE,
+        )
+        if not (root / path).exists()
+    ]
 
     temp_root = Path(tempfile.mkdtemp(prefix="methodology-scenarios-"))
     try:
         complete_fixture = temp_root / "complete"
         incomplete_fixture = temp_root / "missing-safety"
         missing_assets_fixture = temp_root / "missing-operating-assets"
+        missing_onboarding_fixture = temp_root / "missing-onboarding-assets"
         control_character_fixture = temp_root / "control-character"
         write_fixture(complete_fixture, include_safety=True)
         write_fixture(incomplete_fixture, include_safety=False)
         write_fixture(missing_assets_fixture, include_safety=True, include_operating_assets=False)
+        write_fixture(missing_onboarding_fixture, include_safety=True)
+        (missing_onboarding_fixture / ONBOARDING_SCRIPT).unlink()
         write_fixture(control_character_fixture, include_safety=True, include_control_character=True)
 
         complete_exit, complete_result = run_audit(root, complete_fixture)
         incomplete_exit, incomplete_result = run_audit(root, incomplete_fixture)
         missing_assets_exit, missing_assets_result = run_audit(root, missing_assets_fixture)
+        missing_onboarding_exit, missing_onboarding_result = run_audit(root, missing_onboarding_fixture)
         control_exit, control_result = run_audit(root, control_character_fixture)
 
         valid_contract = json.loads(read_text(root / CONTRACT_TEMPLATE))
@@ -355,6 +415,8 @@ def main() -> int:
         failures.append(f"migration gate template missing: {', '.join(missing_migration_template)}")
     if missing_tenant_template:
         failures.append(f"tenant regression template missing: {', '.join(missing_tenant_template)}")
+    if missing_onboarding_assets:
+        failures.append(f"project onboarding assets missing: {', '.join(missing_onboarding_assets)}")
     if complete_exit != 0 or not complete_result.get("passed"):
         failures.append("complete fixture did not pass methodology audit")
     if incomplete_exit == 0 or incomplete_result.get("passed"):
@@ -367,6 +429,10 @@ def main() -> int:
         failures.append("missing-operating-assets fixture was not rejected by methodology audit")
     if not any(issue.get("code") == "DELIVERY_OPERATING_ASSET_MISSING" for issue in missing_assets_result.get("issues", [])):
         failures.append("missing-operating-assets fixture did not fail operating asset check")
+    if missing_onboarding_exit == 0 or missing_onboarding_result.get("passed"):
+        failures.append("missing-onboarding-assets fixture was not rejected by methodology audit")
+    if not any(issue.get("code") == "ONBOARDING_ASSET_MISSING" for issue in missing_onboarding_result.get("issues", [])):
+        failures.append("missing-onboarding-assets fixture did not fail onboarding asset check")
     if control_exit == 0 or control_result.get("passed"):
         failures.append("control-character fixture was not rejected by methodology audit")
     if not any(issue.get("code") == "CONTROL_CHARACTER" for issue in control_result.get("issues", [])):
@@ -394,6 +460,7 @@ def main() -> int:
             "delivery_contract_template": {"passed": not missing_contract_template, "missing": missing_contract_template},
             "migration_gate_template": {"passed": not missing_migration_template, "missing": missing_migration_template},
             "tenant_regression_template": {"passed": not missing_tenant_template, "missing": missing_tenant_template},
+            "project_onboarding_assets": {"passed": not missing_onboarding_assets, "missing": missing_onboarding_assets},
             "complete_fixture": {"passed": complete_result.get("passed"), "exitCode": complete_exit},
             "missing_safety_fixture_rejected": {
                 "passed": not incomplete_result.get("passed") and incomplete_exit != 0,
@@ -404,6 +471,11 @@ def main() -> int:
                 "passed": not missing_assets_result.get("passed") and missing_assets_exit != 0,
                 "exitCode": missing_assets_exit,
                 "issueCodes": [issue.get("code") for issue in missing_assets_result.get("issues", [])],
+            },
+            "missing_onboarding_assets_fixture_rejected": {
+                "passed": not missing_onboarding_result.get("passed") and missing_onboarding_exit != 0,
+                "exitCode": missing_onboarding_exit,
+                "issueCodes": [issue.get("code") for issue in missing_onboarding_result.get("issues", [])],
             },
             "control_character_fixture_rejected": {
                 "passed": not control_result.get("passed") and control_exit != 0,
