@@ -34,6 +34,66 @@ CMD_ALIAS = {
     "slides": ("lark-cli", True),
 }
 
+# PATH 外探测表：工具已安装但未加入 PATH 时的常见安装位置。
+# 命中这些位置说明工具"已安装（可用/部分可用）"，不应判为缺失。
+# 维护方法：本机实测安装位置 + 各工具官方默认安装目录。
+KNOWN_INSTALL_LOCATIONS = {
+    "codex": [
+        r"C:\Users\Administrator\AppData\Local\OpenAI\Codex\bin\247581e40ee272fb\codex.exe",
+        r"C:\Users\Administrator\.codex",
+        # 通用：%LOCALAPPDATA%\OpenAI\Codex\bin\*\codex.exe（见 probe_dir）
+    ],
+    "flutter": [
+        r"D:\flutter\bin\flutter.bat",
+        r"G:\DevTools\flutter\bin\flutter.bat",
+        r"C:\flutter\bin\flutter.bat",
+    ],
+    "playwright": [
+        r"C:\Users\Administrator\AppData\Local\ms-playwright",
+    ],
+    "docker": [
+        r"C:\Program Files\Docker\Docker\resources\bin\docker.exe",
+        r"C:\Program Files\Docker\Docker\Docker Desktop.exe",
+        # 注意：C:\ProgramData\DockerDesktop 仅含安装日志（残留），不是可用安装，不作为命中。
+    ],
+    "code": [
+        r"C:\Program Files\Microsoft VS Code\bin\code.cmd",
+        r"C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd",
+    ],
+    "mysql": [
+        r"C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe",
+    ],
+    "go": [r"C:\Program Files\Go\bin\go.exe", r"C:\Go\bin\go.exe"],
+    "psql": [r"C:\Program Files\PostgreSQL\*\bin\psql.exe"],
+    "soffice": [r"C:\Program Files\LibreOffice\program\soffice.exe"],
+    "codex_extra": [],  # placeholder
+}
+
+def _probe_install_location(cmd):
+    """在 PATH 外探测已知安装位置；命中返回 True。"""
+    locs = KNOWN_INSTALL_LOCATIONS.get(cmd, [])
+    for loc in locs:
+        if "*" in loc:
+            # 支持单个 * 通配（如 PostgreSQL 版本目录）
+            import glob as _glob
+            hits = _glob.glob(loc)
+            if hits:
+                return True
+            continue
+        try:
+            if os.path.exists(loc):
+                return True
+        except Exception:
+            continue
+    # 通用探测：OpenAI Codex bin 下任意版本子目录
+    if cmd == "codex":
+        base = os.path.expandvars(r"%LOCALAPPDATA%\OpenAI\Codex\bin")
+        if os.path.isdir(base):
+            for sub in os.listdir(base):
+                if os.path.isfile(os.path.join(base, sub, "codex.exe")):
+                    return True
+    return False
+
 def cmd_exists(cmd):
     try:
         r = subprocess.run(["where" if os.name=="nt" else "which", cmd], capture_output=True, timeout=5)
@@ -62,7 +122,7 @@ def scan_skill(d, name):
     rec = {"name": name, "path": d, "has_skill_md": False, "readable": False,
            "skill_md_bytes": 0, "refs_real_missing": [], "refs_cross_skill": [],
            "refs_external": [], "refs_runtime": [], "refs_dir_missing": [],
-           "cmds_missing": [], "cmds_platform_diff": [],
+           "cmds_missing": [], "cmds_platform_diff": [], "cmds_installed_no_path": [],
            "libs_missing": [], "verdict": "UNKNOWN", "issues": []}
     if ".user_skills" in d:
         rec["lib"] = "user"
@@ -199,6 +259,12 @@ def scan_skill(d, name):
             if cmd_exists(alias):
                 rec["cmds_platform_diff"].append(c)
                 continue
+        if _probe_install_location(c):
+            # 已安装但不在 PATH：记入"已安装未入PATH"，不判缺失
+            if not hasattr(rec, "cmds_installed_no_path"):
+                rec["cmds_installed_no_path"] = []
+            rec["cmds_installed_no_path"].append(c)
+            continue
         rec["cmds_missing"].append(c)
 
     # ---- Python 库（只统计代码块内的 import，避免示例误报） ----
@@ -233,7 +299,8 @@ def scan_skill(d, name):
     # ---- 判定 ----
     hard = rec["refs_real_missing"]
     soft = (rec["cmds_missing"] or rec["libs_missing"] or rec["cmds_platform_diff"]
-            or rec["refs_dir_missing"] or rec["refs_external"] or rec["refs_runtime"])
+            or rec["refs_dir_missing"] or rec["refs_external"] or rec["refs_runtime"]
+            or getattr(rec, "cmds_installed_no_path", []))
     if hard:
         rec["verdict"] = "PARTIAL"
         rec["issues"].append("引用文件真实缺失 %d 处（硬伤）" % len(hard))
@@ -246,6 +313,7 @@ def scan_skill(d, name):
         if rec["refs_dir_missing"]: kinds.append("目录引用%d" % len(rec["refs_dir_missing"]))
         if rec["refs_external"]: kinds.append("外部项目引用%d" % len(rec["refs_external"]))
         if rec["refs_runtime"]: kinds.append("运行时/占位引用%d" % len(rec["refs_runtime"]))
+        if getattr(rec, "cmds_installed_no_path", []): kinds.append("已装未入PATH%d" % len(rec["cmds_installed_no_path"]))
         rec["issues"].append("软缺失：" + "、".join(kinds))
     else:
         rec["verdict"] = "OK"

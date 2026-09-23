@@ -29,8 +29,10 @@ TOOLS = {
     "java":       {"cmd": "java",       "args": ["--version"], "win_paths": [r"C:\Program Files\Eclipse Adoptium\*\bin\java.exe"]},
     "mysql":      {"cmd": "mysql",      "args": ["--version"], "win_paths": [r"C:\Program Files\MySQL\*\bin\mysql.exe"]},
     "docker":     {"cmd": "docker",     "args": ["--version"], "win_paths": [r"C:\Program Files\Docker\Docker\resources\bin\docker.exe", r"C:\Program Files\Docker\Docker\Docker Desktop.exe"]},
+    "codex":      {"cmd": "codex",      "args": ["--version"], "win_paths": [r"C:\Users\Administrator\AppData\Local\OpenAI\Codex\bin\*\codex.exe"]},
+    "flutter":    {"cmd": "flutter",    "args": ["--version"], "win_paths": [r"D:\flutter\bin\flutter.bat", r"C:\flutter\bin\flutter.bat", r"G:\DevTools\flutter\bin\flutter.bat"]},
     "curl":       {"cmd": "curl",       "args": ["--version"], "win_paths": [r"C:\Windows\System32\curl.exe"]},
-    "playwright": {"cmd": "npx.cmd",    "args": ["playwright", "--version"], "win_paths": []},
+    "playwright": {"cmd": "npx.cmd",    "args": ["playwright", "--version"], "win_paths": [r"C:\Users\Administrator\AppData\Local\ms-playwright\chromium-*\chrome.exe"]},
     "edge":       {"cmd": None,         "args": [],             "win_paths": [r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
                                                                                r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"]},
 }
