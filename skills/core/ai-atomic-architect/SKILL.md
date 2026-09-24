@@ -1,6 +1,10 @@
 ---
 name: ai-atomic-architect
 description: "Design AI-native atomic services, atomic orchestration, aggregate interfaces, command gateways, and multi-platform capability exposure. Use when defining service decomposition, backend truth ownership, reusable business commands, Host clients, or MCP/agent capability surfaces."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

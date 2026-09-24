@@ -1,6 +1,10 @@
 ---
 name: ai-5s-delivery-governor
 description: "Govern change delivery with a lightweight Scope, Specify, Ship, Safeguard, Sell lifecycle. Use for versioned delivery, branch routing, release candidates, hotfixes, acceptance gates, deployment evidence, or any task whose completion must be auditable."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

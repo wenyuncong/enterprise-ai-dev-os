@@ -1,6 +1,10 @@
 ---
 name: ai-cross-project-audit
 description: "Cross-project governance audit pipeline: consume existing audit data, orchestrate L3 domain atoms, produce L5 evidence + index + report. Supports read-only (report only) and active (modify target) modes. Use when auditing one project from another project's atomic governance system."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-cross-project-audit — Cross-Project Governance Auditor

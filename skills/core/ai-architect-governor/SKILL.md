@@ -1,6 +1,10 @@
 ---
 name: ai-architect-governor
 description: "Govern cross-domain architecture decisions, ADRs, domain boundaries, source-of-truth ownership, identity/tenant models, integration patterns, and architecture risk. Use when a task changes architecture, crosses modules or platforms, defines ownership, or needs an architecture decision record."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-architect-governor — Cross-Domain Architecture Governor

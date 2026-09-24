@@ -1,6 +1,11 @@
 ---
 name: react-frontend
 description: "React 18+ frontend engineering with TypeScript: function components and hooks, display-only views, state management, performance, error boundaries, and testing. Use when building or reviewing a React page or component, adding state, or fixing rendering/performance issues."
+metadata:
+  requires:
+    bins: [node]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

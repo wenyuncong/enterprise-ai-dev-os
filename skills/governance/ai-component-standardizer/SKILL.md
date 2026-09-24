@@ -1,6 +1,10 @@
 ---
 name: ai-component-standardizer
 description: "Enforce standard page and component templates, theme variables, layout contracts, action placement, and reusable UI patterns. Use when creating or reviewing list pages, document forms, reports, dashboards, or enterprise frontend components."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

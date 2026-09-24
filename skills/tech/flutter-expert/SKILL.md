@@ -11,6 +11,10 @@ metadata:
   scope: implementation
   output-format: code
   related-skills: react-native-expert, test-master, fullstack-guardian
+  requires:
+    bins: [flutter]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 ## Purpose
 

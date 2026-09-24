@@ -1,6 +1,11 @@
 ---
 name: ai-runtime-verify
 description: "Verify runtime behavior with browser/API checks, console inspection, loading-state removal, DOM rendering, screenshots, logs, and structured evidence. Use before claiming code or page work is complete, especially for frontend and integration changes."
+metadata:
+  requires:
+    bins: [node]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

@@ -1,6 +1,11 @@
 ---
 name: ai-architecture-knowledge-and-delivery
 description: "Use when scanning an existing project into a language-neutral Architecture IR, generating an applicable 13-step delivery plan and task DAG, or publishing bounded static knowledge-center evidence without treating the graph as runtime truth."
+metadata:
+  requires:
+    bins: [python]
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-architecture-knowledge-and-delivery

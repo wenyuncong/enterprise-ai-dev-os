@@ -1,6 +1,10 @@
 ---
 name: ai-frontend-audit
 description: "Audit frontend availability, state handling, API integration, component reuse, accessibility, loading/empty/error states, performance, and user-facing readiness. Use before PRs, screenshots, releases, or when a page exists but may not be usable."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

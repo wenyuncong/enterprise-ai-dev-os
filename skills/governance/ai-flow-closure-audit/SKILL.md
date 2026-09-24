@@ -1,6 +1,10 @@
 ---
 name: ai-flow-closure-audit
 description: "Audit whether a business flow is closed across page, API, database, parameters, permissions, downstream writeback, reports, evidence, and regression tests. Use before declaring a business process complete or when checking end-to-end readiness."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

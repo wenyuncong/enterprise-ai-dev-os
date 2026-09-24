@@ -1,6 +1,10 @@
 ---
 name: ai-tool-bootstrapper
 description: "Detect, acquire, register, and verify missing development tools without wasting time on environment confusion. Use when commands are missing, versions are wrong, tool paths are unknown, or project automation depends on local runtimes."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

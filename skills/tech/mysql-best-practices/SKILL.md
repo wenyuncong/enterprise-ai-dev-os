@@ -1,6 +1,11 @@
 ---
 name: mysql-best-practices
 description: "MySQL development best practices for schema design, query optimization, migrations, indexes, transactions, charset/collation, and database administration. Use when creating or reviewing MySQL schemas, SQL queries, migrations, performance plans, or data-integrity fixes."
+metadata:
+  requires:
+    bins: [mysql]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

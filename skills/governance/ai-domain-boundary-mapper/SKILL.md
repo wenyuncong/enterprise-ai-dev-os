@@ -1,6 +1,10 @@
 ---
 name: ai-domain-boundary-mapper
 description: "Map domain boundaries, object ownership, source-of-truth placement, write paths, read consumers, schema ownership, and cross-domain risks. Use when data, identity, permissions, documents, reports, or business objects cross module boundaries."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-domain-boundary-mapper — Domain Boundary & Object Ownership Mapper

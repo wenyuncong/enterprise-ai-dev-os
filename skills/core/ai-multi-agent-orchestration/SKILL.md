@@ -1,6 +1,10 @@
 ---
 name: ai-multi-agent-orchestration
 description: "Orchestrate parallel AI agents across domain boundaries: partition a large project into domains, decide parallel vs serial execution by data-dependency, define contracts before integration, and set role/acceptance boundaries. Use when a task spans multiple modules or domains, or when fanning out work across several agents."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

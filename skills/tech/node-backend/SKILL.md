@@ -1,6 +1,11 @@
 ---
 name: node-backend
 description: "Node.js backend engineering for Express, NestJS, and Fastify services: layered structure, async discipline, validation, error handling, middleware, testing, and observability. Use when building or reviewing a Node.js API, adding a route or service, or debugging async/error behavior."
+metadata:
+  requires:
+    bins: [node]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

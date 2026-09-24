@@ -4,6 +4,10 @@ description: "Comprehensive guide for implementing animations in Flutter. Use wh
 metadata:
   author: Stanislav [MADTeacher] Chernyshev
   version: "1.0"
+  requires:
+    bins: [flutter]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 ## Purpose
 

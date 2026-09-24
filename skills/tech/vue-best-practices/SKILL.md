@@ -5,6 +5,10 @@ license: MIT
 metadata:
   author: github.com/vuejs-ai
   version: "18.0.0"
+  requires:
+    bins: [node]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 ## Purpose
 

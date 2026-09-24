@@ -1,6 +1,11 @@
 ---
 name: ai-delivery-contract-governor
 description: "Create and enforce machine-readable delivery contracts that bound write scope, stage transitions, test seams, fresh evidence, and independent two-axis review. Use for L2/L3 work, parallel agents, risky changes, or any task that needs rules to fail closed instead of relying on prose alone."
+metadata:
+  requires:
+    bins: [python]
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

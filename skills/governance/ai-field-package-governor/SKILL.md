@@ -1,6 +1,10 @@
 ---
 name: ai-field-package-governor
 description: "Govern field metadata, database-authoritative fields, UI field packages, personalization config, report fields, and duplicate field definitions. Use when adding columns, changing form/table fields, centralizing metadata, or auditing hard-coded page fields."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-field-package-governor — Field Metadata & Component Configuration Governor

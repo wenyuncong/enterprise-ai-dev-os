@@ -1,6 +1,10 @@
 ---
 name: ai-project-classifier
 description: "Classify projects by origin, quality target, deployment targets, and scale to choose the correct methodology path and skill set. Use at project start, during onboarding, or before applying the methodology to a new or existing codebase."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

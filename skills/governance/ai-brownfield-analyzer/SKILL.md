@@ -1,6 +1,10 @@
 ---
 name: ai-brownfield-analyzer
 description: "Analyze existing projects before changing them by discovering architecture, scripts, conventions, risks, intervention level, and safe extension points. Use for brownfield codebases, inherited systems, migrations, or unfamiliar repository work."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-brownfield-analyzer — Legacy Project Analysis & Pattern Extraction Engine

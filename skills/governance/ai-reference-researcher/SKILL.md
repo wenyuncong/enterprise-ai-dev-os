@@ -1,6 +1,10 @@
 ---
 name: ai-reference-researcher
 description: "Research primary references, official docs, open-source implementations, and comparable systems before designing unfamiliar features. Use when the domain is new, standards may have changed, or implementation should follow proven external practice."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

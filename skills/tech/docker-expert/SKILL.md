@@ -5,6 +5,11 @@ category: devops
 risk: unknown
 source: community
 date_added: "2026-02-27"
+metadata:
+  requires:
+    bins: [docker]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 ## Purpose
 

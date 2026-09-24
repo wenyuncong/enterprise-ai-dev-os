@@ -1,6 +1,10 @@
 ---
 name: ai-rule-dispatcher
 description: "Route tasks to the correct methodology rules, skills, first checks, source documents, and safe execution order. Use at the start of each non-trivial task, especially when a request spans frontend, backend, data, deployment, governance, or documentation."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-rule-dispatcher — Intelligent Task Routing Engine

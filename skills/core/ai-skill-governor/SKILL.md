@@ -1,6 +1,10 @@
 ---
 name: ai-skill-governor
 description: "Audit the health of a skill ecosystem for contradictions, overlap, stale assumptions, missing triggers, orphan skills, quality drift, and maturity gaps. Use for weekly/monthly methodology reviews or after major skill, rule, or project-structure changes."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

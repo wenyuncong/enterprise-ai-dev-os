@@ -1,6 +1,11 @@
 ---
 name: javascript-typescript-jest
 description: 'Best practices for writing JavaScript/TypeScript tests using Jest, including mocking strategies, test structure, and common patterns. Use when adding, reviewing, debugging, or refactoring Jest tests for JS/TS code, React components, async code, or mocked dependencies.'
+metadata:
+  requires:
+    bins: [node]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

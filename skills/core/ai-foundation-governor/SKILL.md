@@ -1,6 +1,10 @@
 ---
 name: ai-foundation-governor
 description: "Govern stable project foundations including version control, permissions, routes, feature switches, menus, API contracts, configuration ownership, release gates, and single-source platform rules. Use when foundational behavior or shared project infrastructure changes."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-foundation-governor — Stable Foundation & Single Source of Truth Governor

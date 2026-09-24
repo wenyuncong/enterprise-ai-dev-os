@@ -1,6 +1,11 @@
 ---
 name: multi-stage-dockerfile
 description: 'Create optimized multi-stage Dockerfiles for applications in any language or framework. Use when containerizing apps, reducing image size, separating build/runtime stages, improving cache behavior, or hardening production images.'
+metadata:
+  requires:
+    bins: [docker]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Purpose

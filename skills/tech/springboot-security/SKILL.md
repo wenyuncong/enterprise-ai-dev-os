@@ -2,6 +2,11 @@
 name: springboot-security
 description: Spring Security best practices for authn/authz, validation, CSRF, secrets, headers, rate limiting, and dependency security in Java Spring Boot services. Use when securing or auditing a Spring Boot API, adding authentication or authorization, or reviewing security configuration.
 origin: ECC
+metadata:
+  requires:
+    bins: [java]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 ## Purpose
 

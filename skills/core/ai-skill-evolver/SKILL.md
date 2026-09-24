@@ -1,6 +1,10 @@
 ---
 name: ai-skill-evolver
 description: "Improve the skill system from concrete evidence by updating existing skills, classifying gaps, recording evolution, and proposing new skill candidates. Use when reviewing skill quality, fixing ineffective skills, or turning repeated task patterns into reusable capability."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-skill-evolver — Self-Evolving Skill Engine

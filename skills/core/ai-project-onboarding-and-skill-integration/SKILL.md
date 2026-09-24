@@ -1,6 +1,11 @@
 ---
 name: ai-project-onboarding-and-skill-integration
 description: "Safely onboard the methodology into a new or existing project by detecting its technology profile, preserving project-owned assets, staging external skills in quarantine, governing candidate compatibility, and generating an incremental knowledge index. Use before copying methodology assets, importing skills, or establishing a project knowledge base."
+metadata:
+  requires:
+    bins: [python]
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

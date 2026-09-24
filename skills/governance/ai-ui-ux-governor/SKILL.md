@@ -1,6 +1,10 @@
 ---
 name: ai-ui-ux-governor
 description: "Govern enterprise UI/UX density, zero-fluff wording, action semantics, states, hierarchy, usability, visual consistency, and design-system fit. Use when designing or reviewing ERP/SaaS/admin pages, forms, dashboards, reports, and operational workflows."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-ui-ux-governor — Enterprise UI/UX Design System Governor

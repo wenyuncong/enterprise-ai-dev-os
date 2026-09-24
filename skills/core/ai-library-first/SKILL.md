@@ -1,6 +1,10 @@
 ---
 name: ai-library-first
 description: "Enforce library-first development by checking mature packages, built-in framework features, and existing project utilities before custom implementation. Use before writing new logic, parsers, UI widgets, engines, integrations, or scripts from scratch."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

@@ -1,6 +1,11 @@
 ---
 name: postgresql-best-practices
 description: "PostgreSQL schema design and query optimization: data types, constraints, indexing, EXPLAIN, transactions, migrations, connection pooling, and backups. Use when designing a table or schema, writing or tuning a query, adding an index, or reviewing migration safety."
+metadata:
+  requires:
+    bins: [psql]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

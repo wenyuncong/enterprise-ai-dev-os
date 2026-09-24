@@ -1,6 +1,10 @@
 ---
 name: ai-atomic-governance
 description: "Govern atomic system architecture: declaration+executor separation, layering (L0-L5), governance integration, and anti-pattern detection. Use when auditing or building atomic systems, adding new atoms, or integrating governance into existing atom executors."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-atomic-governance — Atomic System Architecture Governor

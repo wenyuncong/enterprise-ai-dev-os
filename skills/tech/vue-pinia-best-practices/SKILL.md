@@ -4,6 +4,11 @@ description: "Pinia stores, state management patterns, store setup, and reactivi
 version: 1.0.0
 license: MIT
 author: github.com/vuejs-ai
+metadata:
+  requires:
+    bins: [node]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 ## Rule
 

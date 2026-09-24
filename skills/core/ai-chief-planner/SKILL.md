@@ -1,6 +1,10 @@
 ---
 name: ai-chief-planner
 description: "Plan end-to-end project execution, task lines, batch sequencing, acceptance criteria, evidence requirements, blockers, and closure state. Use for project-level coordination, multi-step delivery, task backlog governance, and final closure planning."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

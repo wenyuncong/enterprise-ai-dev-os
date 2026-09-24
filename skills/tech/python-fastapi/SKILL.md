@@ -1,6 +1,11 @@
 ---
 name: python-fastapi
 description: "Python FastAPI backend engineering: layered services, Pydantic validation, async endpoints, dependency injection, SQLAlchemy persistence, and pytest coverage. Use when building or reviewing a FastAPI service, adding an endpoint or model, or fixing validation/async issues."
+metadata:
+  requires:
+    bins: [python]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

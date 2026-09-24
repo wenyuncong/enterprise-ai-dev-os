@@ -1,6 +1,11 @@
 ---
 name: java-performance-governance
 description: "Java/Spring performance and memory governance: batch-operation efficiency, unbounded caches, thread/connection leaks, finally cleanup, SQL cost, and observability. Use when diagnosing slow batch operations, memory growth, timeouts, or when reviewing performance-sensitive Java code."
+metadata:
+  requires:
+    bins: [java]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule

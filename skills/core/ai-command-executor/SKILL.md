@@ -1,6 +1,10 @@
 ---
 name: ai-command-executor
 description: "Standardize command execution, environment checks, tool discovery, approved script usage, runtime diagnosis, logs, service start/stop, build verification, and evidence capture. Use before shell/CLI work, runtime debugging, or tool installation decisions."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 # ai-command-executor — Standardized Command Execution Engine

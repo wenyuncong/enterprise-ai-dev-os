@@ -1,6 +1,11 @@
 ---
 name: java-springboot
 description: 'Build, review, refactor, and troubleshoot Spring Boot applications. Use when working on Java backend projects, REST controllers, services, repositories, validation, transactions, configuration, logging, tests, or Spring Boot project structure.'
+metadata:
+  requires:
+    bins: [java]
+    scope: runtime
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Purpose

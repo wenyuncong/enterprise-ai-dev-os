@@ -1,6 +1,10 @@
 ---
 name: ai-product-directed-delivery
 description: "Run AI-native product delivery where a product owner defines outcomes, usability, and business acceptance while AI agents perform analysis, research, architecture, implementation, verification, and delivery evidence. Use for product-led enterprise delivery, non-programmer-led development, end-to-end feature work, or explaining human and agent responsibilities."
+metadata:
+  requires:
+    scope: universal
+    declared-by: enterprise-ai-dev-os
 ---
 
 ## Rule
