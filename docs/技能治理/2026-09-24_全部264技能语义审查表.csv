@@ -1,0 +1,265 @@
+﻿序号,技能名,库,行数,判定,逻辑自洽,无明显歧义,运行时可执行,能力匹配,备注
+1,artifact-preview,系统,250,PASS,是,是,是,是,产物预览：render/info/list/clean+JSON输出协议+依赖降级+缓存机制完整
+2,browser-use-automation,系统,309,PASS,是,是,是,是,浏览器自动化：bu平面+登录检查点强制用户接管+observe-act-observe+文档作用域ref+失败恢复完整
+3,byted-mediakit-audio,系统,37,PASS,是,是,是,是,前置读 shared + 工具表 + CLI schema 为准，跨域路由清晰
+4,byted-mediakit-editing,系统,56,PASS,是,是,是,是,23 剪辑工具表完整，跨域路由(audio/image/video)清晰
+5,byted-mediakit-image,系统,54,PASS,是,是,是,是,21 工具表完整，前置 shared 检查+路由清晰
+6,byted-mediakit-shared,系统,90,PASS,是,是,是,是,MediaKit 入口：能力导航+query-task 协议说明透彻（含 9 分钟轮询边界）；需 mediakit-cli
+7,byted-mediakit-video,系统,63,PASS,是,是,是,是,30 视频工具表完整，跨域路由清晰
+8,computer-use-automation,系统,240,PASS,是,是,是,是,Windows桌面自动化：cu平面+坐标规范+启动协议+批处理安全+用户接管+回读验证完整
+9,data-analysis-skill,系统,182,PASS,是,是,是,是,社科数据分析：复现证据链+一次一确认+隐私门禁完整；依赖脚本模板
+10,dingtalk-operations,系统,65,PASS,是,是,是,是,dws CLI 规则清晰（help 先行/不臆造命令/写操作确认）；依赖 dws CLI 可用
+11,doubao-academic-evaluator,系统,56,PASS,是,是,是,是,诊断定位清晰，两条子路径+底线原则完整；引用 scholar_search/general_search 可用工具
+12,doubao-academic-polish,系统,90,WARN,是,否,否,是,写作/润色/结构三线路由严谨；依赖 Makefile 与子技能+references，脚本不全时不可执行
+13,doubao-academic-researcher,系统,397,PASS,是,是,是,是,学术文献调研：IRON RULES7条+workflow.py门卫+四阶段管线+6维门禁+双层交付+验收清单完整
+14,doubao-announcement-analysis,系统,114,WARN,是,否,否,是,公告解读双模式+联动检索+门禁脚本化极详尽；依赖多个 references+scripts（finalize_report.py 等）+飞书创建
+15,doubao-answer-with-medical-evidence,系统,121,WARN,是,否,否,是,患者循证问答流程+七章文档模板+文档确认门细致；依赖 references+assets+scripts+lark-doc
+16,doubao-app-builder,系统,392,PASS,是,是,是,是,网页应用：双链路分流+构建判定+技术类型约束+html本地链路+app_builder_agent链路+query红线完整
+17,doubao-book-writer,系统,92,WARN,是,是,否,是,非虚构长文档 make 驱动流程完整；依赖 Makefile+子技能+脚本，脚本不全时不可执行
+18,doubao-clinical-decision-support,系统,92,WARN,是,否,否,是,循证医学决策流程极其详细（模式选择/证据标准/交付门禁）；依赖多个 references+scripts+医学检索工具，强资源依赖
+19,doubao-compliance-assessment-public,系统,233,PASS,是,是,是,是,合规评估：角色底线+能力探测降级+强制工作流A-F+两道闸门+来源分层完整；依赖 seed_legal_search
+20,doubao-contract-amendment,系统,97,WARN,是,否,是,是,补充协议起草 S0+Δ=S1 模型严谨（数量守恒/来源一致/双向验证）；依赖原协议完整读取，无需外部工具但需要高质量文本提取
+21,doubao-contract-drafting,系统,62,WARN,是,否,否,是,起草工作流+references 路由完整严谨；但依赖 ${CLAUDE_SKILL_DIR} 变量与多个 python 脚本（extract_deal/generate_docx/preflight 等）+python-docx；脚本缺失时不可执行
+22,doubao-contract-reviewer,系统,338,PASS,是,是,是,是,合同审查：立场闸门+模块解构+三层输出+脚本可用性降级+短链路流程+自检门控完整
+23,doubao-creative-design,系统,238,PASS,是,是,是,是,创意设计：串行读取协议+产物路由+模型轨+核心资产+生成限制+Prompt总规则完整
+24,doubao-creative-drama,系统,170,PASS,是,是,是,是,短剧全流程规划+分阶段用户确认门禁+资产分批顺序强制；依赖 refs+视频工具
+25,doubao-creative-video,系统,270,PASS,是,是,是,是,视频生成：确认门控+模型矩阵+ref路由+产品/分镜/台词门控+交付协议极完整
+26,doubao-critical-reading-companion,系统,166,PASS,是,否,是,是,批判性阅读：协议路由+论点卡+事实核查规程+交付门槛完整；依赖 references+lark-cli
+27,doubao-cron-scheduler,系统,271,PASS,是,是,是,是,定时任务：工具清单+时间锚定+歧义澄清+登录态引导+query规范+操作流程完整
+28,doubao-cross-border-growth-content,系统,143,WARN,是,否,否,是,跨境内容运营三模式+证据账本+八门检查极严谨；依赖大量 references
+29,doubao-customer-service,系统,202,PASS,是,是,是,是,电商客服方案：15条全局硬规则+边界路由ABCDE+路由流程+产物类型+内部自检，极完整
+30,doubao-daily-stock,系统,134,WARN,是,否,否,是,个股日报数据准确性门禁（8 项摘要强制 seed 源）极严格；依赖 seed_finance_search+references+lark-doc 全链
+31,doubao-data-analysis,系统,134,WARN,是,否,否,是,业务数据分析七强制门+输入/推理/输出三门极详尽；依赖多个 scripts（delivery_guard/evidence_audit/final_facts 等）+references
+32,doubao-dpa-drafter,系统,552,PASS,是,是,是,是,DPA数据处理协议起草：最高规则+场景识别+最小信息收集+法条分析+模块遍历清单+docx格式化脚本完整
+33,doubao-earnings-analysis,系统,176,PASS,是,是,是,是,财报因果分析：收入函数+深度阶梯+假设空间+结论分档；依赖 finalize_report.py+飞书
+34,doubao-ecommerce-compliance-tax-logistics,系统,127,WARN,是,否,否,是,跨境合规税物流 12 步流程+强制门禁极详尽；依赖大量 references+官方源核验，强资源依赖
+35,doubao-ecommerce-proposal,系统,44,WARN,是,否,否,是,同 marketing-plan，依赖多 references；交付 HTML 网页版需本地生成能力，红线要求较多
+36,doubao-enterprise-search,系统,331,PASS,是,是,是,是,企业搜索：全文读取门禁+五步路由+query构造+多轮继承+引用/表格/图片格式完整
+37,doubao-finance-model-builder,系统,147,WARN,是,否,否,是,财务建模强制读取协议+G0-G5 质量门+飞书表格交付硬门极详尽；依赖大量 scripts+references+sheet 技能+LibreOffice，强资源依赖
+38,doubao-game-designer,系统,22,WARN,是,否,否,是,正文极简(仅任务/执行/交付)，全部执行逻辑委托 workflow.md；若 workflow.md 缺失或过简则不可执行；交付默认飞书文档+HTML Demo 门槛较高
+39,doubao-headlines-calendar,系统,348,PASS,是,是,是,是,标题生成+选题日历：路由判定+硬性规则20条+工作流+强制飞书交付校验+自检完整
+40,doubao-human-signal,系统,157,PASS,是,否,是,是,去 AI 味触发/不触发判定+六层成因诊断+强度分级极严谨；依赖 references 齐全时可直接执行
+41,doubao-identity,系统,80,PASS,是,是,是,是,豆包官方问答：触发判定+内置摘录路由+安全边界完整
+42,doubao-industry-analysis,系统,131,WARN,是,否,否,是,行业深度报告 6 批分片+判断主线+三级数据分级极详尽；依赖 scripts（assemble/validate/renumber）+references+lark-doc
+43,doubao-journal-format,系统,201,WARN,是,否,否,是,DOCX 期刊排版：47 步强制路由+复合请求硬停+非docx证据分级极详尽；依赖 format_docx.py 等脚本
+44,doubao-listing-localization,系统,132,WARN,是,否,否,是,Listing 优化 12 步+5 强制质量门极详尽；依赖大量 references+官方平台源核验，强资源依赖
+45,doubao-market-hotspot,系统,292,PASS,是,是,是,是,事件影响分析：输出硬模板五规则+来源标记+分档表/假设卡+搜索证据门禁+七阶段完整
+46,doubao-marketing-material-review,系统,195,PASS,是,是,是,是,营销素材审核：五步流程+规则来源标记+风险分类+免责声明完整；依赖法条检索
+47,doubao-marketing-plan,系统,41,WARN,是,否,否,是,工作流依赖多个 references（planning-methodology/hotspot-guide/image-methodology/output-format），正文只给红线清单；模型需自取参考文件，若参考缺失则方案质量不可控
+48,doubao-medical-literature-interpretation,系统,145,WARN,是,否,否,是,医学文献解读双模式+全报告结构规则极详尽；依赖 scripts/validate-report-structure.js+assets+lark-doc+白板
+49,doubao-medical-literature-monitoring,系统,141,WARN,是,否,否,是,医学进展监控+订阅任务管理极详尽；依赖 scripts/render_overview_whiteboard.py+references+飞书文档+定时任务
+50,doubao-medical-literature-search,系统,115,WARN,是,否,否,是,文献检索模式分流+CSV+门禁脚本完整；依赖 references+scripts+lark-doc 交付链
+51,doubao-medical-literature-translation,系统,227,WARN,是,否,否,是,医学翻译：来源锁定+范围/参考文献策略+门槛A/B+飞书写入+交付回执极完整；依赖 validate_translation_fidelity.py+node 脚本
+52,doubao-medical-report,系统,117,WARN,是,否,否,是,报告解读流程+数值确认硬门槛+图表脚本完整；依赖 references+scripts+lark-doc 交付链
+53,doubao-multiplatform-rewrite,系统,229,PASS,是,是,是,是,多平台改写：使用边界判定流程+复合交叉+执行优先级+平台分工+自检完整；依赖飞书+生图
+54,doubao-newmedia-writing,系统,49,WARN,是,否,否,是,流程完整但依赖 lark-cli 建文档+多 references；命中判定与 DO NOT USE 边界清晰；执行门槛取决于 lark-cli 可用性
+55,doubao-novel-writing,系统,347,PASS,是,是,是,是,网文创作：市场调查+编辑视角+脚本门禁workflow.py+飞书交付+一票否决完整
+56,doubao-oceanengine-adops-agent,系统,43,WARN,是,否,否,是,只读边界清晰；但强依赖官方 Remote MCP 已绑定+agents/openai.yaml 存在；未绑定时技能不可执行（设计如此，属环境依赖非缺陷）
+57,doubao-paper-close-reading,系统,425,PASS,是,是,是,是,论文精读：七阶段+四类信息区分+专家经验+自适应方法拆解+可信边界完整
+58,doubao-patent-drafting,系统,126,WARN,是,否,否,是,专利撰写全流程极其严谨（分流/红线/交付门禁/降级路径）；依赖 scripts/patent_build.py 与子技能，脚本不全时不可执行
+59,doubao-pc-optimizer,系统,162,PASS,是,否,是,是,PC 清理优化 L0-L3 风险分级+L3 黑名单+脚本规范极详细；本地模式可执行，依赖脚本模板
+60,doubao-pdf,系统,287,PASS,是,是,是,是,PDF处理：规则+库选择（PyMuPDF优先）+代码示例+扫描件视觉读取+快速参考完整
+61,doubao-personal-info-audit,系统,201,WARN,是,否,否,是,个保合规审计：11环节分析链+26模块107子项+强制校验脚本完整；依赖大量 scripts+references 强资源
+62,doubao-private-company,系统,298,PASS,是,是,是,是,一级项目评估：硬模板五规则+capability gates分层+七阶段+领域硬规则+输出契约完整
+63,doubao-product-analysis,系统,232,PASS,是,是,是,是,产品分析：决策简报+最短路径+证据底稿+事实闸门+报告组织+HTML5定位图/路线图硬门完整
+64,doubao-product-content,系统,193,PASS,是,否,是,是,电商图文生成：边界外/复合分流+证据层拆解+飞书两层交付极详尽；依赖生图与飞书工具
+65,doubao-product-manager,系统,107,PASS,是,是,是,是,产品判断四类内容区分+缺失信息风险分级+交付深度选择完整
+66,doubao-product-qa,系统,188,WARN,是,是,否,是,QA 控制器 bootstrap/anchor/complete/deliver 四命令+门禁完整；强脚本依赖，脚本缺失时不可执行
+67,doubao-product-selection,系统,59,PASS,是,是,是,是,五维打分框架+输出格式完整；明确基于公开数据无内部接口
+68,doubao-public-company-analysis,系统,320,PASS,是,是,是,是,上市公司基本面：硬模板五规则+P2八阶段+搜索证据门禁+现金流桥+三级估值完整
+69,doubao-questionnaire-designer,系统,88,WARN,是,是,是,是,四模块路由+全局质量准入完整；细则委托 references 需存在
+70,doubao-record,系统,29,PASS,是,是,是,是,start_recording/get_recording 分流清晰；frontmatter 后空行不影响解析
+71,doubao-reference-audit,系统,384,PASS,是,是,是,是,论文引用审计：七阶段工作流+角色判断+主张证据比较+专家经验+飞书交付完整
+72,doubao-research-proposal,系统,95,WARN,是,是,是,是,立项书流程+信息分层（基本/事实/AI建议）完整；交付依赖 lark-cli 或 docx
+73,doubao-sentiment-tracker,系统,259,PASS,是,是,是,是,舆情追踪：手机端不触发+五步法+强制红线（原帖链接/一手信源）+输出格式完整
+74,doubao-stock-screening,系统,203,PASS,是,是,是,是,股票筛选：13条核心原则+任务路由+双检索工具分工+证据分级+输出模块+禁止项完整
+75,doubao-ultimate-guide,系统,429,PASS,是,是,是,是,四合一攻略总控：路由旅游/健身/美食/游戏+文档容器先建+内容写入模式+多分支同文档规则+边界路由完整
+76,doubao-video-extract,系统,133,WARN,是,否,否,是,视频提取意图路由+统一脚本入口清晰；依赖多平台下载器/妙记链路脚本+yt-dlp+PyAV，脚本不全时不可执行
+77,doubao-visualization,系统,156,PASS,是,是,是,是,可视化统一入口：目标四分类+模式路由+强制渐进加载门+降级规则完整；依赖 references 齐全时可直接执行
+78,doubao-wealth-planning,系统,305,PASS,是,是,是,是,财富规划：硬模板五规则（含绝对金额禁令/保本说明）+辖区渐进加载+七阶段+领域硬规则完整
+79,experiment-data-analysis,系统,168,WARN,是,否,否,是,实验分析能力分层（脚本主流程/有限CLI/仅模板）诚实；依赖 exp_analysis.py+用户数据
+80,finance-ops-insight,系统,255,PASS,是,是,是,是,经营财务解读：交付卫生v4+WHAT/WHEN/Intake/Modes/状态机/权限门禁/搜索运行时完整；依赖财务脚本
+81,gift-card-redemption,系统,62,PASS,是,是,是,是,PREPARE→确认→REDEEM 状态机严谨，防误兑换规则完备；映射 gift_card_redemption 工具
+82,lark-approval,系统,96,PASS,是,是,是,是,审批路由+命令表+1395001 错误决策树完整；需 lark-cli
+83,lark-attendance,系统,55,PASS,是,是,是,是,考勤查询单一 API；默认参数自动填充规则明确；需 lark-cli
+84,lark-base,系统,232,PASS,是,是,是,是,多维表格：写任务完成协议+验收矩阵+快速路由+心智模型+常见恢复极详尽；依赖 lark-cli+references
+85,lark-calendar,系统,231,PASS,是,是,是,是,飞书日历：Shortcuts+意图路由+重复日程+时间推断+会议室规则+API+权限完整
+86,lark-contact,系统,70,PASS,是,是,是,是,命令选择表+人/机器人识别+注意事项完整
+87,lark-doc,系统,100,PASS,是,是,是,是,文档路由（载体表+模块串联+附件规则）严谨；强制重新读取分支文档的规则合理
+88,lark-drive,系统,213,PASS,是,是,是,是,飞书云盘：快速决策+分流规则+Shortcuts 表+token处理+错误表完整；依赖 lark-cli
+89,lark-im,系统,252,PASS,是,是,是,是,飞书IM：概念+Shortcuts+AppLink规则+卡片前置+API+权限表完整
+90,lark-mail,系统,284,PASS,是,是,是,是,飞书邮箱：prompt注入安全最高优先级+数据真实性+草稿默认+发送确认+原生API规则完整
+91,lark-markdown,系统,67,PASS,是,是,是,是,快速决策+核心边界+shortcuts 清晰；patch 语义说明透彻；需 lark-cli
+92,lark-meeting,系统,126,PASS,是,是,是,是,会议领域模型（meeting/minutes/note 标识不可互换）+场景手册渐进加载清晰；需 lark-cli
+93,lark-okr,系统,171,PASS,是,是,是,是,OKR 快速决策表+分数/进度区分+Shortcuts 完整；依赖 lark-cli+references
+94,lark-openapi-explorer,系统,147,PASS,是,是,是,是,OpenAPI 挖掘 5 步+安全规则+示例完整；依赖 lark-cli 与官方文档库
+95,lark-task,系统,184,PASS,是,是,是,是,任务管理：渐进式发现规则+待办消歧+shortcut 表+权限表完整；依赖 lark-cli+references
+96,lark-whiteboard,系统,53,PASS,是,是,是,是,只读/写入决策表+shortcuts 清晰；依赖 lark-cli 与 whiteboard-cli，需先 --version 确认
+97,lark-wiki,系统,110,PASS,是,是,是,是,知识库操作决策表完整（删除需解析 space_id 并用户确认）；需 lark-cli
+98,lark-workflow-meeting-summary,系统,120,PASS,是,是,是,是,会议纪要汇总工作流（妙记备选路径+note_display_type 路由）清晰；需 lark-cli+meeting token
+99,lark-workflow-standup-report,系统,115,PASS,是,是,是,是,日程待办摘要工作流（时间转换/冲突检测/排序规则）清晰；需 lark-cli
+100,multi-stock-comparison,系统,128,WARN,是,否,否,是,多股横向研究（delivery_mode 锁定/能力选择/横向执行/交付门禁）极详尽；依赖 scripts 多个 py+seed_finance_search+lark-doc
+101,paper-craft-master,系统,165,WARN,是,是,否,是,社科实证论文写作 8 阶段+事实证据门禁完整；依赖用户材料+references 存在
+102,paper-review-assistant,系统,160,WARN,是,否,否,是,期刊审稿人评审流程+外部事实核验纪律清晰；依赖检索工具+references，强外部依赖
+103,ppt,系统,277,PASS,是,是,是,是,飞书幻灯片：权威经验+MUST RELOAD约束+新建/编辑/模板/读取路由+Step1-8闭环+文档地图完整
+104,research-idea-refiner,系统,199,PASS,是,是,是,是,研究思路聚焦六阶段+层级判定+文献真实性门禁完整；依赖检索工具
+105,research-study-designer,系统,166,PASS,是,是,是,是,研究设计五阶段+文献 gap 证据绑定+方法匹配门禁完整；依赖检索工具
+106,seed-audio,系统,46,PASS,是,是,是,是,T2A/A2A 分流规则明确（含判定实例），prompt 构造原则清晰；映射 text_to_audio_plus/audio_to_audio_plus
+107,seedance-25,系统,107,PASS,是,是,是,是,原文透传+时长比例建议表+检索触发+确认流程极其严谨；依赖视频工具 seedance_2.5
+108,seedream-50,系统,313,PASS,是,是,是,是,5.0Pro模型轨：接力doubao-creative-design+prompt模板+构图决策器+美学系统+最终检查完整
+109,sheet,系统,370,PASS,是,是,是,是,表格全场景：370行全文门禁+平台差异+云/本地路由+编辑准则14条+命令速查+high-risk审批完整
+110,skill-creator-for-work,系统,378,PASS,是,是,是,是,Skill创建指南：核心原则+渐进披露+六步流程+默认.user_skills定位+浏览器优先完整
+111,student-discount-application,系统,132,PASS,是,是,是,是,阶段机（路由表/错误处理/等待重查/学信网子流程）极其严谨；依赖 student_discount_run_application_step 工具+references
+112,tencent-meeting-cli,系统,103,PASS,是,是,是,是,tmeet 命令面+隐私/确认/分页边界极其严谨（meeting_code 不露 id）；依赖 tmeet CLI
+113,verifier-hub,系统,171,PASS,是,是,是,是,确定性产物校验 CLI：8 家族 58 子命令+输出协议+依赖说明完整
+114,wecom-operations,系统,145,WARN,是,是,是,是,企业微信 CLI 路由表（12 业务域）+ID 禁止外露约束清晰；依赖 wecom-cli 安装与授权+各域 references
+115,ai-5s-delivery-governor,用户,144,PASS,是,是,是,是,5S 状态机+分支路由+门禁选择+Q0-Q3 资格完整；通用可执行
+116,ai-architect-governor,用户,126,PASS,是,是,是,是,跨域架构治理（ADR 模板+四层决策+检查表）完整；通用可执行
+117,ai-atomic-architect,用户,317,PASS,是,是,是,是,原子架构：三支柱+聚合接口/命令网关+能力成熟度链registered→business-closed+Host边界完整
+118,ai-atomic-governance,用户,209,PASS,是,是,是,是,原子治理：声明/执行分离+治理注入+分层L0-L5+反模式+AST注入+检查清单完整
+119,ai-brownfield-analyzer,用户,273,PASS,是,是,是,是,遗留项目分析：工具发现+五步审计+干预等级+模式提取+半成品处理完整
+120,ai-chief-planner,用户,126,PASS,是,是,是,是,端到端项目规划（任务状态模型+收尾清单+调度模式）完整；通用可执行
+121,ai-command-executor,用户,143,PASS,是,是,是,是,命令执行标准化+工作树闸门+诊断分类完整；尾行有乱码 'r' 是文件杂质不影响语义
+122,ai-competitor-analyst,用户,153,PASS,是,是,是,是,竞品对标四框架+研究方法+决策模板完整；通用可执行
+123,ai-component-standardizer,用户,292,PASS,是,是,是,是,组件标准化：页面四类模板契约+组合主链+主题变量+执行检测+豁免规则完整
+124,ai-cross-project-audit,用户,221,PASS,是,是,是,是,跨项目治理审计：pipeline+只读默认+证据链四阶段+五类审计+报告模板完整
+125,ai-delivery-contract-governor,用户,107,PASS,是,是,是,是,机器可读交付契约状态机+校验器命令清晰；依赖项目脚本存在
+126,ai-delivery-session-gate,用户,118,WARN,是,否,否,是,5S 会话门脚本化（delivery_session.py）详尽；依赖 ai-os 工程仓脚本，仅该项目上下文可执行
+127,ai-domain-boundary-mapper,用户,119,PASS,是,是,是,是,对象级领域边界映射模板+四步工作流+常见模式完整；通用可执行
+128,ai-field-package-governor,用户,149,PASS,是,是,是,是,字段真相源层次+复用模式+工作流完整；通用可执行
+129,ai-flow-closure-audit,用户,172,PASS,是,是,是,是,业务链闭环审计九层+写回交叉校验+双轴审查完整；通用可执行
+130,ai-foundation-governor,用户,165,PASS,是,是,是,是,地基治理：真相源分类+发布双门+迁移一致性门禁完整；通用可执行
+131,ai-frontend-audit,用户,126,PASS,是,是,是,是,前端六维审计（可用性/完整性/一致性/性能/错误态/无障碍）+报告模板完整
+132,ai-library-first,用户,186,PASS,是,是,是,是,库优先决策流+标准库目录+token 成本+自定义三条件完整
+133,ai-multi-agent-orchestration,用户,47,PASS,是,是,是,是,并行/串行判定矩阵明确，契约先行规则清晰
+134,ai-product-directed-delivery,用户,322,PASS,是,是,是,是,产品主导交付：责任边界+12步地图+后端/前端主链+安全修改协议+代码定位+重大项目自动驾驶完整
+135,ai-project-classifier,用户,229,PASS,是,是,是,是,项目分类：四维分类+决策树+输出模板+集成+护栏完整
+136,ai-reference-researcher,用户,255,PASS,是,是,是,是,引用研究：五阶段工作流（搜索/评估/下载/提取/应用）+加权评分+许可证意识+集成完整
+137,ai-rule-dispatcher,用户,151,PASS,是,是,是,是,任务路由五步+任务线/类型分类+重读触发表完整；通用可执行
+138,ai-runtime-verify,用户,131,PASS,是,是,是,是,同 method 版，加 exec 登记说明
+139,ai-single-truth-enforcer,用户,183,PASS,是,是,是,是,前端纯展示最高指令+三规则+通知分级 P0-P3+审计清单完整
+140,ai-skill-evolver,用户,172,PASS,是,是,是,是,证据驱动技能进化+N次触发规则+lesson_book 落地完整；依赖 agent-studio 脚本
+141,ai-skill-governor,用户,253,PASS,是,是,是,是,含AI-OS确定性审计脚本+无遥测不造数约束；依赖 ai-os 项目上下文
+142,ai-task-decomposer,用户,150,PASS,是,是,是,是,任务分解引擎+批次构建+输出结构模板完整；通用可执行
+143,ai-tool-bootstrapper,用户,153,PASS,是,是,是,是,工具自愈五类获取策略+注册表优先+标准工作流完整
+144,ai-ui-ux-governor,用户,194,PASS,是,是,是,是,企业 UI/UX 治理：布局分类+零废话+四状态+密度+通知分级完整
+145,cnb-api,用户,56,PASS,是,是,是,是,快捷命令+注意事项（注入防护/长文本/单引号）+更多 API 分层完整
+146,cnb-code-commit,用户,125,PASS,是,是,是,是,编码提交推送 PR 全流程（分支命名/PR 检测/Ref Issue）清晰；依赖 cnb CLI
+147,cnb-code-review,用户,130,PASS,是,是,是,是,PR 评审过滤规则+JSON 输出+行级评论 API 完整；依赖 cnb-pr-diff 与 CNB 环境变量
+148,cnb-docs,用户,76,PASS,是,是,是,是,文档索引→WebFetch→整理流程清晰；用 ${CNB_WEB_PROTOCOL} 环境变量兜底
+149,cnb-npc-delegate,用户,92,PASS,是,是,是,是,召唤 NPC 流程+上下文传递示例完整；依赖 cnb-npc-search
+150,cnb-npc-search,用户,59,PASS,是,是,是,是,关键词提取→搜索→解读→选NPC 步骤完整；命令与字段表清晰
+151,cnb-pipeline,用户,206,PASS,是,否,是,是,CNB流水线：模式判定+配置/诊断工作流+校验命令+结构骨架+GERP门禁；依赖 skill validator 脚本
+152,cnb-pr-diff,用户,96,PASS,是,是,是,是,PR diff 获取流程（场景 A/B+过滤模式）完整；用 jq 需已装
+153,cnb-pr-summary,用户,69,PASS,是,是,是,是,分析维度+过滤规则+输出格式完整；依赖 cnb-pr-diff 技能
+154,cnb-repo-knowledge-base,用户,20,PASS,是,是,是,是,单命令技能，CLI 参数明确；依赖 cnb CLI 已装（registry 有）
+155,cnb-tapd-resource-fetcher,用户,42,PASS,是,是,是,是,链接解析→curl→错误码表闭环清晰；依赖 CNB_TOKEN 环境变量，已说明
+156,cnb-text-path-converter,用户,30,WARN,是,否,否,是,requires scripts/convertLink.js 未给出绝对路径归属(技能目录 or 仓库根)；执行时模型需自行定位脚本
+157,cnb-upload-attachment,用户,47,PASS,是,是,是,是,图片/文件分支命令清晰，返回字段处理明确
+158,docker-expert,用户,413,PASS,是,是,是,是,Docker专家：检测命令+多阶段构建+安全加固+Compose+镜像优化+诊断清单完整
+159,find-skills,用户,142,PASS,是,是,是,是,技能发现流程（leaderboard→find→验证→推荐→安装）清晰；依赖 npx skills CLI
+160,flutter-animations,用户,605,PASS,是,是,是,是,Flutter动画：决策树+隐式/显式/Hero/交错/物理动画+最佳实践+代码模板完整
+161,flutter-expert,用户,138,PASS,是,是,是,是,Flutter 核心工作流+参考表+代码示例+排查表完整；依赖 flutter CLI(3.24.0 已装)+references
+162,gerp-ai-guardrail-eval,用户,94,WARN,是,否,否,是,AI 护栏三层清单+SSE 契约+eval 集规则详尽；仅 GERP 项目上下文可执行
+163,gerp-api-contract,用户,56,WARN,是,否,否,是,GERP 契约规则极详细（聚合画像/命令网关/版本化），仅项目上下文可用；非 GERP 项目不可执行
+164,gerp-architect-governor,用户,448,PASS,是,是,是,是,GERP跨域架构治理：边界模型+身份租户+对象归属+凭证生成边界+命令所有权+生命周期画像完整
+165,gerp-atomic-component-fieldpackage,用户,863,PASS,是,是,是,是,GERP原子组件与字段包：页面不拥有字段真相+静态字段/Provider/统一单据宿主/SKU批次/计算/权限门禁+BaseTable规范极完整
+166,gerp-business-lifecycle-regression,用户,66,WARN,是,是,否,是,L0-L3 门禁选择表清晰；依赖 GERP 脚本 run-business-lifecycle-regression.ps1 与后端 API，仅项目上下文可执行
+167,gerp-chief-planner,用户,404,PASS,是,是,是,是,GERP首席规划：核心原则10条+9步工作流+连续治理队列+模型成本分层+任务模板完整
+168,gerp-cnb-release-deploy,用户,275,PASS,是,是,是,是,CNB发布部署：硬规则+流水线+迁移门禁+测试/生产工作流+浏览器门禁+失败模式完整（GERP专属）
+169,gerp-command-executor,用户,460,PASS,是,是,是,是,GERP命令执行：批准入口优先+测试服务器部署门禁+数据库基线门禁+多类CORS护栏+Maven/MySQL注意事项完整
+170,gerp-competitor-analyst,用户,195,WARN,是,否,否,是,竞品对标→GERP 决策→任务包工作流完整；依赖 GERP 文档库与指定任务包，仅项目上下文
+171,gerp-db-change-migration,用户,74,WARN,是,否,否,是,数据库变更双轨制（Flyway+patch）规则完整；仅 GERP 项目上下文可执行
+172,gerp-domain-boundary-mapper,用户,79,WARN,是,是,否,是,对象级边界映射流程清晰；引用 GERP 特有文档路径，仅项目上下文可执行
+173,gerp-domain-cost-inventory-mrp,用户,98,WARN,是,否,否,是,库存/成本/生产域门禁详尽（可售边界清晰）；仅 GERP 项目上下文可执行
+174,gerp-domain-invoice-tax,用户,72,WARN,是,否,否,是,发票/税务域边界清晰（已具备vs未实现数电票区分明确）；仅 GERP 项目上下文可用
+175,gerp-domain-payment-bank,用户,114,WARN,是,否,否,是,资金/往来域门禁详尽（核销口径/红冲命令原子）；仅 GERP 项目上下文可执行
+176,gerp-domain-voucher-finance,用户,95,WARN,是,否,否,是,凭证/财务域真相门禁详尽（报表只认凭证/所有权裁决）；仅 GERP 项目上下文可执行
+177,gerp-external-agent-orchestration,用户,174,WARN,是,否,否,是,Codex/Terra/Harness 路由矩阵+只读边界完整；依赖 DeepSeekHarness 本地环境，仅项目上下文
+178,gerp-flow-closure-audit,用户,395,PASS,是,是,是,是,GERP闭环审计：S0-S3分层+命令原子真相+文档动作语义+性能/订阅闭环+商业基准完整
+179,gerp-frontend-availability-audit,用户,131,WARN,是,否,否,是,前端可用性审计+任务转化+wrapper 解析规则详尽；引用 GERP 任务包文档与代码库，仅项目上下文可执行
+180,gerp-im-self-built-app-runtime,用户,51,WARN,是,否,否,是,非常具体的 GERP 项目知识（三家 IM 差异表、产物生成顺序、trailer 要求），仅在该项目上下文可用；通用模型无法凭空执行但文档自足
+181,gerp-implementation-onboarding,用户,66,WARN,是,否,否,是,实施全流程门禁详细（八清单/租户开通责任链/割接/月结）；仅 GERP 项目上下文可用
+182,gerp-log-incident-diagnosis,用户,67,WARN,是,否,否,是,事故诊断流程极详细（provenance/分支恢复/数据修复边界）；仅 GERP 项目上下文可用
+183,gerp-market-researcher,用户,81,WARN,是,是,否,是,市场研究→产品决策流程+BP 规则清晰；引用 GERP 特有文档，仅项目上下文可执行
+184,gerp-mobile-page-rules,用户,197,WARN,是,否,否,是,Flutter 移动端规则极详尽（5Tab+组件复用+FieldPackage 后端优先）；仅 GERP mobile 项目上下文
+185,gerp-multilang-language-onboarding,用户,63,WARN,是,是,否,是,多语言接入路径清晰完整；依赖 GERP 前端特定文件，仅项目上下文可执行
+186,gerp-multilang-page-implementation,用户,67,WARN,是,是,否,是,多语言页面实现路径清晰；依赖 GERP 前端文件，仅项目上下文可执行
+187,gerp-perf-observability,用户,60,WARN,是,否,否,是,GERP 性能门禁极详细（定位顺序/前端/后端/容量灾备），仅项目上下文可用；非 GERP 项目不可执行
+188,gerp-print-report,用户,62,WARN,是,否,否,是,打印/导出/报表模块资产表详尽；仅 GERP 项目上下文可用
+189,gerp-rule-dispatcher,用户,315,PASS,是,是,是,是,GERP规则路由：能力归属门+token预算L0-L3+5S分支+相似实现优先+证据确认门完整
+190,gerp-session-intake,用户,83,WARN,是,是,否,是,会话 Start/Outro 门禁清晰；依赖 invoke-gerp-session-intake.ps1 脚本，仅 GERP 项目上下文可执行
+191,gerp-simplification-audit,用户,88,WARN,是,是,否,是,简化审计流程清晰（delete/reuse/defer/keep 分类+Debt Ledger）；依赖 GERP 代码与技能生态，仅项目上下文可执行
+192,gerp-skill-evolver,用户,412,PASS,是,是,是,是,GERP技能进化：证据驱动+修复到技能循环+audit_skills_gate.py加载门禁+多条进化规则+老化护栏完整
+193,gerp-stable-foundation-governor,用户,701,PASS,是,是,是,是,GERP稳定基座治理：5S交付边界+唯一真相分类表+版本权限参数报表文件AI/MCP治理+硬规则+验收检查极完整
+194,gerp-task-decomposer,用户,141,WARN,是,是,否,是,任务分解工作流清晰（freeze/reuse/layers/batches/deps）；引用 GERP 仓库事实与 references/decomposition-template.md，仅项目上下文可执行
+195,gerp-test-engineering,用户,81,WARN,是,是,否,是,测试金字塔+分层选择+failing-first 规则详尽；依赖 GERP 代码库现实，仅项目上下文可执行
+196,gerp-ui-ux,用户,151,WARN,是,否,否,是,ERP UI/UX 护栏极详尽（状态语义/表格视口/品牌用词）；依赖 GERP 组件库与主题文件，仅项目上下文可执行
+197,java-springboot,用户,77,PASS,是,是,是,是,同 method 版 + GERP 线程池专属规则；两部分均清晰
+198,javascript-typescript-jest,用户,44,PASS,是,是,是,是,测试规范清单清晰，无需外部引用
+199,local-vector-kb,用户,48,WARN,是,否,否,是,高度依赖 ai-os 项目特定文件（runtime/embedding_provider.py 等），属项目上下文技能；离开该项目上下文不可执行，但引用路径清晰、降级策略明确
+200,multi-stage-dockerfile,用户,46,PASS,是,是,是,是,Dockerfile 最佳实践清单完整可执行
+201,mysql-best-practices,用户,360,PASS,是,是,是,是,MySQL最佳实践：schema/索引/EXPLAIN/事务/复制/安全/配置+GERP定时查询索引规则完整
+202,playwright-cli,用户,484,PASS,是,是,是,是,Playwright CLI浏览器自动化：命令清单+快照ref交互+会话+存储+安装+示例完整
+203,python-fastapi,用户,55,WARN,是,是,否,是,ai-os 项目增强版：分层规则+references 深度参考表完整；离开 ai-os 上下文部分参考不可用，但通用 FastAPI 规则本身可执行
+204,skill-creator,用户,492,PASS,是,是,是,是,Skill创建迭代评测：创建流程+测试案例+评估循环+描述优化+打包交付；run_loop依赖claude CLI已注明不可用降级
+205,supabase-postgres-best-practices,用户,64,PASS,是,是,是,是,8 类规则优先级表+按需读取 reference 结构清晰
+206,tailwind-css-patterns,用户,863,PASS,是,是,是,是,Tailwind CSS工具优先模式：示例+核心概念+布局/间距/排版/颜色/交互+组件/响应式/暗模式/动画/性能/无障碍+配置+高级v4.1特性完整
+207,tailwind-design-system,用户,866,PASS,是,是,是,是,Tailwind v4设计系统：CSS-first配置+设计令牌层级+CVA/Compound/Form/Grid/原生动画/Dark模式模式+v3到v4迁移清单完整
+208,tauri-rust-desktop,用户,52,WARN,是,是,否,是,项目特定规则完整清晰（三处同步/单实例/路径分支），但依赖项目代码与 cargo 环境；非本项目上下文不可执行
+209,typescript-advanced-types,用户,717,PASS,是,是,是,是,TypeScript高级类型：泛型/条件/映射/模板字面量/工具类型+6模式+推断+类型测试+最佳实践完整
+210,vue,用户,84,PASS,是,是,是,是,Vue 3 Composition API 快速参考清晰；引用 references 需存在
+211,vue-best-practices,用户,166,PASS,是,是,是,是,Vue3 最佳实践+GERP runtimeDisposer 硬护栏；通用可执行
+212,vue-pinia-best-practices,用户,21,PASS,是,是,是,是,问题→参考文件映射式；references 已在机械扫描确认
+213,webapp-testing,用户,104,PASS,是,是,是,是,Playwright 测试决策树+reconnaissance-then-action 清晰；依赖 playwright 已装(1.63.0)
+214,core/ai-5s-delivery-governor,方法论,144,PASS,是,是,是,是,与 user 版一致
+215,core/ai-architect-governor,方法论,126,PASS,是,是,是,是,与 user 版一致，通用可执行
+216,core/ai-architecture-knowledge-and-delivery,方法论,58,PASS,是,是,是,是,IR/计划/DAG/知识中心产物+只读护栏清晰；依赖 architecture_delivery.py 脚本存在
+217,core/ai-atomic-architect,方法论,317,PASS,是,是,是,是,与 user 版同源（三支柱+交付主链+成熟度链+原型），method 库独立副本
+218,core/ai-chief-planner,方法论,126,PASS,是,是,是,是,项目级规划引擎：任务状态机/收尾清单/调度模式完整；依赖 ai-task-decomposer 联动
+219,core/ai-command-executor,方法论,143,PASS,是,是,是,是,与 user 版一致（同样含尾行乱码）
+220,core/ai-delivery-contract-governor,方法论,107,PASS,是,是,是,是,与 user 版一致，契约门禁定义完整
+221,core/ai-foundation-governor,方法论,165,PASS,是,是,是,是,与 user 版一致
+222,core/ai-library-first,方法论,186,PASS,是,是,是,是,与 user 版一致
+223,core/ai-multi-agent-orchestration,方法论,47,PASS,是,是,是,是,与 user 库版本一致，并行/串行矩阵+契约先行完整
+224,core/ai-product-directed-delivery,方法论,322,PASS,是,是,是,是,与 user 版同源（责任矩阵+12步+安全协议+定位协议+自动驾驶），method 库独立副本
+225,core/ai-project-classifier,方法论,229,PASS,是,是,是,是,与 user 版一致
+226,core/ai-project-onboarding-and-skill-integration,方法论,148,PASS,是,是,是,是,方法论接入链（Detect→Index）+candidates/quarantine 隔离+preflight 完整；依赖项目脚本存在
+227,core/ai-rule-dispatcher,方法论,151,PASS,是,是,是,是,与 user 版一致
+228,core/ai-skill-evolver,方法论,148,PASS,是,是,是,是,证据驱动技能进化+成熟度评级+触发规则完整
+229,core/ai-skill-governor,方法论,232,PASS,是,是,是,是,技能治理：五维审计（矛盾/重叠/腐蚀/有效性/孤儿）+治理周期+自动修复完整
+230,core/ai-task-decomposer,方法论,150,PASS,是,是,是,是,与 user 版一致
+231,core/ai-tool-bootstrapper,方法论,153,PASS,是,是,是,是,与 user 版一致
+232,governance/ai-atomic-governance,方法论,209,PASS,是,是,是,是,与 user 版完全一致
+233,governance/ai-brownfield-analyzer,方法论,273,PASS,是,是,是,是,与 user 版同源（工具发现+五步+干预等级），method 库独立副本
+234,governance/ai-competitor-analyst,方法论,153,PASS,是,是,是,是,与 user 版一致
+235,governance/ai-component-standardizer,方法论,292,PASS,是,是,是,是,与 user 版同源（四模板+主链+主题），method 库独立副本
+236,governance/ai-cross-project-audit,方法论,221,PASS,是,是,是,是,与 user 版一致
+237,governance/ai-domain-boundary-mapper,方法论,119,PASS,是,是,是,是,与 user 版一致，通用可执行
+238,governance/ai-field-package-governor,方法论,149,PASS,是,是,是,是,与 user 版一致
+239,governance/ai-flow-closure-audit,方法论,172,PASS,是,是,是,是,与 user 版一致
+240,governance/ai-frontend-audit,方法论,126,PASS,是,是,是,是,前端六维审计清单+输出格式+工作流完整
+241,governance/ai-reference-researcher,方法论,255,PASS,是,是,是,是,与 user 版同源（五阶段+评分+许可），method 库独立副本
+242,governance/ai-runtime-verify,方法论,129,PASS,是,是,是,是,P0/P1/P2 验证维度+verify.js 调用+证据归档完整；依赖 node+playwright
+243,governance/ai-single-truth-enforcer,方法论,183,PASS,是,是,是,是,与 user 版一致
+244,governance/ai-ui-ux-governor,方法论,194,PASS,是,是,是,是,与 user 版一致
+245,tech/docker-expert,方法论,420,PASS,是,是,是,是,与user版同主体，仅加Purpose/Rule头与description微调，内容一致
+246,tech/flutter-animations,方法论,612,PASS,是,是,是,是,与user版同主体，仅加Purpose/Rule头，内容一致
+247,tech/flutter-expert,方法论,145,PASS,是,是,是,是,同 user 版 + Purpose/Rule 前缀
+248,tech/java-performance-governance,方法论,49,PASS,是,是,是,是,根因表格完整，工作流可执行
+249,tech/java-springboot,方法论,73,PASS,是,是,是,是,Spring Boot 最佳实践全面可执行
+250,tech/javascript-typescript-jest,方法论,66,PASS,是,是,是,是,规则+工作流+测试结构+guardrails 完整
+251,tech/multi-stage-dockerfile,方法论,54,PASS,是,是,是,是,Dockerfile 多阶段最佳实践完整，规则+结构+安全+性能四段清晰
+252,tech/mysql-best-practices,方法论,360,PASS,是,是,是,是,与 user 版同主体（schema/索引/事务/配置），无 GERP 专属段，method 通用版
+253,tech/node-backend,方法论,38,PASS,是,是,是,是,规则/触发/工作流/护栏完整，无外部依赖，可直接执行
+254,tech/postgresql-best-practices,方法论,39,PASS,是,是,是,是,完整可执行
+255,tech/python-fastapi,方法论,38,PASS,是,是,是,是,同上，完整可执行
+256,tech/react-frontend,方法论,39,PASS,是,是,是,是,完整可执行
+257,tech/springboot-patterns,方法论,321,PASS,是,是,是,是,Spring Boot模式：REST/Repository/DTO/异常/缓存/异步/限流(含XFF安全注意)/生产默认完整
+258,tech/springboot-security,方法论,279,PASS,是,是,是,是,Spring Security：认证/授权/校验/SQL注入/密码/CSRF/密钥/头/CORS/限流/依赖安全+发布清单完整
+259,tech/tailwind-css-patterns,方法论,870,PASS,是,是,是,是,与user版同主体，仅加Purpose/Rule头，内容一致
+260,tech/tailwind-design-system,方法论,873,PASS,是,是,是,是,与user版tailwind-design-system同主体（CSS-first配置+令牌+组件模式+v3迁移清单），仅加Purpose/Rule头
+261,tech/typescript-advanced-types,方法论,724,PASS,是,是,是,是,与user版同主体，仅加Purpose/Rule头，内容一致
+262,tech/vue,方法论,91,PASS,是,是,是,是,Vue3 规则+参考表完整
+263,tech/vue-best-practices,方法论,161,PASS,是,是,是,是,Vue3 最佳实践：必读 references+组件拆分规则+性能顺序完整
+264,tech/vue-pinia-best-practices,方法论,42,PASS,是,是,是,是,规则+工作流+参考映射+护栏完整
