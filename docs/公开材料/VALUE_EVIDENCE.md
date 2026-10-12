@@ -77,6 +77,12 @@ Conclusion:
 
 **Honest limits**: these numbers come from one complex brownfield project and are directional, not benchmarked across projects. Public claims must cite them as a sanitized single case, not as a universal percentage.
 
+## Token Cost Structure Telemetry | Token 成本结构实测
+
+A separate report records the measured token cost structure after the methodology was in place (2026-09-01 to 10-12; 1,028 sessions): 99.6% of tokens occur on the input/context side, prompt-cache hit reaches 85.6% overall (98.7%-99.3% recently), and the median session size fell by about two orders of magnitude as the workflow matured. These are descriptive observations without a control group, together with 2026 industry benchmarks, each with its source URL. See [TOKEN_COST_BENCHMARK_V1.md](TOKEN_COST_BENCHMARK_V1.md) and the paper on [Zenodo](https://zenodo.org/records/22991315).
+
+Token 成本结构实测（描述性、无对照）与 2026 行业对标（每条附来源链接）见 [TOKEN_COST_BENCHMARK_V1.md](TOKEN_COST_BENCHMARK_V1.md)，论文见 [Zenodo](https://zenodo.org/records/22991315)。
+
 ## Public Claim Rules | 公开表述规则
 
 Allowed:

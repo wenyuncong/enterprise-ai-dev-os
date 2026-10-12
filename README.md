@@ -174,6 +174,9 @@ site/                     GitHub Pages website
 - [全 AI 原生开发标准](docs/公开材料/FULL_AI_NATIVE_DEVELOPMENT_STANDARD_CN.md)
 - [Roadmap](docs/公开材料/ROADMAP.md)
 - [Value Evidence](docs/公开材料/VALUE_EVIDENCE.md)
+- [Token Cost Model & Industry Benchmark](docs/公开材料/TOKEN_COST_BENCHMARK_V1.md)
+- [Paper: Governing Full AI Development (Zenodo, v2, CC BY 4.0)](https://zenodo.org/records/22991315)
+- [Product Website: Yunruan Software](https://www.cdyunruan.com)
 - [Tool Adapters](docs/TOOL_ADAPTERS.md)
 - [Compatibility](docs/COMPATIBILITY.md)
 
@@ -202,7 +205,9 @@ The architecture documents describe what an adopted project may implement. They 
 - Skill health audit: passing; 49 skills, average `100.0/100` structural health score
 - L2 delivery contract for the latest methodology upgrade: passing
 - Full methodology audit: passing with no failures or warnings
-- Independent external business-effect evidence: not yet available; current practice evidence is author-led and not a cross-project benchmark
+- Token cost telemetry (2026-09-01 to 10-12; 1,028 sessions, 26,369 calls): 99.6% of tokens on the input/context side; prompt-cache hit 85.6% overall and 98.7%-99.3% in recent weeks; the median session size fell by about two orders of magnitude as the workflow matured. These are descriptive observations without a control group; see [Token Cost Model & Industry Benchmark](docs/公开材料/TOKEN_COST_BENCHMARK_V1.md)
+- Production result: the ERP governed by this methodology is in paid production use, with the golden business path closed end-to-end (customer identity withheld)
+- Independent external business-effect evidence: not yet available; current practice evidence is author-led and not a cross-project benchmark, and no causal "saves X%" claim is made
 
 The evidence status above is intentionally more precise than a blanket “everything passes”. Run the project-owned checks for the current result.
 
@@ -310,7 +315,10 @@ iwr -UseBasicParsing https://raw.githubusercontent.com/wenyuncong/enterprise-ai-
 - Skill 健康审计：通过，49 个 Skill，平均 `100.0/100`，这是结构健康度自检分
 - 最新方法论升级的 L2 交付契约：通过
 - 总方法论审计：通过，失败项和警告项均为 0
-- 独立外部业务效果证据：当前尚无；现有经验来自作者主导实践，不能当作跨项目基准
+- Token 成本实测（2026-09-01~10-12，1,028 会话、26,369 次调用）：99.6% 的 token 发生在输入/上下文侧；提示缓存命中全局 85.6%、近期 98.7%-99.3%；随工作流成熟，会话中位规模下降约两个数量级。以上为描述性观测、无对照组，详见 [Token 成本模型与行业对标](docs/公开材料/TOKEN_COST_BENCHMARK_V1.md)
+- 生产结果：由本方法论治理的 ERP 已有客户付费使用，黄金业务链路端到端闭环（客户身份保密）
+- 独立外部业务效果证据：当前尚无；现有经验来自作者主导实践，不能当作跨项目基准，也不做“节省 X%”的因果声明
+- 论文与官网：论文见 [Zenodo（v2，CC BY 4.0）](https://zenodo.org/records/22991315)；产品官网 [www.cdyunruan.com](https://www.cdyunruan.com)
 
 ### 开源边界与许可
 
