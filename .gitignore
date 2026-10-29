@@ -76,3 +76,6 @@ evidence/runs/
 *.pfx
 id_rsa*
 id_ed25519*
+
+# project console runtime cache (local only)
+.console/

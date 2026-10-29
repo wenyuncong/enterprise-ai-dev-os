@@ -23,7 +23,7 @@ import os, re, sys, json, subprocess
 SKILL_ROOTS = [
     r"C:\Users\Administrator\AppData\Local\Doubao\User Data\Default\.doubao\agent_mode\workspace\.skills",
     r"C:\Users\Administrator\AppData\Local\Doubao\User Data\Default\.doubao\agent_mode\workspace\.user_skills",
-    r"G:\企业级梦境系统\skills",
+    r"E:\企业级梦境系统\skills",
 ]
 
 # 命令 -> (真实命令, 是否仅平台差异)
@@ -126,7 +126,7 @@ def scan_skill(d, name):
            "libs_missing": [], "verdict": "UNKNOWN", "issues": []}
     if ".user_skills" in d:
         rec["lib"] = "user"
-    elif "G:\\企业级梦境系统\\skills" in d:
+    elif "E:\\企业级梦境系统\\skills" in d:
         rec["lib"] = "methodology"
     else:
         rec["lib"] = "system"

@@ -22,7 +22,7 @@ import os, re, sys, json, argparse
 DEFAULT_ROOTS = [
     r"C:\Users\Administrator\AppData\Local\Doubao\User Data\Default\.doubao\agent_mode\workspace\.skills",
     r"C:\Users\Administrator\AppData\Local\Doubao\User Data\Default\.doubao\agent_mode\workspace\.user_skills",
-    r"G:\企业级梦境系统\skills",
+    r"E:\企业级梦境系统\skills",
 ]
 DECLARED_BY = "enterprise-ai-dev-os"
 MARK_RE = re.compile(r"(?m)^[ \t]+declared-by:\s*" + re.escape(DECLARED_BY) + r"\s*$")
@@ -31,7 +31,7 @@ MARK_RE = re.compile(r"(?m)^[ \t]+declared-by:\s*" + re.escape(DECLARED_BY) + r"
 def lib_of(d):
     if ".user_skills" in d:
         return "user"
-    if "G:\\企业级梦境系统\\skills" in d:
+    if "E:\\企业级梦境系统\\skills" in d:
         return "method"
     return "system"
 
