@@ -19,7 +19,7 @@
 | Frameworks | | |
 | Databases | | |
 | Package managers | | |
-| Existing tools/scripts | | |
+| Existing tools and scripts | | |
 
 ## Copy Preflight
 

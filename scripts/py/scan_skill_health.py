@@ -20,10 +20,22 @@ Output: one JSON object per skill, UTF-8.
 """
 import os, re, sys, json, subprocess
 
+# Methodology skills root is resolved relative to this script (scripts/py/ -> ../../skills),
+# so it keeps working after a machine or drive-letter relocation instead of hard-coding a path.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+METHODOLOGY_SKILLS_ROOT = os.path.normpath(os.path.join(_HERE, "..", "..", "skills"))
+
+
+def _is_methodology_path(d):
+    cur = os.path.normcase(os.path.abspath(d))
+    root = os.path.normcase(METHODOLOGY_SKILLS_ROOT)
+    return cur == root or cur.startswith(root + os.sep)
+
+
 SKILL_ROOTS = [
     r"C:\Users\Administrator\AppData\Local\Doubao\User Data\Default\.doubao\agent_mode\workspace\.skills",
     r"C:\Users\Administrator\AppData\Local\Doubao\User Data\Default\.doubao\agent_mode\workspace\.user_skills",
-    r"E:\企业级梦境系统\skills",
+    METHODOLOGY_SKILLS_ROOT,
 ]
 
 # 命令 -> (真实命令, 是否仅平台差异)
@@ -126,7 +138,7 @@ def scan_skill(d, name):
            "libs_missing": [], "verdict": "UNKNOWN", "issues": []}
     if ".user_skills" in d:
         rec["lib"] = "user"
-    elif "E:\\企业级梦境系统\\skills" in d:
+    elif _is_methodology_path(d):
         rec["lib"] = "methodology"
     else:
         rec["lib"] = "system"

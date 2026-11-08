@@ -19,19 +19,30 @@ Usage:
 """
 import os, re, sys, json, argparse
 
+# Methodology skills root is resolved relative to this script (scripts/py/ -> ../../skills),
+# so it keeps working after a machine or drive-letter relocation instead of hard-coding a path.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+METHODOLOGY_SKILLS_ROOT = os.path.normpath(os.path.join(_HERE, "..", "..", "skills"))
+
 DEFAULT_ROOTS = [
     r"C:\Users\Administrator\AppData\Local\Doubao\User Data\Default\.doubao\agent_mode\workspace\.skills",
     r"C:\Users\Administrator\AppData\Local\Doubao\User Data\Default\.doubao\agent_mode\workspace\.user_skills",
-    r"E:\企业级梦境系统\skills",
+    METHODOLOGY_SKILLS_ROOT,
 ]
 DECLARED_BY = "enterprise-ai-dev-os"
 MARK_RE = re.compile(r"(?m)^[ \t]+declared-by:\s*" + re.escape(DECLARED_BY) + r"\s*$")
 
 
+def _is_methodology_path(d):
+    cur = os.path.normcase(os.path.abspath(d))
+    root = os.path.normcase(METHODOLOGY_SKILLS_ROOT)
+    return cur == root or cur.startswith(root + os.sep)
+
+
 def lib_of(d):
     if ".user_skills" in d:
         return "user"
-    if "E:\\企业级梦境系统\\skills" in d:
+    if _is_methodology_path(d):
         return "method"
     return "system"
 

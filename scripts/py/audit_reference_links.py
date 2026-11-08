@@ -23,15 +23,18 @@ TRAILING = ".,);:`"
 GENERATED_OR_TEMPLATE = (
     re.compile(r"^tools/tool-registry\.json$"),
     re.compile(r"^skills/platform/?$"),
-    re.compile(r"^docs/(架构决策记录|业务流程全案|部署运维手册|测试验收报告|每日调研回写)(/|$)"),
+    re.compile(r"^skills/(candidates|quarantine|project)(/|$)"),
+    re.compile(r"^docs/(架构决策记录|业务流程全案|部署运维手册|测试验收报告|每日调研回写|发布闭环)(/|$)"),
     re.compile(r"^docs/(copilot|rules|devops|upgrade-guide|tests)(/|$)"),
     re.compile(r"^scripts/(bat|ps1|logs)(/|$)"),
     re.compile(r"^rules/(project_rules|enterprise-ai-dev-os)\.(md|mdc)$"),
     re.compile(r"^skills/governance/ai-runtime-verify/screenshots/"),
     re.compile(r"^docs/(报表规划任务包_\d{8}|业务流程全案模板)/?"),
+    re.compile(r"^docs/changes/example(/|$)"),
+    re.compile(r"^scripts/py/extract_token_cost_metrics\.py$"),
     re.compile(r"^docs/公开材料/"),
 )
-PLACEHOLDER = re.compile(r"XXX|YYYY|\{|\}|\*|/ci$|docs/spec$|lite/full$", re.IGNORECASE)
+PLACEHOLDER = re.compile(r"XXX|YYYY|\.\.\.|\{|\}|\*|/ci$|docs/spec$|lite/full$", re.IGNORECASE)
 EXCLUDED_DOCUMENT_PREFIXES = (
     ".agents/",
     ".claude/",
@@ -53,7 +56,14 @@ EXCLUDED_DOCUMENT_PREFIXES = (
     "temp/",
     "tmp/",
     "verification-demo/",
+    "docs/技能治理/",
+    "i18n/zh-CN/90_校验/源仓库问题清单.md",
+    "i18n/zh-CN/90_校验/源问题复核结论.md",
 )
+# Documents in these folders describe assets in an external reference project
+# using that project's own relative paths. They are reference-context examples,
+# not repository-relative links that must resolve here.
+REFERENCE_CONTEXT_PREFIXES = ("bootstrap/",)
 
 
 def classify(path: str) -> str:
@@ -62,6 +72,36 @@ def classify(path: str) -> str:
     if any(pattern.search(path) for pattern in GENERATED_OR_TEMPLATE):
         return "generated_or_template"
     return "missing_asset"
+
+
+def ignored_paths(root: Path, candidates: set[str]) -> set[str]:
+    """Return the subset of candidates that .gitignore excludes."""
+    if not candidates:
+        return set()
+    # A gitignore directory rule (e.g. docs/foo/) only matches a trailing-slash
+    # query. Normalize to unique logical paths, probe each once, then map the
+    # result back to every original candidate sharing that logical path.
+    logical_paths = {candidate.rstrip("/") for candidate in candidates}
+    probes = sorted(path + "/" for path in logical_paths)
+    completed = subprocess.run(
+        ["git", "check-ignore", "-z", "--stdin"],
+        cwd=root,
+        input=("\0".join(probes) + "\0").encode("utf-8"),
+        capture_output=True,
+        check=False,
+    )
+    if completed.returncode not in (0, 1):
+        return set()
+    ignored_logical = {
+        part.rstrip("/")
+        for part in completed.stdout.decode("utf-8", errors="replace").split("\0")
+        if part
+    }
+    return {
+        candidate
+        for candidate in candidates
+        if candidate.rstrip("/") in ignored_logical
+    }
 
 
 def public_markdown_files(root: Path) -> list[Path]:
@@ -88,10 +128,13 @@ def public_markdown_files(root: Path) -> list[Path]:
 def scan(root: Path) -> tuple[dict[str, dict[str, list[str]]], int]:
     findings: dict[str, defaultdict[str, set[str]]] = {
         "missing_asset": defaultdict(set),
+        "excluded_asset": defaultdict(set),
+        "reference_context": defaultdict(set),
         "generated_or_template": defaultdict(set),
         "placeholder": defaultdict(set),
     }
     reference_count = 0
+    missing_candidates: set[str] = set()
 
     for document in public_markdown_files(root):
         # git ls-files reflects the index; a rename staged only in the working
@@ -108,7 +151,24 @@ def scan(root: Path) -> tuple[dict[str, dict[str, list[str]]], int]:
             reference_count += 1
             if (root / raw).exists():
                 continue
-            findings[classify(raw)][relative_document].add(raw)
+            category = classify(raw)
+            if category == "missing_asset" and relative_document.startswith(REFERENCE_CONTEXT_PREFIXES):
+                category = "reference_context"
+            findings[category][relative_document].add(raw)
+            if category == "missing_asset":
+                missing_candidates.add(raw)
+
+    # Paths .gitignore excludes are intentionally absent from the open-source
+    # package: internal material, not broken links. Reclassify them once.
+    ignored = ignored_paths(root, missing_candidates)
+    if ignored:
+        for document, paths in list(findings["missing_asset"].items()):
+            moved = paths & ignored
+            if moved:
+                findings["excluded_asset"][document].update(moved)
+                paths -= moved
+                if not paths:
+                    del findings["missing_asset"][document]
 
     normalized = {
         category: {
