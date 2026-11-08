@@ -2,6 +2,27 @@
 
 本项目的显著变更记录。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，日期为 Asia/Shanghai。
 
+## 2026-11-08 — 方法论本体治理回流 + 换电脑位置关联 + 断链清零（v2.7.0）
+
+### Added
+
+- **方法论本体治理回流（`27a089c`，128 文件 +3395/-2059）**：新增 `methodology/11_通用架构与治理模式库.md`（16 个中立模式，覆盖数据库/架构/前端等治理层——治理层本身即方法论的一部分）；新增可执行回流驱动 `scripts/py/reconcile_writeback.py`（check / mark-resolved）与每周一 10:23 本地定时对账任务；中立适配初始化器 `scripts/py/project_onboarding.py` 扩展架构/AI 工具/Git 平台检测与 `bind-remote` 推送绑定，两阶段扫描避免大项目目录饿死。
+- **断链审计器五分类**：`audit_reference_links.py` 由三分类扩为五分类，新增 `excluded_asset`（gitignore 排除的内部材料）、`reference_context`（参考项目/目标项目语境路径），并以逻辑路径归一化正确处理带/不带斜杠的同一目录。
+- **论文公式代码化（技能库即代码）**：新增纯标准库测量模块 `scripts/py/evidence_metrics.py`，把论文与三模型报告中的公式实现为可调用函数——Wilson 区间、Jeffreys Beta 后验（含正则化不完全 Beta `betainc` 与分位数 `beta_ppf`）、样本量功效 n=z²p(1−p)/d²、证据分级 E0–E3、数据时钟裁决、缓存/成本构念；新增治理技能 `skills/governance/ai-evidence-metrics/`（SKILL.md 含公式→函数映射与 CLI/import 用法），注册进 `SKILL_MANIFEST.json`（official 51→52、governance 13→14）。
+- **方法论新增 6A/6B/6C**：`rules/AGENTS.md` 增加治理机制准入判据（B/V/E/O）、证据门测量与统计纪律、独立审计拓扑，并写入代码模块/技能指针。
+
+### Changed / Fixed
+
+- **换电脑位置关联（#9）**：`scan_skill_health.py` 与 `skill_requires_governor.py` 中按盘符硬编码的方法论技能归属判断，改为基于 `__file__` 动态推导（`METHODOLOGY_SKILLS_ROOT` + normcase/abspath 比较，兼容盘符/斜杠/大小写），换盘符不再失效。
+- **writeback bridge 空待办治理（#10）**：删除生成快照中三条无人执行的空 checkbox，改为说明本地证据快照性质与 reconcile 回流机制；移除硬编码旧盘符、零引用的死脚本 `writeback_evidence.py`。
+- **断链清零（#11）**：当前生效文档的 prose 斜杠词组改为 `and` 表述；按需目录（`skills/candidates|quarantine|project`、`docs/发布闭环`）、目标项目旁路脚本与模板示例路径纳入白名单；历史归档（`docs/技能治理/`、90_校验历史清单）不参与链接审计。`missing_asset` 由 100 降至 0，`--strict-missing` 门控通过。
+- **版本对齐**：`package.json` 与规则源版本标注统一为 2.7.0。
+
+### Verification
+
+- 断链审计 `missing_asset=0`、`--strict-missing` 退出码 0；方法论审计、规则 lint、i18n 校验全绿（英文源改动后重签 baseline）。
+- `test_evidence_metrics.py` 20 个用例全部通过；`--demo` 复现论文真实数字（37/655=5.65%、127/148=85.8%、69/71=97.2%），Wilson 与 Jeffreys 区间互证。
+
 ## 2026-09-24 — 技能治理：全量语义审查 + 前置条件声明化
 
 ### Added

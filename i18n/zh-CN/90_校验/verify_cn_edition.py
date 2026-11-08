@@ -166,9 +166,9 @@ RULES_MAP = [
     ("docs/_templates/全项目总控/task_dag.json", "30_模板/全项目总控/task_dag_字段说明_中文版.md"),
 ]
 INDEX_MAP = [
-    ("skills/SKILL_MANIFEST.json", "40_Skill索引/00_49个Skill总索引.md"),
-    ("skills/core", "40_Skill索引/10_core_16个Skill详解.md"),
-    ("skills/governance", "40_Skill索引/20_governance_13个Skill详解.md"),
+    ("skills/SKILL_MANIFEST.json", "40_Skill索引/00_52个Skill总索引.md"),
+    ("skills/core", "40_Skill索引/10_core_18个Skill详解.md"),
+    ("skills/governance", "40_Skill索引/20_governance_14个Skill详解.md"),
     ("skills/tech", "40_Skill索引/30_tech_20个Skill摘要.md"),
 ]
 
@@ -607,7 +607,7 @@ def main() -> int:
             "| 检查项 | 方法 | 判定 |",
             "|---|---|---|",
             "| 覆盖度 | 逐条比对源文件与中文版文件的映射表，缺文件/过薄即 FAIL | " + ("通过" if fails == 0 else "见下表") + " |",
-            "| 标识符完整性 | 49 个 Skill 名必须出现在中文索引；core/governance 正文必须保留自身英文名 | 通过 |",
+            "| 标识符完整性 | 52 个 Skill 名必须出现在中文索引；core/governance 正文必须保留自身英文名 | 通过 |",
             "| 英文断言保留 | 以英文源为准：源中含 `audit_methodology.py` 的 FAIL 级英文短语时，译文必须保留英文原样 | " + ("通过" if fails == 0 else "见下表") + " |",
             "| 禁译项泄露 | 全量扫描盘符路径与十六进制颜色字面量，必须为 0 | " + ("通过" if not any(c == "LEAK_DRIVE_PATH" or c == "LEAK_HEX_COLOR" for _, c, _ in rep.items if _ == "FAIL") else "见下表") + " |",
             "| 中文充分性 | 按源文件规模自适应阈值（短源 60 字，长源 200 字）+ 中文/英文比例 | " + ("通过" if warns == 0 else "见下表") + " |",

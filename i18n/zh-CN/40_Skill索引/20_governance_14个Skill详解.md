@@ -1,8 +1,8 @@
-# governance 层 13 个 Skill 中文详解 | Governance Layer Skills
+# governance 层 14 个 Skill 中文详解 | Governance Layer Skills
 
 > **源文件**：skills/governance/*/SKILL.md、skills/SKILL_MANIFEST.json
-> **源版本**：SKILL_MANIFEST.json updatedAt 2026-07-28
-> **译文日期**：2026-09-14
+> **源版本**：SKILL_MANIFEST.json updatedAt 2026-11-08
+> **译文日期**：2026-11-08
 > **术语依据**：00_导读/02_术语对照表.md
 > **翻译口径**：Skill 名、路径、门禁代号保持英文；本文件为中文摘要（正文中文版见 50_Skill正文中文版/governance/）。
 
@@ -25,6 +25,7 @@
 | `ai-brownfield-analyzer` | governance | 老项目分析与模式提炼 | 先审计再改动：审计现状、定干预级别、提炼模式、出外科手术式计划 | 首次进入任何存量项目；迁移、接管、继承半成品 |
 | `ai-reference-researcher` | governance | 参考实现驱动的研究 | 不熟悉领域先找一手参考与开源实现，提炼模式再设计 | 新领域、标准可能变化、需要成熟外部实践 |
 | `ai-competitor-analyst` | governance | 竞品对标与市场调研 | 以真实产品行为而非营销材料做对标，分离事实、推断与选择 | 市场分析、产品策略、定价、功能对比 |
+| `ai-evidence-metrics` | governance | 证据度量（Skill 即代码） | 把证据门测量纪律做成可执行代码：Wilson/Jeffreys 区间、样本量/功效、E0–E3 分级、数据时钟裁决与成本/缓存构造 | 报告任何比率、阻断百分比、成功率或成本数字之前 |
 
 ---
 
@@ -490,6 +491,24 @@ evidence/{target_project}/
 
 ---
 
+## 14. `ai-evidence-metrics` — 证据度量（Skill 即代码）
+
+- **源文件**：`skills/governance/ai-evidence-metrics/SKILL.md`
+- **成熟度**：verified
+- **可执行实现（唯一真相源）**：`scripts/py/evidence_metrics.py`（仅用 Python 标准库，全新克隆可离线运行）；测试 `scripts/py/test_evidence_metrics.py`（20 测试全绿）。
+
+**用途**：把 AGENTS.md 证据门的测量纪律做成**可执行代码**，让每个比率/成本数字都带分母、区间与明确的主张边界，而不是一段容易被误读的 prose 点估计。
+
+**触发条件**：报告任何阻断率、成功率、失败率、自恢复率、缓存命中率或单任务成本之前；核查测量窗口是否满足数据时钟；校验某主张的 E0–E3 证据分级。
+
+**公式 → 函数映射（公式即代码）**：点估计 `point_rate(k,n)`；Wilson 得分区间 `wilson_interval`；Jeffreys Beta 后验区间 `jeffreys_interval`（用真实的正则化不完全 Beta `betainc` 及其逆 `beta_ppf`，非正态近似）；样本量 `required_sample_size`；证据分级 `validate_grade`；数据时钟裁决 `adjudication_status`；缓存命中率 `cache_token_hit_rate`、净输入 `net_input_tokens`、token 节省 `token_savings`、单任务成本 `per_task_cost`。
+
+**强制纪律**：① 比例报告同时给出 Wilson（频率）与 Jeffreys（贝叶斯）两个互相印证的区间；② 数据时钟——效果主张需连续至少 28 天且至少 200 事件，否则状态为 Underpowered、数字仅作描述，独立分析单元是任务而非会话内单次请求；③ 阻断率不是质量保证——没有 TP/FP 判定标签与 CI 事件，精确率/召回率/逃逸率不可辨识，阻断率只说明闸门触发频率；④ 全分母口径——超时与失败计入分母；⑤ 分母缺失时 fail-closed 抛错，绝不静默返回零。
+
+**锚定真实数字（无编造）**：655 中阻断 37（点 0.0565，Wilson [0.0413, 0.0769]，Jeffreys [0.0407, 0.0762]）；148 中端到端成功 127（0.8581，含 21 个超时占位）；71 中自恢复 69（0.9718）；边际 0.05 样本量 ceil 385、边际 0.03 为 ceil 1068。
+
+---
+
 ## 附录 A：governance 层触发矩阵（什么情况找哪个 Skill）
 
 | 你面对的情况 | 找哪个 Skill | 门禁强度 |
@@ -507,6 +526,7 @@ evidence/{target_project}/
 | 首次进入存量项目、迁移、接管、继承半成品 | `ai-brownfield-analyzer` | 先审计再改；数据库改动独立批次 |
 | 进入不熟悉领域、在多个候选库间选型 | `ai-reference-researcher` | MUST/SHOULD/SKIP 三档触发，禁止无引用称"最佳实践" |
 | 做市场分析、定价对比、投资人材料 | `ai-competitor-analyst` | 禁止用营销宣称对标，建议必须有表中证据 |
+| 要报告比率、成功率、成本或核查证据分级/数据时钟 | `ai-evidence-metrics` | 分母缺失 fail-closed；未达 28 天/200 事件仅作描述 |
 
 选型顺序建议：先判定"这是不是老项目"（`ai-brownfield-analyzer`）→ 再判定"这是什么页面/什么领域"（`ai-component-standardizer` 或 `ai-domain-boundary-mapper`）→ 开发中始终挂 `ai-single-truth-enforcer` 与 `ai-field-package-governor` → 提 PR 前 `ai-frontend-audit` → 声明完成前 `ai-runtime-verify` 与 `ai-flow-closure-audit`。
 
@@ -531,5 +551,6 @@ governance 层是执行层（Layer 3）里的"闸门与标尺"，它不产出交
 | `ai-brownfield-analyzer` | `ai-project-classifier`、`ai-chief-planner`、`ai-task-decomposer`、`ai-skill-evolver` | 分类层判定 Brownfield 后进入审计 → 计划 → 拆批 → 模式回灌 |
 | `ai-reference-researcher` | `ai-library-first`、`ai-architect-governor`、`ai-skill-evolver` | 参考发现进入库选型、ADR 与 Skill 更新 |
 | `ai-competitor-analyst` | `ai-chief-planner`、`ai-product-directed-delivery` | 竞品结论是产品范围与优先级决策的输入，不构成验收 |
+| `ai-evidence-metrics` | `ai-runtime-verify`、`ai-flow-closure-audit`、`ai-delivery-contract-governor` | 把证据门的区间/分级/数据时钟做成可执行函数，为新鲜证据与 fail-closed 契约提供可复算的度量来源 |
 
 配套的门禁与状态口径：`ai-5s-delivery-governor` 用 `L0`/`L1`/`L2`/`L3` 门禁分级（L0 只读与外观、L1 单组件/单端点、L2 共享业务模块与写入路径、L3 模式/权限/版本/跨模块回写/发布），并用 `Q0`/`Q1`/`Q2`/`Q3` 交付资格描述能力成熟度（能力存在 → 参数权限对齐 → 后端编排与副作用路径闭环 → 真实客户或 product owner 场景跨端完成且对账通过）；交付状态只能写 `complete`，未推送提交、证据失败、远端不可用或集成仍在进行时**必须**写 `paused` 或 `blocked`。`ai-delivery-contract-governor` 则把契约做成**失败即阻断（fail-closed）**：改写白名单之外的路径、缺少证明、证据过期或评审未通过，都会阻断 `safeguarded` 与 `completed`。governance 层为这两套代号提供证据来源——`ai-runtime-verify` 给运行时证据，`ai-flow-closure-audit` 给写回与对账证据，`ai-frontend-audit` 给静态质量证据，`ai-cross-project-audit` 给跨项目证据链（`evidence.json` + `knowledge_index.json` + `report.md`）。

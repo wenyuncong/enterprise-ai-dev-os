@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""生成 40_Skill索引/00_49个Skill总索引.md。
+"""生成 40_Skill索引/00_52个Skill总索引.md。
 
 数据来源：
   - `<英文源仓库>/skills/SKILL_MANIFEST.json`（name / layer / path / maturity / description）
-  - 同目录的 10_core_16个Skill详解.md、20_governance_13个Skill详解.md、30_tech_20个Skill摘要.md
+  - 同目录的 10_core_18个Skill详解.md、20_governance_14个Skill详解.md、30_tech_20个Skill摘要.md
     （从中提取「## N. `skill-name` — 中文名」与紧随其后的小节内容，取中文名与一句话职责）
 
 用法（在中文版根目录内执行）：
@@ -48,7 +48,7 @@ def extract_sections(path: Path) -> dict[str, str]:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="生成 49 个 Skill 总索引")
+    ap = argparse.ArgumentParser(description="生成 52 个 Skill 总索引")
     ap.add_argument("--source-root", required=True,
                     help="英文方法论仓库路径（需含 skills/SKILL_MANIFEST.json）")
     ap.add_argument("--edition-root", default=str(EDITION),
@@ -61,13 +61,13 @@ def main() -> int:
 
     manifest = load_json(source / "skills" / "SKILL_MANIFEST.json")
     names: dict[str, str] = {}
-    names.update(extract_sections(index_dir / "10_core_16个Skill详解.md"))
-    names.update(extract_sections(index_dir / "20_governance_13个Skill详解.md"))
+    names.update(extract_sections(index_dir / "10_core_18个Skill详解.md"))
+    names.update(extract_sections(index_dir / "20_governance_14个Skill详解.md"))
     names.update(extract_sections(index_dir / "30_tech_20个Skill摘要.md"))
 
     skills = manifest.get("officialSkills", [])
     lines = [
-        "# 49 个正式 Skill 总索引 | Official Skill Index",
+        "# 52 个正式 Skill 总索引 | Official Skill Index",
         "",
         "> **源文件**：skills/SKILL_MANIFEST.json",
         f"> **源版本**：updatedAt {manifest.get('updatedAt', '未标注')}；schemaVersion {manifest.get('schemaVersion', '未标注')}",
@@ -79,7 +79,7 @@ def main() -> int:
         f"governance {sum(1 for s in skills if s.get('layer') == 'governance')} 个、"
         f"tech {sum(1 for s in skills if s.get('layer') == 'tech')} 个。",
         "",
-        "本索引是导航入口；**core/governance 的中文详解**见 `10_core_16个Skill详解.md`、`20_governance_13个Skill详解.md`，"
+        "本索引是导航入口；**core/governance 的中文详解**见 `10_core_18个Skill详解.md`、`20_governance_14个Skill详解.md`，"
         "**tech 中文摘要**见 `30_tech_20个Skill摘要.md`，**core/governance 正文中文对照**见 `50_Skill正文中文版/`。",
         "",
         "---",
@@ -126,7 +126,7 @@ def main() -> int:
         "并且会破坏署名与升级同步。详见 `30_tech_20个Skill摘要.md` 附录 B。",
     ]
 
-    out = index_dir / "00_49个Skill总索引.md"
+    out = index_dir / "00_52个Skill总索引.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     missing = [s.get("name") for s in skills if s.get("name") not in names]

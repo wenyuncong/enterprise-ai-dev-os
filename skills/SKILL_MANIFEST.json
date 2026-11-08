@@ -18,11 +18,11 @@
     "deprecated": "The skill should not be used for new work."
   },
   "counts": {
-    "official": 51,
+    "official": 52,
     "rawSource": 45,
     "byLayer": {
       "core": 18,
-      "governance": 13,
+      "governance": 14,
       "tech": 20,
       "platform": 0
     }
@@ -355,6 +355,14 @@
       "path": "skills/governance/ai-cross-project-audit/SKILL.md",
       "maturity": "callable",
       "description": "Cross-project governance audit pipeline: consume existing audit data, orchestrate L3 domain atoms, produce L5 evidence + index + report."
+    },
+    {
+      "name": "ai-evidence-metrics",
+      "layer": "governance",
+      "path": "skills/governance/ai-evidence-metrics/SKILL.md",
+      "source": "paper measurement formulas coded as an executable standard-library module",
+      "maturity": "verified",
+      "description": "Apply the evidence-gate measurement discipline as code: Wilson and Jeffreys intervals, sample-size/power, evidence grading, data-clock adjudication, and cost/cache constructs."
     },
     {
       "name": "node-backend",

@@ -410,6 +410,39 @@ These rules are enforced by governance skills. Violating any of them means the t
 | 15 | **Fresh evidence before completion claims**. The proving command/check must run after the final relevant change; agent reports and old evidence are insufficient. | ai-runtime-verify / ai-flow-closure-audit |
 | 16 | **Review standards and product intent independently**. Non-trivial commits/releases must check both repository/truth rules and the source acceptance/non-goals. | ai-flow-closure-audit / ai-5s-delivery-governor |
 
+### 6A. Governance Mechanism Admission | 治理机制准入判据 (B/V/E/O)
+
+A governance mechanism (gate, gateway, hook) is a real control only if it satisfies all four properties; otherwise it is advisory and must not be treated as a control.
+
+- **Binding (B)**: it lies on the only path from change production to integration, and bypass leaves evidence.
+- **Versioned (V)**: the policy evaluated for a change is the policy at that revision, so policy and change are reviewed together.
+- **External (E)**: the policy is not authored in, and cannot be mutated through, the governed change's own context (prompts or per-agent configuration).
+- **Observable (O)**: every invocation and verdict is durably recorded.
+
+Prompts, conventions, and verbal rules are **unversioned, non-binding, and self-referential**: in a self-evolving system the governed can edit the rule that governs it, so such controls cannot be sound. They do not constitute a control.
+
+Formal anchors: side-effect invariants **I1** mandatory interposition, **I2** explicit gaps (never silent omission), **I3** no new bypass; concurrency invariants **C1** single writer per file allowlist, **C2** shared files owned solely by the chief controller, **C3** atomic claim (lease with TTL). Existing debt uses the honest claim "no new bypass plus explicitly enumerated, converging gaps"; never state "zero bypass / zero defects".
+
+### 6B. Evidence Gate: Measurement and Statistics Discipline | 证据门测量纪律
+
+Every proportion or cost figure must be produced through the executable measurement module, carry a denominator and an interval, and state its evidence grade and adjudication status.
+
+- **Evidence grades**: label each claim **E1** measured, **E2** documented, **E3** marketing (not a fact), **E0** missing (not in a conclusion).
+- **Data clock**: effect claims require a continuous window of at least 28 days and at least 200 events. The independent analysis unit is the task, not individual in-session requests.
+- **Two intervals**: report both the Wilson score interval (frequentist) and the Jeffreys Beta posterior (Bayesian) so they mutually corroborate.
+- **Adjudication status**: Measured / Underpowered / Not-instrumented. Below the data clock the figure is descriptive only.
+- **Denominator first**: record the attempt before any check; a missing or invalid denominator fails closed rather than returning zero.
+- **Claim boundary**: a block rate is how often a gate fired, not a quality guarantee; without TP/FP resolution labels and CI events, precision, recall, and escape rate are not identifiable. Count timeouts and failures in the denominator; never use a favorable denominator that hides failures.
+
+Executable implementation (skill-as-code): `scripts/py/evidence_metrics.py` and the **ai-evidence-metrics** skill, standard library only, with tests in `scripts/py/test_evidence_metrics.py`.
+
+### 6C. Independent Audit Topology | 独立审计拓扑
+
+- **Separation of duties**: the builder cannot audit itself; the auditor uses an independent rule set, read-only evidence, and holds veto power.
+- **Three-layer review**: L0 deterministic gates, L1 cross-source read-only AI reviewer producing evidence packs, L2 human handling only red routes. Changes to gate or rule scripts are always red: scoring rules cannot score themselves.
+- **Policy as code**: uncovered decision points trigger a BUILD_RULE response (build the missing rule), not a default handoff to a human; production deployment is the sole human red line.
+- **Release gate checklist**: before internal or external release, clear AI-tone and em-dash artifacts, remove placeholder references, ensure no orphan citations, and confirm every claim maps to evidence.
+
 ---
 
 ## 7. Complete Skill Index | 完整 Skill 索引
@@ -437,7 +470,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | ai-skill-evolver | Review completed work, update skills, archive patterns | After task closure |
 | ai-skill-governor | Proactive skill health audit: contradiction, overlap, rot, orphan detection | Weekly / monthly / on-demand |
 
-### Governance (skills/governance/) — 13 skills
+### Governance (skills/governance/) — 14 skills
 
 | Skill | Purpose | When to Load |
 |---|---|---|
@@ -454,6 +487,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 | ai-brownfield-analyzer | Analyze legacy projects, extract patterns, classify intervention level | Any existing project (ALWAYS first) |
 | ai-atomic-governance | Atomic system architecture governance: declaration/executor separation, layering, governance integration, anti-pattern detection | Atomic architecture work |
 | ai-cross-project-audit | Cross-project governance audit pipeline: consume audit data, orchestrate L3 domain atoms, produce L5 evidence + index + report | Cross-project audits |
+| ai-evidence-metrics | Evidence-gate measurement as code: Wilson/Jeffreys intervals, sample-size/power, grading, data-clock adjudication, cost/cache constructs | Before reporting any rate or cost figure |
 
 ### Technology Stack (skills/tech/) — 20 skills
 
@@ -578,16 +612,16 @@ For a new or existing project, initialize the methodology by:
 
 1. **Classify and discover first** — Use `ai-project-classifier`, existing tool
    discovery, and `project_onboarding.py inspect` to determine archetype,
-   technology profile, existing skills/scripts, and index scope.
+   technology profile, existing skills and scripts, and index scope.
    Then run `architecture_delivery.py` to produce Architecture IR and the
    language-neutral project graph before planning implementation.
 2. **Preflight before copying** — Run `project_onboarding.py preflight` against
    the target. Review every `add`, `same`, and `conflict`; preserve conflicts
    until their explicit merge/overwrite decision and rollback path are recorded.
-3. **Select, do not bulk-copy** — Add entry rules/templates, core/governance
+3. **Select, do not bulk-copy** — Add entry rules and templates, core/governance
    capabilities needed by the selected adoption mode, and only stack skills that
    match verified language/framework/database facts.
-4. **Stage external content** — GitHub skills/references enter
+4. **Stage external content** — GitHub skills and references enter
    `skills/candidates/` with pinned source metadata. They remain non-callable
    until reviewed, integrated, and registered in `skills/SKILL_MANIFEST.json`.
 5. **Scaffold approved folders** — Create the documentation hierarchy and
@@ -607,5 +641,5 @@ For a new or existing project, initialize the methodology by:
 
 ---
 
-*Methodology version: 2.6.0 | Last updated: 2026-09-21*
-*Skills: 51 | Derived from enterprise delivery evidence*
+*Methodology version: 2.7.0 | Last updated: 2026-11-08*
+*Skills: 52 | Derived from enterprise delivery evidence*

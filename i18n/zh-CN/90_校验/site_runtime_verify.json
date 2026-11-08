@@ -9,12 +9,12 @@
     {
       "name": "侧栏自动加载 >=100 条",
       "ok": true,
-      "detail": "118"
+      "detail": "122"
     },
     {
       "name": "侧栏含 Skill 正文 >=40 条",
       "ok": true,
-      "detail": "42"
+      "detail": "45"
     },
     {
       "name": "白皮书渲染出表格/标题",
@@ -24,7 +24,7 @@
     {
       "name": "并排对照两侧都有内容",
       "ok": true,
-      "detail": "{\"on\":true,\"zh\":10,\"en\":9,\"enLen\":9958}"
+      "detail": "{\"on\":true,\"zh\":10,\"en\":9,\"enLen\":10185}"
     },
     {
       "name": "English 单栏渲染英文原文",
@@ -39,12 +39,12 @@
     {
       "name": "tech Skill 页（中文摘要 + 英文原文）",
       "ok": true,
-      "detail": "{\"zh\":2929,\"en\":2261}"
+      "detail": "{\"zh\":2929,\"en\":2741}"
     },
     {
       "name": "中英同步总览页可用",
       "ok": true,
-      "detail": "{\"h1\":\"中英同步总览\",\"rows\":108}"
+      "detail": "{\"h1\":\"中英同步总览\",\"rows\":112}"
     },
     {
       "name": "全文搜索可用且有高亮",
@@ -65,13 +65,13 @@
   "consoleErrors": [],
   "problems": [],
   "stats": {
-    "docs": 123,
-    "tablesRendered": 372,
-    "codeBlocksRendered": 256,
-    "zhRenderedRatio": 0.89,
-    "enDocsChecked": 114,
-    "enTablesRendered": 272,
-    "enRenderedRatio": 0.932,
+    "docs": 127,
+    "tablesRendered": 376,
+    "codeBlocksRendered": 269,
+    "zhRenderedRatio": 0.892,
+    "enDocsChecked": 118,
+    "enTablesRendered": 284,
+    "enRenderedRatio": 0.943,
     "consoleErrors": 0,
     "problems": 0,
     "passed": 12,
