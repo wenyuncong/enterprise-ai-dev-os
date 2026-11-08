@@ -1,11 +1,11 @@
 # 命令入口与诊断地图 | Command Entry Points and Diagnosis Map
 
 > **源文件**：skills/core/ai-command-executor/references/entrypoints.md
-> **源版本**：未标注
-> **译文日期**：2026-09-14
+> **源版本**：1.0.0
+> **译文日期**：2026-11-08
 > **术语依据**：00_导读/02_术语对照表.md
 > **翻译口径**：全量对应；英文标识符、命令、代码块、门禁代号原样保留。
-> **说明**：本文件是 Skill `ai-command-executor` 的配套参考文件中中文对照版，不是正式加载源。
+> **说明**：本文件是 Skill `ai-command-executor` 的配套参考文件中文对照版，不是正式加载源。
 
 ---
 
@@ -17,7 +17,7 @@
 
 ## 2. 获准入口的优先级 | Approved entrypoint priority
 
-1. `{PROJECT_ROOT}/scripts/bat/gerp.bat`
+1. `{PROJECT_ROOT}/scripts/bat/project-command.bat`（项目统一命令入口）
 2. `{PROJECT_ROOT}/scripts/bat` 下的直接批处理脚本
 3. `{PROJECT_ROOT}/scripts/ps1` 下的辅助脚本
 4. 仅当以上都不覆盖所需能力时，才使用自定义 shell 命令
@@ -26,30 +26,30 @@
 
 | 场景 | 首选入口 | 首查项 | 证据 |
 | --- | --- | --- | --- |
-| MySQL 连通性 | `scripts/bat/gerp.bat mysql test` | DB 主机 / 账号 / 进程 | 命令结果 |
-| SQL 只读检查 | `scripts/bat/gerp.bat mysql exec gerp_enterprise "SHOW TABLES;"` | schema / 表 / 字段是否存在 | SQL 输出 |
-| SQL 写入执行 | `database/` 下的确切 SQL 文件 + 对应的 MySQL 入口 | 目标 schema、是否需要备份、脚本路径 | SQL 文件 + 执行输出 |
-| 后端编译 | `scripts/bat/gerp.bat maven compile [module]` | 模块路径、`pom.xml`、依赖状态 | 编译输出 |
-| 后端打包 | `scripts/bat/maven-package.bat` | 模块 target、打包路径 | 打包输出 |
+| 数据存储连通性 | `scripts/bat/project-command.bat db test` | 数据存储主机 / 账号 / 进程 | 命令结果 |
+| 只读数据检查 | `scripts/bat/project-command.bat db exec <schema> "<检查命令>;"` | schema / 表 / 字段是否存在 | 命令输出 |
+| 数据写入执行 | `database/` 下的确切变更脚本 + 对应的数据存储入口 | 目标 schema、是否需要备份、脚本路径 | 脚本 + 执行输出 |
+| 后端编译 | `scripts/bat/project-command.bat build compile [module]` | 模块路径、构建清单、依赖状态 | 编译输出 |
+| 后端打包 | `scripts/bat/build-package.bat` | 模块目标、打包路径 | 打包输出 |
 | 后端启动 | `scripts/bat/start-service.bat [service]` | 端口 / 进程 / 配置 / 延迟重启规则 | 运行时日志 |
-| 前端开发 | `scripts/bat/frontend-dev.bat [app]` | 应用路径、端口、node 状态 | dev 输出 |
+| 前端开发 | `scripts/bat/frontend-dev.bat [app]` | 应用路径、端口、运行时状态 | dev 输出 |
 | 前端构建 | `scripts/bat/frontend-build.bat [app]` | 应用路径、依赖状态 | 构建输出 |
 | 运行时诊断 | 现有脚本 + 对应日志路径 | 日志文件是否存在、第一个真实错误 | 日志摘录摘要 |
 
 ## 4. 常用直接脚本 | Common direct scripts
 
-- `{PROJECT_ROOT}/scripts/bat/mysql-test.bat`
-- `{PROJECT_ROOT}/scripts/bat/mysql-exec.bat`
-- `{PROJECT_ROOT}/scripts/bat/maven-compile.bat`
-- `{PROJECT_ROOT}/scripts/bat/maven-package.bat`
+- `{PROJECT_ROOT}/scripts/bat/db-test.bat`
+- `{PROJECT_ROOT}/scripts/bat/db-exec.bat`
+- `{PROJECT_ROOT}/scripts/bat/build-compile.bat`
+- `{PROJECT_ROOT}/scripts/bat/build-package.bat`
 - `{PROJECT_ROOT}/scripts/bat/start-service.bat`
 - `{PROJECT_ROOT}/scripts/bat/frontend-dev.bat`
 - `{PROJECT_ROOT}/scripts/bat/frontend-build.bat`
 
 ## 5. 常用辅助脚本 | Common helper scripts
 
-- `{PROJECT_ROOT}/scripts/ps1/mysql-functions.ps1`
-- `{PROJECT_ROOT}/scripts/ps1/maven-functions.ps1`
+- `{PROJECT_ROOT}/scripts/ps1/db-functions.ps1`
+- `{PROJECT_ROOT}/scripts/ps1/build-functions.ps1`
 - `{PROJECT_ROOT}/scripts/ps1/frontend-functions.ps1`
 
 ## 6. 常用日志位置 | Common log locations
@@ -57,13 +57,13 @@
 - `{PROJECT_ROOT}/scripts/bat/logs`
 - `{PROJECT_ROOT}/scripts/bat/logs/error`
 - `{PROJECT_ROOT}/scripts/logs`
-- 模块本地的 `target` 或运行时日志目录（仅在显式配置时）
+- 模块本地的构建或运行时日志目录（仅在显式配置时）
 
 ## 7. 首查矩阵 | First-check matrix
 
 | 检查类型 | 典型动作 |
 | --- | --- |
-| DB | `SHOW TABLES`、`DESCRIBE`、行数、schema 确认 |
+| 数据 | 检查 表/集合、描述结构、行数、schema 确认 |
 | 代码 | `Test-Path`、`rg`、读配置、模块路径确认 |
 | 运行时 | 端口、进程、PID、日志文件是否存在 |
 | 任务边界 | 当前任务包、延迟重启规则、热点文件冲突 |
@@ -76,8 +76,8 @@
 | 脚本问题 | 获准脚本路径错误或参数不匹配 | 修正脚本用法或脚本资产 |
 | 依赖问题 | 依赖包缺失、工具链未就绪 | 恢复依赖或环境 |
 | 编译问题 | 编译错误、符号未解析 | 查看第一个编译错误与目标文件 |
-| 运行时问题 | 服务启动后失败、HTTP 500 | 查看运行时日志与失败堆栈 |
-| 数据 / 配置问题 | schema 错误、配置缺失、样例数据错误 | 核实 DB / 配置并修补来源 |
+| 运行时问题 | 服务启动后失败、内部错误 | 查看运行时日志与失败堆栈 |
+| 数据 / 配置问题 | schema 错误、配置缺失、样例数据错误 | 核实数据/配置并修补来源 |
 
 ## 9. Git 路径提醒 | Git path reminder
 

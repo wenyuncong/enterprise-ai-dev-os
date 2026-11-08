@@ -210,30 +210,30 @@ result = orch.execute(
 
 ---
 
-## Case Study: ERP Cross-Project Audit (2026-07-05) | 案例：ERP 跨项目审计（2026-07-05）
+## Case Study: Cross-Project Audit of a Large Enterprise System | 案例：大型企业系统跨项目审计
 
-**来源**：ai-os 原子治理系统（L0–L5）
-**目标**：企业级 ERP 生产仓库
+**来源**：原子治理系统（L0–L5）
+**目标**：大型企业生产仓库
 **模式**：只读
 
 **输入**：
 
-- gaps.json：623 条代码审计发现（document_action_backend_truth_audit）
-- result.json：100 条字段审计发现（field_package_truth_audit）
+- 代码审计发现文件（数百条后端真相发现）
+- 字段审计发现文件（约一百条字段发现）
 
 **流水线**：
 
-1. L3 domain_code_audit → 623 条发现，7 个模块，含风险评分
-2. L3 domain_erp_field_check → 100 条字段发现，249 个候选
-3. L5 governance_orchestrator → 证据 + 索引（34 条）+ 报告
+1. L3 代码审计 -> 跨多个模块的数百条发现，含风险评分
+2. L3 字段检查 -> 跨多个候选的字段发现
+3. L5 治理编排器 -> 证据 + 索引 + 报告
 
 **产出**：
 
-- 证据：cross_project_audit_20260705/evidence_gov_*.json
-- 索引：knowledge_index.json（34 条）
-- 报告：ERP_跨项目治理审计_20260705.md
+- 证据：带版本的证据目录
+- 索引：知识索引（有限条目）
+- 报告：带日期的跨项目治理审计报告
 
-**关键洞察**：此前 ERP 审计产生的既有审计数据可被 L3 原子直接复用 —— 无需重新扫描。L5 编排器在一次执行中把 L3 产出串联为 证据 → 索引 → 报告。
+**关键洞察**：此前一轮产生的审计数据可被 L3 原子直接复用 —— 无需重新扫描。L5 编排器在一次执行中把 L3 产出串联为 证据 -> 索引 -> 报告。
 
 ---
 

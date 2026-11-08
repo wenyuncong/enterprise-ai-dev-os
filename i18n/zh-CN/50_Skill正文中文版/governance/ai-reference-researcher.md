@@ -82,22 +82,24 @@ description: "Research primary references, official docs, open-source implementa
 
 ### Search Sources | 检索来源
 
+选择与所研究生态匹配的包注册表；下表是来源映射，而非指定技术栈。
+
 | 来源 | 检索方式 | 最适用于 |
 |---|---|---|
 | **GitHub** | `site:github.com {domain} {language} stars:>100` | 全栈应用、框架、库 |
 | **npm** | `npm search {keyword}` 或 `npmjs.com` | 前端库、Node.js 工具 |
-| **Maven Central** | `mvnrepository.com` | Java 库、Spring Boot starter |
+| **Maven Central** | `mvnrepository.com` | JVM 库、后端框架 |
 | **PyPI** | `pypi.org` | Python 工具、ML 库 |
 | **Awesome Lists** | `site:github.com awesome {domain}` | 精选的最佳项目清单 |
 
 ### Search Strategy | 检索策略
 
 ```bash
-# 示例：调研 "multi-tenant SaaS ERP"
-1. Search: site:github.com "multi-tenant" erp spring-boot stars:>50
-2. Search: site:github.com "saas" "multi-tenant" java architecture
-3. Search: site:github.com awesome erp
-4. 按具体功能检索: site:github.com "purchase order" workflow engine
+# 示例：调研一个多租户企业系统
+1. Search: site:github.com "multi-tenant" enterprise stars:>50
+2. Search: site:github.com "saas" "multi-tenant" architecture
+3. Search: site:github.com awesome enterprise
+4. 按具体功能检索: site:github.com "business workflow" engine
 ```
 
 ---
@@ -201,17 +203,17 @@ git clone --depth 1 https://github.com/repo-owner/project-a.git
 
 ---
 
-## Domain-Specific Reference Targets | 领域参考目标
+## Reference Targets by Domain | 领域参考目标
 
-### ERP / Enterprise Systems | ERP / 企业系统
+这些是检索参考实现的类别。选择匹配研究目标的类别；仅在需要缩小结果时才加入项目已验证的语言，不要假设它。
 
-| 领域 | 检索关键词 | 预期收获 |
+| 领域 | 通用检索意图 | 预期收获 |
 |---|---|---|
-| 多租户 SaaS | `multi-tenant spring boot saas` | 租户隔离模式、schema-per-tenant 与共享 schema 之争 |
-| 库存 / WMS | `warehouse management system open source` | 库存移动模式、条码、库位层级 |
-| 会计 / 财务 | `open source accounting double-entry` | 总账模式、对账、期间关账 |
-| CRM | `open source crm node.js` | 销售漏斗、线索管理、联系人层级 |
-| 工作流引擎 | `workflow engine open source bpmn` | 状态机、审批链、流程定义 |
+| 多租户系统 | `multi-tenant enterprise open source` | 租户隔离、schema-per-tenant 与共享 |
+| 资产/仓储管理 | `warehouse management system open source` | 移动模式、条码、库位层级 |
+| 会计 | `open source accounting double-entry` | 总账模式、对账、期间关账 |
+| 客户关系 | `open source crm` | 漏斗、线索管理、联系人层级 |
+| 工作流引擎 | `workflow engine open source` | 状态机、审批链、流程定义 |
 
 ### General Architecture | 通用架构
 

@@ -85,7 +85,7 @@
               "name": { "type": "string" },
               "lines": {
                 "type": "integer",
-                "description": "只读前 N 行（母版实践为 50）"
+                "description": "只读前 N 行（参考项目实践为 50）"
               },
               "full": { "type": "boolean", "description": "是否全量加载" }
             }

@@ -24,7 +24,7 @@ The solution is a **five-layer architecture (Classification → Routing → Deco
 Classify every project at inception across four dimensions:
 - **Origin**: Brownfield (existing) vs Greenfield (new)
 - **Quality Target**: Rapid Prototype vs AI-Native vs Enterprise
-- **Deploy Targets**: Web / Mobile / WeChat / MCP / All platforms
+- **Deploy Targets**: Web / Mobile / Mini-Program / MCP / All platforms
 - **Scale**: Monolith vs Atomic Services vs Microservices
 
 ### Why It's Separate
@@ -121,7 +121,7 @@ Execute the batch plan following **mandatory engineering discipline**:
 - Verification after every step
 
 ### Why It's Separate
-Execution skills are **domain-specific** — a Vue developer skill should not contain Docker deployment rules. Each tech skill is self-contained and loadable independently.
+Execution skills are **domain-specific** — a frontend skill should not contain deployment rules. Each tech skill is self-contained and loadable independently.
 
 ### How Skills Are Selected
 The dispatcher selects the execution skill based on task type:

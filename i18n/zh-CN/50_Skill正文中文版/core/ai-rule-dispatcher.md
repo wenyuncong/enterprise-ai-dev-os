@@ -168,12 +168,12 @@ Re-reading: ai-single-truth-enforcer, ai-library-first
 
 ## Maturity | 成熟度
 
-**Stage**：effective —— 在 GERP ERP 项目上经 2000+ 次任务派发实战检验。
+**Stage**：effective —— 在真实企业交付中经 2000+ 次任务派发实战检验。
 
 ## Evolution History | 进化记录
 
-- v1.0.0：提炼自 gerp-rule-dispatcher，并通用化为普适用法
-- 来源：GERP Enterprise ERP，3 个多月的每日派发实践
+- v1.0.0：提炼自真实任务路由证据，并通用化为普适用法
+- 来源：真实企业交付中多个月的每日派发实践
 
 ---
 
@@ -181,7 +181,7 @@ Re-reading: ai-single-truth-enforcer, ai-library-first
 
 1. **代码围栏缺陷（内容未改）**：源文件 `## Task Routing Result` 模板使用单个反引号作围栏（`` `markdown `` 开头、`` ` `` 结尾），而非三个反引号。按“路由结果模板必须保留可套用形态”的要求，中文版把围栏改为标准三反引号以便正常渲染，**块内字段与占位符一字未改**（`## Task Routing Result` 及其全部字段名保持英文原样）。`⚠️ Context Decay Warning` 代码块在源文件中已使用三反引号，原样保留未动。
 2. **断链引用：`rules/project_rules.md` 不存在**。源文件 Step 3 要求读 `rules/project_rules.md`（项目专属规则，“如存在”）。仓库 `rules/` 目录下实际只有 `AGENTS.md`、`AGENTS.global.md`、`rules.json`，没有该文件；项目级规则目前落在 `AGENTS.md` 与 `rules/rules.json`。源文件自身已用 “if exists” 做了条件限定，因此不构成硬性断链，但实践者不应期待该文件存在。
-3. **断链引用：`ai-market-researcher` 不存在**。源文件 Step 2 把“调研”路由到 `ai-competitor-analyst` 或 `ai-market-researcher`。仓库中不存在 `skills/governance/ai-market-researcher/`；`skills/SKILL_MANIFEST.json` 的 `rawOnlySkills` 里只有一个 `gerp-market-researcher`，属于“仅作原始证据保留、不计入正式发布”的条目。调研类任务当前可用的正式 Skill 是 `ai-competitor-analyst`。
+3. **断链引用：`ai-market-researcher` 不存在**。源文件 Step 2 把“调研”路由到 `ai-competitor-analyst` 或 `ai-market-researcher`。仓库中不存在该目录；该来源仅作为原始证据保留在私有本地归档，不计入正式发布。调研类任务当前可用的正式 Skill 是 `ai-competitor-analyst`。
 4. **占位命名不是真实 Skill 名**：Step 2 中的 `{stack}-frontend-dev`、`{stack}-backend-dev` 是模板占位符，仓库中并不存在同名 Skill。实际存在的是 `skills/tech/vue`、`skills/tech/react-frontend` 与 `skills/tech/java-springboot`、`skills/tech/node-backend`、`skills/tech/python-fastapi` 等；调用时必须使用 `skills/SKILL_MANIFEST.json` 中登记的正式名，不得直接使用 `{stack}-frontend-dev` 这类占位串。
 5. **源文件拼写错误**：`## Evolution History` 第二行源文为 “3+ months of daily dispatchesr”，末词 `dispatchesr` 是 `dispatches` 的拼写错误。中文版按语义译为“每日派发”，不复制拼写错误；此处记录原文形态以便对照。
 6. **源版本**：源文件 frontmatter 只有 `name` 与 `description`，无版本号/日期标注，故记「未标注」。Step 1 表列了 5 条项目线（含 `release`），而 Purpose 第 1 问只列举 4 条（mainline、governance、audit、research），源文件两处不一致，中文版各自照实翻译、未做合并。

@@ -155,7 +155,7 @@ def execute(self, ..., governance=None):
 
 ### Bulk Governance Injection (AST Transform)
 
-When a monolithic executor file has many classes without governance, use Python AST transformation:
+When a monolithic executor file has many classes without governance, use an AST transformation in the language's own tooling (shown here with generic Python-style AST pseudocode):
 
 `python
 import ast
@@ -206,8 +206,8 @@ Before declaring an atomic system "governed":
 
 **Key metric**: 0 → 21 atoms with governance integration in one session.
 
-### GERP Cross-Project Audit (2026-07-05)
+### Cross-Project Audit on a Large Enterprise System
 
-**Before**: 623 code audit findings + 100 field audit findings in GERP, no governance pipeline.
+**Before**: hundreds of code audit findings plus field audit findings in a large enterprise system, with no governance pipeline.
 
-**After**: L5 governance_orchestrator consumed L3 domain_code_audit + domain_erp_field_check, produced evidence + index + report. Read-only mode, no GERP modification.
+**After**: an L5 governance orchestrator consumed L3 domain code and field checks, produced evidence + index + report. Read-only mode, with no modification to the target system.

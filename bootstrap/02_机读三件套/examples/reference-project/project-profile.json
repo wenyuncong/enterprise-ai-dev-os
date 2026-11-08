@@ -1,37 +1,37 @@
 {
   "profile_version": "1.0.0",
-  "project_id": "gerp-enterprise",
-  "display_name": "GERP 企业管理系统（母版 / reference implementation）",
+  "project_id": "example-enterprise",
+  "display_name": "示例企业系统（reference example；替换为采用项目自己的名称）",
   "origin": "brownfield",
   "archetype": "C",
   "quality_target": "enterprise",
-  "deploy_targets": ["web", "mobile", "mcp", "openapi", "desktop"],
+  "deploy_targets": ["web", "mobile", "miniprogram", "mcp", "openapi", "desktop"],
   "scale": "modular_monolith",
   "domain": {
-    "name": "ERP（进销存 / 资金往来 / 财务 / 生产 / 报表）",
+    "name": "由采用项目命名的企业领域",
     "tenancy": "multi_tenant",
     "regulated": true
   },
   "tech_stack": {
-    "backend": "Java / Spring Boot（单体 JAR + 模块化 gerp-modules）",
-    "frontend": "Vue 3 + Vite（gerp-web / gerp-admin-web / gerp-agent-web / gerp-desktop）",
-    "database": "MySQL 8.0",
-    "mobile": "Flutter（gerp-mobile）",
-    "container": "docker / docker-compose",
-    "runtime": "Node 24（MCP bridge 与桌面壳）"
+    "backend": "采用项目已验证的后端语言与框架",
+    "frontend": "采用项目已验证的前端框架与构建工具",
+    "database": "采用项目已验证的关系数据库",
+    "mobile": "采用项目已验证的移动技术",
+    "container": "采用项目已验证的容器方案",
+    "runtime": "采用项目已验证的脚本运行时"
   },
   "delivery": {
     "branch_model": {
-      "mainline": "develop",
-      "integration": "develop",
-      "production": "stable",
+      "mainline": "采用项目的日常开发主分支",
+      "integration": "同主分支",
+      "production": "采用项目的发布分支",
       "release_pattern": "release/<version>",
-      "frozen": ["daily"]
+      "frozen": ["历史分支"]
     },
-    "remotes": ["origin", "cnb"],
+    "remotes": ["origin"],
     "change_types": ["U", "B", "E", "N"],
     "risk_levels": ["L0", "L1", "L2", "L3"],
-    "qualification_matrix": "S0_S3",
+    "qualification_matrix": "Q0_Q3",
     "close_criteria": "FIVE_S_DELIVERY_CLOSE=PASS"
   },
   "knowledge": {
@@ -43,17 +43,17 @@
     "impact_declaration": "Knowledge-Impact:"
   },
   "ai": {
-    "engine": "openclaw（小龙虾）为当前 runtime；DSH 为并列候选引擎",
+    "engine": "采用项目接入的可替换执行引擎",
     "engine_replaceable": true,
     "engine_interface_version": "1.0.0",
-    "mcp_server": "scripts/mcp/gerp-mcp-stdio-bridge.mjs（标准 MCP stdio）+ /api/v1/ai-tools/mcp/{catalog,invoke}",
-    "tool_contract": "后端 MCP Gateway 的 L1–L4 工具分级（24 个工具）",
+    "mcp_server": "采用项目对外暴露的 MCP 入口",
+    "tool_contract": "采用项目的工具契约分级",
     "model_adaptation_level": "M1"
   },
   "language": {
     "code": "en",
     "docs": "zh-CN"
   },
-  "generated_at": "2026-09-14",
+  "generated_at": "2026-11-08",
   "source_template": "enterprise-ai-dev-os/bootstrap@1.0.0"
 }

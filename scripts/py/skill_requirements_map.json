@@ -4,7 +4,7 @@
     "declared_by": "enterprise-ai-dev-os",
     "scope_legend": {
       "universal": "纯提示词/方法论，技能内 references 自足，任何宿主可读即可执行",
-      "project": "需特定项目上下文（GERP / ai-os 代码库、项目脚本、项目数据）",
+      "project": "需特定项目上下文（项目代码库、项目脚本、项目数据）",
       "runtime": "需宿主运行时提供外部命令/服务（CLI、MCP、飞书、检索工具、本地生成能力）"
     },
     "fields": {

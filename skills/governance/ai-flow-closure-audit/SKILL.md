@@ -48,14 +48,16 @@ A business chain is only "closed" when evidence exists at ALL layers:
 
 ## Business Chain Categories | 业务链分类
 
-| Chain | Description | Typical Scope |
-|---|---|---|
-| O2C (Order to Cash) | Sales order → delivery → invoice → payment | Sales, Inventory, Finance |
-| S2P (Source to Pay) | Purchase req → order → receipt → payment | Procurement, Inventory, Finance |
-| R2R (Record to Report) | Transaction → ledger → financial report | Finance, Reporting |
-| L2C (Lead to Cash) | Lead → opportunity → quote → order | CRM, Sales |
-| Fulfillment | Order → pick → pack → ship | WMS, Logistics |
-| Subscription | Signup → activate → bill → renew/cancel | SaaS, Billing |
+These are generic chain shapes, not a fixed business vocabulary. Identify which shape the project's own flow follows; any domain can instantiate any shape.
+
+| Chain shape | Generic sequence |
+|---|---|
+| Primary transaction chain | request -> execution -> document -> settlement |
+| Procurement-style chain | requisition -> order -> receipt -> settlement |
+| Record/report chain | transaction -> ledger -> analytical report |
+| Opportunity chain | lead -> opportunity -> quote -> commitment |
+| Fulfillment chain | commitment -> preparation -> dispatch |
+| Subscription chain | signup -> activation -> billing -> renewal/cancel |
 
 ---
 
@@ -80,16 +82,16 @@ For each node, collect concrete evidence:
 
 A writeback is only closed when the numbers reconcile across layers. For any flow that moves quantities, amounts, balances, or status, add a **consistency cross-check** that scans for mismatches instead of trusting a single sample row:
 
-1. **Map the reconciliation pairs**: source table → downstream table for every writeback (e.g., a receipt increments both inventory and payable).
+1. **Map the reconciliation pairs**: source structure -> downstream structure for every writeback (e.g., one receipt updates both a quantity balance and an amount balance).
 2. **Design the check**: aggregate each side independently and compare; for calculated values (averages, balances) also recompute from raw rows.
 3. **Run a full-table scan**: locate rows where source and downstream disagree; a single pass often surfaces hidden drift that sample-based checks miss.
 4. **Record the discrepancy**: table, row, expected vs actual, and the likely root cause.
 5. **Fix and rerun**: after the fix, the cross-check must return zero mismatches before closure.
 
 ```text
-Example (domain-specific, from ERP): purchase receipt -> inventory + payable
-  SELECT aggregate(inventory_qty) FROM inventory WHERE receipt_id = :id;
-  SELECT aggregate(payable_amount) FROM payable WHERE receipt_id = :id;
+Generic example: one receipt updates a quantity balance and an amount balance
+  aggregate the downstream quantity where receipt_id = :id;
+  aggregate the downstream amount where receipt_id = :id;
   -- both must reconcile with the receipt line totals; any drift is a P1 data risk
 ```
 
@@ -118,7 +120,7 @@ Convert each gap into a concrete task:
 | Gap | Severity | Root Cause | Fix Action | Acceptance |
 |---|---|---|---|---|
 | Submit has no backend validation | P0 | Missing service method | Implement validation in service | curl test passes |
-| Inventory not updated on delivery | P1 | Missing writeback | Add inventory movement service | Inventory count matches |
+| Downstream balance not updated on execution | P1 | Missing writeback | Add the downstream update service | Balance count matches |
 ```
 
 ---
@@ -166,11 +168,11 @@ Convert each gap into a concrete task:
 
 ## Maturity | 成熟度
 
-**Stage**: Effective — Extracted from enterprise ERP flow closure audits across purchase/sales/inventory/finance chains.
+**Stage**: Effective — Generalized from real enterprise flow closure audits across transactional, operational, and financial chains.
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-flow-closure-audit (12.5KB original)
+- v1.0.0: Generalized from real enterprise flow closure evidence (project-specific names removed)
 - v1.1.0: Generalized to universal business chain closure framework
 - v1.2.0: Added product-owner business-flow acceptance as an explicit closure layer
-- Source: O2C, S2P, R2R chain audits in enterprise ERP
+- Source: end-to-end chain audits across transactional, operational, and reporting workflows

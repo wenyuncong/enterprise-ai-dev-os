@@ -1,6 +1,6 @@
 # Stable Foundation Checklist
 
-Use this checklist when a GERP task touches version, module, feature, permission, route, API, FieldPackage, parameters, reports, schema sync, or release closure.
+Use this checklist when an enterprise task touches version, module, feature, permission, route, API, FieldPackage, parameters, reports, schema sync, or release closure.
 
 ## Classification
 

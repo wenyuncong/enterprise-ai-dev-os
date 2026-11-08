@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "updatedAt": "2026-09-21",
+  "updatedAt": "2026-11-08",
   "officialSkillRoot": "skills/",
   "rawSourceRoot": "private-local-archive",
   "adapterRoots": [
@@ -12,7 +12,7 @@
   ],
   "maturityLevels": {
     "raw": "Source material copied from a previous project and not counted as an official portable skill.",
-    "generalized": "GERP-specific naming has been generalized and the skill is stored under skills/.",
+    "generalized": "Project-specific naming has been generalized and the skill is stored under skills/.",
     "callable": "The skill has a SKILL.md and can be loaded by an agent through the official skills/ root.",
     "verified": "The skill has passed audit checks for path validity, minimum structure, and portable references.",
     "deprecated": "The skill should not be used for new work."
@@ -32,42 +32,42 @@
       "name": "ai-architect-governor",
       "layer": "core",
       "path": "skills/core/ai-architect-governor/SKILL.md",
-      "source": "gerp-architect-governor",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
       "name": "ai-atomic-architect",
       "layer": "core",
       "path": "skills/core/ai-atomic-architect/SKILL.md",
-      "source": "GERP architecture extraction",
+      "source": "generalized architecture extraction",
       "maturity": "verified"
     },
     {
       "name": "ai-chief-planner",
       "layer": "core",
       "path": "skills/core/ai-chief-planner/SKILL.md",
-      "source": "gerp-chief-planner",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
       "name": "ai-command-executor",
       "layer": "core",
       "path": "skills/core/ai-command-executor/SKILL.md",
-      "source": "gerp-command-executor",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
       "name": "ai-foundation-governor",
       "layer": "core",
       "path": "skills/core/ai-foundation-governor/SKILL.md",
-      "source": "gerp-stable-foundation-governor",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
       "name": "ai-5s-delivery-governor",
       "layer": "core",
       "path": "skills/core/ai-5s-delivery-governor/SKILL.md",
-      "source": "GERP 5S delivery governance extraction",
+      "source": "generalized 5S delivery governance extraction",
       "maturity": "verified",
       "description": "Govern versioned delivery with Scope, Specify, Ship, Safeguard, Sell, risk-based gates, baseline routing, and evidence-backed closure."
     },
@@ -113,7 +113,7 @@
       "name": "ai-product-directed-delivery",
       "layer": "core",
       "path": "skills/core/ai-product-directed-delivery/SKILL.md",
-      "source": "GERP non-programmer product-owner and AI delivery extraction",
+      "source": "generalized product-owner and AI delivery extraction",
       "maturity": "verified",
       "description": "Define product-owner and AI-agent responsibilities across outcome, architecture, atomic delivery, Host composition, business acceptance, and governed release."
     },
@@ -121,14 +121,14 @@
       "name": "ai-rule-dispatcher",
       "layer": "core",
       "path": "skills/core/ai-rule-dispatcher/SKILL.md",
-      "source": "gerp-rule-dispatcher",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
       "name": "ai-skill-evolver",
       "layer": "core",
       "path": "skills/core/ai-skill-evolver/SKILL.md",
-      "source": "gerp-skill-evolver",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
@@ -142,7 +142,7 @@
       "name": "ai-task-decomposer",
       "layer": "core",
       "path": "skills/core/ai-task-decomposer/SKILL.md",
-      "source": "gerp-task-decomposer",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
@@ -156,7 +156,7 @@
       "name": "ai-multi-agent-orchestration",
       "layer": "core",
       "path": "skills/core/ai-multi-agent-orchestration/SKILL.md",
-      "source": "GERP multi-agent parallel development extraction",
+      "source": "generalized multi-agent parallel development extraction",
       "maturity": "verified",
       "description": "Orchestrate parallel AI agents across domain boundaries: domain partition, parallel vs serial dependency matrix, contract-first integration, and role/acceptance boundaries."
     },
@@ -171,7 +171,7 @@
       "name": "ai-competitor-analyst",
       "layer": "governance",
       "path": "skills/governance/ai-competitor-analyst/SKILL.md",
-      "source": "gerp-competitor-analyst",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
@@ -185,28 +185,28 @@
       "name": "ai-domain-boundary-mapper",
       "layer": "governance",
       "path": "skills/governance/ai-domain-boundary-mapper/SKILL.md",
-      "source": "gerp-domain-boundary-mapper",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
       "name": "ai-field-package-governor",
       "layer": "governance",
       "path": "skills/governance/ai-field-package-governor/SKILL.md",
-      "source": "gerp-atomic-component-fieldpackage",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
       "name": "ai-flow-closure-audit",
       "layer": "governance",
       "path": "skills/governance/ai-flow-closure-audit/SKILL.md",
-      "source": "gerp-flow-closure-audit",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
       "name": "ai-frontend-audit",
       "layer": "governance",
       "path": "skills/governance/ai-frontend-audit/SKILL.md",
-      "source": "gerp-frontend-availability-audit",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
@@ -234,7 +234,7 @@
       "name": "ai-ui-ux-governor",
       "layer": "governance",
       "path": "skills/governance/ai-ui-ux-governor/SKILL.md",
-      "source": "gerp-ui-ux",
+      "source": "generalized from project-specific delivery evidence",
       "maturity": "verified"
     },
     {
@@ -392,35 +392,35 @@
       "name": "java-performance-governance",
       "layer": "tech",
       "path": "skills/tech/java-performance-governance/SKILL.md",
-      "source": "GERP batch-operation and memory-leak governance extraction",
+      "source": "generalized batch-operation and memory-leak governance extraction",
       "maturity": "verified",
       "description": "Java/Spring performance and memory governance: batch-operation efficiency, unbounded caches, finally cleanup, SQL cost, and observability."
     }
   ],
   "rawOnlySkills": [
-    "cnb-api",
-    "cnb-code-commit",
-    "cnb-code-review",
-    "cnb-pipeline",
-    "cnb-docs",
-    "cnb-npc-delegate",
-    "cnb-npc-search",
-    "cnb-pr-diff",
-    "cnb-pr-summary",
-    "cnb-repo-knowledge-base",
-    "cnb-tapd-resource-fetcher",
-    "cnb-text-path-converter",
-    "cnb-upload-attachment",
-    "find-skills",
-    "gerp-cnb-release-deploy",
-    "gerp-market-researcher",
-    "gerp-mobile-page-rules",
-    "gerp-multilang-language-onboarding",
-    "gerp-multilang-page-implementation"
+    "raw-skill-01",
+    "raw-skill-02",
+    "raw-skill-03",
+    "raw-skill-04",
+    "raw-skill-05",
+    "raw-skill-06",
+    "raw-skill-07",
+    "raw-skill-08",
+    "raw-skill-09",
+    "raw-skill-10",
+    "raw-skill-11",
+    "raw-skill-12",
+    "raw-skill-13",
+    "raw-skill-14",
+    "raw-skill-15",
+    "raw-skill-16",
+    "raw-skill-17",
+    "raw-skill-18",
+    "raw-skill-19"
   ],
   "notes": [
     "Only skills listed in officialSkills count toward the portable methodology release.",
-    "Raw-only skills remain as source evidence and future extraction candidates.",
+    "Raw-only skills remain as source evidence and future extraction candidates; their original names stay in the private local archive.",
     "A skill reaches verified only after scripts/py/audit_methodology.py passes without blocking issues."
   ]
 }

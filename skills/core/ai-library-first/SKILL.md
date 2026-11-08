@@ -67,57 +67,50 @@ IT    BETTER   CUSTOM    HARDER
 
 ## Standard Library Catalog | 标准库目录
 
-### Frontend (Vue/React)
+### Frontend
+
+The exact library follows the project's existing stack. For each need, use the component library's built-in component or a maintained, actively used library; never write it from scratch.
 
 | Need | Use This | Never Write From Scratch |
 |---|---|---|
-| Date picker | `element-plus` DatePicker / `vuetify` / `react-datepicker` | Custom date input |
-| Table/DataGrid | `element-plus` Table / `ag-grid` / `tanstack-table` | Custom `<table>` with sorting |
-| Form validation | `element-plus` Form / `vee-validate` / `react-hook-form` | Custom validation functions |
-| Charts | `echarts` / `chart.js` / `recharts` | Custom SVG/canvas drawings |
-| Icons | `lucide-vue-next` / `@element-plus/icons-vue` | Custom SVG icons |
-| State management | `pinia` / `zustand` / `jotai` | Custom reactive store |
-| Drag & drop | `vuedraggable` / `@dnd-kit/core` | Custom drag handlers |
-| Rich text editor | `tiptap` / `quill` | Custom contenteditable |
-| File upload | `element-plus` Upload / `uppy` | Custom XHR upload |
-| Toast/notification | `element-plus` ElMessage / `sonner` | Custom toast component |
-| Modal/Dialog | `element-plus` ElMessageBox / Dialog | Custom modal overlay |
-| HTTP client | `axios` / `ofetch` | Custom `fetch` wrapper |
-| Router | `vue-router` / `react-router` | Custom routing logic |
-| i18n | `vue-i18n` / `i18next` | Custom translation system |
-| Virtual scroll | `vue-virtual-scroller` / `@tanstack/virtual` | Custom scroll optimization |
+| Date picker | component-library date picker or a maintained date library | custom date input |
+| Table / data grid | component-library data grid or a maintained table library | custom table with sorting |
+| Form validation | component-library form or a maintained validation library | custom validation functions |
+| Charts | a maintained charting library | custom SVG/canvas drawings |
+| Icons | the icon set shipped with the library or a maintained icon package | custom SVG icons |
+| State management | a maintained state library | custom reactive store |
+| Drag and drop | a maintained drag-and-drop library | custom drag handlers |
+| Rich text editor | a maintained editor library | custom contenteditable |
+| File upload | component-library upload or a maintained upload library | custom XHR upload |
+| Toast / notification | component-library notification component | custom toast component |
+| Modal / dialog | component-library dialog component | custom modal overlay |
+| HTTP client | the stack's maintained HTTP client | custom fetch wrapper |
+| Router | the stack's official router | custom routing logic |
+| i18n | a maintained i18n library | custom translation system |
+| Virtual scroll | a maintained virtualization library | custom scroll optimization |
 
-### Backend (Java/Spring Boot)
+### Backend
 
-| Need | Use This | Never Write From Scratch |
-|---|---|---|
-| ORM | `MyBatis-Plus` / `JPA/Hibernate` | Custom JDBC wrapper |
-| Validation | `jakarta.validation` / `hibernate-validator` | Custom annotation validators |
-| Cache | `Spring Cache` + `Redis/Caffeine` | Custom HashMap cache |
-| Rate limiting | `bucket4j` / `resilience4j` | Custom counter logic |
-| Logging | `SLF4J` + `Logback` | Custom logging framework |
-| JSON | `Jackson` / `Gson` / `fastjson2` | Custom JSON parser |
-| Excel | `EasyExcel` / `Apache POI` | Custom XLSX writer |
-| API docs | `SpringDoc OpenAPI` / `Knife4j` | Custom Swagger config |
-| Job scheduling | `XXL-Job` / `Quartz` | Custom cron executor |
-| Security | `Spring Security` + `Sa-Token` | Custom auth filter |
-| Code generation | `MyBatis-Plus Generator` | Custom template engine |
-| SMS/Email | `aliyun-sms` / `javax.mail` | Custom SMTP client |
-
-### Backend (Node.js/Express)
+The exact library follows the project's language and framework. For each need, use the framework's module or a maintained library rather than building low-level infrastructure yourself.
 
 | Need | Use This | Never Write From Scratch |
 |---|---|---|
-| Web framework | `express` / `fastify` / `hono` | Custom HTTP server |
-| ORM | `prisma` / `drizzle-orm` / `typeorm` | Custom SQL builder |
-| Validation | `zod` / `joi` / `yup` | Custom validator |
-| Auth | `lucia-auth` / `next-auth` / `passport` | Custom session handler |
-| File upload | `multer` / `busboy` | Custom multipart parser |
-| Queue/Jobs | `bullmq` / `bee-queue` | Custom job queue |
-| Real-time | `socket.io` / `ws` | Custom WebSocket handler |
-| Logging | `pino` / `winston` | Custom logger |
-| Testing | `vitest` / `jest` + `supertest` | Custom test runner |
-| Rate limit | `express-rate-limit` | Custom rate counter |
+| Persistence / ORM | the stack's ORM or persistence library | custom low-level driver wrapper |
+| Validation | the framework's validation module | custom annotation/hand-written validators |
+| Cache | the framework's cache abstraction over a maintained cache store | custom in-memory map cache |
+| Rate limiting | a maintained resilience/rate-limit library | custom counter logic |
+| Logging | the framework's logging facade | custom logging framework |
+| Serialization | the stack's maintained serialization library | custom parser |
+| Spreadsheet export | a maintained spreadsheet library | custom file-format writer |
+| API docs | the framework's documentation tool | hand-rolled spec config |
+| Job scheduling | a maintained scheduler | custom cron executor |
+| Security | the framework's security module | custom auth filter |
+| Code generation | a maintained generator | custom template engine |
+| Messaging (SMS/email) | a maintained messaging client | custom protocol client |
+| Web framework | the stack's maintained framework | custom HTTP server |
+| Queue / jobs | a maintained job queue | custom job queue |
+| Real-time | a maintained real-time library | custom socket handler |
+| Testing | the stack's maintained test runner | custom test runner |
 
 ---
 
@@ -176,7 +169,7 @@ Run this check on any PR or completed task:
 ## Guardrails | 防护规则
 
 - **Check library catalog BEFORE writing any code** — not after
-- **Prefer the project''s existing libraries** — if the project uses Element Plus, don't install Ant Design for one component
+- **Prefer the project's existing libraries** — if the project already has a component library, don't add a second one for a single component
 - **Library version must be pinned** — no `^` or `~` in production, use exact versions
 - **One library per concern** — don't use 3 different date libraries in one project
 - **No wrapper libraries** — don't wrap axios in a "custom HTTP client" that adds nothing
@@ -187,4 +180,4 @@ Run this check on any PR or completed task:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Initial creation — library catalog for Vue, React, Java Spring Boot, Node.js, token cost analysis
+- v1.0.0: Initial creation — stack-neutral library catalog and token cost analysis

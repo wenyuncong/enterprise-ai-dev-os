@@ -7,7 +7,7 @@ executability (references, commands, python libs, platform differences).
 
 Judgments: OK / PARTIAL / BROKEN (unreadable).
 Reference misses are classified: real_missing (hard), external (designed
-to run inside another project root, e.g. gerp codebase), runtime (generated
+to run inside another project root, e.g. a project-specific codebase), runtime (generated
 artifacts / placeholders / wildcards).
 
 Usage: python scan_skill_health.py > result.jsonl

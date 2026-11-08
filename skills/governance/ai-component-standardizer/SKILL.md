@@ -183,8 +183,8 @@ The Host is a composition surface, not a business service. A Host can show a com
 └──────────┴──────────┴──────────┴──────────┘
 ┌─────────────────────┬──────────────────────┐
 │ Recent Items Table  │ Quick Actions        │
-│ (same as List)      │ [+ New Order]        │
-│                     │ [+ New Invoice]      │
+│ (same as List)      │ [+ New Item A]       │
+│                     │ [+ New Item B]       │
 │                     │ [View Reports]       │
 └─────────────────────┴──────────────────────┘
 ```
@@ -238,7 +238,7 @@ Each customer gets a theme file that overrides ONLY the variables they need:
 | Table uses DataTable? | Check for `<DataTable` or standardized table component |
 | Toolbar matches template? | Button order: New → Batch → Export → Refresh |
 | Form has pinned footer? | Check for `position: sticky; bottom: 0` on footer |
-| Summary computed by backend? | Check for no `computed()` in line items |
+| Summary computed by backend? | Check that line items contain no reactive derived values with business math |
 
 ### Violation: When AI Creates a Non-Standard Page
 

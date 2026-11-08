@@ -222,7 +222,7 @@ Before any development work, classify the project. See skills/core/ai-project-cl
 |---|---|---|
 | **Origin** | Brownfield (existing) / Greenfield (new) | Read-first vs scaffold |
 | **Quality Target** | Rapid Prototype / AI-Native / Enterprise | Which skills to load, which architecture |
-| **Deploy Targets** | Web / Mobile / WeChat / MCP / All | Interface design strategy |
+| **Deploy Targets** | Web / Mobile / Mini-Program / MCP / All | Interface design strategy |
 | **Scale** | Monolith / Atomic Services / Microservices | Service split granularity |
 
 **Rule**: Default to AI-Native when unclear. Easier to downgrade than upgrade.
@@ -271,7 +271,7 @@ Before any development work, classify the project. See skills/core/ai-project-cl
 
 **Key Rule**: Each step MUST pass verification before moving to the next.
 
-**Stack note**: The 13+1 steps above instantiate the Java / Spring Boot + Vue + MySQL stack. For other stacks (Node, Python, Go, React, PostgreSQL), keep the same skeleton — DB → backend → API → frontend → verification — and map each step to the stack's equivalent layer.
+**Stack note (illustrative, not prescriptive)**: The 13+1 steps can be written against any one stack as a worked example. Keep the same skeleton — data store → backend → API → frontend → verification — and map each step to the equivalent layer in the adopting project's own stack.
 
 ---
 
@@ -377,7 +377,7 @@ QUICK CHECK (15 rules, always active):
 □ Missing tool → auto-install, never ask user.
 □ Every page handles 4 states: loading, empty, error, edge.
 □ Brownfield: audit before code, match existing style.
-□ No business logic in Vue computed() or React useMemo().
+□ No business logic in frontend reactive derived values (such as a computed property or memoized hook).
 □ Single truth: never compute same value in two places.
 □ Versioned delivery: record 5S state and select an L0-L3 gate.
 □ Product owner owns business acceptance; AI owns evidence-backed engineering execution.
@@ -396,7 +396,7 @@ These rules are enforced by governance skills. Violating any of them means the t
 ### Data & Logic
 | # | Rule | Enforced By |
 |---|---|---|
-| 1 | **Frontend = display only**. Zero business logic in Vue/React components. All computation, validation, decisions in backend. | ai-single-truth-enforcer |
+| 1 | **Frontend = display only**. Zero business logic in frontend components. All computation, validation, decisions in backend. | ai-single-truth-enforcer |
 | 2 | **Backend is sole source of truth**. DB → Backend API → Frontend cache. Never compute the same value in two places. | ai-atomic-architect |
 | 3 | **No duplicate truth sources**. Same field defined in 2+ components with different logic = violation. | ai-field-package-governor |
 
@@ -514,8 +514,8 @@ docs/
     2026-06-17_调研记录.md
 
   业务流程全案/           ← Sub-folders per business process
-    采购流程/
-    销售流程/
+    示例流程 A/
+    示例流程 B/
 
   测试验收报告/           ← One file per test round
     2026-06_R1_核心流程.md
@@ -532,7 +532,7 @@ docs/
 **Rules**:
 - No loose `.md` files in `docs/` root — all in sub-folders
 - Task packs go under their domain folder, not as loose `docs/{name}_任务包/`
-- Type first (ADR/调研/流程), then topic (财务/采购)
+- Type first (ADR/调研/流程), then topic (the project's own domain topics)
 
 **Daily Writeback Rule**: After each development session, write a dated record under the appropriate docs/ category. This builds an auditable knowledge base automatically.
 

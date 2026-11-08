@@ -47,8 +47,8 @@ description: "Govern cross-domain architecture decisions, ADRs, domain boundarie
 ### Layer 1: Domain Boundaries | 第 1 层：领域边界
 
 - 每个身份概念（用户、租户、组织）归哪个领域所有？
-- 每个主数据对象（产品、客户、供应商）归哪个领域所有？
-- 每张业务单据（订单、发票、收据）归哪个领域所有？
+- 每个主数据/参考对象（用项目自己的名称）归哪个领域所有？
+- 每张业务单据（用项目自己的名称）归哪个领域所有？
 - 每张平台表（配置、审计日志）归哪个领域所有？
 
 ### Layer 2: Identity & Access | 第 2 层：身份与访问
@@ -149,7 +149,7 @@ description: "Govern cross-domain architecture decisions, ADRs, domain boundarie
 
 ## Evolution History | 进化记录
 
-- v1.0.0：提炼自 gerp-architect-governor（原始 15KB）
+- v1.0.0：提炼自真实企业架构治理证据并通用化
 - v1.1.0：通用化为普适的架构治理模式
 - 来源：多领域企业级系统（ERP + Mall + App + Agent + SaaS）
 
@@ -160,7 +160,7 @@ description: "Govern cross-domain architecture decisions, ADRs, domain boundarie
 1. **源版本**：源文件 frontmatter 只有 `name`/`description` 两个键，未标注版本；本译文按「进化记录」最新条目注记 v1.1.0。
 2. **引用路径存在性核对**（源文件引用的路径/脚本）：
    - `docs/架构决策记录/`：本仓库内存在该目录，引用有效。
-   - `gerp-architect-governor`：源文件引用的历史 Skill 名（原始 15KB），当前 `skills/` 下已不存在该目录，属历史来源注记。
+   - 源文件原本引用的历史 Skill 名已在通用化中移除，当前只保留通用模式，不包含本仓库之外的历史目录。
    - 全文未引用任何脚本或命令，故无脚本存在性风险。
 3. **ADR 模板处理**：模板代码块按口径原样复制，`[NNN]`、`[Title]`、`[Alternative 1]`、`[Alternative 2]` 等占位符保持原样；模板后用一张中文表说明每个位置的填写内容，模板本身可直接套用。
 4. **术语保留自检**：本译文保留了 `ADR`、`SSO`、`RBAC`、`ABAC`、`shared-nothing`、`shared-kernel`、`shared-core`、`Entry Layer`、`Source of Truth`、`Writeback Consumer`、`Enablement Layer` 等英文标识符；源文件未出现 `atomic service`、`atomic orchestration`、`aggregate interface`、`command gateway`、`Host`、`DeclarationAtom`、`ExecutorAtom`、`FieldPackage`、`BusinessProfile`、`fail-closed`、`L0`–`L5`、`Q0`–`Q3`、`P0`–`P3`，本译文不引入源文件没有的概念，这些标识符在术语表中仍保持英文写法。

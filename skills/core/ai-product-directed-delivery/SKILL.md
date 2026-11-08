@@ -322,5 +322,5 @@ The AI system stops and asks the product owner only for a real business ambiguit
 
 ## Evolution History
 
-- v1.0.0: Extracted from repeated GERP delivery evidence where a non-programmer product owner directed product outcome and business acceptance while AI agents performed full-stack implementation, verification, and governed release closure.
-- v1.1.0: Added safe change, code location, and major-project autopilot protocols from GERP dirty-worktree, shared-component, route-tracing, and evidence-gated delivery practice.
+- v1.0.0: Generalized from repeated enterprise delivery evidence where a non-programmer product owner directed product outcome and business acceptance while AI agents performed full-stack implementation, verification, and governed release closure.
+- v1.1.0: Added safe change, code location, and major-project autopilot protocols from real dirty-worktree, shared-component, route-tracing, and evidence-gated delivery practice.

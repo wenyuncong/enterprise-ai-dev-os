@@ -66,6 +66,8 @@ verification-demo/
 skills/governance/ai-runtime-verify/screenshots/
 evidence/self_audit/
 evidence/runs/
+evidence/writeback_reconcile/
+knowledge/project-index.json
 
 # Secrets and environment files
 .env

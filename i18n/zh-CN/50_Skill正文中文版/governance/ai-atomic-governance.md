@@ -214,11 +214,11 @@ new_source = ast.unparse(new_tree)
 
 **关键指标**：一个会话内，具备治理集成的原子从 0 个变为 21 个。
 
-### GERP Cross-Project Audit (2026-07-05) | GERP 跨项目审计（2026-07-05）
+### 大型企业系统的跨项目审计 | Cross-Project Audit on a Large Enterprise System
 
-**整改前**：GERP 中 623 条代码审计发现 + 100 条字段审计发现，没有治理流水线。
+**整改前**：大型企业系统中有数百条代码审计发现加字段审计发现，没有治理流水线。
 
-**整改后**：L5 governance_orchestrator 消费 L3 domain_code_audit + domain_erp_field_check，产出证据 + 索引 + 报告。只读模式，未修改 GERP。
+**整改后**：L5 治理编排器消费 L3 领域代码与字段检查，产出证据 + 索引 + 报告。只读模式，未修改目标系统。
 
 ---
 

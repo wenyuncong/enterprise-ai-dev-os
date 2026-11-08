@@ -1,6 +1,6 @@
 # Domain Module Decomposition Reference | 领域模块分解参考
 
-> **Extracted from**: GERP Enterprise ERP — 24 domain modules across 6 categories
+> **Generalized from**: real enterprise delivery evidence — generic responsibility categories, project and business names removed
 > **Use when**: Designing atomic service boundaries for a new enterprise project
 
 ---
@@ -9,47 +9,28 @@
 
 1. **One module = one business capability** — not one table, not one screen
 2. **Max 3 dependencies** — any module depending on > 3 others should be split
-3. **Data ownership is exclusive** — each table belongs to exactly one module
+3. **Data ownership is exclusive** — each data collection belongs to exactly one module
 4. **API is the only contract** — modules communicate only through defined APIs
 
 ---
 
-## Reference Module Map | 参考模块地图
+## Reference Category Map | 参考类别地图
+
+Map the system's own modules onto these generic responsibility categories rather than assuming a fixed module list:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     FOUNDATION LAYER                         │
-│  ┌──────────┐  ┌──────────────┐  ┌──────────┐              │
-│  │   base   │  │  masterdata  │  │   auth   │              │
-│  │ (system  │  │  (product,   │  │  (user,  │              │
-│  │  config) │  │  customer,   │  │  role,   │              │
-│  │          │  │  supplier)   │  │  tenant) │              │
-│  └──────────┘  └──────────────┘  └──────────┘              │
+│  FOUNDATION — shared base, master/reference data, identity  │
 ├─────────────────────────────────────────────────────────────┤
-│                     CORE BUSINESS LAYER                      │
-│  ┌──────┐  ┌──────────┐  ┌─────┐  ┌────────────┐  ┌─────┐ │
-│  │ sale │  │ purchase │  │ inv │  │ production │  │ wms │ │
-│  └──────┘  └──────────┘  └─────┘  └────────────┘  └─────┘ │
+│  CORE TRANSACTION — primary flows, asset state, execution   │
 ├─────────────────────────────────────────────────────────────┤
-│                     FINANCE LAYER                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐                  │
-│  │ finance  │  │ payment  │  │ capital  │                  │
-│  └──────────┘  └──────────┘  └──────────┘                  │
+│  FINANCE — accounting, settlement, funds                    │
 ├─────────────────────────────────────────────────────────────┤
-│                     EXTENDED BUSINESS LAYER                  │
-│  ┌─────┐  ┌──────┐  ┌─────┐  ┌─────┐  ┌─────┐  ┌───────┐ │
-│  │ crm │  │ mall │  │ b2b │  │ scm │  │ tms │  │ trade │ │
-│  └─────┘  └──────┘  └─────┘  └─────┘  └─────┘  └───────┘ │
+│  EXTENDED BUSINESS — channels, supply coordination, trade   │
 ├─────────────────────────────────────────────────────────────┤
-│                     OPERATIONS LAYER                         │
-│  ┌────────┐  ┌───────┐  ┌────┐  ┌─────┐  ┌─────┐          │
-│  │ report │  │ print │  │ oa │  │ mes │  │ qms │          │
-│  └────────┘  └───────┘  └────┘  └─────┘  └─────┘          │
+│  OPERATIONS — reporting, output, collaboration, quality     │
 ├─────────────────────────────────────────────────────────────┤
-│                     PLATFORM LAYER                           │
-│  ┌──────┐  ┌───────┐  ┌────┐                                │
-│  │ saas │  │ agent │  │ ai │                                │
-│  └──────┘  └───────┘  └────┘                                │
+│  PLATFORM — provisioning, agent capabilities, automation    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -59,15 +40,15 @@
 
 | Rule | Rationale |
 |---|---|
-| Foundation modules depend on NOTHING | They are the root of the dependency tree |
-| Core Business depends on Foundation | sale → masterdata (needs product/customer data) |
-| Finance depends on Core Business | finance → sale (needs invoice data) |
-| Extended Business depends on Core | crm → sale (needs customer order history) |
-| Operations depends on ALL above | report reads from all modules |
-| Platform depends on ALL above | saas manages all tenant subscriptions |
+| Foundation modules depend on nothing | They are the root of the dependency tree |
+| Core transaction depends on Foundation | transaction flows need reference and identity data |
+| Finance depends on Core transaction | accounting needs the transactional evidence |
+| Extended business depends on Core | channels need the transaction history |
+| Operations depends on the layers above | reporting reads across modules |
+| Platform depends on the layers above | provisioning governs all tenants |
 
-**Anti-pattern**: `sale → payment` (circular dependency). Fix: both depend on a shared event bus.
+**Anti-pattern**: a circular dependency between two modules. Fix: both depend on a shared event bus.
 
 ---
 
-*Last updated: 2026-06-17 | Source: GERP Enterprise ERP*
+*Last updated: 2026-11-08 | Status: universal — project and business names removed*

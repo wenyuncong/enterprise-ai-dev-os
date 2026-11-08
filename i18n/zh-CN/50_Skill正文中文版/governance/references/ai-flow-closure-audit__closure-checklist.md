@@ -17,15 +17,15 @@
 - `{PROJECT_ROOT}/docs/业务流程全案/` 下的相关流程文档
 - `{PROJECT_ROOT}/docs/测试验收报告/` 下的最新验证报告
 
-## 典型链路类别 | Typical chain categories
+## 典型流程形态（通用；把项目自己的流程映射到这些形态）
 
-- O2C：订单到收款（order to cash）
-- S2P：采购到付款（source to pay）
-- R2R：记录到报告（record to report）
-- L2C：线索到收款（lead to cash）
-- 生产履约（production fulfillment）
-- WMS / TMS 执行
-- SaaS 订阅生命周期（SaaS subscription lifecycle）
+- 主交易链：请求 -> 执行 -> 单据 -> 结算
+- 采购式链：申请 -> 订单 -> 收货 -> 结算
+- 记录/报表链：交易 -> 总账 -> 分析报表
+- 机会链：线索 -> 商机 -> 报价 -> 承诺
+- 履约链：承诺 -> 准备 -> 发运
+- 运营执行
+- 订阅生命周期
 
 ## 审计检查清单 | Audit checklist
 

@@ -13,7 +13,7 @@ metadata:
 
 Enforce the fundamental rule: **frontend displays, backend decides**. Every piece of business logic, every validation, every computation, every data transformation must live in the backend. The frontend is a rendering layer — nothing more.
 
-**Problem it solves**: AI frequently writes business logic in Vue components, computes prices in JavaScript, validates form data only on the client, and mixes data transformation with rendering. This creates fragile UIs that break when the same logic needs to run on mobile, WeChat, or MCP.
+**Problem it solves**: AI frequently writes business logic in presentation-layer components, computes prices on the client, validates form data only on the client, and mixes data transformation with rendering. This creates fragile UIs that break when the same logic needs to run on mobile, mini-programs, or MCP.
 
 ---
 
@@ -39,38 +39,38 @@ Enforce the fundamental rule: **frontend displays, backend decides**. Every piec
 
 | Concern | Backend Responsibility | Frontend Must NOT |
 |---|---|---|
-| **Calculations** | Price computation, tax, discounts, totals | `computed(() => price * quantity)` |
-| **Validation** | Business rules (credit limit, stock check, duplicate detection) | `if (amount > 10000) show error` |
-| **Data transformation** | Formatting, unit conversion, locale formatting | `date.toLocaleDateString()` with business logic |
-| **Authorization** | Permission checks, role-based access | `v-if="user.role === 'admin'"` (use backend-returned permissions) |
-| **State machines** | Order status, workflow transitions | `if (status === 'pending' && user pressed...)` |
-| **Business decisions** | Which fields to show based on state | Frontend conditional rendering from backend state flags |
+| **Calculations** | Amount computation, rates, adjustments, totals | a reactive derived value that multiplies business values |
+| **Validation** | Business rules (limits, availability checks, duplicate detection) | a client-side branch that applies a business threshold |
+| **Data transformation** | Formatting, unit conversion, locale formatting | a display-formatting call carrying business logic |
+| **Authorization** | Permission checks, role-based access | hiding UI from a local role string (use backend-returned permissions) |
+| **State machines** | Document status, workflow transitions | a local branch that advances a business state |
+| **Business decisions** | Which fields to show based on state | conditional rendering driven by locally computed flags instead of backend state flags |
 
 ### How Frontend Should Work
 
-```javascript
-// ❌ WRONG: Business logic in Vue component
-const totalPrice = computed(() => {
-  const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const tax = subtotal * 0.13;
-  const discount = user.vipLevel === 'gold' ? 0.1 : 0;
-  return subtotal + tax - (subtotal * discount);
-});
+The code below is stack-neutral pseudocode; map it to the project's actual frontend framework.
+
+```text
+// ❌ WRONG: Business logic in a presentation component
+total = derived from items:
+  subtotal = sum(item.amount * item.qty)
+  rate = subtotal * configured rate
+  adjustment = subtotal * tier-based adjustment
+  return subtotal + rate - adjustment
 
 // ✅ CORRECT: Backend computes, frontend displays
-const totalPrice = ref(0);
-async function loadTotal() {
-  const resp = await api.calculateTotal({ items: items.value });
-  totalPrice.value = resp.total;  // Already computed by backend
-}
+total = display-only state (initially empty)
+on load:
+  resp = api.calculateTotal({ items })
+  total = resp.total   // already computed by backend
 ```
 
 ### What Frontend MAY Do
 
-- `v-if` based on data returned from backend (not computed locally)
-- `v-for` to iterate backend-returned arrays
-- Basic UI formatting: `toLocaleDateString()` for display only (never for computation)
-- Event binding: `@click="save()"` → sends data to backend API
+- Conditional rendering based on data returned from backend (not computed locally)
+- Iterating backend-returned arrays
+- Basic UI formatting for display only (never for computation)
+- Event binding that sends data to the backend API
 - Client-side routing and navigation
 
 ---
@@ -89,10 +89,10 @@ Level 3: FRONTEND STATE ← Display copy only, never the authority
 
 | Violation | Detection Pattern |
 |---|---|
-| Frontend computes prices | `computed(() => ... * ...)` with business values |
-| Frontend validates business rules | `if (quantity > stockLevel)` in .vue |
+| Frontend computes amounts | a reactive derived value that combines business values |
+| Frontend validates business rules | a client-side branch comparing a business quantity against a threshold |
 | Duplicate truth sources | Same field defined in 2+ components with different logic |
-| Frontend modifies data before display | `.map(item => ({ ...item, displayPrice: item.price * rate }))` |
+| Frontend modifies data before display | transforming items to add a locally computed business value |
 
 ---
 
@@ -120,26 +120,22 @@ Level 3: FRONTEND STATE ← Display copy only, never the authority
 
 ### Implementation Check
 
-```javascript
-// ❌ WRONG: Critical action with transient toast
-async function deleteAll() {
-  await api.deleteAll();
-  showToast('Deleted!');  // Gone in 3 seconds, user didn't confirm
-}
+```text
+// ❌ WRONG: Critical action with a transient toast
+on deleteAll:
+  await api.deleteAll()
+  showToast('Deleted!')   // gone in seconds; user never confirmed
 
-// ✅ CORRECT: Critical action with modal confirmation
-async function deleteAll() {
-  const confirmed = await showModal({
+// ✅ CORRECT: Critical action with a modal confirmation
+on deleteAll:
+  confirmed = await showModal(
     title: 'Delete All Records',
     body: 'This action is irreversible. All data will be permanently deleted.',
-    confirmText: 'Delete All',
-    confirmStyle: 'danger',
-    cancelText: 'Cancel'
-  });
-  if (!confirmed) return;
-  await api.deleteAll();
-  showToast('All records deleted');
-}
+    confirmText: 'Delete All', danger style,
+    cancelText: 'Cancel')
+  if not confirmed: return
+  await api.deleteAll()
+  showToast('All records deleted')
 ```
 
 ---
@@ -148,8 +144,8 @@ async function deleteAll() {
 
 This skill audits frontend code for:
 
-- [ ] Zero `computed()` with business formulas (prices, taxes, discounts, totals)
-- [ ] Zero `if/else` with business rules (credit limits, stock checks, eligibility)
+- [ ] Zero reactive derived values with business formulas (amounts, rates, adjustments, totals)
+- [ ] Zero client-side branches with business rules (limits, availability checks, eligibility)
 - [ ] All validation calls go to backend API, not local functions
 - [ ] All data transformations happen in backend before sending to frontend
 - [ ] Permission checks use server-returned permissions, not local role strings

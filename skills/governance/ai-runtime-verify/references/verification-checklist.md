@@ -10,7 +10,7 @@
 ### 1. No Console Errors
 - **Check**: `consoleErrors.length === 0`
 - **Why**: Any uncaught JS error or console.error indicates broken code
-- **Common causes**: Missing function definitions, undefined variables, API response parsing errors, React/Vue render errors
+- **Common causes**: Missing function definitions, undefined variables, API response parsing errors, component render errors
 - **False positives**: Third-party analytics scripts, browser extension interference (filter if needed)
 
 ### 2. Loading Overlay Removed

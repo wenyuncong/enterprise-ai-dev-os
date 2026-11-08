@@ -70,21 +70,23 @@ Before developing complex features in unfamiliar domains, search for, download, 
 
 ### Search Sources
 
+Choose the package registry that matches the ecosystem under research; the rows below are a source map, not a prescribed stack.
+
 | Source | Search Method | Best For |
 |---|---|---|
 | **GitHub** | `site:github.com {domain} {language} stars:>100` | Full-stack apps, frameworks, libraries |
 | **npm** | `npm search {keyword}` or `npmjs.com` | Frontend libraries, Node.js tools |
-| **Maven Central** | `mvnrepository.com` | Java libraries, Spring Boot starters |
+| **Maven Central** | `mvnrepository.com` | JVM libraries, backend frameworks |
 | **PyPI** | `pypi.org` | Python tools, ML libraries |
 | **Awesome Lists** | `site:github.com awesome {domain}` | Curated lists of best projects |
 
 ### Search Strategy
 ```
-# Example: Researching "multi-tenant SaaS ERP"
-1. Search: site:github.com "multi-tenant" erp spring-boot stars:>50
-2. Search: site:github.com "saas" "multi-tenant" java architecture
-3. Search: site:github.com awesome erp
-4. For specific features: site:github.com "purchase order" workflow engine
+# Example: Researching a multi-tenant enterprise system
+1. Search: site:github.com "multi-tenant" enterprise stars:>50
+2. Search: site:github.com "saas" "multi-tenant" architecture
+3. Search: site:github.com awesome enterprise
+4. For specific features: site:github.com "business workflow" engine
 ```
 
 ---
@@ -185,16 +187,17 @@ git clone --depth 1 https://github.com/repo-owner/project-a.git
 
 ---
 
-## Domain-Specific Reference Targets | 领域参考目标
+## Reference Targets by Domain | 领域参考目标
 
-### ERP / Enterprise Systems
-| Domain | Search Keywords | Expected Findings |
+These are search categories for finding reference implementations. Pick the category matching the research goal; add the project's verified language only to narrow results, never assume it.
+
+| Domain | Generic search intent | Expected findings |
 |---|---|---|
-| Multi-tenant SaaS | `multi-tenant spring boot saas` | Tenant isolation patterns, schema-per-tenant vs shared |
-| Inventory/WMS | `warehouse management system open source` | Stock movement patterns, barcode, location hierarchy |
-| Accounting/Finance | `open source accounting double-entry` | Ledger patterns, reconciliation, period close |
-| CRM | `open source crm node.js` | Pipeline, lead management, contact hierarchy |
-| Workflow Engine | `workflow engine open source bpmn` | State machines, approval chains, process definition |
+| Multi-tenant systems | `multi-tenant enterprise open source` | Tenant isolation, schema-per-tenant vs shared |
+| Asset/warehouse management | `warehouse management system open source` | Movement patterns, barcode, location hierarchy |
+| Accounting | `open source accounting double-entry` | Ledger patterns, reconciliation, period close |
+| Customer relationship | `open source crm` | Pipeline, lead management, contact hierarchy |
+| Workflow engine | `workflow engine open source` | State machines, approval chains, process definition |
 
 ### General Architecture
 | Domain | Search Keywords | Expected Findings |

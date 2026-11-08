@@ -146,9 +146,9 @@ Use blocker-first ordering:
 
 ## Maturity | 成熟度
 
-**Stage**: effective — Battle-tested on GERP ERP project across 100+ decompositions.
+**Stage**: effective — Battle-tested in real enterprise delivery across 100+ decompositions.
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-task-decomposer, generalized for universal use
-- Source: GERP Enterprise ERP, PDCA-driven decomposition templater
+- v1.0.0: Generalized from real decomposition evidence, universalized for portable use
+- Source: PDCA-driven decomposition in real enterprise deliveryr

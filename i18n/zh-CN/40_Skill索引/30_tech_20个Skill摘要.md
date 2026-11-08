@@ -65,7 +65,7 @@
 ## 4. `java-performance-governance` — Java 性能与内存治理
 
 - **源文件**：`skills/tech/java-performance-governance/SKILL.md`
-- **上游来源**：frontmatter 无第三方作者；`SKILL_MANIFEST.json` 记录 source 为 `GERP batch-operation and memory-leak governance extraction`（本仓库自研提炼）
+- **上游来源**：frontmatter 无第三方作者；`SKILL_MANIFEST.json` 记录 source 为通用化的批处理与内存治理提炼（本仓库自研，项目名已移除）
 - **用途**：管 Java / Spring 性能与内存治理：批处理效率、无界缓存、资源泄漏、finally 释放、SQL 成本与可观测性。把劣化模式固化成诊断与修复手册，坚持 no silent degradation。
 - **覆盖范围**：集合式批处理、无界缓存、finally 清理、线程池与连接池、EXPLAIN 索引、结构化日志
 - **何时加载**：批删批改变慢、内存增长或 OOM、超时、连接池耗尽，以及评审性能敏感代码、新增缓存或线程配置前加载。
@@ -249,4 +249,4 @@
 
 **不翻译理由（统一）**：以上 8 个 Skill 由第三方作者或上游仓库维护，正文随上游持续演进。若中文版逐句翻译，会产生第二份真相源，上游一旦更新就无法低成本同步，方法论审计与 Skill 健康检查也会出现英文断言缺失。因此 tech 层统一「只出中文摘要，不译正文」，摘要负责说清管什么、何时加载，细节一律回到英文原文。
 
-**其余 12 个 Skill 的来源说明**：`java-performance-governance` 的 `SKILL_MANIFEST.json` source 为 `GERP batch-operation and memory-leak governance extraction`（本仓库自研提炼）；另外 11 个（`java-springboot`、`javascript-typescript-jest`、`multi-stage-dockerfile`、`mysql-best-practices`、`node-backend`、`postgresql-best-practices`、`python-fastapi`、`react-frontend`、`tailwind-css-patterns`、`tailwind-design-system`、`typescript-advanced-types`）的 source 均为 `tech skill library`，frontmatter 无第三方作者。它们同样只出摘要、不出全文译文，口径与第三方 Skill 一致，便于整层统一维护与同步。
+**其余 12 个 Skill 的来源说明**：`java-performance-governance` 的 `SKILL_MANIFEST.json` source 为通用化的批处理与内存治理提炼（本仓库自研，项目名已移除）；另外 11 个（`java-springboot`、`javascript-typescript-jest`、`multi-stage-dockerfile`、`mysql-best-practices`、`node-backend`、`postgresql-best-practices`、`python-fastapi`、`react-frontend`、`tailwind-css-patterns`、`tailwind-design-system`、`typescript-advanced-types`）的 source 均为 `tech skill library`，frontmatter 无第三方作者。它们同样只出摘要、不出全文译文，口径与第三方 Skill 一致，便于整层统一维护与同步。

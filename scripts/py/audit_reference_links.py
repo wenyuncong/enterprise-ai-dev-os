@@ -94,6 +94,11 @@ def scan(root: Path) -> tuple[dict[str, dict[str, list[str]]], int]:
     reference_count = 0
 
     for document in public_markdown_files(root):
+        # git ls-files reflects the index; a rename staged only in the working
+        # tree can leave an index entry whose file no longer exists. Skip it
+        # instead of crashing; the entry resolves once the change is committed.
+        if not document.exists():
+            continue
         text = document.read_text(encoding="utf-8-sig", errors="ignore")
         relative_document = document.relative_to(root).as_posix()
         for match in REFERENCE_RE.finditer(text):

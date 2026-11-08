@@ -24,9 +24,9 @@ DECLARATION = 仅契约（schema、meta、relations）。EXECUTOR = 全部业务
 
 ## Purpose | 目的
 
-定义并强制 AI 原生架构模式：**atomic service + atomic orchestration + 统一接口**。本 Skill 确保用这套方法论构建的每个项目，都能从单一 Web 前端演进为多平台系统（Web、移动 App、微信小程序、MCP 服务器、API），而无需重写业务逻辑。
+定义并强制 AI 原生架构模式：**atomic service + atomic orchestration + 统一接口**。本 Skill 确保用这套方法论构建的每个项目，都能从单一 Web 前端演进为多平台系统（Web、移动 App、小程序、MCP 服务器、API），而无需重写业务逻辑。
 
-**它解决的问题**：传统开发把业务逻辑与表现层紧紧耦合在一起。当你需要在新平台（移动端、微信、MCP）提供同一功能时，只能重写。AI 原生架构从第一天起就分离关注点，从而避免这件事。
+**它解决的问题**：传统开发把业务逻辑与表现层紧紧耦合在一起。当你需要在新平台（移动端、小程序、MCP）提供同一功能时，只能重写。AI 原生架构从第一天起就分离关注点，从而避免这件事。
 
 ---
 
@@ -35,7 +35,7 @@ DECLARATION = 仅契约（schema、meta、relations）。EXECUTOR = 全部业务
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                  UNIFIED INTERFACES                      │
-│   REST · GraphQL · MCP · WebSocket · gRPC · WeChat API  │
+│   REST · GraphQL · MCP · WebSocket · gRPC · Webhook     │
 ├─────────────────────────────────────────────────────────┤
 │               ATOMIC ORCHESTRATION                       │
 │        Workflow Engine · Event Bus · Saga Pattern        │
@@ -51,7 +51,7 @@ DECLARATION = 仅契约（schema、meta、relations）。EXECUTOR = 全部业务
 |---|---|---|
 | atomic service（原子服务） | 最小可独立理解、可测试、可治理、可替换的业务逻辑单元 | Auth · User · Task · Note · File · Notify · Audit |
 | atomic orchestration（原子编排） | 把 atomic service 组合成业务工作流，而不把它们彼此耦合 | 工作流引擎（Workflow Engine）· 事件总线（Event Bus）· Saga 模式（Saga Pattern） |
-| 统一接口（UNIFIED INTERFACES） | 同一套业务逻辑经多种传输协议暴露，且不复制逻辑 | REST · GraphQL · MCP · WebSocket · gRPC · 微信 API（WeChat API） |
+| 统一接口（UNIFIED INTERFACES） | 同一套业务逻辑经多种传输协议暴露，且不复制逻辑 | REST · GraphQL · MCP · WebSocket · gRPC · Webhook |
 
 ---
 
@@ -86,7 +86,7 @@ atomic-service/
 | ❌ 反模式 | ✅ AI 原生模式 |
 |---|---|
 | 一个拥有 50 个方法的巨型 "UserService" | `auth-service` + `profile-service` + `permission-service` |
-| 业务逻辑写在 Vue 组件里 | 业务逻辑放在 `core/`，Vue 组件只调用 API |
+| 业务逻辑写在前端组件里 | 业务逻辑放在 `core/`，前端组件只调用 API |
 | 前端直接查询数据库 | 所有数据库访问都经 atomic service API |
 | 混杂多种关注点的 "Utils" 目录 | 每个工具都属于某个明确的 atomic service |
 | 一个 API 端点做 5 件事 | 每个原子操作一个端点 |
@@ -105,7 +105,7 @@ atomic-service/
 |---|---|---|
 | **Direct Call（直接调用）** | 简单的 1:1 服务依赖 | `task-service` → `notify-service` |
 | **Event-Driven（事件驱动）** | 松耦合、发后即忘 | `task-completed` → `audit-log` + `stats-update` |
-| **Saga (Choreography)（Saga 编排）** | 带补偿的分布式事务 | `create-order` → `reserve-inventory` → `charge-payment`（含回滚） |
+| **Saga (Choreography)（Saga 编排）** | 带补偿的分布式事务 | `create-commitment` -> `reserve-capacity` -> `settle`（含回滚） |
 | **Workflow Engine（工作流引擎）** | 复杂的多步业务流程 | 审批链：submit → review → approve → notify |
 | **API Gateway（API 网关）** | 面向客户端的聚合 | 移动 App 调一个端点，网关扇出到 N 个服务 |
 
@@ -114,13 +114,13 @@ atomic-service/
 **业务工作流是组合，不是单体。**
 
 ```
-❌ Monolith:        OrderService.processOrder() → does everything in one class
-✅ AI-Native:       order-created event → inventory-service.reserve()
-                    → payment-service.charge()
-                    → notify-service.send()
+❌ Monolith:        one service does everything in a single class
+✅ AI-Native:       commitment-created event -> capacity-service.reserve()
+                    -> settlement-service.charge()
+                    -> notify-service.send()
 ```
 
-读法：反模式是把所有逻辑塞进 `OrderService.processOrder()` 一个类里；AI 原生模式是 `order-created` 事件驱动 `inventory-service.reserve()` → `payment-service.charge()` → `notify-service.send()` 依次协作。
+读法：反模式是把所有逻辑塞进一个类里；AI 原生模式是 `commitment-created` 事件驱动 `capacity-service.reserve()` -> `settlement-service.charge()` -> `notify-service.send()` 依次协作。
 
 ---
 
@@ -136,42 +136,42 @@ atomic-service/
                     ┌──────────────┐
                     │  ATOMIC      │
 Web Browser ──────→│  SERVICE     │
-React Native ─────→│              │
-WeChat MP ────────→│  core/       │──────→ Database
+Mobile Client ────→│              │
+Mini-Program ─────→│  core/       │──────→ Database
 MCP Client ───────→│  business    │
 REST Client ──────→│  logic       │
 GraphQL Client ───→│              │
                     └──────────────┘
 ```
 
-图示读法：Web 浏览器、React Native、微信小程序（WeChat MP）、MCP 客户端、REST 客户端、GraphQL 客户端都接入同一个 `core/` 业务逻辑；数据库只在这一侧被访问。
+图示读法：Web 浏览器、移动客户端、小程序、MCP 客户端、REST 客户端、GraphQL 客户端都接入同一个 `core/` 业务逻辑；数据库只在这一侧被访问。
 
 ### Interface Mapping by Platform | 按平台划分的接口映射
 
 | 平台 | 主要接口 | 说明 |
 |---|---|---|
-| Web SPA (Vue/React) | REST + WebSocket | 标准 JSON API，实时能力走 WS |
-| 移动 App (Flutter/RN) | REST + WebSocket | 与 Web 同一套 API，仅 UI 不同 |
-| 微信小程序（WeChat Mini-Program） | REST (wx.request) | 同一套 API，配微信认证适配器 |
+| Web SPA | REST + WebSocket | 标准 JSON API，实时能力走 WS |
+| 移动 App | REST + WebSocket | 与 Web 同一套 API，仅 UI 不同 |
+| 小程序 | REST | 同一套 API，配平台认证适配器 |
 | MCP Server | MCP Tools Protocol | 把同一套逻辑暴露为 MCP tools，供 AI 智能体使用 |
 | 第三方集成 | REST + Webhook | 公开 API，带限流 |
 | 管理/内部工具 | GraphQL | 为管理看板提供灵活查询 |
 
-### Real-World Platform Matrix (Extracted from GERP) | 真实平台矩阵（提炼自 GERP）
+### Generic Multi-Client Type Matrix | 通用多客户端类型矩阵
 
-GERP 用一套后端支撑 7 个平台。这就是模板：
+一套后端可支撑多种客户端类型。这就是通用模板（具体技术随项目栈而定）：
 
-| 平台 | 代码 | 类型 | 共享组件 |
-|---|---|---|---|
-| Web Admin | `gerp-web` | Vue SPA（微前端） | `gerp-common`（组件、语言包、工具） |
-| Mobile | `gerp-mobile` | Flutter | 共享 API 层 |
-| WeChat Mini-Program | `gerp-mall-miniprogram` | 微信小程序 | 共享 API 层 |
-| Agent Web | `gerp-agent-web` | Vue SPA | `gerp-common` |
-| Admin Web | `gerp-admin-web` | Vue SPA | `gerp-common` |
-| Desktop | `gerp-desktop` | Electron | 共享 API 层 |
-| Root Config | `root-config` | 微前端编排器 | N/A（编排其余平台） |
+| 客户端类型 | 典型形态 | 共享层 |
+|---|---|---|
+| Web 管理端 | 单页应用（可含微前端） | 共享组件、语言包、工具 |
+| 移动端 | 移动应用 | 共享 API 层 |
+| 小程序 | 平台小程序 | 共享 API 层 |
+| 面向代理/伙伴的 Web | 单页应用 | 共享组件 |
+| 内部管理 Web | 单页应用 | 共享组件 |
+| 桌面端 | 桌面壳应用 | 共享 API 层 |
+| 编排配置 | 前端编排器 | 编排其余客户端 |
 
-**关键模式**：所有平台共享同一套 REST API。差异只存在于表现层。
+**关键模式**：所有客户端共享同一套 API。差异只存在于表现层。
 
 ---
 
@@ -257,20 +257,20 @@ Web、App、AI、MCP、OpenAPI、桌面端与各类连接器，都是同一套�
 
 ---
 
-### Domain Module Decomposition (Extracted from GERP) | 领域模块拆分（提炼自 GERP）
+### Domain Module Decomposition Pattern | 领域模块拆分模式
 
-一套完整 ERP 拆成以下领域模块。可作为领域驱动设计的参照：
+大型企业系统可按通用职责类别拆分。把系统自己的模块映射到这些类别，而非假设一份固定模块清单：
 
-| 类别 | 模块 |
+| 类别 | 通用职责 |
 |---|---|
-| **Foundation（基座）** | base, masterdata, auth |
-| **Core Business（核心业务）** | sale, purchase, inv (inventory), production, wms (warehouse) |
-| **Finance（财务）** | finance, payment, capital |
-| **Extended Business（扩展业务）** | crm, mall, b2b, scm (supply chain), tms (transport), trade |
-| **Operations（运营）** | report, print, oa, mes, qms |
-| **Platform（平台）** | saas, agent, ai |
+| **Foundation（基座）** | 共享基座、主数据/参考数据、身份与访问 |
+| **Core transaction（核心交易）** | 主要交易流程、资源/资产状态、执行 |
+| **Finance（财务）** | 核算、结算、资金 |
+| **Extended business（扩展业务）** | 合作方渠道、供应协同、外部交易 |
+| **Operations（运营）** | 报表、输出、协作、质量与执行系统 |
+| **Platform（平台）** | 多租户预置、代理能力、AI/自动化 |
 
-**拆分规则**：每个模块 = 一个 atomic service。任何模块依赖的其他模块**不得超过** 3 个。
+**拆分规则**：每个有界模块 = 一个 atomic service。任何模块依赖的其他模块**不得超过** 3 个。
 
 ---
 
@@ -283,7 +283,7 @@ paths:
   /tasks:
     get:
       operationId: listTasks
-      summary: List tasks (used by web, mobile, WeChat, MCP)
+      summary: List tasks (used by web, mobile, mini-program, MCP)
     post:
       operationId: createTask
       summary: Create task (used by all platforms)
@@ -311,7 +311,7 @@ paths:
 
 ### Archetype C: Multi-Platform (Enterprise) | 原型 C：多平台（企业级）
 
-**何时（When）**：Web + App + 微信 + MCP + 第三方 API
+**何时（When）**：Web + App + Mini-Program + MCP + 第三方 API
 **架构（Architecture）**：atomic service + API Gateway + Transport Adapters
 **平台（Platforms）**：以上全部
 
@@ -333,7 +333,7 @@ paths:
 
 ## Guardrails | 防护规则
 
-- **禁止把业务逻辑放进表现层**（Vue 组件、Flutter widget）
+- **禁止把业务逻辑放进表现层**（前端组件、移动客户端组件）
 - **先定义接口再实现**（先写 OpenAPI/GraphQL schema）
 - **一个 atomic service = 一个明确的数据边界** —— 只有在独立部署与隔离足以证明其运维成本合理时，schema-per-service 才是合适的
 - **传输只是细节** —— 核心业务逻辑不知道自己是经 REST、MCP 还是 WebSocket 被调用
@@ -359,7 +359,7 @@ paths:
 1. **源版本**：源文件 frontmatter 只有 `name`/`description` 两个键，未标注版本；本译文按「进化记录」最新条目注记 v1.2.0。
 2. **引用路径存在性核对**（源文件引用的路径/脚本）：
    - `api/task-service.openapi.yaml`、`atomic-service/`：源文件中的模板/示例路径，仓库内不存在，属可套用的示意结构，非缺失文件。
-   - `gerp-web`、`gerp-mobile`、`gerp-mall-miniprogram`、`gerp-agent-web`、`gerp-admin-web`、`gerp-desktop`、`root-config`：源文件引用的历史企业项目代号，不是本仓库路径。
+   - 源文件原本引用的历史项目代号已在通用化中移除，当前矩阵只保留通用客户端类型，不包含任何本仓库之外的项目路径。
    - `ai-project-classifier`：以 Skill 名引用，正式源位于 `skills/core/ai-project-classifier/SKILL.md`（存在）。
    - 全文未引用任何脚本或命令，故无脚本存在性风险。
 3. **代码块处理**：源文件 7 个代码块（Three Pillars 图示、`atomic-service/` 目录结构、单体 vs AI 原生对照、传输适配器图示、交付主干、能力成熟度链、OpenAPI YAML）按口径原样复制，图示内的英文标签未改写；为便于阅读，在每个图示后补了中文对照说明。

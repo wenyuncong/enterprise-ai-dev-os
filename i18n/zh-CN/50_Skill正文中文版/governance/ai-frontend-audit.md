@@ -149,7 +149,7 @@ description: "Audit frontend availability, state handling, API integration, comp
 
 ## Evolution History | 进化记录
 
-- v1.0.0: 提炼自 gerp-frontend-availability-audit
+- v1.0.0: 提炼自真实企业前端审计证据并通用化
 - v1.1.0: 泛化为通用前端质量维度
 
 ---

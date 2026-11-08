@@ -14,9 +14,9 @@ metadata:
 Map domain boundaries at the object level:
 
 - Which domain owns each identity concept?
-- Which domain owns each master data object?
+- Which domain owns each master/reference object?
 - Which domain owns each business document?
-- Which domain owns each platform/shared table?
+- Which domain owns each platform/shared data structure?
 - Which domain is the writeback target for each action?
 
 This skill is for **domain boundary mapping**, not implementation or architecture design from scratch.
@@ -25,11 +25,13 @@ This skill is for **domain boundary mapping**, not implementation or architectur
 
 ## Rule
 
-**Every object (table, service, API) has one owning domain. Cross-domain access must be explicit and traceable.**
+**Every object (data structure, service, contract) has one owning domain. Cross-domain access must be explicit and traceable.**
 
 ---
 
 ## Domain Boundary Template | 领域边界模板
+
+The rows below use neutral placeholders. Replace them with the project's own objects; do not assume a fixed business vocabulary.
 
 ```markdown
 ## Domain: [Domain Name]
@@ -37,33 +39,31 @@ This skill is for **domain boundary mapping**, not implementation or architectur
 ### Identity & Tenant
 | Object | Owner | Access Pattern |
 |---|---|---|
-| User | [Domain] | Shared — read by all, write by [Domain] |
-| Tenant | [Domain] | Shared — read by all, write by [Domain] |
-| Organization | [Domain] | Owned by [Domain] |
-| Role | [Domain] | Shared — read by all, write by [Domain] |
+| User identity | [Domain] | Shared — read by all, write by [Domain] |
+| Tenant/partition | [Domain] | Shared — read by all, write by [Domain] |
+| Organization unit | [Domain] | Owned by [Domain] |
+| Role/permission | [Domain] | Shared — read by all, write by [Domain] |
 
-### Master Data
+### Master / Reference Data
 | Object | Owner | Consumers |
 |---|---|---|
-| Product | [Domain] | Sales, Purchase, Inventory (read-only) |
-| Customer | [Domain] | Sales, Finance, Reports (read-only) |
-| Supplier | [Domain] | Purchase, Finance, Reports (read-only) |
-| Warehouse | [Domain] | Sales, Purchase, Inventory (read-only) |
+| Reference object A | [Domain] | consuming domains (read-only) |
+| Reference object B | [Domain] | consuming domains (read-only) |
+| Reference object C | [Domain] | consuming domains (read-only) |
 
 ### Business Documents
 | Object | Owner | Writeback Targets |
 |---|---|---|
-| Sales Order | [Domain] | Inventory (reservation), Finance (none) |
-| Sales Delivery | [Domain] | Inventory (decrease), Finance (COGS) |
-| Purchase Order | [Domain] | Inventory (none), Finance (none) |
-| Purchase Receipt | [Domain] | Inventory (increase), Finance (AP) |
+| Document A | [Domain] | downstream domain action (or none) |
+| Document B | [Domain] | downstream domain action (or none) |
+| Document C | [Domain] | downstream domain action (or none) |
 
-### Platform Tables
+### Platform Structures
 | Object | Owner | Notes |
 |---|---|---|
-| System Parameters | [Domain] | Platform infra |
-| Audit Log | [Domain] | Cross-cutting |
-| File Storage | [Domain] | Shared service |
+| System parameters | [Domain] | Platform infra |
+| Audit log | [Domain] | Cross-cutting |
+| File storage | [Domain] | Shared service |
 | Notifications | [Domain] | Shared service |
 ```
 
@@ -71,8 +71,8 @@ This skill is for **domain boundary mapping**, not implementation or architectur
 
 ## Mapping Workflow | 映射工作流
 
-### Step 1: Inventory Objects
-List all tables, services, and APIs in scope.
+### Step 1: List Objects
+List all data structures, services, and contracts in scope.
 
 ### Step 2: Assign Ownership
 For each object, determine the single owning domain based on:
@@ -82,12 +82,12 @@ For each object, determine the single owning domain based on:
 
 ### Step 3: Map Writeback Paths
 For each business action, trace:
-- Source object → writeback action → target object
+- Source object -> writeback action -> target object
 - Verify: does the target domain have a consumer for this writeback?
 
 ### Step 4: Identify Violations
 Flag any:
-- Multiple domains writing to the same table directly
+- Multiple domains writing to the same structure directly
 - Entry layer (frontend) containing business rules
 - Missing writeback consumers
 - Circular writeback dependencies
@@ -98,26 +98,26 @@ Flag any:
 
 | Pattern | Description | Example |
 |---|---|---|
-| **Shared-Read, Single-Write** | Multiple domains read, one domain writes | User table: all read, Identity domain writes |
-| **Event-Driven Writeback** | Source domain emits event, target consumes asynchronously | Order created → Inventory receives event |
-| **Anti-Corruption Layer** | Translation layer between domain models | External API → internal domain model adapter |
-| **Shared Kernel** | Limited shared model between closely related domains | Shared value objects between Order and Shipment |
+| **Shared-Read, Single-Write** | Multiple domains read, one domain writes | identity data: all read, the identity domain writes |
+| **Event-Driven Writeback** | Source domain emits event, target consumes asynchronously | a document is created -> the downstream domain receives the event |
+| **Anti-Corruption Layer** | Translation layer between domain models | external contract -> internal domain model adapter |
+| **Shared Kernel** | Limited shared model between closely related domains | shared value objects between two cooperating domains |
 
 ---
 
 ## Guardrails | 防护规则
 
 - Do not assign an object to a domain based on naming alone — verify actual code ownership
-- Do not allow multiple domains to write to the same table without explicit governance
+- Do not allow multiple domains to write to the same structure without explicit governance
 - Do not skip writeback path verification
 - Do not create domain boundaries that don't match actual code reality
-- Do not treat shared tables as "no owner" — every table has an owner
+- Do not treat shared structures as "no owner" — every one has an owner
 
 ## Maturity | 成熟度
 
-**Stage**: Effective — Extracted from multi-domain enterprise ERP boundary mapping.
+**Stage**: Effective — generalized from real multi-domain enterprise boundary mapping.
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-domain-boundary-mapper
-- v1.1.0: Generalized with universal domain patterns
+- v1.0.0: Generalized from real enterprise boundary mapping evidence (project-specific names removed)
+- v1.1.0: Generalized with universal domain patterns and neutral placeholders

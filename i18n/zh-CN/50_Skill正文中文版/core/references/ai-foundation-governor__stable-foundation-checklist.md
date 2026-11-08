@@ -9,7 +9,7 @@
 
 ---
 
-当 GERP 任务触及版本、模块、功能、权限、路由、API、FieldPackage、参数、报表、schema 同步或发布收口时，使用本检查清单。
+当企业任务触及版本、模块、功能、权限、路由、API、FieldPackage、参数、报表、schema 同步或发布收口时，使用本检查清单。
 
 ## 分类 | Classification
 

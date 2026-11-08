@@ -28,7 +28,7 @@ description: "Verify runtime behavior with browser/API checks, console inspectio
 
 ## Trigger | 触发条件
 
-- 每次前端代码改动之后（`src/**/*.html`、`src/**/*.vue`、`src/**/*.jsx`、`src/**/*.tsx`）
+- 每次前端代码改动之后（项目前端目录下任何被渲染的组件或页面源）
 - 任何「done / complete / finished」声明之前
 - `ai-frontend-audit` 完成其静态分析之后
 - 服务重启或部署之后

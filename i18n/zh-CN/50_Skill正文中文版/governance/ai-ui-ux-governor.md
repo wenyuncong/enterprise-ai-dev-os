@@ -204,7 +204,7 @@ interface NotificationAPI {
 
 ## Evolution History | 进化记录
 
-- v1.0.0: 提炼自 gerp-ui-ux（原始 19KB + 2 个参考）
+- v1.0.0: 提炼自真实企业 UI/UX 治理证据并通用化
 - Source: 覆盖 50+ 页面类型的企业级 ERP UI/UX 治理
 
 ---

@@ -164,7 +164,7 @@ Template or reference update is enough ──> Update relevant reference file
 ## 进化记录 | Evolution History
 
 - v1.0.1（2026-06-18）：3 个任务使用了自定义分页后，补充分页模式
-- v1.0.0（2026-06-17）：从 GERP 项目首次提炼
+- v1.0.0（2026-06-17）：从真实企业交付首次提炼并通用化
 ```
 
 Skill 档案（`docs/全项目总控/MASTER_INDEX.md`）跟踪全部 Skill：

@@ -143,6 +143,6 @@ Use `complete` only when Safeguard has passed and the project's required integra
 
 ## Evolution History
 
-- v1.0.0: Generalized from the GERP 5S delivery state machine and three-line release governance, with project-specific paths and remote names removed.
+- v1.0.0: Generalized from real enterprise 5S delivery state-machine and release governance, with project-specific paths and remote names removed.
 - v1.1.0: Added evidence-backed `Q0-Q3` delivery qualification so technical
   execution and customer or release readiness cannot be conflated.

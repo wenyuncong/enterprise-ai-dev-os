@@ -54,7 +54,7 @@ The frontend should receive a `businessCode` or `entityKey` and consume fields f
 Before any field configuration, verify the actual database schema:
 ```
 Check: column exists, type matches, constraints are correct
-Source: DESCRIBE table / SHOW COLUMNS
+Source: the schema inspection command for the target data store (e.g. DESCRIBE / SHOW COLUMNS in SQL dialects)
 ```
 
 ### 2. Metadata Registry
@@ -149,5 +149,5 @@ When one physical entity (table) represents multiple business identities:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-atomic-component-fieldpackage (111KB original)
-- Source: Enterprise ERP metadata governance across purchase/sales/inventory/finance/capital modules
+- v1.0.0: Generalized from real enterprise field metadata governance (project-specific names removed)
+- Source: metadata governance across transactional, operational, and financial modules

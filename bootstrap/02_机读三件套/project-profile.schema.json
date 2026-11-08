@@ -105,7 +105,7 @@
         },
         "qualification_matrix": {
           "enum": ["none", "S0_S3", "Q0_Q3"],
-          "description": "交付资格矩阵口径：S0–S3（母版销售资格）或 Q0–Q3（本方法论交付资格）"
+          "description": "交付资格矩阵口径：S0–S3（参考项目销售资格）或 Q0–Q3（本方法论交付资格）"
         },
         "close_criteria": {
           "type": "string",

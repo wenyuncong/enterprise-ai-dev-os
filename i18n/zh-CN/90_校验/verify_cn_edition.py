@@ -83,6 +83,7 @@ METHODOLOGY = [
     "03_12步开发执行引擎", "04_MD文档总控体系", "05_Skill自动进化机制",
     "06_企业级部署与验收标准", "07_方法论移植指南", "08_项目文件夹结构标准",
     "09_老项目改造方法论", "10_发布治理与锁版体系",
+    "11_通用架构与治理模式库",
 ]
 # 源文件名与中文版文件名不一致的例外（03 源文件名写「12步」，正文实为 13 步）
 METHODOLOGY_OUT_OVERRIDE = {"03_12步开发执行引擎": "03_13步开发执行引擎"}
@@ -133,8 +134,8 @@ REFERENCE_MAP = [
      "50_Skill正文中文版/governance/references/ai-flow-closure-audit__closure-checklist.md"),
     ("skills/governance/ai-runtime-verify/references/verification-checklist.md",
      "50_Skill正文中文版/governance/references/ai-runtime-verify__verification-checklist.md"),
-    ("skills/governance/ai-ui-ux-governor/references/gerp-context.md",
-     "50_Skill正文中文版/governance/references/ai-ui-ux-governor__gerp-context.md"),
+    ("skills/governance/ai-ui-ux-governor/references/enterprise-page-patterns.md",
+     "50_Skill正文中文版/governance/references/ai-ui-ux-governor__enterprise-page-patterns.md"),
     ("skills/governance/ai-ui-ux-governor/references/mainstream-layouts.md",
      "50_Skill正文中文版/governance/references/ai-ui-ux-governor__mainstream-layouts.md"),
 ]

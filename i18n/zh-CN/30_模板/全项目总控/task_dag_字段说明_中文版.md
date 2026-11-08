@@ -80,13 +80,13 @@
   "schemaVersion": "1.0.0",
   "description": "Task DAG template for multi-agent orchestration. nodes describe work items and their data dependencies; contracts pin cross-node integration points. scripts/py/orchestrate_dag.py validates the graph, detects cycles, and emits a parallel-layer execution plan. Replace the example nodes with a real plan; this is a contract + planner, not a dispatcher.",
   "nodes": [
-    { "id": "platform-foundation", "name": "平台基础（租户/权限/菜单）", "depends": [] },
-    { "id": "inventory", "name": "库存域", "depends": ["platform-foundation"] },
-    { "id": "finance", "name": "财务域", "depends": ["platform-foundation"] },
-    { "id": "reports", "name": "报表域", "depends": ["inventory", "finance"] }
+    { "id": "platform-foundation", "name": "平台基础（身份/权限/菜单）", "depends": [] },
+    { "id": "domain-a", "name": "示例领域 A", "depends": ["platform-foundation"] },
+    { "id": "domain-b", "name": "示例领域 B", "depends": ["platform-foundation"] },
+    { "id": "domain-c", "name": "示例领域 C", "depends": ["domain-a", "domain-b"] }
   ],
   "contracts": [
-    { "from": "inventory", "to": "finance", "contract": "出入库金额口径：库存过账后以事件通知应付/成本，幂等键 = 单据号+行号" }
+    { "from": "domain-a", "to": "domain-b", "contract": "跨域口径：来源过账后以事件通知下游，幂等键 = 来源类型+来源标识" }
   ]
 }
 ```
@@ -107,4 +107,4 @@
 
 - **无独立 Schema**：`docs/全项目总控/schemas/` 下没有 `task_dag` 的 JSON Schema；第 2–4 节的「是否必填」是按 `scripts/py/orchestrate_dag.py` 的实际读取逻辑推断的，而非模式声明。
 - **`description` 中的路径**：源模板 `description` 内引用了 `scripts/py/orchestrate_dag.py`（仓库相对路径），已原样保留。
-- **示例节点名本就是中文**：源模板的 `name` 值（「平台基础（租户/权限/菜单）」「库存域」「财务域」「报表域」）已是中文，按「JSON 模板原样保留」口径未作改动。
+- **示例节点名**：源模板的 `name` 值为通用占位（平台基础、示例领域 A/B/C），已与英文源同步为中立示例。

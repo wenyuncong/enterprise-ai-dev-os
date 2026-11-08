@@ -180,7 +180,7 @@ description: "Classify projects by origin, quality target, deployment targets, a
 |---|---|
 | **Web only** | 标准 SPA/SSR、REST API |
 | **Web + Mobile** | API 优先设计，考虑移动端 SDK |
-| **Web + WeChat** | 微信认证适配器、`wx.request` 兼容 |
+| **Web + Mini-Program** | 平台认证适配器、小程序 API 兼容 |
 | **Web + MCP Server** | 在 REST 之外并行提供 MCP Tools 协议 |
 | **All platforms** | 统一接口层，每个传输通道各自的适配器（adapter） |
 
@@ -236,7 +236,7 @@ If (team_size >= 5 && compliance_required) → Enterprise Microservices
 - Steps: Full 13-step with all gates
 - DB: Schema-per-service
 - API: REST + GraphQL (OpenAPI-first)
-- Mobile: React Native with same API
+- Mobile: a mobile client reusing the same API
 ```
 
 **分类结论模板字段中文对照**（字段名保持英文，照抄上方模板即可套用）：

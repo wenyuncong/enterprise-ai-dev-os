@@ -184,7 +184,7 @@
 ## 4. `java-performance-governance` — Java 性能与内存治理
 
 - **源文件**：`skills/tech/java-performance-governance/SKILL.md`
-- **上游来源**：仓库内自研提炼，frontmatter 无第三方作者；`skills/SKILL_MANIFEST.json` 记 source 为 `GERP batch-operation and memory-leak governance extraction`
+- **上游来源**：仓库内自研提炼，frontmatter 无第三方作者；`skills/SKILL_MANIFEST.json` 记 source 为通用化的批处理与内存治理提炼（项目名已移除）
 - **用途**：把 Java 后端的可预测劣化模式变成一套诊断与修复手册。源文件开篇就点明问题集：无界缓存、缺失的 `finally` 清理、每请求日志与正则重写、超大线程池、逐行批处理。它把「集合式批处理」与「内存泄漏治理」的经验通用化，要求先拿证据定位根因再改代码，明确反对用重启或加大堆来掩盖泄漏。它属于治理型 Skill：既管修复动作，也管「不许怎么修」。
 - **何时加载**：诊断变慢的批删/批改/批审、内存增长或 OOM、超时、连接池耗尽时；评审性能敏感的 Spring / MyBatis 代码、准备新增缓存或线程/异步配置之前；做内存泄漏排查、批处理 SQL 重构、索引规划与可观测性建设时。
 - **核心规则要点**（`## Rule` 六条，全部为强制约束）：
@@ -534,7 +534,7 @@
 | `docker-expert` | `source: community`；`category: devops`；`risk: unknown`；`date_added: "2026-02-27"`；未署具名作者 | source `tech skill library`；maturity `verified` | 正文与 references 保留英文，仅出中文要点，避免与上游分叉 |
 | `flutter-animations` | `metadata.author: Stanislav [MADTeacher] Chernyshev`；`version: "1.0"`；无 `source` 字段 | source `tech skill library`；maturity `verified` | 同上；本 Skill 无 `references/` 之外的模板目录，模板引用失效需上游补齐 |
 | `flutter-expert` | `license: MIT`；`metadata.author: https://github.com/Jeffallan`；`version: "1.1.0"`；`related-skills: react-native-expert, test-master, fullstack-guardian` | source `tech skill library`；maturity `verified` | 同上；`related-skills` 指向本仓库不存在的 Skill |
-| `java-performance-governance` | 无第三方作者字段，仅 `name` 与 `description` | source `GERP batch-operation and memory-leak governance extraction`；maturity `verified` | 仓库内自研提炼；正文保留英文，仅出中文要点 |
+| `java-performance-governance` | 无第三方作者字段，仅 `name` 与 `description` | source 为通用化的批处理与内存治理提炼（项目名已移除）；maturity `verified` | 仓库内自研提炼；正文保留英文，仅出中文要点 |
 | `java-springboot` | 无第三方作者与版本字段 | source `tech skill library`；maturity `verified` | 仓库内能力包；正文保留英文，仅出中文要点 |
 | `javascript-typescript-jest` | 无第三方作者与版本字段 | source `tech skill library`；maturity `verified` | 仓库内能力包；正文保留英文，仅出中文要点 |
 | `multi-stage-dockerfile` | 无第三方作者与版本字段 | source `tech skill library`；maturity `verified` | 仓库内能力包；正文保留英文，仅出中文要点 |

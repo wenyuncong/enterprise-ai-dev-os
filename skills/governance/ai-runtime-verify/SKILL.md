@@ -22,7 +22,7 @@ Automatically verify frontend pages render correctly in a real browser before cl
 
 ## Trigger | 触发条件
 
-- After every frontend code change (`src/**/*.html`, `src/**/*.vue`, `src/**/*.jsx`, `src/**/*.tsx`)
+- After every frontend code change (any rendered component or page source under the project's frontend tree)
 - Before any "done / complete / finished" claim
 - After `ai-frontend-audit` completes its static analysis
 - After server restart or deployment

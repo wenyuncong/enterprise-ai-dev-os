@@ -11,7 +11,7 @@
 ## [流程名] — 业务流程文档 | [Process Name] — Business Process Documentation
 
 **版本（Version）**：1.0.0
-**领域（Domain）**：[采购 / 销售 / 库存 / 财务 / ...]
+**领域（Domain）**：[采用项目自己的领域名称]
 **最后更新（Last Updated）**：YYYY-MM-DD
 
 ---
@@ -60,8 +60,8 @@ graph TD
 
 | 下游系统 | 写入内容 | 触发时机 | 幂等键 |
 |---|---|---|---|
-| 库存（Inventory） | 库存流水（Stock movement） | 审计通过时 | source_type + source_id |
-| 财务（Finance） | 凭证分录（Voucher entry） | 审计通过时 | source_type + source_id |
+| [下游领域 A] | [它拥有的派生条目] | 审计通过时 | source_type + source_id |
+| [下游领域 B] | [它拥有的派生条目] | 审计通过时 | source_type + source_id |
 
 ---
 

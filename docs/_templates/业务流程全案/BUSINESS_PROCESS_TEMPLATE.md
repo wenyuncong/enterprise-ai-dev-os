@@ -3,7 +3,7 @@
 ## [Process Name] — Business Process Documentation
 
 **Version**: 1.0.0
-**Domain**: [Purchase / Sales / Inventory / Finance / ...]
+**Domain**: [the adopting project's own domain name]
 **Last Updated**: YYYY-MM-DD
 
 ---
@@ -52,5 +52,5 @@ graph TD
 
 | Downstream System | What is Written | When | Idempotency Key |
 |---|---|---|---|
-| Inventory | Stock movement | On audit | source_type + source_id |
-| Finance | Voucher entry | On audit | source_type + source_id |
+| [downstream domain A] | [the derived entry it owns] | On audit | source_type + source_id |
+| [downstream domain B] | [the derived entry it owns] | On audit | source_type + source_id |

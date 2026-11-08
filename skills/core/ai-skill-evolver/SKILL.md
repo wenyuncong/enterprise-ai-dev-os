@@ -132,6 +132,30 @@ ai-skill-evolver should automatically invoke ai-skill-governor when it detects:
 - A skill not updated in > 3 months
 - A skill that was loaded 0 times in the last 50 tasks
 
+### Executable Writeback Driver | 可执行回流驱动
+
+The triggers above are only effective if something actually runs them. The
+writeback gap is therefore measured by an executable, schedulable check rather
+than left to memory:
+
+```text
+py scripts/py/reconcile_writeback.py check --practice-root <practice-project>
+```
+
+The check compares practice-project commits since the last resolved point
+against the methodology's last update and exits non-zero when a writeback is
+overdue. After the generalized evidence has actually been written back, record
+the new baseline so the next run only measures incremental activity:
+
+```text
+py scripts/py/reconcile_writeback.py mark-resolved --practice-root <practice-project>
+```
+
+The practice path is always supplied explicitly and the local state (real
+paths, commit hashes) stays outside the portable release. A scheduler should
+invoke `check` on a recurring cadence; a non-zero result is the signal to run
+this skill's Repair-To-Skill loop, not a claim that the loop ran by itself.
+
 ---
 
 ## Guardrails | 防护规则
@@ -144,9 +168,9 @@ ai-skill-evolver should automatically invoke ai-skill-governor when it detects:
 
 ## Maturity | 成熟度
 
-**Stage**: effective — Battle-tested on GERP ERP with documented evolution cycles.
+**Stage**: effective — Battle-tested in real enterprise delivery with documented evolution cycles.
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-skill-evolver, generalized for universal use
-- Source: GERP Enterprise ERP, Continuous Repair-To-Skill loop validatedr
+- v1.0.0: Generalized from real skill-evolution evidence, universalized for portable use
+- Source: continuous Repair-To-Skill loop validated in real enterprise delivery

@@ -13,7 +13,7 @@
     "gates_version": { "type": "string" },
     "layers": {
       "type": "array",
-      "description": "门禁分层（母版实践为六层）",
+      "description": "门禁分层（参考项目实践为六层）",
       "items": {
         "enum": [
           "static_audit",
@@ -121,7 +121,7 @@
           },
           "provenance": {
             "type": "string",
-            "description": "该门禁来自母版的哪个脚本或哪条规则"
+            "description": "该门禁来自参考项目的哪个脚本或哪条规则"
           },
           "notes": { "type": "string" }
         }

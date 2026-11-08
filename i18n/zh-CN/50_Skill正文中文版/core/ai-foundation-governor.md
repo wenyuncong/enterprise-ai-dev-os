@@ -165,7 +165,7 @@ description: "Govern stable project foundations including version control, permi
 
 ## Evolution History | 进化记录
 
-- v1.0.0：提炼自 gerp-stable-foundation-governor（原始 65KB）
+- v1.0.0：提炼自真实企业基座治理证据并通用化
 - v1.1.0：通用化为普适的企业级基座模式
 - v1.2.0：加入失败即阻断（fail-closed）的跨环境迁移一致性门禁，覆盖清单、校验和、执行历史、迁移后检查与恢复证据
 - 来源：12 个月以上的企业级 ERP 基座治理实践
@@ -178,7 +178,7 @@ description: "Govern stable project foundations including version control, permi
 2. **引用路径存在性核对**（源文件引用的路径/脚本）：
    - `schema/`、`seed/`、`patch/`、`templates/`：源文件把它们作为「正式源目录」的类别名引用，不是本仓库路径。其中 `schema/`、`seed/` 在 `methodology/08_项目文件夹结构标准.md` 中被定义为项目 `database/` 下的子目录（`database/schema`、`database/seed`）；**`patch/`、`templates/` 在本仓库内未找到定义**（全仓库检索 `patch/` 仅命中本源文件自身），属源文件沿用历史项目的目录约定，采用时需按目标项目实际结构确认。
    - `SHOW TABLES`、`DESCRIBE`、`SELECT COUNT(*)`：SQL 命令，按口径原样保留。
-   - `gerp-stable-foundation-governor`：源文件引用的历史 Skill 名（原始 65KB），当前 `skills/` 下已不存在该目录，属历史来源注记。
+   - 源文件原本引用的历史 Skill 名已在通用化中移除，当前只保留通用模式，不包含本仓库之外的历史目录。
    - 全文未引用任何脚本或命令，故无脚本存在性风险。
 3. **术语统一**：源文件小节标题自带中文「发布闸门」，按术语表（gate = 门禁，不译作「闸门」）统一为「发布门禁」，语义未变；`fail-closed` 按术语表统一为「失败即阻断（fail-closed）」并保留英文。
 4. **强制语气**：`## 3. Backend Truth Rule` 的强制表述未弱化 —— 「业务真相**必须**存在于后端服务」「**验收检查**：……**必须**产生完全一致的校验、持久化结果、回写行为与审计事实」「**禁止**把入口层当作真相源」均按原强度译出；迁移门禁的「**失败即阻断（fail-closed）**」「成功的部署作业**不能**替代这些检查」同样保持原强度。

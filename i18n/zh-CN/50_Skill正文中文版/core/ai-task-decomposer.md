@@ -170,12 +170,12 @@ description: "Break complex work into safe executable batches with dependencies,
 
 ## Maturity | 成熟度
 
-**Stage**：effective —— 在 GERP ERP 项目上经 100+ 次拆解实战检验。
+**Stage**：effective —— 在真实企业交付中经 100+ 次拆解实战检验。
 
 ## Evolution History | 进化记录
 
-- v1.0.0：提炼自 gerp-task-decomposer，并通用化为普适用法
-- 来源：GERP Enterprise ERP，PDCA 驱动的拆解模板器（decomposition templater）
+- v1.0.0：提炼自真实任务拆解证据，并通用化为普适用法
+- 来源：真实企业交付中 PDCA 驱动的拆解模板器（decomposition templater）
 
 ---
 

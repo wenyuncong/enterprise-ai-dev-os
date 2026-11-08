@@ -83,6 +83,10 @@ Conclusion:
 
 **诚实的边界**：这些数字来自一个复杂的老项目（brownfield），只是方向性参考，并未跨项目做基准化。公开表述必须把它们当作单个脱敏案例引用，禁止当成通用百分比。
 
+## Token 成本结构实测 | Token Cost Structure Telemetry
+
+另一份报告记录了方法论落地后实测的 token 成本结构（2026-09-01 至 10-12；1,028 个会话）：99.6% 的 token 发生在输入/上下文侧，提示缓存整体命中率达 85.6%（近期达 98.7%–99.3%），随着工作流成熟，会话规模中位数下降约两个数量级。这些是无对照组的描述性观察，并附 2026 行业对标（每条带来源链接）。见 [TOKEN_COST_BENCHMARK_V1.md](../../../docs/公开材料/TOKEN_COST_BENCHMARK_V1.md)，论文见 [Zenodo](https://zenodo.org/records/22991315)。
+
 ## 公开表述规则 | Public Claim Rules
 
 允许：

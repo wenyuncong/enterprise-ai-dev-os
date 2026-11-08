@@ -76,57 +76,50 @@ IT    BETTER   CUSTOM    HARDER
 
 ## Standard Library Catalog | 标准库目录
 
-### Frontend (Vue/React) | 前端（Vue/React）
+### 前端
+
+具体用哪个库跟随项目既有技术栈。对每个需求，使用组件库内置组件或受维护、活跃使用的库；禁止自研。
 
 | 需求 | 应当使用 | 禁止自研 |
 |---|---|---|
-| 日期选择器 | `element-plus` DatePicker / `vuetify` / `react-datepicker` | 自研日期输入 |
-| 表格/数据网格 | `element-plus` Table / `ag-grid` / `tanstack-table` | 自研带排序的 `<table>` |
-| 表单校验 | `element-plus` Form / `vee-validate` / `react-hook-form` | 自研校验函数 |
-| 图表 | `echarts` / `chart.js` / `recharts` | 自研 SVG/canvas 绘制 |
-| 图标 | `lucide-vue-next` / `@element-plus/icons-vue` | 自研 SVG 图标 |
-| 状态管理 | `pinia` / `zustand` / `jotai` | 自研响应式 store |
-| 拖拽 | `vuedraggable` / `@dnd-kit/core` | 自研拖拽处理器 |
-| 富文本编辑器 | `tiptap` / `quill` | 自研 contenteditable |
-| 文件上传 | `element-plus` Upload / `uppy` | 自研 XHR 上传 |
-| 轻提示（Toast）/通知 | `element-plus` ElMessage / `sonner` | 自研 toast 组件 |
-| 模态框（Modal）/对话框 | `element-plus` ElMessageBox / Dialog | 自研模态遮罩层 |
-| HTTP 客户端 | `axios` / `ofetch` | 自研 `fetch` 封装 |
-| 路由 | `vue-router` / `react-router` | 自研路由逻辑 |
-| 国际化（i18n） | `vue-i18n` / `i18next` | 自研翻译系统 |
-| 虚拟滚动 | `vue-virtual-scroller` / `@tanstack/virtual` | 自研滚动优化 |
+| 日期选择器 | 组件库日期选择器或受维护的日期库 | 自研日期输入 |
+| 表格/数据网格 | 组件库数据网格或受维护的表格库 | 自研带排序的表格 |
+| 表单校验 | 组件库表单或受维护的校验库 | 自研校验函数 |
+| 图表 | 受维护的图表库 | 自研 SVG/canvas 绘制 |
+| 图标 | 库自带图标集或受维护的图标包 | 自研 SVG 图标 |
+| 状态管理 | 受维护的状态库 | 自研响应式 store |
+| 拖拽 | 受维护的拖拽库 | 自研拖拽处理器 |
+| 富文本编辑器 | 受维护的编辑器库 | 自研 contenteditable |
+| 文件上传 | 组件库上传或受维护的上传库 | 自研 XHR 上传 |
+| 轻提示/通知 | 组件库通知组件 | 自研 toast 组件 |
+| 模态框/对话框 | 组件库对话框组件 | 自研模态遮罩层 |
+| HTTP 客户端 | 技术栈受维护的 HTTP 客户端 | 自研 fetch 封装 |
+| 路由 | 技术栈官方路由 | 自研路由逻辑 |
+| 国际化（i18n） | 受维护的 i18n 库 | 自研翻译系统 |
+| 虚拟滚动 | 受维护的虚拟化库 | 自研滚动优化 |
 
-### Backend (Java/Spring Boot) | 后端（Java/Spring Boot）
+### 后端
 
-| 需求 | 应当使用 | 禁止自研 |
-|---|---|---|
-| ORM | `MyBatis-Plus` / `JPA/Hibernate` | 自研 JDBC 封装 |
-| 校验 | `jakarta.validation` / `hibernate-validator` | 自研注解校验器 |
-| 缓存 | `Spring Cache` + `Redis/Caffeine` | 自研 HashMap 缓存 |
-| 限流 | `bucket4j` / `resilience4j` | 自研计数器逻辑 |
-| 日志 | `SLF4J` + `Logback` | 自研日志框架 |
-| JSON | `Jackson` / `Gson` / `fastjson2` | 自研 JSON 解析器 |
-| Excel | `EasyExcel` / `Apache POI` | 自研 XLSX 写入器 |
-| API 文档 | `SpringDoc OpenAPI` / `Knife4j` | 自研 Swagger 配置 |
-| 任务调度 | `XXL-Job` / `Quartz` | 自研 cron 执行器 |
-| 安全 | `Spring Security` + `Sa-Token` | 自研认证过滤器 |
-| 代码生成 | `MyBatis-Plus Generator` | 自研模板引擎 |
-| 短信/邮件 | `aliyun-sms` / `javax.mail` | 自研 SMTP 客户端 |
-
-### Backend (Node.js/Express) | 后端（Node.js/Express）
+具体用哪个库跟随项目的语言与框架。对每个需求，使用框架模块或受维护的库，而不是自己造底层基础设施。
 
 | 需求 | 应当使用 | 禁止自研 |
 |---|---|---|
-| Web 框架 | `express` / `fastify` / `hono` | 自研 HTTP 服务器 |
-| ORM | `prisma` / `drizzle-orm` / `typeorm` | 自研 SQL 构造器 |
-| 校验 | `zod` / `joi` / `yup` | 自研校验器 |
-| 认证 | `lucia-auth` / `next-auth` / `passport` | 自研会话处理 |
-| 文件上传 | `multer` / `busboy` | 自研 multipart 解析器 |
-| 队列/任务 | `bullmq` / `bee-queue` | 自研任务队列 |
-| 实时通信 | `socket.io` / `ws` | 自研 WebSocket 处理器 |
-| 日志 | `pino` / `winston` | 自研 logger |
-| 测试 | `vitest` / `jest` + `supertest` | 自研测试运行器 |
-| 限流 | `express-rate-limit` | 自研速率计数器 |
+| 持久化/ORM | 技术栈的 ORM 或持久化库 | 自研底层驱动封装 |
+| 校验 | 框架的校验模块 | 自研/手写校验器 |
+| 缓存 | 框架缓存抽象 + 受维护的缓存存储 | 自研内存 map 缓存 |
+| 限流 | 受维护的弹性/限流库 | 自研计数器逻辑 |
+| 日志 | 框架日志门面 | 自研日志框架 |
+| 序列化 | 技术栈受维护的序列化库 | 自研解析器 |
+| 表格导出 | 受维护的电子表格库 | 自研文件格式写入器 |
+| API 文档 | 框架的文档工具 | 自研 spec 配置 |
+| 任务调度 | 受维护的调度器 | 自研 cron 执行器 |
+| 安全 | 框架安全模块 | 自研认证过滤器 |
+| 代码生成 | 受维护的生成器 | 自研模板引擎 |
+| 消息（短信/邮件） | 受维护的消息客户端 | 自研协议客户端 |
+| Web 框架 | 技术栈受维护的框架 | 自研 HTTP 服务器 |
+| 队列/任务 | 受维护的任务队列 | 自研任务队列 |
+| 实时通信 | 受维护的实时库 | 自研 socket 处理器 |
+| 测试 | 技术栈受维护的测试运行器 | 自研测试运行器 |
 
 ---
 
@@ -192,10 +185,10 @@ IT    BETTER   CUSTOM    HARDER
 ## Guardrails | 防护规则
 
 - **在写任何代码之前核查库目录** —— 而不是写完之后
-- **优先使用项目既有库** —— 若项目使用 Element Plus，禁止为单个组件引入 Ant Design
+- **优先使用项目既有库** —— 若项目已有一套组件库，禁止为单个组件引入第二套
 - **库版本必须锁定** —— 生产环境禁止使用 `^` 或 `~`，必须使用精确版本
 - **一个关注点只用一个库** —— 禁止在同一项目里使用 3 个不同的日期库
-- **禁止包装型库** —— 禁止把 `axios` 包一层毫无增益的「自研 HTTP 客户端」
+- **禁止包装型库** —— 禁止把受维护的 HTTP 客户端包一层毫无增益的「自研客户端」
 
 ## Maturity | 成熟度
 
@@ -203,7 +196,7 @@ IT    BETTER   CUSTOM    HARDER
 
 ## Evolution History | 进化记录
 
-- v1.0.0：初始创建 —— 覆盖 Vue、React、Java Spring Boot、Node.js 的库目录，以及 Token 成本分析
+- v1.0.0：初始创建 —— 技术中立的库目录，以及 Token 成本分析
 
 ---
 

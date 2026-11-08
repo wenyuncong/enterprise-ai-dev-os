@@ -256,7 +256,7 @@ cat pom.xml               # 依赖（Java）
 | **组件模式** | 页面如何组织（列表/单据/报表） | ai-component-standardizer |
 | **库选型** | 用了哪些库、为什么用 | ai-library-first |
 | **鉴权模式** | 认证/授权如何工作 | 后端技术类 Skill |
-| **数据库模式** | 表命名、索引、迁移策略 | mysql-best-practices |
+| **数据库模式** | 表命名、索引、迁移策略 | 与检测到的数据存储匹配的数据库技术 Skill |
 | **测试模式** | 测试如何组织、测了什么 | 测试类技术 Skill |
 
 ### Extraction Rules | 提炼规则

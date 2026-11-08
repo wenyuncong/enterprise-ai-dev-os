@@ -1,17 +1,17 @@
 # Benchmark Decision Template
 
-- Purpose: use this template when competitor research must feed `CMP-DES-01`, `PROD-DES-01`, module `-02 竞品基线对照稿`, or `GOV-PLAN-07B`.
-- Rule: keep official facts, inference, GERP decisions, and task conversion separate.
+- Purpose: use this template when competitor research must feed a downstream design package, product decision, baseline comparison, or governance plan.
+- Rule: keep official facts, inference, project decisions, and task conversion separate.
 
 ## 1. Scope Freeze
 
 | Item | Content |
 | --- | --- |
-| GERP target | |
+| Project target | |
 | Module / domain | |
 | Related parent task | |
 | Target user / version | |
-| Existing GERP docs checked | |
+| Existing project docs checked | |
 | Existing code/pages checked | |
 
 ## 2. Official Source Matrix
@@ -31,9 +31,9 @@
 | Reports / analytics |  |  |  |
 | Roles / versions |  |  |  |
 
-## 4. GERP Mapping and Decisions
+## 4. Project Mapping and Decisions
 
-| Finding | GERP current reality | Decision | Why |
+| Finding | Project current reality | Decision | Why |
 | --- | --- | --- | --- |
 |  |  | keep / simplify / hide / advanced / upgrade / postpone |  |
 

@@ -147,9 +147,9 @@ Re-reading: ai-single-truth-enforcer, ai-library-first
 
 ## Maturity | 成熟度
 
-**Stage**: effective — Battle-tested on GERP ERP project across 2000+ task dispatches.
+**Stage**: effective — Battle-tested in real enterprise delivery across 2000+ task dispatches.
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-rule-dispatcher, generalized for universal use
-- Source: GERP Enterprise ERP, 3+ months of daily dispatchesr
+- v1.0.0: Generalized from real enterprise routing evidence, universalized for portable use
+- Source: multiple months of daily dispatches in real enterprise delivery

@@ -20,7 +20,7 @@ description: "Enforce backend-owned truth, single source of business logic, no d
 
 强制一条根本规则：**前端展示，后端决策（frontend displays, backend decides）**。每一条业务逻辑、每一次校验、每一次计算、每一次数据变换都必须落在后端。前端是渲染层——仅此而已。
 
-**它解决的问题**：智能体频繁把业务逻辑写进 Vue 组件、在 JavaScript 里算价格、只在客户端校验表单数据，并把数据变换和渲染混在一起。这会造出脆弱的前端：同一套逻辑要跑到移动端、微信或 MCP 上时就崩。
+**它解决的问题**：智能体频繁把业务逻辑写进展示层组件、在客户端算金额、只在客户端校验表单数据，并把数据变换和渲染混在一起。这会造出脆弱的前端：同一套逻辑要跑到移动端、小程序或 MCP 上时就崩。
 
 ---
 
@@ -48,38 +48,38 @@ description: "Enforce backend-owned truth, single source of business logic, no d
 
 | 关注点 | 后端职责 | 前端禁止（Must NOT） |
 |---|---|---|
-| **计算（Calculations）** | 价格计算、税、折扣、合计 | `computed(() => price * quantity)` |
-| **校验（Validation）** | 业务规则（信用额度、库存检查、重复检测） | `if (amount > 10000) show error` |
-| **数据变换（Data transformation）** | 格式化、单位换算、区域化格式 | 带业务逻辑的 `date.toLocaleDateString()` |
-| **授权（Authorization）** | 权限检查、基于角色的访问 | `v-if="user.role === 'admin'"`（应使用后端返回的权限） |
-| **状态机（State machines）** | 订单状态、工作流流转 | `if (status === 'pending' && user pressed...)` |
-| **业务决策（Business decisions）** | 依据状态决定显示哪些字段 | 前端依据后端状态标记做条件渲染 |
+| **计算（Calculations）** | 金额计算、费率、调整、合计 | 用响应式派生值组合业务值 |
+| **校验（Validation）** | 业务规则（限额、可用性检查、重复检测） | 用客户端分支套用业务阈值 |
+| **数据变换（Data transformation）** | 格式化、单位换算、区域化格式 | 带业务逻辑的展示格式化调用 |
+| **授权（Authorization）** | 权限检查、基于角色的访问 | 依据本地角色字符串隐藏界面（应使用后端返回的权限） |
+| **状态机（State machines）** | 单据状态、工作流流转 | 用本地分支推进业务状态 |
+| **业务决策（Business decisions）** | 依据状态决定显示哪些字段 | 用本地计算标记而非后端状态标记做条件渲染 |
 
 ### How Frontend Should Work | 前端应当怎么写
 
-```javascript
-// ❌ WRONG: Business logic in Vue component
-const totalPrice = computed(() => {
-  const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const tax = subtotal * 0.13;
-  const discount = user.vipLevel === 'gold' ? 0.1 : 0;
-  return subtotal + tax - (subtotal * discount);
-});
+下面是技术中立的伪代码；映射到项目实际的前端框架。
 
-// ✅ CORRECT: Backend computes, frontend displays
-const totalPrice = ref(0);
-async function loadTotal() {
-  const resp = await api.calculateTotal({ items: items.value });
-  totalPrice.value = resp.total;  // Already computed by backend
-}
+```text
+// ❌ WRONG: 业务逻辑写在展示组件里
+total = 从 items 派生：
+  subtotal = sum(item.amount * item.qty)
+  rate = subtotal * 配置费率
+  adjustment = subtotal * 分层调整
+  return subtotal + rate - adjustment
+
+// ✅ CORRECT: 后端计算，前端展示
+total = 仅展示状态（初始为空）
+加载时：
+  resp = api.calculateTotal({ items })
+  total = resp.total   // 已由后端计算
 ```
 
 ### What Frontend MAY Do | 前端可以做什么
 
-- 依据后端返回的数据做 `v-if`（不是本地计算出来的条件）
-- 用 `v-for` 遍历后端返回的数组
-- 基础 UI 格式化：`toLocaleDateString()` 仅用于展示（**禁止**用于计算）
-- 事件绑定：`@click="save()"` → 把数据发给后端 API
+- 依据后端返回的数据做条件渲染（不是本地计算出来的条件）
+- 遍历后端返回的数组
+- 基础 UI 格式化：仅用于展示（**禁止**用于计算）
+- 事件绑定：把数据发给后端 API
 - 客户端路由与导航
 
 ---
@@ -100,10 +100,10 @@ Level 3: FRONTEND STATE ← Display copy only, never the authority
 
 | 违规 | 检出模式 |
 |---|---|
-| 前端计算价格 | `computed(() => ... * ...)` 中出现业务取值 |
-| 前端校验业务规则 | `.vue` 文件里出现 `if (quantity > stockLevel)` |
+| 前端计算金额 | 响应式派生值中组合业务取值 |
+| 前端校验业务规则 | 客户端分支把业务数量与阈值比较 |
 | 重复真相源 | 同一字段在 2 个以上组件中定义且逻辑不同 |
-| 前端在展示前改写数据 | `.map(item => ({ ...item, displayPrice: item.price * rate }))` |
+| 前端在展示前改写数据 | 变换条目时新增本地计算的业务值 |
 
 ---
 
@@ -133,26 +133,22 @@ Level 3: FRONTEND STATE ← Display copy only, never the authority
 
 ### Implementation Check | 实现检查
 
-```javascript
-// ❌ WRONG: Critical action with transient toast
-async function deleteAll() {
-  await api.deleteAll();
-  showToast('Deleted!');  // Gone in 3 seconds, user didn't confirm
-}
+```text
+// ❌ WRONG: 关键动作用瞬时轻提示
+on deleteAll:
+  await api.deleteAll()
+  showToast('Deleted!')   // 几秒后消失；用户从未确认
 
-// ✅ CORRECT: Critical action with modal confirmation
-async function deleteAll() {
-  const confirmed = await showModal({
+// ✅ CORRECT: 关键动作用模态确认
+on deleteAll:
+  confirmed = await showModal(
     title: 'Delete All Records',
     body: 'This action is irreversible. All data will be permanently deleted.',
-    confirmText: 'Delete All',
-    confirmStyle: 'danger',
-    cancelText: 'Cancel'
-  });
-  if (!confirmed) return;
-  await api.deleteAll();
-  showToast('All records deleted');
-}
+    confirmText: 'Delete All', danger style,
+    cancelText: 'Cancel')
+  if not confirmed: return
+  await api.deleteAll()
+  showToast('All records deleted')
 ```
 
 ---
@@ -161,8 +157,8 @@ async function deleteAll() {
 
 本 Skill 审计前端代码的以下各项：
 
-- [ ] 零个带业务公式的 `computed()`（价格、税、折扣、合计）
-- [ ] 零个带业务规则的 `if/else`（信用额度、库存检查、资格判定）
+- [ ] 零个带业务公式的响应式派生值（金额、费率、调整、合计）
+- [ ] 零个带业务规则的客户端分支（限额、可用性检查、资格判定）
 - [ ] 所有校验调用都走后端 API，而不是本地函数
 - [ ] 所有数据变换都在后端完成后再发给前端
 - [ ] 权限检查使用服务端返回的权限，而不是本地角色字符串

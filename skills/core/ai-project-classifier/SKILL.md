@@ -151,7 +151,7 @@ Classify every project at inception across four critical dimensions. This determ
 |---|---|
 | **Web only** | Standard SPA/SSR, REST API |
 | **Web + Mobile** | API-first design, mobile SDK consideration |
-| **Web + WeChat** | WeChat auth adapter, wx.request compatibility |
+| **Web + Mini-Program** | platform auth adapter, mini-program API compatibility |
 | **Web + MCP Server** | MCP Tools protocol alongside REST |
 | **All platforms** | Unified interface layer, transport adapters for each |
 
@@ -200,7 +200,7 @@ Every project start must produce this summary:
 - Steps: Full 13-step with all gates
 - DB: Schema-per-service
 - API: REST + GraphQL (OpenAPI-first)
-- Mobile: React Native with same API
+- Mobile: a mobile client reusing the same API
 ```
 
 ---

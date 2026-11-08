@@ -138,7 +138,7 @@ description: "Plan end-to-end project execution, task lines, batch sequencing, a
 
 ## Evolution History | 进化记录
 
-- v1.0.0：提炼自 gerp-chief-planner（原始 10KB）
+- v1.0.0：提炼自真实企业规划证据并通用化
 - v1.1.0：通用化，纳入通用项目规划模式
 
 ---

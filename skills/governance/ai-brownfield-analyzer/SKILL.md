@@ -75,6 +75,7 @@ ls -la                    # Root structure
 git log --oneline -20     # Recent activity
 cat package.json          # Dependencies (Node)
 cat pom.xml               # Dependencies (Java)
+# or the equivalent dependency manifest for the project's actual stack
 ```
 
 **Output**: One-paragraph summary of project type, size, activity level.
@@ -229,7 +230,7 @@ Full details: methodology/09_老项目改造方法论.md §5b
 | **Component patterns** | How pages are structured (list/form/report) | ai-component-standardizer |
 | **Library choices** | What libraries are used and why | ai-library-first |
 | **Auth pattern** | How authentication/authorization works | Backend tech skills |
-| **Database patterns** | Table naming, indexing, migration strategy | mysql-best-practices |
+| **Database patterns** | Table naming, indexing, migration strategy | The database tech skill matching the detected data store |
 | **Testing patterns** | How tests are organized, what's tested | Test tech skills |
 
 ### Extraction Rules

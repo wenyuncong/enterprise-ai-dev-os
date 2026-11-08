@@ -1,12 +1,12 @@
 # 领域模块分解参考 | Domain Module Decomposition Reference
 
 > **源文件**：docs/_templates/业务流程全案/DOMAIN_MODULE_REFERENCE.md
-> **源版本**：未标注
-> **译文日期**：2026-09-14
+> **源版本**：1.0.0
+> **译文日期**：2026-11-08
 > **术语依据**：00_导读/02_术语对照表.md
 > **翻译口径**：全量对应；英文标识符、命令、代码块、门禁代号原样保留。
 
-> **提炼自**：GERP Enterprise ERP —— 6 大类、24 个领域模块
+> **通用化自**：真实企业交付证据——通用职责类别，项目与业务名称已移除
 > **适用时机**：为新企业级项目设计原子服务（atomic service）边界时
 
 ---
@@ -15,51 +15,32 @@
 
 1. **一个模块 = 一项业务能力** —— 不是一张表，也不是一个页面
 2. **最多 3 个依赖** —— 任何模块若依赖超过 3 个其他模块，就应当拆分
-3. **数据归属唯一** —— 每张表只属于一个模块
+3. **数据归属唯一** —— 每个数据集合只属于一个模块
 4. **API 是唯一契约** —— 模块之间只通过已定义的 API 通信
 
 ---
 
-## 参考模块地图 | Reference Module Map
+## 参考类别地图 | Reference Category Map
+
+把系统自己的模块映射到这些通用职责类别，而非假设一份固定模块清单：
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     FOUNDATION LAYER                         │
-│  ┌──────────┐  ┌──────────────┐  ┌──────────┐              │
-│  │   base   │  │  masterdata  │  │   auth   │              │
-│  │ (system  │  │  (product,   │  │  (user,  │              │
-│  │  config) │  │  customer,   │  │  role,   │              │
-│  │          │  │  supplier)   │  │  tenant) │              │
-│  └──────────┘  └──────────────┘  └──────────┘              │
+│  FOUNDATION — shared base, master/reference data, identity  │
 ├─────────────────────────────────────────────────────────────┤
-│                     CORE BUSINESS LAYER                      │
-│  ┌──────┐  ┌──────────┐  ┌─────┐  ┌────────────┐  ┌─────┐ │
-│  │ sale │  │ purchase │  │ inv │  │ production │  │ wms │ │
-│  └──────┘  └──────────┘  └─────┘  └────────────┘  └─────┘ │
+│  CORE TRANSACTION — primary flows, asset state, execution   │
 ├─────────────────────────────────────────────────────────────┤
-│                     FINANCE LAYER                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐                  │
-│  │ finance  │  │ payment  │  │ capital  │                  │
-│  └──────────┘  └──────────┘  └──────────┘                  │
+│  FINANCE — accounting, settlement, funds                    │
 ├─────────────────────────────────────────────────────────────┤
-│                     EXTENDED BUSINESS LAYER                  │
-│  ┌─────┐  ┌──────┐  ┌─────┐  ┌─────┐  ┌─────┐  ┌───────┐ │
-│  │ crm │  │ mall │  │ b2b │  │ scm │  │ tms │  │ trade │ │
-│  └─────┘  └──────┘  └─────┘  └─────┘  └─────┘  └───────┘ │
+│  EXTENDED BUSINESS — channels, supply coordination, trade   │
 ├─────────────────────────────────────────────────────────────┤
-│                     OPERATIONS LAYER                         │
-│  ┌────────┐  ┌───────┐  ┌────┐  ┌─────┐  ┌─────┐          │
-│  │ report │  │ print │  │ oa │  │ mes │  │ qms │          │
-│  └────────┘  └───────┘  └────┘  └─────┘  └─────┘          │
+│  OPERATIONS — reporting, output, collaboration, quality     │
 ├─────────────────────────────────────────────────────────────┤
-│                     PLATFORM LAYER                           │
-│  ┌──────┐  ┌───────┐  ┌────┐                                │
-│  │ saas │  │ agent │  │ ai │                                │
-│  └──────┘  └───────┘  └────┘                                │
+│  PLATFORM — provisioning, agent capabilities, automation    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-> **层级对照**：FOUNDATION LAYER = 基座层；CORE BUSINESS LAYER = 核心业务层；FINANCE LAYER = 财务层；EXTENDED BUSINESS LAYER = 扩展业务层；OPERATIONS LAYER = 运营层；PLATFORM LAYER = 平台层。图中模块名（`base`、`masterdata`、`sale`、`purchase` 等）是模块标识符，原样保留。
+> **层级对照**：FOUNDATION = 基座层；CORE TRANSACTION = 核心交易层；FINANCE = 财务层；EXTENDED BUSINESS = 扩展业务层；OPERATIONS = 运营层；PLATFORM = 平台层。
 
 ---
 
@@ -68,21 +49,14 @@
 | 规则 | 依据 |
 |---|---|
 | 基座模块不依赖任何模块 | 它们是依赖树的根 |
-| 核心业务依赖基座 | sale → masterdata（需要商品 / 客户数据） |
-| 财务依赖核心业务 | finance → sale（需要发票数据） |
-| 扩展业务依赖核心 | crm → sale（需要客户订单历史） |
-| 运营依赖上述全部 | report 读取所有模块 |
-| 平台依赖上述全部 | saas 管理全部租户订阅 |
+| 核心交易依赖基座 | 交易流程需要参考数据与身份数据 |
+| 财务依赖核心交易 | 核算需要交易证据 |
+| 扩展业务依赖核心 | 渠道需要交易历史 |
+| 运营依赖上述全部 | 报表跨模块读取 |
+| 平台依赖上述全部 | 预置治理全部租户 |
 
-**反模式（anti-pattern）**：`sale → payment`（循环依赖）。修复：两者都依赖同一条事件总线。
-
----
-
-*最后更新：2026-06-17 | 来源：GERP Enterprise ERP*
+**反模式（anti-pattern）**：两个模块之间的循环依赖。修复：两者都依赖同一条事件总线。
 
 ---
 
-## 译注 | Translation Notes
-
-- 源文件的 ASCII 模块图为代码块，按口径原样保留；其层级名称的中文对照以引用块补在代码块之后。
-- 源文件第 3 行原文为 "Extracted from: GERP Enterprise ERP"，不含任何本机路径。
+*最后更新：2026-11-08 | 状态：通用——项目与业务名称已移除*

@@ -168,7 +168,7 @@ description: "Research competitors, market references, product positioning, benc
 
 ## Evolution History | 进化记录
 
-- v1.0.0：从 gerp-competitor-analyst 提炼
+- v1.0.0：从真实企业对标证据提炼并通用化
 - v1.1.0：通用化，形成通用对标框架
 
 ---

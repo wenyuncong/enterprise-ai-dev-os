@@ -15,9 +15,9 @@ DECLARATION = CONTRACT ONLY (schema, meta, relations). EXECUTOR = ALL BUSINESS L
 
 ## Purpose
 
-Define and enforce AI-native architecture patterns: **atomic services + atomic orchestration + unified interfaces**. This skill ensures that every project built with this methodology can evolve from a single web frontend into a multi-platform system (web, mobile app, WeChat mini-program, MCP server, API) without rewriting business logic.
+Define and enforce AI-native architecture patterns: **atomic services + atomic orchestration + unified interfaces**. This skill ensures that every project built with this methodology can evolve from a single web frontend into a multi-platform system (web, mobile app, mini-program, MCP server, API) without rewriting business logic.
 
-**Problem it solves**: Traditional development creates tight coupling between business logic and presentation layer. When you need the same feature on a new platform (mobile, WeChat, MCP), you rewrite it. AI-native architecture prevents this by separating concerns from day one.
+**Problem it solves**: Traditional development creates tight coupling between business logic and presentation layer. When you need the same feature on a new platform (mobile, mini-program, MCP), you rewrite it. AI-native architecture prevents this by separating concerns from day one.
 
 ---
 
@@ -26,7 +26,7 @@ Define and enforce AI-native architecture patterns: **atomic services + atomic o
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                  UNIFIED INTERFACES                      │
-│   REST · GraphQL · MCP · WebSocket · gRPC · WeChat API  │
+│   REST · GraphQL · MCP · WebSocket · gRPC · Webhook     │
 ├─────────────────────────────────────────────────────────┤
 │               ATOMIC ORCHESTRATION                       │
 │        Workflow Engine · Event Bus · Saga Pattern        │
@@ -63,7 +63,7 @@ atomic-service/
 | ❌ Anti-Pattern | ✅ AI-Native Pattern |
 |---|---|
 | One giant "UserService" with 50 methods | `auth-service` + `profile-service` + `permission-service` |
-| Business logic in Vue components | Business logic in `core/`, Vue components call API only |
+| Business logic in presentation-layer components | Business logic in the service core, presentation components call the API only |
 | Direct DB queries from frontend | All DB access through atomic service API |
 | "Utils" folder with mixed concerns | Each utility belongs to a specific atomic service |
 | One API endpoint that does 5 things | One endpoint per atomic operation |
@@ -81,17 +81,17 @@ Orchestration composes atomic services into business workflows without coupling 
 |---|---|---|
 | **Direct Call** | Simple 1:1 service dependency | `task-service` → `notify-service` |
 | **Event-Driven** | Loose coupling, fire-and-forget | `task-completed` → `audit-log` + `stats-update` |
-| **Saga (Choreography)** | Distributed transaction with compensation | `create-order` → `reserve-inventory` → `charge-payment` (with rollback) |
+| **Saga (Choreography)** | Distributed transaction with compensation | `create-commitment` -> `reserve-capacity` -> `settle` (with rollback) |
 | **Workflow Engine** | Complex multi-step business process | Approval chain: submit → review → approve → notify |
 | **API Gateway** | Client-facing aggregation | Mobile app calls one endpoint, gateway fans out to N services |
 
 ### Orchestration Rule
 **Business workflows are compositions, not monoliths.**
 ```
-❌ Monolith:        OrderService.processOrder() → does everything in one class
-✅ AI-Native:       order-created event → inventory-service.reserve()
-                    → payment-service.charge()
-                    → notify-service.send()
+❌ Monolith:        one service does everything in a single class
+✅ AI-Native:       commitment-created event -> capacity-service.reserve()
+                    -> settlement-service.charge()
+                    -> notify-service.send()
 ```
 
 ---
@@ -106,8 +106,8 @@ The same atomic service exposes its business logic through multiple transport pr
                     ┌──────────────┐
                     │  ATOMIC      │
 Web Browser ──────→│  SERVICE     │
-React Native ─────→│              │
-WeChat MP ────────→│  core/       │──────→ Database
+Mobile Client ────→│              │
+Mini-Program ─────→│  core/       │──────→ Database
 MCP Client ───────→│  business    │
 REST Client ──────→│  logic       │
 GraphQL Client ───→│              │
@@ -118,29 +118,29 @@ GraphQL Client ───→│              │
 
 | Platform | Primary Interface | Notes |
 |---|---|---|
-| Web SPA (Vue/React) | REST + WebSocket | Standard JSON API, real-time via WS |
-| Mobile App (Flutter/RN) | REST + WebSocket | Same API as web, different UI |
-| WeChat Mini-Program | REST (wx.request) | Same API, WeChat auth adapter |
+| Web SPA | REST + WebSocket | Standard JSON API, real-time via WS |
+| Mobile App | REST + WebSocket | Same API as web, different UI |
+| Mini-Program | REST | Same API, platform auth adapter |
 | MCP Server | MCP Tools Protocol | Expose same logic as MCP tools for AI agents |
 | Third-party Integration | REST + Webhook | Public API with rate limiting |
 | Admin/Internal Tools | GraphQL | Flexible querying for admin dashboards |
 
 
-### Real-World Platform Matrix (Extracted from GERP)
+### Multi-Client Platform Matrix (General Template)
 
-GERP supports 7 platforms from a single backend. This is the template:
+A single backend can serve many client types. This is the portable template:
 
-| Platform | Code | Type | Shared Components |
-|---|---|---|---|
-| Web Admin | `gerp-web` | Vue SPA (micro-frontend) | `gerp-common` (components, locales, utils) |
-| Mobile | `gerp-mobile` | Flutter | Shared API layer |
-| WeChat Mini-Program | `gerp-mall-miniprogram` | 微信小程序 | Shared API layer |
-| Agent Web | `gerp-agent-web` | Vue SPA | `gerp-common` |
-| Admin Web | `gerp-admin-web` | Vue SPA | `gerp-common` |
-| Desktop | `gerp-desktop` | Electron | Shared API layer |
-| Root Config | `root-config` | Micro-frontend orchestrator | N/A (orchestrates others) |
+| Client Type | Role | Shared Layer |
+|---|---|---|
+| Web administration client | Data-heavy SPA | Shared presentation assets (components, locales, utils) |
+| Mobile client | Native/portable client | Shared API layer |
+| Hosted mini-program client | Platform-hosted lightweight client | Shared API layer |
+| Agent-facing web client | Focused operational SPA | Shared presentation assets |
+| Separate admin web client | Privileged administration SPA | Shared presentation assets |
+| Desktop shell client | Installed shell | Shared API layer |
+| Client orchestrator | Composes other clients | N/A (orchestrates others) |
 
-**Key pattern**: All platforms share the same REST API. The difference is only in the presentation layer.
+**Key pattern**: All clients share the same service API. The difference is only in the presentation layer; no client owns business logic.
 
 ---
 
@@ -228,20 +228,20 @@ Web, App, AI, MCP, OpenAPI, desktop, and connectors are adapters over the same a
 
 ---
 
-### Domain Module Decomposition (Extracted from GERP)
+### Domain Module Decomposition Pattern
 
-A full ERP breaks down into these domain modules. Use as a reference for domain-driven design:
+A large enterprise system can be decomposed along generic responsibility categories. Map the system's own modules to these categories rather than assuming a fixed module list:
 
-| Category | Modules |
+| Category | Generic responsibility |
 |---|---|
-| **Foundation** | base, masterdata, auth |
-| **Core Business** | sale, purchase, inv (inventory), production, wms (warehouse) |
-| **Finance** | finance, payment, capital |
-| **Extended Business** | crm, mall, b2b, scm (supply chain), tms (transport), trade |
-| **Operations** | report, print, oa, mes, qms |
-| **Platform** | saas, agent, ai |
+| **Foundation** | shared base, master/reference data, identity and access |
+| **Core transaction** | primary transactional flows, resource/asset state, execution |
+| **Finance** | accounting, settlement, funds |
+| **Extended business** | partner channels, supply coordination, external trade |
+| **Operations** | reporting, output, collaboration, quality and execution systems |
+| **Platform** | multi-tenant provisioning, agent capabilities, AI/automation |
 
-**Decomposition Rule**: Each module = one atomic service. No module should depend on more than 3 other modules.
+**Decomposition Rule**: Each bounded module = one atomic service. No module should depend on more than 3 other modules.
 
 ---
 
@@ -253,7 +253,7 @@ paths:
   /tasks:
     get:
       operationId: listTasks
-      summary: List tasks (used by web, mobile, WeChat, MCP)
+      summary: List tasks (used by web, mobile, mini-program, MCP)
     post:
       operationId: createTask
       summary: Create task (used by all platforms)
@@ -278,7 +278,7 @@ paths:
 **Platforms**: Web + Mobile + API
 
 ### Archetype C: Multi-Platform (Enterprise)
-**When**: Web + App + WeChat + MCP + Third-party API
+**When**: Web + App + Mini-Program + MCP + Third-party API
 **Architecture**: Atomic services + API Gateway + Transport Adapters
 **Platforms**: All of the above
 
@@ -300,7 +300,7 @@ paths:
 
 ## Guardrails | 防护规则
 
-- **Never put business logic in the presentation layer** (Vue components, Flutter widgets)
+- **Never put business logic in the presentation layer** (web components, mobile widgets)
 - **Define the interface before implementing** (OpenAPI/GraphQL schema first)
 - **One atomic service = one explicit data boundary** — schema-per-service is appropriate only when independent deployment and isolation justify its operational cost
 - **Transport is a detail** — the core business logic doesn't know if it's called via REST, MCP, or WebSocket

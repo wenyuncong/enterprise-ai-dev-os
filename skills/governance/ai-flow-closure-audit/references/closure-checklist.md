@@ -8,15 +8,15 @@
 - relevant process document under `{PROJECT_ROOT}/docs/业务流程全案/`
 - latest verification report under `{PROJECT_ROOT}/docs/测试验收报告/`
 
-## Typical chain categories
+## Typical chain shapes (generic; map the project's own flows onto these)
 
-- O2C: order to cash
-- S2P: source to pay
-- R2R: record to report
-- L2C: lead to cash
-- production fulfillment
-- WMS / TMS execution
-- SaaS subscription lifecycle
+- primary transaction chain: request -> execution -> document -> settlement
+- procurement-style chain: request -> order -> receipt -> settlement
+- record/report chain: transaction -> ledger -> analytical report
+- opportunity chain: lead -> opportunity -> quote -> commitment
+- fulfillment chain: commitment -> preparation -> shipment
+- operations execution
+- subscription lifecycle
 
 ## Audit checklist
 

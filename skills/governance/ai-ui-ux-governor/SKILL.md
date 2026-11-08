@@ -149,8 +149,8 @@ Every user-facing notification MUST match its severity level. Wrong severity des
 | ❌ Wrong | Severity Mismatch | ✅ Correct |
 |---|---|---|
 | showToast('Deleted') after delete all | P0 action → P2 notification | Modal: "Delete 500 records? This cannot be undone." |
-| ElMessage.error('Save failed') that disappears | P1 action → P2 notification | Persistent banner: "Save failed. [Retry] [Details]" |
-| ElMessageBox.confirm('Field changed') on every input | P2 action → P0 notification | Silent save or no confirmation needed |
+| A disappearing toast showing "Save failed" | P1 action → P2 notification | Persistent banner: "Save failed. [Retry] [Details]" |
+| A confirm dialog on every input for "Field changed" | P2 action → P0 notification | Silent save or no confirmation needed |
 | Flash-toast on form validation error | P1 → P2 | Inline error under the field, stays until fixed |
 
 ### Implementation Contract
@@ -193,6 +193,6 @@ interface NotificationAPI {
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-ui-ux (19KB original + 2 references)
-- Source: Enterprise ERP UI/UX governance across 50+ page types
+- v1.0.0: Generalized from real enterprise UI/UX governance evidence (project-specific names removed)
+- Source: enterprise UI/UX governance across 50+ page types
 

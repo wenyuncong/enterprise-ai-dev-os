@@ -161,7 +161,7 @@ Before merging any foundation change, verify:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-stable-foundation-governor (65KB original)
+- v1.0.0: Generalized from real enterprise foundation governance evidence (project-specific names removed)
 - v1.1.0: Generalized to universal enterprise foundation patterns
 - v1.2.0: Added a fail-closed cross-environment migration consistency gate,
   including manifest, checksum, execution history, post-migration checks, and

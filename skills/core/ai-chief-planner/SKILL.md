@@ -126,5 +126,5 @@ Before marking any task batch as closed, verify:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-chief-planner (10KB original)
+- v1.0.0: Generalized from real enterprise planning evidence (project-specific names removed)
 - v1.1.0: Generalized with universal project planning patterns

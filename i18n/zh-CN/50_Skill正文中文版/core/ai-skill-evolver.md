@@ -143,6 +143,22 @@ ai-skill-evolver 在检测到以下情况时，应当自动调用 ai-skill-gover
 - 某个 Skill 超过 3 个月未更新
 - 某个 Skill 在最近 50 个任务中被加载 0 次
 
+### Executable Writeback Driver | 可执行回流驱动
+
+上述触发只有在有东西真正运行它们时才有效。因此，回流缺口由一个可执行、可调度的检查来度量，而不是靠人记忆：
+
+```text
+py scripts/py/reconcile_writeback.py check --practice-root <practice-project>
+```
+
+该检查把实践项目自上次收口点以来的提交与方法论最后更新时间对比，当回流逾期时以非零退出码返回。在通用化证据真正回写之后，记录新的基准点，下次运行只度量增量活动：
+
+```text
+py scripts/py/reconcile_writeback.py mark-resolved --practice-root <practice-project>
+```
+
+实践路径始终显式传入，本地状态（真实路径、提交哈希）留在可移植发布包之外。调度器应按固定节奏调用 `check`；非零结果是运行本技能 Repair-To-Skill 循环的信号，而不是循环已自行运行的声明。
+
 ---
 
 ## Guardrails | 防护规则
@@ -155,12 +171,12 @@ ai-skill-evolver 在检测到以下情况时，应当自动调用 ai-skill-gover
 
 ## Maturity | 成熟度
 
-**Stage**：effective（有效）—— 已在 GERP ERP 上实战检验，且有文档化的进化周期。
+**Stage**：effective（有效）—— 已在真实企业交付中实战检验，且有文档化的进化周期。
 
 ## Evolution History | 进化记录
 
-- v1.0.0：从 gerp-skill-evolver 提炼，泛化为通用能力
-- Source：GERP Enterprise ERP, Continuous Repair-To-Skill loop validatedr
+- v1.0.0：从真实技能进化证据提炼，泛化为通用能力
+- Source：真实企业交付中验证的持续 Repair-To-Skill 闭环
 
 ---
 

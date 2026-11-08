@@ -126,7 +126,7 @@
 - 每一步之后都要验证
 
 ### 为什么单独成层 | Why It's Separate
-执行类 Skill 是**领域专用**的——Vue 开发 Skill 不应包含 Docker 部署规则。每个技术 Skill 都自包含，可独立加载。
+执行类 Skill 是**领域专用**的——前端技能不应包含部署规则。每个技术 Skill 都自包含，可独立加载。
 
 ### Skill 如何被选中 | How Skills Are Selected
 路由者依据任务类型选择执行 Skill：

@@ -1,8 +1,8 @@
-# core 层 16 个 Skill 中文详解 | Core Layer Skills
+# core 层 18 个 Skill 中文详解 | Core Layer Skills
 
 > **源文件**：skills/core/*/SKILL.md、skills/SKILL_MANIFEST.json
-> **源版本**：SKILL_MANIFEST.json updatedAt 2026-07-28
-> **译文日期**：2026-09-14
+> **源版本**：SKILL_MANIFEST.json updatedAt 2026-11-08
+> **译文日期**：2026-11-08
 > **术语依据**：00_导读/02_术语对照表.md
 > **翻译口径**：Skill 名、路径、门禁代号保持英文；本文件为中文摘要，不是正文全文（正文中文版见 50_Skill正文中文版/core/）。
 
@@ -13,6 +13,7 @@
 | Skill | 层 | 中文名 | 一句话职责 | 何时加载 |
 |---|---|---|---|---|
 | `ai-5s-delivery-governor` | core | 5S 交付治理 | 用范围（Scope）/说明（Specify）/实现（Ship）/保障（Safeguard）/销售放行（Sell）生命周期治理版本化交付、分支路由与发布收口 | 变更版本化产品、共享服务、schema、权限、发布物或部署目标时 |
+| `ai-architecture-knowledge-and-delivery` | core | 架构知识与交付 | 把存量项目扫描为语言中立的架构 IR、生成 13 步可适用计划与任务 DAG，发布有界静态知识中心 | 存量项目接入后、规划实现前，或依赖边界未记录时 |
 | `ai-architect-governor` | core | 跨域架构治理 | 治理跨域架构决策、领域边界、真相归属与 ADR | 任务改动架构、跨模块跨平台或需要架构决策记录时 |
 | `ai-atomic-architect` | core | AI 原生原子架构 | 定义 `atomic service` + `atomic orchestration` + 统一接口，并以 `aggregate interface`/`command gateway` 收口 | 设计服务拆分、后端真相归属、可复用业务命令或 Host 客户端时 |
 | `ai-chief-planner` | core | 端到端项目规划与收口 | 做项目级规划、依赖调度、进度跟踪与收口验证 | 需要项目级协调、多步交付、待办台账治理或最终收口规划时 |
@@ -21,6 +22,7 @@
 | `ai-foundation-governor` | core | 稳定基座与唯一真相治理 | 治理版本控制、权限、菜单路由、参数、Schema 迁移等共享基座 | 改动基座行为或共享项目基础设施时 |
 | `ai-library-first` | core | 库优先开发治理 | 强制写自研代码前先核查成熟库、框架内建能力与项目既有工具 | 任何新写逻辑、解析器、UI 组件、引擎、集成或脚本之前 |
 | `ai-multi-agent-orchestration` | core | 多智能体编排 | 按领域拆分并把依赖矩阵、契约优先集成、验收边界分配给多个智能体 | 任务跨多模块/多领域，或要把工作扇出给多个智能体时 |
+| `ai-project-onboarding-and-skill-integration` | core | 受控方法论接入 | 探测技术画像、保留项目资产、隔离外部候选、治理兼容性并生成增量知识索引 | 拷贝方法论、导入技能或建立项目知识库之前 |
 | `ai-product-directed-delivery` | core | 产品主导的全 AI 交付 | 划定 `product owner` 与 AI 智能体的职责边界，给出十二步交付地图与双链契约 | 产品主导的企业级交付、非程序员主导开发或端到端功能交付 |
 | `ai-project-classifier` | core | 项目分类器 | 按来源/质量目标/部署目标/规模四维分类，确定方法论路径与 Skill 集 | 项目启动、接入新代码库或范围发生重大变化时（永远最先运行） |
 | `ai-rule-dispatcher` | core | 规则与任务路由 | 把任务路由到正确规则、Skill、首要文档、前置事实检查与安全执行顺序 | 每个非平凡任务开始时，特别是请求跨端跨域或语义含糊时 |
@@ -112,7 +114,7 @@
 - **门禁与资格**：本 Skill 不使用 `L0`–`L3`/`Q0`–`Q3` 代号；它定义能力成熟度链 `registered`/`configured`/`authorized`/`provider-covered`/`runtime-executable`/`business-closed`。规则：低阶状态不得谎报为高阶状态；注册表或目录中存在只证明 `registered`，看得见的按钮什么后续状态都不证明；被推迟/阻断/不支持的动作必须显式不可执行并给出稳定原因；同一条链适用于 Web、App、AI、MCP、OpenAPI 与后台任务适配器，适配器不得提升能力成熟度。
 - **必交产出**：接口定义文件（如 `api/task-service.openapi.yaml`，先于实现）；`aggregate interface` 与 `command gateway` 契约；ADR 或架构说明（与 `ai-architect-governor` 衔接）。源文件未明确其他强制路径。
 - **防护规则**（`## Guardrails | 防护规则`）：
-  1. **禁止把业务逻辑放进展示层**（Vue 组件、Flutter widget）。
+  1. **禁止把业务逻辑放进展示层**（前端组件、移动客户端组件）。
   2. **必须先定义接口再实现**（OpenAPI/GraphQL schema 先行）。
   3. **一个 `atomic service` = 一个显式数据边界**；schema-per-service 只有在独立部署与隔离足以抵偿运维成本时才是恰当的。
   4. **传输只是细节** —— 核心业务逻辑不知道调用方是 REST、MCP 还是 WebSocket。
@@ -240,7 +242,7 @@
 - **核心规则**：创建任何新东西之前必须依次：1）搜索既有库/组件；2）检查既有物能否扩展；3）只有都不匹配时才新建；4）把新增登记进共享目录；5）记录复用决策。**禁止在没有明确理由的情况下重复造轮子。**最高指令：**永远不要从零写一个库已经实现的东西**（`Check → Choose → Install → Configure → Use` 约 10 token，对比从零重写 5000+ token）。
 - **关键流程/检查点**：
   1. 决策流程：标准库是否存在？成熟吗？→ 直接使用；不成熟 → 找更好的替代；不存在 → 判断是否真novel → 是则自研，否则继续更努力地搜索（你多半漏了一个）。
-  2. 标准库目录按栈给出「该用这个 / 永远别从零写」对照表：前端（Vue/React：日期选择、表格/DataGrid、表单校验、图表、图标、状态管理、拖拽、富文本、上传、Toast/通知、模态框、HTTP 客户端、路由、i18n、虚拟滚动）、后端 Java/Spring Boot（ORM、校验、缓存、限流、日志、JSON、Excel、API 文档、任务调度、安全、代码生成、短信/邮件）、后端 Node.js/Express（Web 框架、ORM、校验、认证、上传、队列、实时、日志、测试、限流）。
+  2. 标准库目录技术中立地给出「该用这个 / 永远别从零写」对照表：前端（日期选择、表格/DataGrid、表单校验、图表、图标、状态管理、拖拽、富文本、上传、通知、模态框、HTTP 客户端、路由、i18n、虚拟滚动）、后端（持久化、校验、缓存、限流、日志、序列化、表格导出、API 文档、任务调度、安全、代码生成、消息、Web 框架、队列、实时、测试）。
   3. Token 成本分析：自研数据表格约 8000 token 对比库约 200 token（省约 97.5%），富文本约 15000 对比约 300（约 98%），平均省约 96%，且库版本更稳定并有文档。
   4. 审计：对任何 PR 或已完成任务跑四步检查 —— 列出自研工具函数/模块；逐个判断标准库是否已存在；存在则**拒绝：替换为库**；不存在则记录为何必须自研。
   5. 与 `ai-chief-planner`（Phase 1 库目录核查）、`ai-task-decomposer`（每批次列出所需库）、`ai-tool-bootstrapper`（自动安装声明的库依赖）、`ai-skill-evolver`（把新发现的库加入目录）集成。
@@ -331,7 +333,7 @@
 - **关键流程/检查点**：
   1. Dimension 1 项目来源：老项目（brownfield，有 `package.json`、`.git`、数据库、既有结构）→ 先读后写、提炼既有模式而非强加新约定、增量升级方法论层、**禁止破坏既有功能**；新项目（greenfield，空目录）→ 先按维度 2–4 分类，再按分类搭脚手架，从 Step 1 起走完整方法论。
   2. Dimension 2 质量目标：Rapid Prototype（MVP/演示/概念验证，< 1 周，1–2 人；单体仓库可接受、最小测试、UI 先行；只加载 core 类 Skill；走精简 13 步、跳过深度架构与 ADR；Archetype A）；AI-Native（真实产品、用户会依赖、> 1 月、2–5 人；第一天就有原子服务边界、完整测试覆盖、接口先行、全量方法论文档、多平台就绪；加载全部 core + governance；走完整 13 步含全部门禁；Archetype B）；Enterprise（多租户、合规、SLA、5+ 人团队；完整原子服务架构与事件驱动编排、多区域部署、安全审计与渗透测试、HA/DR、完整 CI/CD 与部署门禁；加载全部 Skill；完整 13 步 + 部署门禁 + 安全扫描；Archetype C）。
-  3. Dimension 3 部署目标：Web only / Web + Mobile / Web + WeChat / Web + MCP Server / All platforms 各自影响接口策略。规则：**永远按 Web + 1 个额外目标设计** —— 前期多花 10%，后期省下 90% 重写成本。
+  3. Dimension 3 部署目标：Web only / Web + Mobile / Web + Mini-Program / Web + MCP Server / All platforms 各自影响接口策略。规则：**永远按 Web + 1 个额外目标设计** —— 前期多花 10%，后期省下 90% 重写成本。
   4. Dimension 4 规模：Monolith/Modular Monolith（< 10K 用户、< 50 接口、单团队；任一模块核心逻辑超过 500 行再拆）；Microservices（> 10K 用户、> 50 接口、多团队；要求投入监控、服务网格、分布式追踪）。判定规则：团队 1 人且接口 < 20 → Monolith；团队 ≥ 3 人或接口 ≥ 50 → Atomic Services；团队 ≥ 5 且需要合规 → Enterprise Microservices。
   5. 分类输出：每次项目启动必须产出分类摘要表（Origin / Quality / Deploy Targets / Scale + Rationale）与 Implications（架构、Skill、步骤、DB、API、移动端）。
   6. 集成点：`ai-chief-planner` Phase 1 在任何规划前运行分类器；`ai-rule-dispatcher` 用分类选 Skill 集；`ai-architect-governor` 用分类选 archetype；`ai-atomic-architect` 按质量目标与规模落地。
@@ -478,6 +480,40 @@
 
 ---
 
+## 17. `ai-project-onboarding-and-skill-integration` — 受控方法论接入
+
+- **源文件**：`skills/core/ai-project-onboarding-and-skill-integration/SKILL.md`
+- **成熟度**：verified
+- **用途**：把方法论安全接入新项目或存量项目，覆盖技术画像探测、项目自有资产保护、外部技能隔离暂存、候选兼容性治理与增量知识索引。
+- **触发条件**：拷贝方法论/规则/技能/脚本/模板进存量项目之前；为探测到的语言、框架、数据库或部署目标选技术栈技能时；考虑代码平台托管的技能或参考实现时；需要可检索的技术知识索引时。
+- **核心规则**：外部技能、脚本与参考材料在来源、许可证、版本、兼容性与结构被记录并评审前一律不可信。默认禁止覆盖既有项目资产，禁止直接激活代码平台候选，禁止把知识索引当运行时业务真相。
+- **关键流程/检查点**：
+  1. 接入链路：`Detect -> Discover -> Evaluate -> Plan -> Stage -> Merge -> Govern -> Index -> Verify`。
+  2. 先运行工具发现与技术画像（`discover_tools.py`、`project_onboarding.py inspect`），不仅凭文件名臆造技术栈。
+  3. 外部候选须具备显式来源、锁定 ref 与提交、许可证决策、兼容性评估，并排除密钥/二进制/安装钩子。
+  4. 拷贝前用 `preflight` 生成非变更计划，标注 `add/same/conflict`；冲突需显式决策与回滚路径。
+  5. 候选只进 `skills/candidates/`，暂存不等于激活；治理通过且所有者决策后才移入并登记。
+  6. 知识索引只支持发现，不是授权、回读、命令提供者或运行时证据；增量刷新而非每会话全量。
+- **防护规则**：禁止用 `-Force`/递归删除解决冲突；禁止因探测到语言就导入该平台全部技能；禁止治理通过前让候选可调用；禁止为让安装看起来完整而覆盖项目自有规则；禁止自动删除过时候选（应隔离）。
+
+---
+
+## 18. `ai-architecture-knowledge-and-delivery` — 架构知识与交付
+
+- **源文件**：`skills/core/ai-architecture-knowledge-and-delivery/SKILL.md`
+- **成熟度**：verified
+- **用途**：把存量项目扫描为语言中立的架构 IR，生成可适用的 13 步交付计划与任务 DAG，发布有界静态知识中心证据。
+- **触发条件**：存量项目接入后、规划实现前；项目使用多种语言/框架/客户端/服务/数据库且依赖边界未记录时；需要自动刷新的知识中心或交付任务包时。
+- **核心规则**：架构发现是只读证据，必须保留来源归属、展示置信度与局限，绝不替代运行时、数据库、授权、业务流程或发布证据。
+- **关键流程/检查点**：
+  1. 流程：`Project Scan -> Technology Profile -> Architecture IR -> 13-Step Plan -> Task DAG -> Knowledge Center -> Incremental Refresh`。
+  2. 必交产出：`architecture-ir.json`（中立节点/边 + 来源 + 置信度）、`delivery-plan.json`（13 步标 applicable/not_applicable/needs_confirmation）、`task-dag.json`、`index.html`。
+  3. 证据来自清单、源文件、导入、路由声明、`CREATE TABLE`、测试与部署标记；适配器可扩展语言而不改 IR。
+  4. 破坏性、迁移、发布、业务验收工作保持 `needs_confirmation`，不标记为自动。
+- **防护规则**：扫描期间禁止执行迁移或改源码；禁止从静态节点推断业务真相、权限、运行时健康或生产闭环；变更后增量刷新并保留扫描限制与时间戳。
+
+---
+
 ## 附录 A：core 层加载顺序建议
 
 本层在方法论中承担「分类 → 路由 → 分解 → 执行 → 进化」的主干。建议的加载顺序：
@@ -547,5 +583,5 @@
 1. 本文件是**中文详摘索引**，不是正文全量译文。逐节全量对应的正文中文版按规划放在 `50_Skill正文中文版/core/`；本文件的目标是让读者不打开英文源也能独立读懂 16 个 core Skill 的职责、规则强度、门禁与产出。
 2. 源文件本身没有中文章节的小节（如 `ai-architect-governor`、`ai-chief-planner`、`ai-command-executor`、`ai-library-first` 未单列 `## When to Use`），其触发条件取自 frontmatter `description`，已在对应条目中注明。
 3. `ai-5s-delivery-governor` 的 `## Required Closure Statement` 只有 `complete` / `paused` / `blocked` 三个状态；`ai-delivery-contract-governor` 的契约状态机另含 `draft`/`scoped`/`approved`/`implementing`/`safeguarded`/`completed`/`cancelled`。两者不合并使用，均在附录 B 中列出。
-4. 源文件中的源代号（如 `gerp-*`）与抽取来源仅出现在各 `SKILL.md` 的 `## Evolution History` 与 `SKILL_MANIFEST.json` 的 `source` 字段；本摘要未展开进化记录，以免与正文中文版重复。
+4. 源文件中的项目特定来源代号已在通用化中移除；各 `SKILL.md` 的进化记录与 `SKILL_MANIFEST.json` 的 `source` 字段现在只保留通用表述，本摘要不展开进化记录，以免与正文中文版重复。
 5. 未在本层源文件中出现的门禁代号（如治理层与外层使用的 `L4`–`L5`）不在本文件展开。

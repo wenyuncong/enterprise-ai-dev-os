@@ -1,0 +1,200 @@
+{
+  "routing_version": "1.0.0",
+  "_provenance": "示例路由表：展示如何把「任务类型 -> 预加载的规则/技能映射」结构化。字段结构为真实模板，具体名称与关键词均为中立占位，采用项目应替换为自己的技能与规则。",
+  "precedence": ["project_rules", "tech_skill", "domain_skill", "handbook"],
+  "defaults": {
+    "risk_level": "L1",
+    "load": {
+      "skills": [{ "name": "ai-rule-dispatcher", "lines": 50 }]
+    },
+    "pre_checks": [
+      "先判定风险等级 L0-L3",
+      "搜索本项目同类实现（路由/菜单 -> 页面/共享组件 -> 服务/接口 -> 数据模型/权限/菜单 -> 数据存储 -> 已有脚本/测试）"
+    ]
+  },
+  "entries": [
+    {
+      "id": "route-backend-service",
+      "title": "后端开发（服务 / 接口 / 模型 / 数据访问 / 构建 / 启动）",
+      "match": {
+        "keywords": ["服务", "接口", "模型", "数据访问", "构建", "启动"],
+        "paths": ["backend/"]
+      },
+      "risk_level": "L2",
+      "load": {
+        "skills": [{ "name": "ai-command-executor", "lines": 50 }],
+        "rules": [
+          { "file": "项目规则文件", "sections": ["数据存储配置", "数据脚本规范", "开发规范和工具链"] }
+        ],
+        "handbooks": ["开发手册"]
+      },
+      "pre_checks": ["后端构建通过", "接口实际返回核对"],
+      "gates": ["G-CONTRACT-REGISTRY", "G-BUSINESS-FLOW-API"],
+      "notes": "L3 升级条件：涉及数据结构 / 租户 / 发布 / 正式版闭环时读规则全量"
+    },
+    {
+      "id": "route-frontend",
+      "title": "前端开发（组件 / 路由 / 接口封装 / 字段配置 / 表单）",
+      "match": {
+        "keywords": ["组件", "页面", "路由", "字段配置", "表单"],
+        "paths": ["frontend/"]
+      },
+      "risk_level": "L1",
+      "load": {
+        "skills": [{ "name": "对应前端技术栈技能", "lines": 50 }],
+        "rules": [{ "file": "项目规则文件", "sections": [] }],
+        "handbooks": ["开发手册"]
+      },
+      "pre_checks": ["检查共享组件与复用单元是否已有同类实现"],
+      "gates": ["G-CONSUMER-FRONTEND", "G-FRONTEND-BUDGET"],
+      "notes": "实际修改状态管理/路由时再展开对应技术栈技能；默认禁止全量加载"
+    },
+    {
+      "id": "route-page-field-atomic",
+      "title": "页面新增/修改、字段增删、原子组件、字段包、元数据",
+      "match": {
+        "keywords": ["页面新增", "页面修改", "字段增删", "原子组件", "字段包", "FieldPackage", "field_metadata", "page_config"],
+        "paths": ["frontend/", "database/"]
+      },
+      "risk_level": "L2",
+      "load": {
+        "skills": [
+          { "name": "ai-field-package-governor", "full": true },
+          { "name": "对应前端技术栈技能", "lines": 50 }
+        ],
+        "code_entrypoints": [
+          "采用项目自己的字段包复用单元路径",
+          "采用项目自己的字段类型定义路径"
+        ],
+        "handbooks": ["架构与唯一真相"]
+      },
+      "pre_checks": ["字段真相源层次核对（数据存储 -> 元数据 -> 组件绑定 -> 个性化）"],
+      "gates": ["G-FIELDPACKAGE-COVERAGE", "G-CONSUMER-FRONTEND"]
+    },
+    {
+      "id": "route-foundation-version",
+      "title": "版本/模块/插件/菜单/路由/统一登录/租户功能开关/租户权限/正式版闭环",
+      "match": {
+        "keywords": ["版本", "模块", "插件", "菜单", "统一登录", "租户功能开关", "租户权限", "正式版闭环", "数据结构同步"]
+      },
+      "risk_level": "L3",
+      "load": {
+        "skills": [{ "name": "ai-foundation-governor", "full": true }],
+        "rules": [{ "file": "项目规则文件", "full": true }],
+        "handbooks": ["架构与唯一真相"]
+      },
+      "pre_checks": ["先判定唯一真相与闭环状态，再进入代码或页面修改"],
+      "gates": ["G-5S-ENTER", "G-ARCHITECTURE-IMPACT"]
+    },
+    {
+      "id": "route-database",
+      "title": "数据存储 / 数据脚本 / 迁移",
+      "match": {
+        "keywords": ["数据库", "数据脚本", "数据结构", "迁移"],
+        "paths": ["database/"]
+      },
+      "risk_level": "L3",
+      "load": {
+        "skills": [{ "name": "对应数据存储技术栈技能", "full": true }],
+        "rules": [{ "file": "项目规则文件", "sections": ["数据存储配置", "数据脚本规范"] }],
+        "handbooks": ["架构与唯一真相"]
+      },
+      "pre_checks": ["核对现状", "数据结构与模板一致性比对"],
+      "gates": ["G-DB-GATE", "G-PROD-MIGRATION"]
+    },
+    {
+      "id": "route-uiux",
+      "title": "UI / UX / 设计 / 页面美观",
+      "match": { "keywords": ["UI", "UX", "设计", "页面美观", "样式"] },
+      "risk_level": "L1",
+      "load": {
+        "skills": [
+          { "name": "ai-ui-ux-governor", "lines": 50 },
+          { "name": "对应样式技术栈技能", "lines": 50 }
+        ]
+      },
+      "gates": ["G-CONSUMER-FRONTEND"],
+      "notes": "涉及页面结构、报表规范、表格壳或动作语义时再读 UI/UX 引用文档"
+    },
+    {
+      "id": "route-architecture",
+      "title": "跨域 / 单体 / 架构 / 域服务",
+      "match": { "keywords": ["跨域", "单体", "架构", "域服务", "领域边界"] },
+      "risk_level": "L2",
+      "load": {
+        "skills": [{ "name": "ai-architect-governor", "lines": 50 }],
+        "handbooks": ["架构与唯一真相"]
+      },
+      "gates": ["G-ARCHITECTURE-IMPACT"]
+    },
+    {
+      "id": "route-business-flow",
+      "title": "业务流程 / 审批 / 单据流转",
+      "match": { "keywords": ["业务流程", "审批", "单据流转", "保存", "审核", "流转", "记账"] },
+      "risk_level": "L2",
+      "load": {
+        "skills": [{ "name": "ai-flow-closure-audit", "lines": 50 }],
+        "handbooks": ["业务手册"]
+      },
+      "pre_checks": ["无契约先专项核验，不得凭页面文案或旧日志补写业务逻辑"],
+      "gates": ["G-DOC-STATUS-ACTION", "G-RUNTIME-REPLAY", "G-BUSINESS-FLOW-API"]
+    },
+    {
+      "id": "route-cross-module",
+      "title": "跨模块复杂任务",
+      "match": { "keywords": ["跨模块", "多模块", "重构", "批量改造"] },
+      "risk_level": "L3",
+      "load": {
+        "skills": [
+          { "name": "ai-task-decomposer", "lines": 50 },
+          { "name": "ai-rule-dispatcher", "lines": 50 }
+        ]
+      },
+      "pre_checks": ["冻结范围与批次", "标记依赖与回滚点"]
+    },
+    {
+      "id": "route-bug-release",
+      "title": "Bug / 稳定版 / 候选版 / 回归 / 发布 / 标签 / 部署 / 回滚",
+      "match": { "keywords": ["Bug", "稳定版", "候选版", "回归", "发布", "标签", "部署", "回滚"] },
+      "risk_level": "L3",
+      "load": {
+        "handbooks": [
+          "质量与发布",
+          "运行与事故"
+        ]
+      },
+      "pre_checks": [
+        "Bug 归属由「稳定基线能否复现」决定，不由发现地点决定",
+        "留下可核验的交付路由结论"
+      ],
+      "gates": ["G-5S-ENTER", "G-5S-CLOSE", "G-RELEASE-MANIFEST", "G-ARTIFACT-PROVENANCE", "G-RUNTIME-REPLAY"]
+    },
+    {
+      "id": "route-scope",
+      "title": "客户定位 / 承诺范围 / 版本范围 / 产品帮助",
+      "match": { "keywords": ["客户定位", "版本范围", "产品帮助", "可售"] },
+      "risk_level": "L2",
+      "load": {
+        "handbooks": ["产品与边界"],
+        "rules": [{ "file": "项目规则文件", "sections": [] }]
+      },
+      "pre_checks": ["读资格矩阵，不得只凭构建/CI/页面加载下结论"],
+      "gates": ["G-RELEASE-MANIFEST"]
+    },
+    {
+      "id": "route-decision-record",
+      "title": "设计冲突 / 历史原因 / 废弃或迁移决定",
+      "match": { "keywords": ["设计冲突", "历史原因", "废弃", "迁移决定", "为什么这么做"] },
+      "risk_level": "L1",
+      "load": { "handbooks": ["决策与追溯台账"] }
+    },
+    {
+      "id": "route-requirement-delivery",
+      "title": "需求 / 客户反馈 / 优先级 / 版本计划 / 发版说明 / 系统公告",
+      "match": { "keywords": ["需求", "客户反馈", "优先级", "版本计划", "发版说明", "系统公告"] },
+      "risk_level": "L2",
+      "load": { "handbooks": ["需求与交付"] },
+      "notes": "发版说明与公告只消费已验证、已发布或明确限制的内容"
+    }
+  ]
+}

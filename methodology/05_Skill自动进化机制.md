@@ -154,7 +154,7 @@ Every evolution must be recorded at the bottom of the affected SKILL.md:
 ## Evolution History | 进化记录
 
 - v1.0.1 (2026-06-18): Added pagination pattern after 3 tasks used custom pagination
-- v1.0.0 (2026-06-17): Initial extraction from GERP project
+- v1.0.0 (2026-06-17): Initial extraction from real enterprise delivery
 `
 
 The skill archive (`docs/全项目总控/MASTER_INDEX.md`) tracks all skills:

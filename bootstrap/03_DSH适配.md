@@ -40,7 +40,7 @@
 
 | 层 | 做什么 | 依据 | 备注 |
 |---|---|---|---|
-| **内容层** ✅ | 按 archetype/角色**裁剪**技能子集，落到 `data/skills/<skill>/`；项目画像与三件套放**项目内**，不复制进 DSH | `data/skills/` 是实测扩展缝（本会话加载的 40+ 技能即在此） | **禁止全量投放**：母版 47 技能 + 本仓库 49 技能全量注入会击穿上下文 |
+| **内容层** ✅ | 按 archetype/角色**裁剪**技能子集，落到 `data/skills/<skill>/`；项目画像与三件套放**项目内**，不复制进 DSH | `data/skills/` 是实测扩展缝（本会话加载的 40+ 技能即在此） | **禁止全量投放**：参考项目 47 技能 + 本仓库 49 技能全量注入会击穿上下文 |
 | **组合层** ✅ | 一个 profile/bundle 按角色组合：`dsh.profile.bundles` | `data/profiles/headless/package.json` 的 bundle 组合机制 | 建议 profile：`methodology-backend` / `-frontend` / `-erp` / `-brownfield` |
 | **执行层** ✅/⚠️ | 5 个工具（CLI 先行）+ 三挂点 | 工具原型已在本仓库跑通（见第 3 节） | 写入前自动拦截是否可行取决于 ⚠️ 钩子能力 |
 | **模型层** ✅ | 国产模型适配是**配置**：`settings.yaml` 的 `llm-deepseek.models`、`agent-default-model{provider,model}`、`llm-pi-ai.providers` | `data/settings.yaml` 实测键名 | 适配结论用 M0–M3 验收，不用"感觉" |
@@ -57,7 +57,7 @@
 | **弱强制**（DSH 内） | `precheck` 做成"必调工具" + 写入 `task-routing.json` 的 `pre_checks` + 完成判据要求提供证据路径 | 模型自律 + 结构约束；**能被绕开** |
 | **强强制**（DSH 外） | `.githooks`（pre-commit / pre-push）+ CI + 服务端发布门禁 | **绕不过去**：不通过就无法提交/推送/发布 |
 
-**结论**：在钩子能力确认之前，**强强制一律放 DSH 之外**——这也正是母版已经做对的事（`.githooks` 4 个 + 7 个 workflow + CI 门禁脚本）。
+**结论**：在钩子能力确认之前，**强强制一律放 DSH 之外**——这也正是参考项目已经做对的事（`.githooks` 4 个 + 7 个 workflow + CI 门禁脚本）。
 
 ---
 
@@ -67,16 +67,16 @@
 
 ```jsonc
 // 输入
-{ "task": "修复采购退货已记账单据的按钮不一致", "project_root": "<path>", "change_type": "B" }
+{ "task": "修复一张已过账单据的按钮不一致", "project_root": "<path>", "change_type": "B" }
 
 // 输出
 {
   "task_line": "bug",
-  "lead_skill": "gerp-flow-closure-audit",
+  "lead_skill": "ai-flow-closure-audit",
   "support_skills": ["ai-runtime-verify", "ai-single-truth-enforcer"],
   "risk_level": "L2",
-  "first_documents": ["AGENTS.md", "docs/项目知识体系/02_业务手册/README.md"],
-  "first_checks": ["搜索同类实现", "SHOW TABLES 核对现状"],
+  "first_documents": ["AGENTS.md", "业务手册/README.md"],
+  "first_checks": ["搜索同类实现", "核对数据存储现状"],
   "gates": ["G-DOC-STATUS-ACTION", "G-RUNTIME-REPLAY", "G-5S-CLOSE"],
   "boundary_warnings": ["不得端侧拼业务动作", "不得直改库"]
 }
@@ -87,7 +87,7 @@
 
 ```jsonc
 // 输入
-{ "paths": ["frontend/gerp-web/src/views/.../Detail.vue"], "change_type": "B", "project_root": "<path>" }
+{ "paths": ["frontend/<项目前端目录>/src/views/.../Detail.<前端文件扩展名>"], "change_type": "B", "project_root": "<path>" }
 
 // 输出
 {
@@ -99,7 +99,7 @@
   "evidence": "temp/precheck-20260914.json"
 }
 ```
-实现来源：`scripts/py/rule_lint.py`（本仓库）+ 母版的 `audit-document-*` 静态审计 + 交付契约的 `write_allowlist` 越界检查（本仓库 `validate_delivery_contract.py` 已有 `CONTRACT_SCOPE_ESCAPE`）。
+实现来源：`scripts/py/rule_lint.py`（本仓库）+ 参考项目的 `audit-document-*` 静态审计 + 交付契约的 `write_allowlist` 越界检查（本仓库 `validate_delivery_contract.py` 已有 `CONTRACT_SCOPE_ESCAPE`）。
 
 ### 3.3 `gate` —— 按门禁级别跑注册表
 
@@ -117,7 +117,7 @@
   "blocking_failures": ["G-CONTRACT-REGISTRY"]
 }
 ```
-实现来源：`gates.json` 驱动；对应本仓库的 `audit_methodology.py` / `check_constitution.py` / `rule_lint.py` 与母版的 `scripts/ci/*`、`scripts/ps1/enter|close-5s-*`。
+实现来源：`gates.json` 驱动；对应本仓库的 `audit_methodology.py` / `check_constitution.py` / `rule_lint.py` 与参考项目的 `scripts/ci/*`、`scripts/ps1/enter|close-5s-*`。
 
 ### 3.4 `sync` —— 双语与方法论同步状态
 
@@ -137,17 +137,17 @@
 { "pages": ["index.html", "business-flows.html", "architecture-map.html", "architecture-atlas.html"],
   "consistent": true, "changed": [] }
 ```
-实现来源：母版 `scripts/py/generate_local_knowledge_center.py --check`、`generate_knowledge_subsites.py --check`、`scripts/ps1/open-local-knowledge-center.ps1`。
+实现来源：参考项目 `scripts/py/generate_local_knowledge_center.py --check`、`generate_knowledge_subsites.py --check`、`scripts/ps1/open-local-knowledge-center.ps1`。
 
 ---
 
 ## 4. 三挂点：自动加载真正发生的地方
 
-| 挂点 | 时机 | 调用 | 加载量 | 对应母版机制 |
+| 挂点 | 时机 | 调用 | 加载量 | 对应参考项目机制 |
 |---|---|---|---|---|
-| **挂点 1 会话启动** | 每条新会话/恢复会话 | `route` | **≤5 KB**：`project-profile.json` + 分支/远端状态 + 待办 + 路由索引 + 5S 接管指令 | 母版 `enter-5s-delivery-session.ps1 -Mode Inspect` + 短入口路由 |
-| **挂点 2 写前** | 第一次触碰文件之前 | `precheck` | 命中规则切片 + 命中技能前 50 行 | 母版"低 token 启动规则"+"长规则读取边界" |
-| **挂点 3 交付前** | 提交 / 推送 / 发布 | `gate` + `sync` + `knowledge` | 只跑注册表，不加载正文 | 母版 `close-5s-delivery-session.ps1` + `scripts/ci/*` |
+| **挂点 1 会话启动** | 每条新会话/恢复会话 | `route` | **≤5 KB**：`project-profile.json` + 分支/远端状态 + 待办 + 路由索引 + 5S 接管指令 | 参考项目 `enter-5s-delivery-session.ps1 -Mode Inspect` + 短入口路由 |
+| **挂点 2 写前** | 第一次触碰文件之前 | `precheck` | 命中规则切片 + 命中技能前 50 行 | 参考项目"低 token 启动规则"+"长规则读取边界" |
+| **挂点 3 交付前** | 提交 / 推送 / 发布 | `gate` + `sync` + `knowledge` | 只跑注册表，不加载正文 | 参考项目 `close-5s-delivery-session.ps1` + `scripts/ci/*` |
 
 **为什么这样切**：挂点 1 决定"读什么"，挂点 2 决定"能不能改"，挂点 3 决定"算不算完成"。三者都不需要把 700 KB 技能塞进上下文。
 
@@ -200,7 +200,7 @@
 | **M2** | 对抗性测试下不漂移 | 给越界任务（例如"顺手把前端 fallback 加回来"），看是否拒绝并被门禁拦下 |
 | **M3** | 无人干预完成 L2/L3 交付且留下**新鲜证据** | 端到端跑 `gate` + 证据路径检查 |
 
-适配对象：DeepSeek / Qwen / GLM / Kimi / GPT / Claude，**同一套测试跑全部**，产出可发布的适配矩阵。母版当前的 `model_adaptation_level` 在 `project-profile.json` 里记为 `M1`（待实测复核）。
+适配对象：DeepSeek / Qwen / GLM / Kimi / GPT / Claude，**同一套测试跑全部**，产出可发布的适配矩阵。参考项目当前的 `model_adaptation_level` 在 `project-profile.json` 里记为 `M1`（待实测复核）。
 
 ---
 
@@ -212,7 +212,7 @@
 - [ ] 建立 `methodology-*` profile（后端/前端/ERP/改造）
 - [ ] 5 个工具做成 CLI（`route/precheck/gate/sync/knowledge`），再暴露 MCP
 - [ ] 用 M0–M3 测 3 家国产模型，产出适配矩阵
-- [ ] 在母版上做一次**只读**回归：CLI 跑出的门禁结果与母版现有脚本一致
+- [ ] 在参考项目上做一次**只读**回归：CLI 跑出的门禁结果与参考项目现有脚本一致
 
 ---
 
@@ -229,7 +229,7 @@
 | 「写前拦截」能覆盖到什么粒度 | ⚠️ **只到 shell 命令行**：载荷只有真实 `tool_name` 与 `tool_input.command`，非 shell 工具参数**不暴露**。按文件路径的写前拦截走 MCP 工具，或写原生插件（§8.5） | 见 §8.4 实测载荷 |
 | ⚠️ 强强制必须放 DSH 之外 | ❌ **需要修正**：DSH 内已可做强强制（shell 粒度），但**必须**修掉退出码掩码这个坑（§8.2），否则是静默失效 | §8.2 |
 | profile 里声明 `skills` 键 | ❌ **猜错了**：DSH 无此键，技能走 `skill-filesystem.customSkillDirs`，且 root 必须一层布局 | §8.3 |
-| 5 个工具（route/precheck/gate/sync/knowledge） | ✅ 4 个已实现并真机调用（route/precheck/gate/sync）；⚠️ `knowledge` 未实现（它依赖母版的 knowledge-center 脚本，不在本仓库） | `scripts/py/methodology_mcp_server.py --selftest` |
+| 5 个工具（route/precheck/gate/sync/knowledge） | ✅ 4 个已实现并真机调用（route/precheck/gate/sync）；⚠️ `knowledge` 未实现（它依赖参考项目的 knowledge-center 脚本，不在本仓库） | `scripts/py/methodology_mcp_server.py --selftest` |
 | 工具先做 CLI、再暴露 MCP | ✅ 按此落地：`methodology_rules.py`（规则单点）→ `methodology_precheck_hook.py`（CLI/钩子）→ `methodology_mcp_server.py`（MCP 面） | 三个文件互不复制规则 |
 | M0–M3 模型适配 | ⚠️ **未做矩阵**。只有一次非计划的对抗性观察：门禁拦下命令后，模型拒绝把「被拦截」谎报成「完成」，并请求授权路径 | §8.6 |
 

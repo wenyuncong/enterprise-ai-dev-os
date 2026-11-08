@@ -209,13 +209,13 @@ backend runtime / field metadata / aggregate profile
 └──────────┴──────────┴──────────┴──────────┘
 ┌─────────────────────┬──────────────────────┐
 │ Recent Items Table  │ Quick Actions        │
-│ (same as List)      │ [+ New Order]        │
-│                     │ [+ New Invoice]      │
+│ (same as List)      │ [+ New Item A]       │
+│                     │ [+ New Item B]       │
 │                     │ [View Reports]       │
 └─────────────────────┴──────────────────────┘
 ```
 
-**中文对照**：**Summary Cards（汇总卡片）** ＝ `Card 1`–`Card 4`，每张卡一个 `Metric`；下方两栏：左侧 **Recent Items Table（最近记录表）**，与资料列表页同构；右侧 **Quick Actions（快捷操作）** ＝ `[+ New Order]`、`[+ New Invoice]`、`[View Reports]`。
+**中文对照**：**Summary Cards（汇总卡片）** ＝ `Card 1`–`Card 4`，每张卡一个 `Metric`；下方两栏：左侧 **Recent Items Table（最近记录表）**，与资料列表页同构；右侧 **Quick Actions（快捷操作）** ＝ `[+ New Item A]`、`[+ New Item B]`、`[View Reports]`。
 
 ---
 
@@ -273,7 +273,7 @@ backend runtime / field metadata / aggregate profile
 | 表格使用 DataTable 吗？ | 查找 `<DataTable` 或标准化表格组件 |
 | 工具条匹配模板吗？ | 按钮顺序：New → Batch → Export → Refresh |
 | 表单有钉底页脚吗？ | 查找页脚上的 `position: sticky; bottom: 0` |
-| 汇总由后端计算吗？ | 检查行项目中不存在 `computed()` |
+| 汇总由后端计算吗？ | 检查行项目中没有带业务计算的响应式派生值 |
 
 ### Violation: When AI Creates a Non-Standard Page | 违规：智能体造出非标准页面时
 

@@ -59,14 +59,16 @@ description: "Audit whether a business flow is closed across page, API, database
 
 ## Business Chain Categories | 业务链分类
 
-| 业务链 | 描述 | 典型范围 |
-|---|---|---|
-| O2C (Order to Cash) | 销售订单 → 发货 → 开票 → 收款 | 销售、库存、财务 |
-| S2P (Source to Pay) | 采购申请 → 订单 → 收货 → 付款 | 采购、库存、财务 |
-| R2R (Record to Report) | 交易 → 总账 → 财务报表 | 财务、报表 |
-| L2C (Lead to Cash) | 线索 → 商机 → 报价 → 订单 | CRM、销售 |
-| Fulfillment | 订单 → 拣货 → 打包 → 发运 | WMS、物流 |
-| Subscription | 注册 → 激活 → 计费 → 续订/取消 | SaaS、计费 |
+这些是通用的流程形态，不是固定业务词汇。识别项目自己的流程符合哪种形态；任何领域都可以实例化任何形态。
+
+| 流程形态 | 通用顺序 |
+|---|---|
+| 主交易链 | 请求 -> 执行 -> 单据 -> 结算 |
+| 采购式链 | 申请 -> 订单 -> 收货 -> 结算 |
+| 记录/报表链 | 交易 -> 总账 -> 分析报表 |
+| 机会链 | 线索 -> 商机 -> 报价 -> 承诺 |
+| 履约链 | 承诺 -> 准备 -> 发运 |
+| 订阅链 | 注册 -> 激活 -> 计费 -> 续订/取消 |
 
 ---
 
@@ -93,16 +95,16 @@ description: "Audit whether a business flow is closed across page, API, database
 
 只有当数字在各层之间对账一致时，一次 `writeback` 才算闭环。对于任何会移动数量、金额、余额或状态的流程，都要增加**一致性交叉校验（consistency cross-check）**：扫描不匹配项，而不是只信一行采样：
 
-1. **Map the reconciliation pairs（映射对账对）**：为每一次 `writeback` 列出源表 → 下游表（例如一次收货同时增加库存与应付）。
+1. **Map the reconciliation pairs（映射对账对）**：为每一次 `writeback` 列出源结构 -> 下游结构（例如一次收货同时更新数量余额与金额余额）。
 2. **Design the check（设计校验）**：独立聚合每一侧并比对；对计算值（平均数、余额）还要从原始行重新计算。
 3. **Run a full-table scan（跑全表扫描）**：定位源与下游不一致的行；一次全扫常能暴露采样式检查漏掉的隐性漂移。
 4. **Record the discrepancy（记录差异）**：表、行、预期值 vs 实际值，以及可能的根因。
 5. **Fix and rerun（修复并重跑）**：修复后，交叉校验必须返回零不匹配才能收口。
 
 ```text
-Example (domain-specific, from ERP): purchase receipt -> inventory + payable
-  SELECT aggregate(inventory_qty) FROM inventory WHERE receipt_id = :id;
-  SELECT aggregate(payable_amount) FROM payable WHERE receipt_id = :id;
+通用示例：一次收货更新数量余额与金额余额
+  aggregate the downstream quantity where receipt_id = :id;
+  aggregate the downstream amount where receipt_id = :id;
   -- both must reconcile with the receipt line totals; any drift is a P1 data risk
 ```
 
@@ -134,7 +136,7 @@ Example (domain-specific, from ERP): purchase receipt -> inventory + payable
 | Gap | Severity | Root Cause | Fix Action | Acceptance |
 |---|---|---|---|---|
 | Submit has no backend validation | P0 | Missing service method | Implement validation in service | curl test passes |
-| Inventory not updated on delivery | P1 | Missing writeback | Add inventory movement service | Inventory count matches |
+| Downstream balance not updated on execution | P1 | Missing writeback | Add the downstream update service | Balance count matches |
 ```
 
 ---
@@ -182,11 +184,11 @@ Example (domain-specific, from ERP): purchase receipt -> inventory + payable
 
 ## Maturity | 成熟度
 
-**Stage**：Effective —— 提炼自企业级 ERP 在采购/销售/库存/财务各链路上的流程闭环审计。
+**Stage**：Effective —— 提炼自真实企业在交易、运营、财务各链路上的流程闭环审计。
 
 ## Evolution History | 进化记录
 
-- v1.0.0：从 gerp-flow-closure-audit 提炼（原始 12.5KB）
+- v1.0.0：从真实企业流程闭环证据提炼并通用化
 - v1.1.0：泛化为通用业务链闭环框架
 - v1.2.0：新增 product owner 的 business-flow acceptance 作为显式闭环层
-- Source：企业级 ERP 中的 O2C、S2P、R2R 业务链审计
+- Source：真实企业交付中跨交易、运营、报表流程的闭环审计

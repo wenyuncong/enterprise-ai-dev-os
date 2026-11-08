@@ -38,8 +38,8 @@ Before making any architecture conclusion:
 
 ### Layer 1: Domain Boundaries
 - Which domain owns each identity concept (user, tenant, organization)?
-- Which domain owns each master data object (product, customer, supplier)?
-- Which domain owns each business document (order, invoice, receipt)?
+- Which domain owns each master/reference object (use the project's own names)?
+- Which domain owns each business document (use the project's own names)?
 - Which domain owns each platform table (configuration, audit log)?
 
 ### Layer 2: Identity & Access
@@ -125,6 +125,6 @@ Every business capability must distinguish:
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-architect-governor (15KB original)
+- v1.0.0: Generalized from real enterprise architecture governance evidence (project-specific names removed)
 - v1.1.0: Generalized to universal architecture governance patterns
-- Source: Multi-domain enterprise system (ERP + Mall + App + Agent + SaaS)
+- Source: multi-domain enterprise delivery across internal, customer-facing, and agent-facing systems

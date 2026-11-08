@@ -67,7 +67,7 @@ description: "Govern field metadata, database-authoritative fields, UI field pac
 
 ```
 Check: column exists, type matches, constraints are correct
-Source: DESCRIBE table / SHOW COLUMNS
+Source: 目标数据存储的 schema 检查命令（例如 SQL 方言中的 DESCRIBE / SHOW COLUMNS）
 ```
 
 ### 2. Metadata Registry（元数据注册表）
@@ -167,5 +167,5 @@ Source: DESCRIBE table / SHOW COLUMNS
 
 ## Evolution History | 进化记录
 
-- v1.0.0：从 gerp-atomic-component-fieldpackage 提炼（原始 111KB）
-- Source：企业级 ERP 在采购/销售/库存/财务/资金模块上的元数据治理
+- v1.0.0：从真实企业字段治理证据提炼并通用化
+- Source：跨交易、运营、财务模块的元数据治理

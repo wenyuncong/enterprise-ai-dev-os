@@ -19,6 +19,8 @@ EXCLUDED_DIRS = {
     ".git", ".agents", ".claude", ".codebuddy", ".continue", ".cursor", ".qoder",
     ".trae", ".windsurf", "node_modules", "dist", "build", "target", "temp", "tmp",
     "reference", "备用", "__pycache__",
+    # Dependency caches and virtual environments: generated artifacts, same class as node_modules.
+    ".m2", ".gradle", ".nuget", ".pytest_cache", ".cache", ".venv", "venv", "env",
 }
 INSTALL_EXCLUDED_DIRS = EXCLUDED_DIRS | {"candidates", "quarantine", "project"}
 TECH_MARKERS = {
@@ -37,6 +39,46 @@ DATABASE_MARKERS = {
     "sqlite": ["sqlite"],
     "mongodb": ["mongodb", "mongoose"],
     "redis": ["redis"],
+}
+# AI development tool adapter signals, mapped to the tool ids used in tools/adapters.json.
+# Each signal is a project-root-relative directory or file that proves an adapter is present.
+AI_TOOL_SIGNALS = {
+    "codebuddy": [".codebuddy"],
+    "claude": [".claude", "CLAUDE.md"],
+    "codex": [".agents", "AGENTS.md"],
+    "trae": [".trae"],
+    "qoder": [".qoder"],
+    "cursor": [".cursor", ".cursorrules"],
+    "copilot": [".github/copilot-instructions.md"],
+    "windsurf": [".windsurf", ".windsurfrules"],
+    "cline": [".cline", ".clinerules"],
+    "roo": [".roo"],
+    "aider": ["CONVENTIONS.md"],
+    "continue": [".continue"],
+    "lingma": [".lingma"],
+}
+# File names that indicate orchestration of more than one independently deployable unit.
+SERVICE_ORCHESTRATION_MARKERS = {
+    "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml",
+}
+# Directories that conventionally hold multiple independently built applications or services.
+MULTI_APP_DIRS = {"services", "apps", "packages"}
+# Host suffix -> platform family. The detector stays neutral: it only classifies what it sees.
+GIT_HOST_FAMILIES = {
+    "github.com": "github",
+    "gitee.com": "gitee",
+    "gitlab.com": "gitlab",
+    "bitbucket.org": "bitbucket",
+}
+CNB_HOST_SUFFIX = "cnb.cool"
+# Build/dependency descriptors that determine the stack. They are collected first in a
+# dedicated pass so traversal order can never starve a large later module (e.g. frontend).
+KEY_MANIFEST_NAMES = {
+    "pom.xml", "build.gradle", "build.gradle.kts", "package.json", "pyproject.toml",
+    "requirements.txt", "pipfile", "setup.py", "go.mod", "cargo.toml", "composer.json",
+    "gemfile", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "poetry.lock",
+    "cargo.lock", "go.sum", "docker-compose.yml", "docker-compose.yaml", "compose.yml",
+    "compose.yaml",
 }
 
 
@@ -61,7 +103,11 @@ def is_excluded(path: Path, root: Path) -> bool:
 
 
 def tracked_files(root: Path, max_files: int = 5000) -> list[Path]:
-    files: list[Path] = []
+    # Two-phase collection. Phase 1 gathers every build/dependency descriptor regardless of
+    # traversal order; phase 2 fills the remaining budget with ordinary files. This prevents a
+    # large early module (thousands of sources) from starving a later module's stack markers.
+    manifests: list[Path] = []
+    others: list[Path] = []
     for current_root, directories, names in os.walk(root):
         current = Path(current_root)
         directories[:] = [
@@ -70,12 +116,14 @@ def tracked_files(root: Path, max_files: int = 5000) -> list[Path]:
             if directory not in EXCLUDED_DIRS
         ]
         for name in names:
-            if len(files) >= max_files:
-                return files
             path = current / name
-            if path.is_file() and not is_excluded(path, root):
-                files.append(path)
-    return files
+            if not path.is_file() or is_excluded(path, root):
+                continue
+            if name.lower() in KEY_MANIFEST_NAMES:
+                manifests.append(path)
+            else:
+                others.append(path)
+    return (manifests + others)[:max_files]
 
 
 def marker_matches(path: Path, pattern: str) -> bool:
@@ -131,6 +179,104 @@ def detect_profile(files: list[Path]) -> dict[str, Any]:
     }
 
 
+def detect_ai_tools(root: Path) -> dict[str, Any]:
+    """Identify which AI tool adapters are actually present in the project root."""
+    found = []
+    evidence_map = {}
+    for tool, signals in AI_TOOL_SIGNALS.items():
+        present = [signal for signal in signals if (root / signal).exists()]
+        if present:
+            found.append(tool)
+            evidence_map[tool] = present
+    return {
+        "detected_tools": sorted(found),
+        "signals": evidence_map,
+        "note": "Presence only. Run tools/deploy.ps1 -Tool <id> to refresh an adapter; adapters are generated, not source.",
+    }
+
+
+def detect_architecture(root: Path, files: list[Path]) -> dict[str, Any]:
+    """Infer deployment shape from objective build/orchestration signals, with bounded confidence."""
+    file_names = {path.name for path in files}
+    orchestration = sorted(name for name in file_names if name in SERVICE_ORCHESTRATION_MARKERS)
+    multi_app_dirs = []
+    for top in MULTI_APP_DIRS:
+        candidate = root / top
+        if candidate.is_dir():
+            children = [child for child in candidate.iterdir() if child.is_dir()]
+            if len(children) > 1:
+                multi_app_dirs.append({"dir": top, "unit_count": len(children)})
+    # Independently deployable build manifests at more than one top-level unit.
+    build_manifests = [
+        path.relative_to(root).as_posix()
+        for path in files
+        if path.name in {"pom.xml", "build.gradle", "package.json", "pyproject.toml", "go.mod", "Cargo.toml"}
+    ]
+    signals = {
+        "orchestration_files": orchestration,
+        "multi_app_dirs": multi_app_dirs,
+        "build_manifest_count": len(build_manifests),
+    }
+    if orchestration or multi_app_dirs:
+        inferred = "service-oriented"
+        confidence = "high"
+    elif len(build_manifests) > 1:
+        inferred = "modular"
+        confidence = "medium"
+    elif build_manifests:
+        inferred = "monolith"
+        confidence = "medium"
+    else:
+        inferred = "unknown"
+        confidence = "low"
+    return {"inferred": inferred, "confidence": confidence, "signals": signals}
+
+
+def git_run(root: Path, args: list[str]) -> tuple[bool, str]:
+    completed = subprocess.run(
+        ["git", *args], cwd=root, capture_output=True, text=True, check=False
+    )
+    output = (completed.stdout or "").strip()
+    return completed.returncode == 0, output
+
+
+def classify_git_host(url: str) -> str:
+    cleaned = url.split("@", 1)[-1]
+    cleaned = cleaned.removeprefix("ssh://").removeprefix("https://").removeprefix("http://")
+    host = cleaned.split("/", 1)[0].split(":", 1)[0].lower()
+    if host.endswith(CNB_HOST_SUFFIX):
+        return "cnb"
+    for suffix, family in GIT_HOST_FAMILIES.items():
+        if host == suffix or host.endswith("." + suffix):
+            return family
+    return host or "unknown"
+
+
+def detect_git(root: Path) -> dict[str, Any]:
+    """Read remotes, current branch, and upstream binding without changing anything."""
+    is_repo, _ = git_run(root, ["rev-parse", "--is-inside-work-tree"])
+    if not is_repo:
+        return {"is_git_repo": False}
+    _, remote_lines = git_run(root, ["remote", "-v"])
+    remotes: dict[str, dict[str, Any]] = {}
+    for line in remote_lines.splitlines():
+        match = re.match(r"^(\S+)\s+(\S+)\s+\((fetch|push)\)$", line.strip())
+        if not match:
+            continue
+        name, url, kind = match.groups()
+        entry = remotes.setdefault(name, {"url": url, "platform": classify_git_host(url), "kinds": []})
+        entry["kinds"].append(kind)
+    _, branch = git_run(root, ["rev-parse", "--abbrev-ref", "HEAD"])
+    upstream_ok, upstream = git_run(root, ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}"])
+    return {
+        "is_git_repo": True,
+        "current_branch": branch,
+        "remotes": remotes,
+        "upstream": upstream if upstream_ok else None,
+        "has_upstream": upstream_ok,
+    }
+
+
 def skill_inventory(root: Path) -> dict[str, Any]:
     skills = []
     for skill in root.glob("skills/**/SKILL.md"):
@@ -161,6 +307,9 @@ def build_index(root: Path, max_files: int) -> dict[str, Any]:
         "file_limit": max_files,
         "truncated": len(files) >= max_files,
         "technology_profile": detect_profile(files),
+        "architecture": detect_architecture(root, files),
+        "ai_tools": detect_ai_tools(root),
+        "git": detect_git(root),
         "top_level_file_counts": dict(sorted(groups.items())),
         "skill_inventory": skill_inventory(root),
     }
@@ -304,6 +453,49 @@ def govern_candidates(root: Path) -> dict[str, Any]:
     }
 
 
+def bind_remote(root: Path, name: str, url: str, apply: bool) -> dict[str, Any]:
+    """Plan (or apply) a platform-neutral git remote binding. The URL is always supplied explicitly."""
+    is_repo, _ = git_run(root, ["rev-parse", "--is-inside-work-tree"])
+    if not is_repo:
+        raise ValueError("target is not a git repository")
+    if not url or not re.match(r"^(https?://|ssh://|git@|git://)", url):
+        raise ValueError("a valid explicit remote URL is required; no platform URL is hard-coded")
+    existing_ok, existing_url = git_run(root, ["remote", "get-url", name])
+    platform = classify_git_host(url)
+    _, branch = git_run(root, ["rev-parse", "--abbrev-ref", "HEAD"])
+    plan: dict[str, Any] = {
+        "schema_version": "1.0",
+        "remote": name,
+        "url": url,
+        "platform": platform,
+        "current_branch": branch,
+    }
+    if existing_ok:
+        if existing_url == url:
+            plan["status"] = "already-bound"
+            plan["commands"] = []
+        else:
+            raise ValueError(
+                f"remote {name} already exists with a different URL ({existing_url}); "
+                "choose another name or resolve the conflict deliberately"
+            )
+    else:
+        plan["status"] = "will-add"
+        plan["commands"] = [f"git remote add {name} {url}"]
+        # Upstream binding is a push (confirmation-gated), so it is emitted as a command, never auto-run.
+        if branch:
+            plan["upstream_command"] = f"git push -u {name} {branch}"
+    plan["applied"] = False
+    if apply and plan["commands"]:
+        for command in plan["commands"]:
+            parts = command.split()
+            ok, output = git_run(root, parts[1:])
+            if not ok:
+                raise ValueError(f"command failed: {command} ({output})")
+        plan["applied"] = True
+    return plan
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Controlled project onboarding and skill integration.")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -329,6 +521,12 @@ def main() -> int:
     govern_parser.add_argument("--project-root", default=".")
     govern_parser.add_argument("--output", default="knowledge/skill-candidate-governance.json")
 
+    bind_parser = subparsers.add_parser("bind-remote", help="Plan or apply a platform-neutral remote binding (URL supplied explicitly).")
+    bind_parser.add_argument("--project-root", default=".")
+    bind_parser.add_argument("--name", default="origin")
+    bind_parser.add_argument("--url", required=True)
+    bind_parser.add_argument("--apply", action="store_true", help="Execute git remote add. Without it, only the plan is shown.")
+
     args = parser.parse_args()
     try:
         if args.command == "inspect":
@@ -341,6 +539,9 @@ def main() -> int:
             write_json(root / args.output, result)
         elif args.command == "stage-github":
             result = stage_github_candidate(args)
+        elif args.command == "bind-remote":
+            root = Path(args.project_root).resolve()
+            result = bind_remote(root, args.name, args.url, args.apply)
         else:
             root = Path(args.project_root).resolve()
             result = govern_candidates(root)

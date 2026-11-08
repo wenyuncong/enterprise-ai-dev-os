@@ -68,7 +68,7 @@ def tool_route(args: dict) -> dict:
     table = None
     for candidate in (
         project_root / "task-routing.json",
-        REPO_ROOT / "bootstrap" / "02_机读三件套" / "examples" / "gerp" / "task-routing.json",
+        REPO_ROOT / "bootstrap" / "02_机读三件套" / "examples" / "reference-project" / "task-routing.json",
     ):
         if candidate.exists():
             try:

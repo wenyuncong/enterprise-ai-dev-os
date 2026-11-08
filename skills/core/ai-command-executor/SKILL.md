@@ -44,8 +44,7 @@ Before running any command, verify:
 | Check | Example | Command |
 |---|---|---|
 | Git availability | Is git on PATH? | `where git` or check known paths |
-| Node.js version | Correct Node for tool? | `node --version` |
-| Java version | Correct JDK? | `java --version` |
+| Runtime version | Correct language/runtime for the tool? | the runtime's version flag |
 | Port availability | Is port already bound? | `netstat -an` or equivalent |
 | Process status | Is service already running? | `ps aux` or equivalent |
 | Disk space | Enough space for build? | `df -h` or equivalent |
@@ -141,7 +140,6 @@ This creates a self-healing environment where missing tools are acquired automat
 
 ## Evolution History | 进化记录
 
-- v1.0.0: Extracted from gerp-command-executor (28KB original)
+- v1.0.0: Generalized from real enterprise command execution evidence (project-specific names removed)
 - v1.1.0: Generalized to universal command execution patterns
-- Source: Daily enterprise development environments with multi-service orchestrationr
-r
+- Source: daily enterprise development environments with multi-service orchestration

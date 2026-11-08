@@ -33,7 +33,7 @@
 - **源文件**：`skills/governance/ai-single-truth-enforcer/SKILL.md`
 - **成熟度**：verified
 
-**用途**：确立并强制一条根本规则——唯一真相源（single source of truth）：**前端纯展示，后端决策**。所有业务逻辑、校验、计算、数据转换必须落在后端；UI 只是渲染层，仅此而已。要解决的问题是：智能体习惯把业务逻辑写进 Vue 组件、在 JavaScript 里算价格、只做客户端表单校验、把数据转换和渲染混在一起，一旦同一逻辑要跑在移动端、微信端或 MCP 端就整体崩塌。
+**用途**：确立并强制一条根本规则——唯一真相源（single source of truth）：**前端纯展示，后端决策**。所有业务逻辑、校验、计算、数据转换必须落在后端；UI 只是渲染层，仅此而已。要解决的问题是：智能体习惯把业务逻辑写进展示层组件、在客户端算金额、只做客户端表单校验、把数据转换和渲染混在一起，一旦同一逻辑要跑在移动端、小程序或 MCP 端就整体崩塌。
 
 **触发条件**：一切涉及前后端职责划分的工作；校验、计算、权限、状态流转、共享业务规则的实现或评审；前端代码审计；`ai-frontend-audit` 的审计维度扩展。
 
@@ -53,16 +53,16 @@
 
 | 关注点 | 后端职责 | UI 层禁止 |
 |---|---|---|
-| 计算 | 价格计算、税费、折扣、合计 | `computed(() => price * quantity)` |
-| 校验 | 业务规则（信用额度、库存检查、重复检测） | `if (amount > 10000) show error` |
-| 数据转换 | 格式化、单位换算、区域化格式 | 携带业务逻辑的 `date.toLocaleDateString()` |
-| 授权 | 权限检查、基于角色的访问 | `v-if="user.role === 'admin'"`（应改用后端返回的权限） |
-| 状态机 | 订单状态、工作流流转 | `if (status === 'pending' && ...)` |
+| 计算 | 金额计算、费率、调整、合计 | 用响应式派生值组合业务值 |
+| 校验 | 业务规则（限额、可用性检查、重复检测） | 用客户端分支套用业务阈值 |
+| 数据转换 | 格式化、单位换算、区域化格式 | 携带业务逻辑的展示格式化调用 |
+| 授权 | 权限检查、基于角色的访问 | 依据本地角色字符串隐藏界面（应改用后端返回的权限） |
+| 状态机 | 单据状态、工作流流转 | 用本地分支推进业务状态 |
 | 业务决策 | 依据状态决定显示哪些字段 | 由后端状态标志驱动的条件渲染 |
 
-UI 层**可以（MAY）**做：基于后端返回数据做 `v-if`；用 `v-for` 遍历后端返回数组；仅供展示的 `toLocaleDateString()`（绝不用于计算）；事件绑定后把数据回传后端 API；客户端路由与导航。
+UI 层**可以（MAY）**做：基于后端返回数据做条件渲染；遍历后端返回数组；仅供展示的格式化（绝不用于计算）；事件绑定后把数据回传后端 API；客户端路由与导航。
 
-**Rule 2：数据唯一真相。** 层次为：Level 1 `DATABASE` 终极真相（规范取值）；Level 2 `BACKEND API` 计算真相（价格、状态、权限）；Level 3 `FRONTEND STATE` 仅展示副本，**永不是权威**。本 Skill 检出的违规包括：前端算价格、前端校验业务规则、同一字段在 2 个以上组件里用不同逻辑重复定义（duplicate truth sources）、展示前在前端改写数据。
+**Rule 2：数据唯一真相。** 层次为：Level 1 `DATABASE` 终极真相（规范取值）；Level 2 `BACKEND API` 计算真相（金额、状态、权限）；Level 3 `FRONTEND STATE` 仅展示副本，**永不是权威**。本 Skill 检出的违规包括：前端算金额、前端校验业务规则、同一字段在 2 个以上组件里用不同逻辑重复定义（duplicate truth sources）、展示前在前端改写数据。
 
 **Rule 3：通知分级策略。** 通知**必须**匹配严重度，不得出现"需要确认却只闪一个轻提示就消失"。分级原样为 **`P0=Modal`、`P1=Banner`、`P2=Toast`、`P3=Console`**：
 
@@ -75,7 +75,7 @@ UI 层**可以（MAY）**做：基于后端返回数据做 `v-if`；用 `v-for` 
 
 反模式对照：删除确认用一闪而过的轻提示 → 必须改为带显式"删除"按钮的 Modal；保存失败一闪而过 → 必须改为带"重试"的常驻横幅；保存成功却用 Modal 挡住屏幕 → 必须改为自动消失的轻提示；每个表单字段变化都问"确定吗" → 只对破坏性或高成本操作确认。
 
-**审计/验证维度**（`## Audit Checklist`）：无携带业务公式（价格、税费、折扣、合计）的 `computed()`；无携带业务规则（信用额度、库存、资格）的 `if/else`；所有校验调用走后端 API 而非本地函数；所有数据转换在后端完成后才下发；权限检查使用服务端返回的权限而非本地角色字符串；删除等破坏性操作使用 Modal 确认，**禁止**用 Toast；保存错误使用常驻通知，**禁止**闪退式轻提示；成功事件使用 P2 轻提示而非 Modal。
+**审计/验证维度**（`## Audit Checklist`）：无携带业务公式（金额、费率、调整、合计）的响应式派生值；无携带业务规则（限额、可用性检查、资格）的客户端分支；所有校验调用走后端 API 而非本地函数；所有数据转换在后端完成后才下发；权限检查使用服务端返回的权限而非本地角色字符串；删除等破坏性操作使用 Modal 确认，**禁止**用 Toast；保存错误使用常驻通知，**禁止**闪退式轻提示；成功事件使用 P2 轻提示而非 Modal。
 
 **输出格式**：审计清单勾选结果 + 逐条违规定位（违规模式 → 正确写法），按 `P0`/`P1`/`P2` 分级；集成关系表说明 `ai-frontend-audit`、`ai-atomic-architect`、`ai-runtime-verify`、`ai-component-standardizer` 各自的消费方式。
 
@@ -366,7 +366,7 @@ node skills/governance/ai-runtime-verify/scripts/verify.js --url http://localhos
 | **Audit/Evidence** | 动作已记录？轨迹完整？ | 审计日志验证 | P2（合规） |
 | **Product Acceptance** | 目标用户能否高效完成真实业务流程？ | product owner 验收记录 | P1（交付风险） |
 
-**业务链分类**：O2C（Order to Cash：销售订单→发货→开票→收款）、S2P（Source to Pay：采购申请→订单→收货→付款）、R2R（Record to Report：交易→总账→财务报表）、L2C（Lead to Cash：线索→商机→报价→订单）、Fulfillment（订单→拣货→打包→发运）、Subscription（注册→激活→计费→续订/取消）。
+**流程形态分类（通用；把项目自己的流程映射到这些形态）**：主交易链（请求 -> 执行 -> 单据 -> 结算）、采购式链（申请 -> 订单 -> 收货 -> 结算）、记录/报表链（交易 -> 总账 -> 分析报表）、机会链（线索 -> 商机 -> 报价 -> 承诺）、履约链（承诺 -> 准备 -> 发运）、订阅链（注册 -> 激活 -> 计费 -> 续订/取消）。
 
 **标准工作流**：Step 1 映射链路（识别所有节点 entry → API → service → DB → writeback → report，识别所有影响该链的参数/开关，记录预期状态流转）。Step 2 逐节点取证（Entry 截图 + 表单校验；API 用 `curl` 拿到预期状态码与响应体；Service 评审业务逻辑路径与事务边界；Database 用 `DESCRIBE table` 与动作前后抽样行；Writeback 从源表追踪到下游表；Report 查询报表输出并与源数据新鲜度比对；Product acceptance 执行 owner 定义的 `business-flow acceptance` 测试并记录接受/拒绝/修改反馈）。Step 2a 双轴审查（`two independent axes`，见下表）。Step 2b 写回一致性交叉校验。Step 3 识别缺口并按 `P0`（阻断：缺后端校验、API 损坏、缺表）、`P1`（数据风险：回写不完整、报表过期、缺参数门控）、`P2`（UX/合规：缺审计轨迹、UI 行为不一致）分级。Step 4 把每条缺口转成具体任务（Gap / Severity / Root Cause / Fix Action / Acceptance）。
 
@@ -379,7 +379,7 @@ node skills/governance/ai-runtime-verify/scripts/verify.js --url http://localhos
 
 任一轴都**禁止**掩盖另一轴。技术实现干净但错失业务结果的审计失败；行为正确但违反真相或架构边界的审计同样失败。
 
-**Step 2b：写回一致性交叉校验**——只有当数字在各层之间对账一致时回写才算闭环。凡涉及数量、金额、余额或状态流转的流程，**必须**增加一致性交叉校验，扫描错配而不是相信单行抽样：① 映射对账配对（每个回写的源表 → 下游表）；② 设计校验（两侧各自独立聚合后比对；对计算值如均值、余额还要从原始行重算）；③ 全表扫描（定位源与下游不一致的行，一次全表扫描常能暴露抽样检查漏掉的隐性漂移）；④ 记录差异（表、行、期望值与实际值、可能根因）；⑤ 修复并重跑（修复后交叉校验**必须**返回零错配才能闭环）。该步骤与栈、领域无关：模式就是"每个回写都要交叉校验对账，而不是抽样"。示例（ERP 领域）：采购收货 → 库存 + 应付账款，两侧聚合值**必须**与收货行合计对账，任何漂移都是 `P1` 数据风险。
+**Step 2b：写回一致性交叉校验**——只有当数字在各层之间对账一致时回写才算闭环。凡涉及数量、金额、余额或状态流转的流程，**必须**增加一致性交叉校验，扫描错配而不是相信单行抽样：① 映射对账配对（每个回写的源表 → 下游表）；② 设计校验（两侧各自独立聚合后比对；对计算值如均值、余额还要从原始行重算）；③ 全表扫描（定位源与下游不一致的行，一次全表扫描常能暴露抽样检查漏掉的隐性漂移）；④ 记录差异（表、行、期望值与实际值、可能根因）；⑤ 修复并重跑（修复后交叉校验**必须**返回零错配才能闭环）。该步骤与栈、领域无关：模式就是"每个回写都要交叉校验对账，而不是抽样"。通用示例：一次收货同时更新数量余额与金额余额，两侧聚合值**必须**与收货行合计对账，任何漂移都是 `P1` 数据风险。
 
 **输出格式**（`## Evidence Collection Template`）：① Layer Evidence 表——`Layer | Status | Evidence | Notes`，逐层列出 Entry/UI、API、Service、Database、Writeback、Report、Product acceptance，Status 用状态符号；② Two-Axis Review 表——`Axis | Status | Evidence | Blockers / Notes`，两行为 Standards / truth 与 Product / spec；③ Gap Summary——`P0: [count] blockers`、`P1: [count] data risks`、`P2: [count] UX/compliance issues`。修复任务表列固定为 `Gap | Severity | Root Cause | Fix Action | Acceptance`。
 
@@ -463,7 +463,7 @@ evidence/{target_project}/
 
 **审计/验证维度**（`## Research Workflow` 五阶段）：**PHASE 1 SEARCH**——在 GitHub/GitLab/npm/PyPI 搜索领域内头部项目（搜索源：GitHub 用 `site:github.com {domain} {language} stars:>100`；npm 用 `npm search {keyword}`；Maven Central 用 `mvnrepository.com`；PyPI 用 `pypi.org`；Awesome Lists 用 `site:github.com awesome {domain}`）。**PHASE 2 EVALUATE**——按加权标准打分：Stars 25%（>100 良好、>1000 优秀）、Active maintenance 30%（最近提交 < 6 个月、issue 在被关闭）、Architecture quality 20%、Code quality 15%、Domain relevance 10%；输出评估表（`Project | Stars | Last Commit | Arch Quality | Overall | Verdict`，结论为 SELECT / Reference only / Skip）。**PHASE 3 DOWNLOAD**——把最好的 1–2 个项目克隆到本地分析（`mkdir -p reference/ && cd reference/` 后 `git clone --depth 1 <repo-url>`；**必须**用 `--depth 1` 浅克隆；存到 `reference/` 且加入 git-ignore；**禁止**把参考代码提交进项目仓库；分析完删除或保留备查）。**PHASE 4 EXTRACT**——按九个维度分析并产出：目录结构、架构模式（服务如何切分、是否事件驱动、是否 CQRS）、数据库模式（表命名、关系、索引策略）、API 设计（REST vs GraphQL、端点命名、版本化）、库选择、命名约定、错误处理、测试模式、配置管理。**PHASE 5 APPLY**——把发现接入 `ai-atomic-architect`（参考架构模式 → 原子服务设计）、`ai-library-first`（参考库选择 → 库目录更新）、`ai-component-standardizer`（参考目录结构 → 脚手架模板）、`ai-project-classifier`（领域复杂度评估 → 质量目标选择）、`ai-architect-governor`（基于参考发现写 ADR，落到 `docs/架构决策记录/`）、`ai-skill-evolver`（新模式 → Skill 更新）。
 
-**输出格式**：评估表；`## Reference Analysis: [Project Name]` 分析文档，含 Key Patterns Extracted（编号列出模式 + 示例路径）、Patterns to Adopt（模式 + 为什么适合我们）、Patterns to Avoid（反模式 + 为什么会出问题）、Recommended Architecture Decisions（ADR 候选）。**许可证意识**：**学习，不要复制**；参考代码用于学模式而非抄代码——MIT / Apache 2.0 / BSD 可学习且可在署名前提下复制；GPL / AGPL 可学习但仅当本项目同为 GPL 才可复制；专有/无许可证**禁止**学习、**永禁止**复制；默认规则是只研究 MIT、Apache 2.0 或 BSD 许可的项目。领域参考目标表给出 ERP/企业系统（多租户 SaaS、库存/WMS、会计/财务、CRM、工作流引擎）与通用架构（微服务、权限/RBAC、报表引擎、实时）的搜索关键词与预期发现。
+**输出格式**：评估表；`## Reference Analysis: [Project Name]` 分析文档，含 Key Patterns Extracted（编号列出模式 + 示例路径）、Patterns to Adopt（模式 + 为什么适合我们）、Patterns to Avoid（反模式 + 为什么会出问题）、Recommended Architecture Decisions（ADR 候选）。**许可证意识**：**学习，不要复制**；参考代码用于学模式而非抄代码——MIT / Apache 2.0 / BSD 可学习且可在署名前提下复制；GPL / AGPL 可学习但仅当本项目同为 GPL 才可复制；专有/无许可证**禁止**学习、**永禁止**复制；默认规则是只研究 MIT、Apache 2.0 或 BSD 许可的项目。领域参考目标表按领域给出（多租户系统、资产/仓储管理、会计、客户关系、工作流引擎）与通用架构（微服务、权限/RBAC、报表引擎、实时）的搜索关键词与预期发现。
 
 **防护规则**：**学模式，绝不抄代码**——这是学习，不是剽窃；**先查许可证**——跳过许可证不兼容或缺失的项目；**质量优于数量**——1–2 个深研项目胜过 10 个浅扫；**浅克隆**——永远 `--depth 1`，别浪费磁盘；**git-ignore `reference/`**——**禁止**把参考代码提交进项目仓库；**记录学到的东西**——每次研究**必须**在 `docs/每日调研回写/` 产出文档；**给研究定时限**——每个领域最多 30 分钟，找不到好参考就继续推进。
 

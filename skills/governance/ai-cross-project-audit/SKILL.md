@@ -202,24 +202,24 @@ Before declaring a cross-project audit complete:
 
 ---
 
-## Case Study: ERP Cross-Project Audit (2026-07-05)
+## Case Study: Cross-Project Audit of a Large Enterprise System
 
-**Source**: ai-os atomic governance system (L0-L5)
-**Target**: enterprise ERP production repository
+**Source**: an atomic governance system (L0-L5)
+**Target**: a large enterprise production repository
 **Mode**: Read-only
 
 **Inputs**:
-- gaps.json: 623 code audit findings (document_action_backend_truth_audit)
-- result.json: 100 field audit findings (field_package_truth_audit)
+- a code-audit findings file (hundreds of backend-truth findings)
+- a field-audit findings file (roughly a hundred field findings)
 
 **Pipeline**:
-1. L3 domain_code_audit → 623 findings, 7 modules, risk scores
-2. L3 domain_erp_field_check → 100 field findings, 249 candidates
-3. L5 governance_orchestrator → evidence + index (34 entries) + report
+1. L3 code audit -> hundreds of findings across multiple modules, with risk scores
+2. L3 field check -> field findings across many candidates
+3. L5 governance orchestrator -> evidence + index + report
 
 **Output**:
-- Evidence: cross_project_audit_20260705/evidence_gov_*.json
-- Index: knowledge_index.json (34 entries)
-- Report: ERP_跨项目治理审计_20260705.md
+- Evidence: a versioned evidence folder
+- Index: a knowledge index (bounded entries)
+- Report: a dated cross-project governance audit report
 
-**Key insight**: Existing audit data from a prior ERP audit was directly reusable by L3 atoms — no re-scanning required. The L5 orchestrator chained L3 outputs through evidence → index → report in a single execution.
+**Key insight**: audit data produced by an earlier pass was directly reusable by L3 atoms — no re-scanning required. The L5 orchestrator chained L3 outputs through evidence -> index -> report in a single execution.

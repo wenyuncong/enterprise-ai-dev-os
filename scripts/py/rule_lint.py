@@ -32,7 +32,7 @@ ROOT_ALLOWED_FILES = {
     "AGENTS.md", "CLAUDE.md", "README.md", "LICENSE", "NOTICE",
     "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "GOVERNANCE.md", "SECURITY.md",
     "SUPPORT.md", "package.json", "package-lock.json", ".editorconfig",
-    ".git", ".gitignore", ".gitattributes", ".npmrc",
+    ".git", ".gitignore", ".gitattributes", ".npmrc", "CHANGELOG.md",
     # generated adapter outputs kept at root by tool conventions
     ".cursorrules", ".clinerules", ".windsurfrules", "CONVENTIONS.md",
 }
@@ -142,7 +142,7 @@ def build_rules():
         return hits
 
     def stale_repo_paths(root):
-        """detect references to the private GERP workspace in portable assets."""
+        """detect references to the private, non-portable workspace in portable assets."""
         hits = []
         for rpath, text in iter_scan_files(root):
             if text is None:
@@ -159,7 +159,7 @@ def build_rules():
     rule("drive_paths", "硬编码盘符路径", "FAIL", drive_paths,
          "Portable assets must not hard-code local drive paths.")
     rule("stale_repo_paths", "私有仓库路径残留", "FAIL", stale_repo_paths,
-         "Portable assets must not reference the private GERP workspace.")
+         "Portable assets must not reference the private, non-portable workspace.")
     rule("hardcoded_colors", "硬编码颜色", "WARN", hardcoded_colors,
          "Theme variables only; no hard-coded colors when a theme exists.")
     rule("empty_catches", "静默失败", "WARN", empty_catches,

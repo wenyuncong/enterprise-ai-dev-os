@@ -156,7 +156,7 @@ description: "Standardize command execution, environment checks, tool discovery,
 
 ## Evolution History | 进化记录
 
-- v1.0.0：从 gerp-command-executor 提炼（原始 28KB）
+- v1.0.0：从真实企业命令执行证据提炼并通用化
 - v1.1.0：泛化为通用命令执行模式
 - Source：Daily enterprise development environments with multi-service orchestrationr
 
